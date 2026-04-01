@@ -18,7 +18,7 @@ description: >-
   developers to access powerful features without having to build them from
   scratch.
 created: '2025-02-24'
-modified: '2026-03-16'
+modified: '2026-04-01'
 specificationVersion: '0.19'
 apis:
   - aid: abstract-api:abstract-api
@@ -51,6 +51,10 @@ common:
     url: https://www.abstractapi.com/pricing
   - type: Blog
     url: https://www.abstractapi.com/blog
+  - type: Documentation
+    url: https://www.abstractapi.com/docs
+  - type: GitHubOrganization
+    url: https://github.com/abstractapi
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
