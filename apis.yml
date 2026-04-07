@@ -5,11 +5,11 @@ name: Abstract API
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - IP Addresses
   - Contacts
-  - Screenshots
   - Currencies
   - Email Validation
+  - IP Addresses
+  - Screenshots
 description: >-
   Abstract API is a platform that offers a wide range of API services for
   developers to easily integrate various functionalities into their applications.
@@ -24,9 +24,9 @@ apis:
   - aid: abstract-api:abstract-api
     name: Abstract API
     tags:
-      - IP Addresses
-      - Email Validation
       - Currencies
+      - Email Validation
+      - IP Addresses
     humanURL: https://www.abstractapi.com/
     baseURL: https://api.abstractapi.com
     properties:
