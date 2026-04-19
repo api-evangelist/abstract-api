@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/json-structure/email-reputation-domain-info-structure.json",
+  "name": "DomainInfo",
+  "description": "Domain-level information",
+  "type": "object",
+  "properties": {
+    "domain": {
+      "type": "string",
+      "description": "Domain extracted from email",
+      "example": "example.com"
+    },
+    "domain_age": {
+      "type": "int32",
+      "description": "Age of the domain in days",
+      "example": 9000
+    },
+    "is_live_site": {
+      "type": "boolean",
+      "description": "Whether the domain hosts a live website",
+      "example": true
+    },
+    "registrar": {
+      "type": "string",
+      "description": "Domain registrar name",
+      "example": "GoDaddy"
+    },
+    "registrar_url": {
+      "type": "uri",
+      "description": "URL of the registrar",
+      "example": "https://www.godaddy.com"
+    },
+    "date_registered": {
+      "type": "date",
+      "description": "Date the domain was registered",
+      "example": "2015-03-10"
+    },
+    "date_last_renewed": {
+      "type": "date",
+      "description": "Date the domain was last renewed",
+      "example": "2025-03-10"
+    },
+    "date_expires": {
+      "type": "date",
+      "description": "Date the domain expires",
+      "example": "2026-03-10"
+    },
+    "is_risky_tld": {
+      "type": "boolean",
+      "description": "Whether the TLD is associated with risky domains",
+      "example": false
+    }
+  }
+}

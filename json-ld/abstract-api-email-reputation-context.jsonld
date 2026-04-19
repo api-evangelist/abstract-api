@@ -1,0 +1,185 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "abstract": "https://abstractapi.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "BreachInfo": "abstract:BreachInfo",
+    "Deliverability": "abstract:Deliverability",
+    "DomainInfo": "abstract:DomainInfo",
+    "EmailQuality": "abstract:EmailQuality",
+    "EmailReputationResponse": "abstract:EmailReputationResponse",
+    "RiskInfo": "abstract:RiskInfo",
+    "SenderInfo": "abstract:SenderInfo",
+    "totalBreaches": {
+      "@id": "abstract:total_breaches",
+      "@type": "xsd:integer"
+    },
+    "dateFirstBreached": {
+      "@id": "abstract:date_first_breached",
+      "@type": "xsd:date"
+    },
+    "dateLastBreached": {
+      "@id": "abstract:date_last_breached",
+      "@type": "xsd:date"
+    },
+    "breachedDomains": {
+      "@id": "abstract:breached_domains",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "abstract:status",
+      "@type": "xsd:string"
+    },
+    "statusDetail": {
+      "@id": "abstract:status_detail",
+      "@type": "xsd:string"
+    },
+    "isFormatValid": {
+      "@id": "abstract:is_format_valid",
+      "@type": "xsd:boolean"
+    },
+    "isSmtpValid": {
+      "@id": "abstract:is_smtp_valid",
+      "@type": "xsd:boolean"
+    },
+    "isMxValid": {
+      "@id": "abstract:is_mx_valid",
+      "@type": "xsd:boolean"
+    },
+    "mxRecords": {
+      "@id": "abstract:mx_records",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "domain": {
+      "@id": "abstract:domain",
+      "@type": "xsd:string"
+    },
+    "domainAge": {
+      "@id": "abstract:domain_age",
+      "@type": "xsd:integer"
+    },
+    "isLiveSite": {
+      "@id": "abstract:is_live_site",
+      "@type": "xsd:boolean"
+    },
+    "registrar": {
+      "@id": "abstract:registrar",
+      "@type": "xsd:string"
+    },
+    "registrarUrl": {
+      "@id": "abstract:registrar_url",
+      "@type": "@id"
+    },
+    "dateRegistered": {
+      "@id": "abstract:date_registered",
+      "@type": "xsd:date"
+    },
+    "dateLastRenewed": {
+      "@id": "abstract:date_last_renewed",
+      "@type": "xsd:date"
+    },
+    "dateExpires": {
+      "@id": "abstract:date_expires",
+      "@type": "xsd:date"
+    },
+    "isRiskyTld": {
+      "@id": "abstract:is_risky_tld",
+      "@type": "xsd:boolean"
+    },
+    "score": {
+      "@id": "abstract:score",
+      "@type": "xsd:decimal"
+    },
+    "isFreeEmail": {
+      "@id": "abstract:is_free_email",
+      "@type": "xsd:boolean"
+    },
+    "isUsernameSuspicious": {
+      "@id": "abstract:is_username_suspicious",
+      "@type": "xsd:boolean"
+    },
+    "isDisposable": {
+      "@id": "abstract:is_disposable",
+      "@type": "xsd:boolean"
+    },
+    "isCatchall": {
+      "@id": "abstract:is_catchall",
+      "@type": "xsd:boolean"
+    },
+    "isSubaddress": {
+      "@id": "abstract:is_subaddress",
+      "@type": "xsd:boolean"
+    },
+    "isRole": {
+      "@id": "abstract:is_role",
+      "@type": "xsd:boolean"
+    },
+    "isDmarcEnforced": {
+      "@id": "abstract:is_dmarc_enforced",
+      "@type": "xsd:boolean"
+    },
+    "isSpfStrict": {
+      "@id": "abstract:is_spf_strict",
+      "@type": "xsd:boolean"
+    },
+    "minimumAge": {
+      "@id": "abstract:minimum_age",
+      "@type": "xsd:integer"
+    },
+    "email": {
+      "@id": "schema:email"
+    },
+    "deliverability": {
+      "@id": "abstract:deliverability",
+      "@type": "xsd:string"
+    },
+    "quality": {
+      "@id": "abstract:quality",
+      "@type": "xsd:string"
+    },
+    "sender": {
+      "@id": "abstract:sender",
+      "@type": "xsd:string"
+    },
+    "risk": {
+      "@id": "abstract:risk",
+      "@type": "xsd:string"
+    },
+    "breaches": {
+      "@id": "abstract:breaches",
+      "@type": "xsd:string"
+    },
+    "addressRiskStatus": {
+      "@id": "abstract:address_risk_status",
+      "@type": "xsd:string"
+    },
+    "domainRiskStatus": {
+      "@id": "abstract:domain_risk_status",
+      "@type": "xsd:string"
+    },
+    "firstName": {
+      "@id": "abstract:first_name",
+      "@type": "xsd:string"
+    },
+    "lastName": {
+      "@id": "abstract:last_name",
+      "@type": "xsd:string"
+    },
+    "emailProviderName": {
+      "@id": "abstract:email_provider_name",
+      "@type": "xsd:string"
+    },
+    "organizationName": {
+      "@id": "abstract:organization_name",
+      "@type": "xsd:string"
+    },
+    "organizationType": {
+      "@id": "abstract:organization_type",
+      "@type": "xsd:string"
+    }
+  }
+}

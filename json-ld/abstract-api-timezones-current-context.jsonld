@@ -1,0 +1,46 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "abstract": "https://abstractapi.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "CurrentTimeResponse": "abstract:CurrentTimeResponse",
+    "datetime": {
+      "@id": "abstract:datetime",
+      "@type": "xsd:string"
+    },
+    "timezoneName": {
+      "@id": "abstract:timezone_name",
+      "@type": "xsd:string"
+    },
+    "timezoneLocation": {
+      "@id": "abstract:timezone_location",
+      "@type": "xsd:string"
+    },
+    "timezoneAbbreviation": {
+      "@id": "abstract:timezone_abbreviation",
+      "@type": "xsd:string"
+    },
+    "gmtOffset": {
+      "@id": "abstract:gmt_offset",
+      "@type": "xsd:integer"
+    },
+    "isDst": {
+      "@id": "abstract:is_dst",
+      "@type": "xsd:boolean"
+    },
+    "requestedLocation": {
+      "@id": "abstract:requested_location",
+      "@type": "xsd:string"
+    },
+    "latitude": {
+      "@id": "abstract:latitude",
+      "@type": "xsd:decimal"
+    },
+    "longitude": {
+      "@id": "abstract:longitude",
+      "@type": "xsd:decimal"
+    }
+  }
+}

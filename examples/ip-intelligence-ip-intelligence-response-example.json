@@ -1,0 +1,13 @@
+{
+  "ip_address": "8.8.8.8",
+  "security": "https://www.example.com",
+  "asn": "sample-value",
+  "company": "sample-value",
+  "domains": [
+    "dns.google"
+  ],
+  "location": "sample-value",
+  "timezone": "sample-value",
+  "flag": "sample-value",
+  "currency": "sample-value"
+}

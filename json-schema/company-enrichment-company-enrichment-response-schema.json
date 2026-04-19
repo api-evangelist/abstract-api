@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/json-schema/company-enrichment-company-enrichment-response-schema.json",
+  "title": "CompanyEnrichmentResponse",
+  "description": "Company enrichment data",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Company name",
+      "example": "Stripe"
+    },
+    "domain": {
+      "type": "string",
+      "description": "Company domain",
+      "example": "stripe.com"
+    },
+    "country": {
+      "type": "string",
+      "description": "ISO 3166-1 alpha-2 country code",
+      "example": "US"
+    },
+    "locality": {
+      "type": "string",
+      "description": "City or locality",
+      "example": "San Francisco"
+    },
+    "region": {
+      "type": "string",
+      "description": "State or region",
+      "example": "California"
+    },
+    "linkedin_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "LinkedIn company profile URL",
+      "example": "https://www.linkedin.com/company/stripe"
+    },
+    "logo": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL to company logo image",
+      "example": "https://logo.clearbit.com/stripe.com"
+    },
+    "year_founded": {
+      "type": "integer",
+      "description": "Year the company was founded",
+      "example": 2010
+    },
+    "industry": {
+      "type": "string",
+      "description": "Industry classification",
+      "example": "Financial Services"
+    },
+    "employees_count": {
+      "type": "integer",
+      "description": "Approximate number of employees",
+      "example": 8000
+    },
+    "description": {
+      "type": "string",
+      "description": "Short company description",
+      "example": "Stripe is a technology company that builds economic infrastructure for the internet."
+    }
+  }
+}

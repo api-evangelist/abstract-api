@@ -1,0 +1,118 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Abstract API Fraud Detection"
+  description: "Unified fraud detection and risk assessment workflow combining email reputation, phone intelligence, and IP intelligence APIs. Used by security engineers, fraud analysts, and compliance teams to detect and block fraudulent users at signup or transaction time."
+  tags:
+    - Abstract Api
+    - Fraud Detection
+    - Security
+    - Email Reputation
+    - Phone Intelligence
+    - Ip Intelligence
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      EMAIL_REPUTATION_API_KEY: EMAIL_REPUTATION_API_KEY
+      PHONE_INTELLIGENCE_API_KEY: PHONE_INTELLIGENCE_API_KEY
+      IP_INTELLIGENCE_API_KEY: IP_INTELLIGENCE_API_KEY
+
+capability:
+  consumes:
+    - import: email-reputation
+      location: ./shared/email-reputation.yaml
+    - import: phone-intelligence
+      location: ./shared/phone-intelligence.yaml
+    - import: ip-intelligence
+      location: ./shared/ip-intelligence.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: fraud-detection-api
+      description: "Unified REST API for fraud detection and risk assessment."
+      resources:
+        - path: /v1/email-risk
+          name: email-risk
+          description: "Check email address risk and reputation"
+          operations:
+            - method: GET
+              name: check-email-risk
+              description: "Check email reputation and risk score"
+              call: "email-reputation.getEmailReputation"
+              with:
+                email: "rest.email"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/phone-risk
+          name: phone-risk
+          description: "Check phone number risk and validity"
+          operations:
+            - method: GET
+              name: check-phone-risk
+              description: "Check phone intelligence and risk score"
+              call: "phone-intelligence.getPhoneIntelligence"
+              with:
+                phone: "rest.phone"
+                country: "rest.country"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/ip-risk
+          name: ip-risk
+          description: "Check IP address risk signals"
+          operations:
+            - method: GET
+              name: check-ip-risk
+              description: "Check IP intelligence and security flags"
+              call: "ip-intelligence.getIPIntelligence"
+              with:
+                ip_address: "rest.ip_address"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: fraud-detection-mcp
+      transport: http
+      description: "MCP server for AI-assisted fraud detection and risk assessment."
+      tools:
+        - name: check-email-reputation
+          description: "Check email address reputation, deliverability, and risk score to detect fraudulent or disposable emails"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "email-reputation.getEmailReputation"
+          with:
+            email: "tools.email"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: check-phone-intelligence
+          description: "Validate phone number and retrieve carrier, line type, VoIP status, and risk score"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "phone-intelligence.getPhoneIntelligence"
+          with:
+            phone: "tools.phone"
+            country: "tools.country"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: check-ip-intelligence
+          description: "Analyze IP address for VPN, proxy, Tor, abuse, hosting, and security risk signals"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "ip-intelligence.getIPIntelligence"
+          with:
+            ip_address: "tools.ip_address"
+          outputParameters:
+            - type: object
+              mapping: "$."

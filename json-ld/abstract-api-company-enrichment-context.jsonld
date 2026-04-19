@@ -1,0 +1,52 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "abstract": "https://abstractapi.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "CompanyEnrichmentResponse": "abstract:CompanyEnrichmentResponse",
+    "name": {
+      "@id": "schema:name"
+    },
+    "domain": {
+      "@id": "abstract:domain",
+      "@type": "xsd:string"
+    },
+    "country": {
+      "@id": "abstract:country",
+      "@type": "xsd:string"
+    },
+    "locality": {
+      "@id": "abstract:locality",
+      "@type": "xsd:string"
+    },
+    "region": {
+      "@id": "abstract:region",
+      "@type": "xsd:string"
+    },
+    "linkedinUrl": {
+      "@id": "abstract:linkedin_url",
+      "@type": "@id"
+    },
+    "logo": {
+      "@id": "abstract:logo",
+      "@type": "@id"
+    },
+    "yearFounded": {
+      "@id": "abstract:year_founded",
+      "@type": "xsd:integer"
+    },
+    "industry": {
+      "@id": "abstract:industry",
+      "@type": "xsd:string"
+    },
+    "employeesCount": {
+      "@id": "abstract:employees_count",
+      "@type": "xsd:integer"
+    },
+    "description": {
+      "@id": "schema:description"
+    }
+  }
+}

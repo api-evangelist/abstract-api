@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/json-schema/timezones-convert-time-response-schema.json",
+  "title": "ConvertTimeResponse",
+  "description": "Time zone conversion result",
+  "type": "object",
+  "properties": {
+    "base_location": {
+      "type": "string",
+      "description": "Source location",
+      "example": "London"
+    },
+    "base_datetime": {
+      "type": "string",
+      "description": "Input date and time",
+      "example": "2026-04-19 10:30:00"
+    },
+    "base_timezone_name": {
+      "type": "string",
+      "description": "Source IANA timezone name",
+      "example": "Europe/London"
+    },
+    "base_timezone_abbreviation": {
+      "type": "string",
+      "description": "Source timezone abbreviation",
+      "example": "BST"
+    },
+    "base_utc_offset": {
+      "type": "integer",
+      "description": "Source UTC offset in hours",
+      "example": 1
+    },
+    "target_location": {
+      "type": "string",
+      "description": "Target location",
+      "example": "Tokyo"
+    },
+    "target_datetime": {
+      "type": "string",
+      "description": "Converted date and time",
+      "example": "2026-04-19 18:30:00"
+    },
+    "target_timezone_name": {
+      "type": "string",
+      "description": "Target IANA timezone name",
+      "example": "Asia/Tokyo"
+    },
+    "target_timezone_abbreviation": {
+      "type": "string",
+      "description": "Target timezone abbreviation",
+      "example": "JST"
+    },
+    "target_utc_offset": {
+      "type": "integer",
+      "description": "Target UTC offset in hours",
+      "example": 9
+    }
+  }
+}

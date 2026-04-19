@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/json-structure/ip-geolocation-security-info-structure.json",
+  "name": "SecurityInfo",
+  "description": "SecurityInfo schema from Abstract API ip-geolocation",
+  "type": "object",
+  "properties": {
+    "is_vpn": {
+      "type": "boolean",
+      "description": "Whether the IP is a known VPN",
+      "example": false
+    }
+  }
+}

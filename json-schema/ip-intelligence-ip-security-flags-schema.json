@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/json-schema/ip-intelligence-ip-security-flags-schema.json",
+  "title": "IPSecurityFlags",
+  "description": "Security classification flags for the IP",
+  "type": "object",
+  "properties": {
+    "is_vpn": {
+      "type": "boolean",
+      "description": "IP is a known VPN endpoint",
+      "example": false
+    },
+    "is_proxy": {
+      "type": "boolean",
+      "description": "IP is a known proxy server",
+      "example": false
+    },
+    "is_tor": {
+      "type": "boolean",
+      "description": "IP is a Tor exit node",
+      "example": false
+    },
+    "is_hosting": {
+      "type": "boolean",
+      "description": "IP belongs to a hosting or cloud provider",
+      "example": true
+    },
+    "is_relay": {
+      "type": "boolean",
+      "description": "IP is used as a relay (e.g., Apple Private Relay)",
+      "example": false
+    },
+    "is_mobile": {
+      "type": "boolean",
+      "description": "IP is associated with a mobile network",
+      "example": false
+    },
+    "is_abuse": {
+      "type": "boolean",
+      "description": "IP has been flagged for abuse",
+      "example": false
+    }
+  }
+}

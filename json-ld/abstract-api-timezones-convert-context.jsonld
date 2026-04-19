@@ -1,0 +1,50 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "abstract": "https://abstractapi.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "ConvertTimeResponse": "abstract:ConvertTimeResponse",
+    "baseLocation": {
+      "@id": "abstract:base_location",
+      "@type": "xsd:string"
+    },
+    "baseDatetime": {
+      "@id": "abstract:base_datetime",
+      "@type": "xsd:string"
+    },
+    "baseTimezoneName": {
+      "@id": "abstract:base_timezone_name",
+      "@type": "xsd:string"
+    },
+    "baseTimezoneAbbreviation": {
+      "@id": "abstract:base_timezone_abbreviation",
+      "@type": "xsd:string"
+    },
+    "baseUtcOffset": {
+      "@id": "abstract:base_utc_offset",
+      "@type": "xsd:integer"
+    },
+    "targetLocation": {
+      "@id": "abstract:target_location",
+      "@type": "xsd:string"
+    },
+    "targetDatetime": {
+      "@id": "abstract:target_datetime",
+      "@type": "xsd:string"
+    },
+    "targetTimezoneName": {
+      "@id": "abstract:target_timezone_name",
+      "@type": "xsd:string"
+    },
+    "targetTimezoneAbbreviation": {
+      "@id": "abstract:target_timezone_abbreviation",
+      "@type": "xsd:string"
+    },
+    "targetUtcOffset": {
+      "@id": "abstract:target_utc_offset",
+      "@type": "xsd:integer"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/json-structure/phone-intelligence-phone-country-structure.json",
+  "name": "PhoneCountry",
+  "description": "PhoneCountry schema from Abstract API phone-intelligence",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string",
+      "description": "ISO 3166-1 alpha-2 country code",
+      "example": "US"
+    },
+    "name": {
+      "type": "string",
+      "description": "Country name",
+      "example": "United States"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "International dialing prefix",
+      "example": "1"
+    }
+  }
+}

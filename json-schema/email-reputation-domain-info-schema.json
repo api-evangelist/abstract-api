@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/json-schema/email-reputation-domain-info-schema.json",
+  "title": "DomainInfo",
+  "description": "Domain-level information",
+  "type": "object",
+  "properties": {
+    "domain": {
+      "type": "string",
+      "description": "Domain extracted from email",
+      "example": "example.com"
+    },
+    "domain_age": {
+      "type": "integer",
+      "description": "Age of the domain in days",
+      "example": 9000
+    },
+    "is_live_site": {
+      "type": "boolean",
+      "description": "Whether the domain hosts a live website",
+      "example": true
+    },
+    "registrar": {
+      "type": "string",
+      "description": "Domain registrar name",
+      "example": "GoDaddy"
+    },
+    "registrar_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL of the registrar",
+      "example": "https://www.godaddy.com"
+    },
+    "date_registered": {
+      "type": "string",
+      "format": "date",
+      "description": "Date the domain was registered",
+      "example": "2015-03-10"
+    },
+    "date_last_renewed": {
+      "type": "string",
+      "format": "date",
+      "description": "Date the domain was last renewed",
+      "example": "2025-03-10"
+    },
+    "date_expires": {
+      "type": "string",
+      "format": "date",
+      "description": "Date the domain expires",
+      "example": "2026-03-10"
+    },
+    "is_risky_tld": {
+      "type": "boolean",
+      "description": "Whether the TLD is associated with risky domains",
+      "example": false
+    }
+  }
+}

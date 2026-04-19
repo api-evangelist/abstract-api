@@ -1,0 +1,472 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "Abstract API"
+  description: "Complete taxonomy of Abstract API services mapping operational (OpenAPI) and capability (Naftiko) dimensions across 14 utility APIs"
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+operational:
+  apis:
+    - name: Email Reputation API
+      namespace: email-reputation
+      version: "1.0.0"
+      baseUrl: https://emailreputation.abstractapi.com/v1
+      status: active
+    - name: Phone Intelligence API
+      namespace: phone-intelligence
+      version: "1.0.0"
+      baseUrl: https://phoneintelligence.abstractapi.com/v1
+      status: active
+    - name: IP Geolocation API
+      namespace: ip-geolocation
+      version: "1.0.0"
+      baseUrl: https://ipgeolocation.abstractapi.com/v1
+      status: active
+    - name: IP Intelligence API
+      namespace: ip-intelligence
+      version: "1.0.0"
+      baseUrl: https://ip-intelligence.abstractapi.com/v1
+      status: active
+    - name: Company Enrichment API
+      namespace: company-enrichment
+      version: "1.0.0"
+      baseUrl: https://companyenrichment.abstractapi.com/v1
+      status: active
+    - name: Exchange Rates API
+      namespace: exchange-rates
+      version: "1.0.0"
+      baseUrl: https://exchange-rates.abstractapi.com/v1
+      status: active
+    - name: Public Holidays API
+      namespace: public-holidays
+      version: "1.0.0"
+      baseUrl: https://holidays.abstractapi.com/v1
+      status: active
+    - name: Timezone API
+      namespace: timezones
+      version: "1.0.0"
+      baseUrl: https://timezone.abstractapi.com/v1
+      status: active
+    - name: VAT Validation API
+      namespace: vat-validation
+      version: "1.0.0"
+      baseUrl: https://vat.abstractapi.com/v1
+      status: active
+    - name: IBAN Validation API
+      namespace: iban-validation
+      version: "1.0.0"
+      baseUrl: https://ibanvalidation.abstractapi.com/v1
+      status: active
+    - name: Website Screenshot API
+      namespace: website-screenshot
+      version: "1.0.0"
+      baseUrl: https://screenshot.abstractapi.com/v1
+      status: active
+    - name: Image Processing API
+      namespace: image-processing
+      version: "1.0.0"
+      baseUrl: https://images.abstractapi.com/v1
+      status: active
+    - name: Web Scraping API
+      namespace: web-scraping
+      version: "1.0.0"
+      baseUrl: https://scrape.abstractapi.com/v1
+      status: active
+    - name: Avatars API
+      namespace: avatars
+      version: "1.0.0"
+      baseUrl: https://avatars.abstractapi.com/v1
+      status: active
+
+  resources:
+    - name: email
+      apis:
+        - email-reputation
+      actions:
+        - validate
+        - enrich
+        - check-reputation
+    - name: phone
+      apis:
+        - phone-intelligence
+      actions:
+        - validate
+        - analyze
+        - check-risk
+    - name: ip-address
+      apis:
+        - ip-geolocation
+        - ip-intelligence
+      actions:
+        - geolocate
+        - analyze
+        - check-security
+    - name: company
+      apis:
+        - company-enrichment
+      actions:
+        - enrich
+        - lookup
+    - name: currency
+      apis:
+        - exchange-rates
+      actions:
+        - get-rates
+        - convert
+        - get-historical
+    - name: holiday
+      apis:
+        - public-holidays
+      actions:
+        - list
+        - lookup
+    - name: timezone
+      apis:
+        - timezones
+      actions:
+        - lookup
+        - convert
+    - name: vat-number
+      apis:
+        - vat-validation
+      actions:
+        - validate
+        - get-rates
+        - calculate
+    - name: iban
+      apis:
+        - iban-validation
+      actions:
+        - validate
+    - name: screenshot
+      apis:
+        - website-screenshot
+      actions:
+        - capture
+    - name: image
+      apis:
+        - image-processing
+      actions:
+        - compress
+        - convert
+        - optimize
+    - name: webpage
+      apis:
+        - web-scraping
+      actions:
+        - scrape
+        - extract
+    - name: avatar
+      apis:
+        - avatars
+      actions:
+        - generate
+
+  actions:
+    - name: validate
+      httpMethod: GET
+      pattern: read
+      description: Validate the format and authenticity of an input value
+    - name: enrich
+      httpMethod: GET
+      pattern: read
+      description: Retrieve additional data about an entity
+    - name: geolocate
+      httpMethod: GET
+      pattern: read
+      description: Determine geographic location from an identifier
+    - name: analyze
+      httpMethod: GET
+      pattern: read
+      description: Perform deep analysis on an input to extract intelligence
+    - name: convert
+      httpMethod: GET
+      pattern: read
+      description: Transform data from one representation to another
+    - name: capture
+      httpMethod: GET
+      pattern: read
+      description: Capture a visual representation of a web resource
+    - name: scrape
+      httpMethod: GET
+      pattern: read
+      description: Extract raw content from a web page
+    - name: generate
+      httpMethod: GET
+      pattern: read
+      description: Generate an artifact from input parameters
+    - name: list
+      httpMethod: GET
+      pattern: read
+      description: List all entries matching filter criteria
+
+  parameters:
+    identifiers:
+      - name: api_key
+        description: Unique per-service API key for authentication
+        type: string
+    filters:
+      - name: ip_address
+        description: IPv4 or IPv6 address to analyze
+        type: string
+      - name: email
+        description: Email address to validate
+        type: string
+      - name: phone
+        description: Phone number in international format
+        type: string
+      - name: domain
+        description: Company domain name
+        type: string
+      - name: country
+        description: ISO 3166-1 alpha-2 country code
+        type: string
+      - name: base
+        description: Base currency ISO 4217 code
+        type: string
+      - name: target
+        description: Target currency ISO 4217 code
+        type: string
+    pagination: []
+
+  enums:
+    deliverability:
+      - DELIVERABLE
+      - UNDELIVERABLE
+      - RISKY
+      - UNKNOWN
+    line_type:
+      - mobile
+      - landline
+      - voip
+      - toll_free
+      - premium_rate
+      - shared_cost
+      - unknown
+    risk_status:
+      - low
+      - medium
+      - high
+      - critical
+    holiday_type:
+      - National
+      - Local
+      - Religious
+      - Observance
+      - Season
+      - Clock Change/Daylight Saving Time
+    image_format:
+      - jpeg
+      - png
+      - webp
+      - gif
+
+  authentication:
+    schemes:
+      - type: apiKey
+        placement: query
+        parameterName: api_key
+        description: Unique API key per Abstract API service, passed as api_key query parameter
+      - type: bearer
+        description: Alternative Bearer token authentication via Authorization header
+
+capability:
+  workflows:
+    - name: Fraud Detection
+      file: capabilities/fraud-detection.yaml
+      description: Email reputation, phone intelligence, and IP intelligence for fraud prevention
+      apis:
+        - email-reputation
+        - phone-intelligence
+        - ip-intelligence
+      toolCount: 3
+      personas:
+        - fraud-analyst
+        - security-engineer
+    - name: Data Enrichment
+      file: capabilities/data-enrichment.yaml
+      description: IP geolocation, company enrichment, and timezone data for user profile enrichment
+      apis:
+        - ip-geolocation
+        - company-enrichment
+        - timezones
+      toolCount: 4
+      personas:
+        - product-engineer
+        - data-engineer
+    - name: Financial Compliance
+      file: capabilities/financial-compliance.yaml
+      description: Exchange rates, VAT validation, and IBAN validation for financial compliance
+      apis:
+        - exchange-rates
+        - vat-validation
+        - iban-validation
+      toolCount: 5
+      personas:
+        - finance-engineer
+        - compliance-analyst
+
+  personas:
+    - id: fraud-analyst
+      name: Fraud Analyst
+      description: Security professional responsible for detecting and blocking fraudulent users and transactions
+      workflows:
+        - Fraud Detection
+    - id: security-engineer
+      name: Security Engineer
+      description: Engineer building fraud detection and threat intelligence systems
+      workflows:
+        - Fraud Detection
+    - id: product-engineer
+      name: Product Engineer
+      description: Developer building user onboarding and personalization features
+      workflows:
+        - Data Enrichment
+    - id: data-engineer
+      name: Data Engineer
+      description: Engineer building data pipelines and enrichment workflows
+      workflows:
+        - Data Enrichment
+    - id: finance-engineer
+      name: Finance Engineer
+      description: Developer building payment, billing, and financial compliance systems
+      workflows:
+        - Financial Compliance
+    - id: compliance-analyst
+      name: Compliance Analyst
+      description: Professional ensuring regulatory compliance for VAT, banking, and financial reporting
+      workflows:
+        - Financial Compliance
+
+  domains:
+    - name: Fraud Prevention
+      description: Detection and blocking of fraudulent users, transactions, and bot activity
+      resources:
+        - email
+        - phone
+        - ip-address
+      workflows:
+        - Fraud Detection
+    - name: User Enrichment
+      description: Automatic enrichment of user profiles with geographic, company, and temporal data
+      resources:
+        - ip-address
+        - company
+        - timezone
+      workflows:
+        - Data Enrichment
+    - name: Financial Operations
+      description: Currency conversion, VAT compliance, and banking validation for financial applications
+      resources:
+        - currency
+        - vat-number
+        - iban
+      workflows:
+        - Financial Compliance
+
+  namespaces:
+    consumed:
+      - email-reputation
+      - phone-intelligence
+      - ip-geolocation
+      - ip-intelligence
+      - company-enrichment
+      - exchange-rates
+      - timezones
+      - vat-validation
+      - iban-validation
+    rest:
+      - fraud-detection-api (port 8080)
+      - data-enrichment-api (port 8081)
+      - financial-compliance-api (port 8082)
+    mcp:
+      - fraud-detection-mcp (port 9090)
+      - data-enrichment-mcp (port 9091)
+      - financial-compliance-mcp (port 9092)
+
+  binds:
+    - EMAIL_REPUTATION_API_KEY
+    - PHONE_INTELLIGENCE_API_KEY
+    - IP_GEOLOCATION_API_KEY
+    - IP_INTELLIGENCE_API_KEY
+    - COMPANY_ENRICHMENT_API_KEY
+    - EXCHANGE_RATES_API_KEY
+    - TIMEZONES_API_KEY
+    - VAT_VALIDATION_API_KEY
+    - IBAN_VALIDATION_API_KEY
+
+crossReference:
+  - resource: email
+    operations:
+      - getEmailReputation
+    workflows:
+      - Fraud Detection
+    personas:
+      - fraud-analyst
+      - security-engineer
+  - resource: phone
+    operations:
+      - getPhoneIntelligence
+    workflows:
+      - Fraud Detection
+    personas:
+      - fraud-analyst
+      - security-engineer
+  - resource: ip-address
+    operations:
+      - getIPGeolocation
+      - getIPIntelligence
+    workflows:
+      - Fraud Detection
+      - Data Enrichment
+    personas:
+      - fraud-analyst
+      - security-engineer
+      - product-engineer
+      - data-engineer
+  - resource: company
+    operations:
+      - getCompanyEnrichment
+    workflows:
+      - Data Enrichment
+    personas:
+      - product-engineer
+      - data-engineer
+  - resource: timezone
+    operations:
+      - getCurrentTime
+      - convertTime
+    workflows:
+      - Data Enrichment
+    personas:
+      - product-engineer
+      - data-engineer
+  - resource: currency
+    operations:
+      - getLiveExchangeRates
+      - convertCurrency
+      - getHistoricalExchangeRates
+    workflows:
+      - Financial Compliance
+    personas:
+      - finance-engineer
+      - compliance-analyst
+  - resource: vat-number
+    operations:
+      - validateVATNumber
+      - getVATRates
+      - calculateVAT
+    workflows:
+      - Financial Compliance
+    personas:
+      - finance-engineer
+      - compliance-analyst
+  - resource: iban
+    operations:
+      - validateIBAN
+    workflows:
+      - Financial Compliance
+    personas:
+      - finance-engineer
+      - compliance-analyst

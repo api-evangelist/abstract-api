@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/json-schema/email-reputation-email-quality-schema.json",
+  "title": "EmailQuality",
+  "description": "Email quality signals",
+  "type": "object",
+  "properties": {
+    "score": {
+      "type": "number",
+      "format": "float",
+      "description": "Quality score from 0.0 to 1.0",
+      "example": 0.92
+    },
+    "is_free_email": {
+      "type": "boolean",
+      "description": "Whether the email is from a free provider",
+      "example": false
+    },
+    "is_username_suspicious": {
+      "type": "boolean",
+      "description": "Whether the username appears suspicious",
+      "example": false
+    },
+    "is_disposable": {
+      "type": "boolean",
+      "description": "Whether the email is from a disposable provider",
+      "example": false
+    },
+    "is_catchall": {
+      "type": "boolean",
+      "description": "Whether the domain accepts all emails",
+      "example": false
+    },
+    "is_subaddress": {
+      "type": "boolean",
+      "description": "Whether the email uses a subaddress (+ tag)",
+      "example": false
+    },
+    "is_role": {
+      "type": "boolean",
+      "description": "Whether the email is a role-based address",
+      "example": false
+    },
+    "is_dmarc_enforced": {
+      "type": "boolean",
+      "description": "Whether DMARC policy is enforced",
+      "example": true
+    },
+    "is_spf_strict": {
+      "type": "boolean",
+      "description": "Whether SPF is strictly enforced",
+      "example": false
+    },
+    "minimum_age": {
+      "type": "integer",
+      "description": "Minimum estimated age of the email in days",
+      "example": 365
+    }
+  }
+}

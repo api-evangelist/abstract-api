@@ -1,0 +1,10 @@
+{
+  "country_code": "DE",
+  "country_name": "Germany",
+  "standard_rate": 19,
+  "reduced_rates": [
+    7
+  ],
+  "super_reduced_rate": null,
+  "parking_rate": null
+}

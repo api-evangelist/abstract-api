@@ -1,0 +1,141 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "abstract": "https://abstractapi.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "CurrencyInfo": "abstract:CurrencyInfo",
+    "FlagInfo": "abstract:FlagInfo",
+    "IPGeolocationResponse": "abstract:IPGeolocationResponse",
+    "SecurityInfo": "abstract:SecurityInfo",
+    "TimezoneInfo": "abstract:TimezoneInfo",
+    "currencyName": {
+      "@id": "abstract:currency_name",
+      "@type": "xsd:string"
+    },
+    "currencyCode": {
+      "@id": "abstract:currency_code",
+      "@type": "xsd:string"
+    },
+    "emoji": {
+      "@id": "abstract:emoji",
+      "@type": "xsd:string"
+    },
+    "unicode": {
+      "@id": "abstract:unicode",
+      "@type": "xsd:string"
+    },
+    "png": {
+      "@id": "abstract:png",
+      "@type": "@id"
+    },
+    "svg": {
+      "@id": "abstract:svg",
+      "@type": "@id"
+    },
+    "ipAddress": {
+      "@id": "abstract:ip_address",
+      "@type": "xsd:string"
+    },
+    "city": {
+      "@id": "abstract:city",
+      "@type": "xsd:string"
+    },
+    "cityGeonameId": {
+      "@id": "abstract:city_geoname_id",
+      "@type": "xsd:integer"
+    },
+    "region": {
+      "@id": "abstract:region",
+      "@type": "xsd:string"
+    },
+    "regionIsoCode": {
+      "@id": "abstract:region_iso_code",
+      "@type": "xsd:string"
+    },
+    "regionGeonameId": {
+      "@id": "abstract:region_geoname_id",
+      "@type": "xsd:integer"
+    },
+    "postalCode": {
+      "@id": "abstract:postal_code",
+      "@type": "xsd:string"
+    },
+    "country": {
+      "@id": "abstract:country",
+      "@type": "xsd:string"
+    },
+    "countryCode": {
+      "@id": "abstract:country_code",
+      "@type": "xsd:string"
+    },
+    "countryGeonameId": {
+      "@id": "abstract:country_geoname_id",
+      "@type": "xsd:integer"
+    },
+    "countryIsEu": {
+      "@id": "abstract:country_is_eu",
+      "@type": "xsd:boolean"
+    },
+    "continent": {
+      "@id": "abstract:continent",
+      "@type": "xsd:string"
+    },
+    "continentCode": {
+      "@id": "abstract:continent_code",
+      "@type": "xsd:string"
+    },
+    "continentGeonameId": {
+      "@id": "abstract:continent_geoname_id",
+      "@type": "xsd:integer"
+    },
+    "longitude": {
+      "@id": "abstract:longitude",
+      "@type": "xsd:decimal"
+    },
+    "latitude": {
+      "@id": "abstract:latitude",
+      "@type": "xsd:decimal"
+    },
+    "security": {
+      "@id": "abstract:security",
+      "@type": "xsd:string"
+    },
+    "timezone": {
+      "@id": "abstract:timezone",
+      "@type": "xsd:string"
+    },
+    "flag": {
+      "@id": "abstract:flag",
+      "@type": "xsd:string"
+    },
+    "currency": {
+      "@id": "abstract:currency",
+      "@type": "xsd:string"
+    },
+    "isVpn": {
+      "@id": "abstract:is_vpn",
+      "@type": "xsd:boolean"
+    },
+    "name": {
+      "@id": "schema:name"
+    },
+    "abbreviation": {
+      "@id": "abstract:abbreviation",
+      "@type": "xsd:string"
+    },
+    "gmtOffset": {
+      "@id": "abstract:gmt_offset",
+      "@type": "xsd:integer"
+    },
+    "currentTime": {
+      "@id": "abstract:current_time",
+      "@type": "xsd:string"
+    },
+    "isDst": {
+      "@id": "abstract:is_dst",
+      "@type": "xsd:boolean"
+    }
+  }
+}

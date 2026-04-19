@@ -1,0 +1,16 @@
+{
+  "iban": "GB82WEST12345698765432",
+  "is_valid": true,
+  "country": {
+    "code": "GB",
+    "name": "United Kingdom"
+  },
+  "bank": {
+    "bank_name": "Westpac Banking Corporation",
+    "bank_code": "WEST",
+    "bic": "WESTGB22"
+  },
+  "account_number": "98765432",
+  "check_digits": "82",
+  "sepa_member": true
+}

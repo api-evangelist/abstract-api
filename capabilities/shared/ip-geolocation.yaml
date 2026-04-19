@@ -1,0 +1,40 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "IP Geolocation API"
+  description: "Geolocate any IPv4 or IPv6 address to country, region, city, coordinates, timezone, currency, and flag data covering 4 billion+ IP addresses across 250,000+ cities worldwide."
+  tags:
+    - Abstract Api
+    - IP Geolocation
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      IP_GEOLOCATION_API_KEY: IP_GEOLOCATION_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: ip-geolocation
+      baseUri: https://ipgeolocation.abstractapi.com/v1
+      description: "IP Geolocation API"
+      authentication:
+        type: apikey
+        key: api_key
+        value: "{{env.IP_GEOLOCATION_API_KEY}}"
+        placement: query
+      resources:
+        - name: ip-geolocation
+          path: /
+          description: "IP Geolocation API ip-geolocation resource"
+          operations:
+            - name: getIPGeolocation
+              method: GET
+              description: "Abstract API Get IP Geolocation"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."

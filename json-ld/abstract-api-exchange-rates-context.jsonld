@@ -1,0 +1,44 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "abstract": "https://abstractapi.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "ConvertResponse": "abstract:ConvertResponse",
+    "HistoricalRatesResponse": "abstract:HistoricalRatesResponse",
+    "LiveRatesResponse": "abstract:LiveRatesResponse",
+    "baseCurrency": {
+      "@id": "abstract:base_currency",
+      "@type": "xsd:string"
+    },
+    "targetCurrency": {
+      "@id": "abstract:target_currency",
+      "@type": "xsd:string"
+    },
+    "baseAmount": {
+      "@id": "abstract:base_amount",
+      "@type": "xsd:decimal"
+    },
+    "convertedAmount": {
+      "@id": "abstract:converted_amount",
+      "@type": "xsd:decimal"
+    },
+    "base": {
+      "@id": "abstract:base",
+      "@type": "xsd:string"
+    },
+    "date": {
+      "@id": "abstract:date",
+      "@type": "xsd:date"
+    },
+    "exchangeRates": {
+      "@id": "abstract:exchange_rates",
+      "@type": "@id"
+    },
+    "lastUpdated": {
+      "@id": "abstract:last_updated",
+      "@type": "xsd:integer"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/json-structure/ip-geolocation-currency-info-structure.json",
+  "name": "CurrencyInfo",
+  "description": "CurrencyInfo schema from Abstract API ip-geolocation",
+  "type": "object",
+  "properties": {
+    "currency_name": {
+      "type": "string",
+      "description": "Currency full name",
+      "example": "US Dollar"
+    },
+    "currency_code": {
+      "type": "string",
+      "description": "ISO 4217 currency code",
+      "example": "USD"
+    }
+  }
+}

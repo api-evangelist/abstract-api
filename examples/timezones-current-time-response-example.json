@@ -1,0 +1,11 @@
+{
+  "datetime": "2026-04-19 10:30:00",
+  "timezone_name": "America/New_York",
+  "timezone_location": "New York, United States",
+  "timezone_abbreviation": "EDT",
+  "gmt_offset": -4,
+  "is_dst": true,
+  "requested_location": "New York City",
+  "latitude": 40.7128,
+  "longitude": -74.006
+}

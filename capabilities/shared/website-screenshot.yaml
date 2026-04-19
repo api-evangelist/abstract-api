@@ -1,0 +1,40 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Website Screenshot API"
+  description: "Capture high-quality screenshots of any website with optional customizations including CSS injection, delay settings, and viewport configuration."
+  tags:
+    - Abstract Api
+    - Website Screenshot
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      SCREENSHOT_API_KEY: SCREENSHOT_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: website-screenshot
+      baseUri: https://screenshot.abstractapi.com/v1
+      description: "Website Screenshot API"
+      authentication:
+        type: apikey
+        key: api_key
+        value: "{{env.SCREENSHOT_API_KEY}}"
+        placement: query
+      resources:
+        - name: website-screenshot
+          path: /
+          description: "Website Screenshot API website-screenshot resource"
+          operations:
+            - name: captureWebsiteScreenshot
+              method: GET
+              description: "Abstract API Capture Website Screenshot"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."

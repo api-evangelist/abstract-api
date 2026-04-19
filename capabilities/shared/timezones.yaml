@@ -1,0 +1,52 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Timezone API"
+  description: "Find, convert, and manage time and timezone data across the world. Supports lookup by location or coordinates and returns local time, timezone abbreviation, UTC offset, and DST information."
+  tags:
+    - Abstract Api
+    - Timezone
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      TIMEZONES_API_KEY: TIMEZONES_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: timezones
+      baseUri: https://timezone.abstractapi.com/v1
+      description: "Timezone API"
+      authentication:
+        type: apikey
+        key: api_key
+        value: "{{env.TIMEZONES_API_KEY}}"
+        placement: query
+      resources:
+        - name: current_time
+          path: /current_time
+          description: "Timezone API current_time resource"
+          operations:
+            - name: getCurrentTime
+              method: GET
+              description: "Abstract API Get Current Time"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: convert_time
+          path: /convert_time
+          description: "Timezone API convert_time resource"
+          operations:
+            - name: convertTime
+              method: GET
+              description: "Abstract API Convert Time Between Timezones"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."

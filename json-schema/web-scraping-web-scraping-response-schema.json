@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/json-schema/web-scraping-web-scraping-response-schema.json",
+  "title": "WebScrapingResponse",
+  "description": "Web scraping result",
+  "type": "object",
+  "properties": {
+    "body": {
+      "type": "string",
+      "description": "Full HTML content of the page",
+      "example": "<html><head><title>Example Domain</title></head><body>...</body></html>"
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Final URL after redirects",
+      "example": "https://www.example.com"
+    },
+    "status_code": {
+      "type": "integer",
+      "description": "HTTP status code of the scraped page",
+      "example": 200
+    }
+  }
+}

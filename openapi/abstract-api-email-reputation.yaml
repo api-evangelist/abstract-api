@@ -1,0 +1,334 @@
+openapi: 3.0.3
+info:
+  title: Abstract API - Email Reputation API
+  description: Validate email addresses for deliverability, detect disposable or risky domains, verify SMTP/MX records, and enrich email data with sender information, breach history, and risk scoring.
+  version: 1.0.0
+  contact:
+    url: https://www.abstractapi.com/
+  x-generated-from: documentation
+servers:
+  - url: https://emailreputation.abstractapi.com/v1
+    description: Email Reputation API v1
+security:
+  - apiKey: []
+tags:
+  - name: Email Reputation
+    description: Email validation and reputation operations
+paths:
+  /:
+    get:
+      operationId: getEmailReputation
+      summary: Abstract API Get Email Reputation
+      description: Validate an email address and retrieve reputation, deliverability, and enrichment data.
+      tags:
+        - Email Reputation
+      parameters:
+        - name: api_key
+          in: query
+          description: Your unique API key for the Email Reputation API.
+          required: true
+          schema:
+            type: string
+          example: abc123def456
+        - name: email
+          in: query
+          description: The email address to validate and analyze.
+          required: true
+          schema:
+            type: string
+            format: email
+          example: test@example.com
+      responses:
+        '200':
+          description: Successful email reputation lookup
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailReputationResponse'
+              examples:
+                getEmailReputation200Example:
+                  summary: Default getEmailReputation 200 response
+                  x-microcks-default: true
+                  value:
+                    email: test@example.com
+                    deliverability:
+                      status: DELIVERABLE
+                      status_detail: smtp_valid
+                      is_format_valid: true
+                      is_smtp_valid: true
+                      is_mx_valid: true
+                      mx_records:
+                        - mx.example.com
+                    quality:
+                      score: 0.92
+                      is_free_email: false
+                      is_disposable: false
+                      is_catchall: false
+                      is_role: false
+                    domain:
+                      domain: example.com
+                      domain_age: 9000
+                      is_live_site: true
+                    risk:
+                      address_risk_status: low
+                      domain_risk_status: low
+                    breaches:
+                      total_breaches: 0
+        '400':
+          description: Bad request - missing or invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized - invalid or missing API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: api_key
+      description: Unique API key per Abstract API service
+  schemas:
+    EmailReputationResponse:
+      type: object
+      description: Email reputation and validation response
+      properties:
+        email:
+          type: string
+          format: email
+          description: The email address analyzed
+          example: test@example.com
+        deliverability:
+          $ref: '#/components/schemas/Deliverability'
+        quality:
+          $ref: '#/components/schemas/EmailQuality'
+        sender:
+          $ref: '#/components/schemas/SenderInfo'
+        domain:
+          $ref: '#/components/schemas/DomainInfo'
+        risk:
+          $ref: '#/components/schemas/RiskInfo'
+        breaches:
+          $ref: '#/components/schemas/BreachInfo'
+    Deliverability:
+      type: object
+      description: Email deliverability information
+      properties:
+        status:
+          type: string
+          description: Overall deliverability status
+          example: DELIVERABLE
+          enum:
+            - DELIVERABLE
+            - UNDELIVERABLE
+            - RISKY
+            - UNKNOWN
+        status_detail:
+          type: string
+          description: Detailed deliverability reason
+          example: smtp_valid
+        is_format_valid:
+          type: boolean
+          description: Whether the email format is valid
+          example: true
+        is_smtp_valid:
+          type: boolean
+          description: Whether the SMTP server responded positively
+          example: true
+        is_mx_valid:
+          type: boolean
+          description: Whether valid MX records exist for the domain
+          example: true
+        mx_records:
+          type: array
+          description: List of MX records for the domain
+          items:
+            type: string
+          example:
+            - mx.example.com
+    EmailQuality:
+      type: object
+      description: Email quality signals
+      properties:
+        score:
+          type: number
+          format: float
+          description: Quality score from 0.0 to 1.0
+          example: 0.92
+        is_free_email:
+          type: boolean
+          description: Whether the email is from a free provider
+          example: false
+        is_username_suspicious:
+          type: boolean
+          description: Whether the username appears suspicious
+          example: false
+        is_disposable:
+          type: boolean
+          description: Whether the email is from a disposable provider
+          example: false
+        is_catchall:
+          type: boolean
+          description: Whether the domain accepts all emails
+          example: false
+        is_subaddress:
+          type: boolean
+          description: Whether the email uses a subaddress (+ tag)
+          example: false
+        is_role:
+          type: boolean
+          description: Whether the email is a role-based address
+          example: false
+        is_dmarc_enforced:
+          type: boolean
+          description: Whether DMARC policy is enforced
+          example: true
+        is_spf_strict:
+          type: boolean
+          description: Whether SPF is strictly enforced
+          example: false
+        minimum_age:
+          type: integer
+          description: Minimum estimated age of the email in days
+          example: 365
+    SenderInfo:
+      type: object
+      description: Sender identity information
+      properties:
+        first_name:
+          type: string
+          description: Inferred first name of sender
+          example: Jane
+        last_name:
+          type: string
+          description: Inferred last name of sender
+          example: Smith
+        email_provider_name:
+          type: string
+          description: Name of the email provider
+          example: Google Workspace
+        organization_name:
+          type: string
+          description: Organization associated with the email
+          example: Example Corp
+        organization_type:
+          type: string
+          description: Type of organization
+          example: business
+    DomainInfo:
+      type: object
+      description: Domain-level information
+      properties:
+        domain:
+          type: string
+          description: Domain extracted from email
+          example: example.com
+        domain_age:
+          type: integer
+          description: Age of the domain in days
+          example: 9000
+        is_live_site:
+          type: boolean
+          description: Whether the domain hosts a live website
+          example: true
+        registrar:
+          type: string
+          description: Domain registrar name
+          example: GoDaddy
+        registrar_url:
+          type: string
+          format: uri
+          description: URL of the registrar
+          example: https://www.godaddy.com
+        date_registered:
+          type: string
+          format: date
+          description: Date the domain was registered
+          example: '2015-03-10'
+        date_last_renewed:
+          type: string
+          format: date
+          description: Date the domain was last renewed
+          example: '2025-03-10'
+        date_expires:
+          type: string
+          format: date
+          description: Date the domain expires
+          example: '2026-03-10'
+        is_risky_tld:
+          type: boolean
+          description: Whether the TLD is associated with risky domains
+          example: false
+    RiskInfo:
+      type: object
+      description: Risk assessment for the email
+      properties:
+        address_risk_status:
+          type: string
+          description: Risk level of the specific email address
+          example: low
+          enum:
+            - low
+            - medium
+            - high
+            - critical
+        domain_risk_status:
+          type: string
+          description: Risk level of the domain
+          example: low
+          enum:
+            - low
+            - medium
+            - high
+            - critical
+    BreachInfo:
+      type: object
+      description: Data breach history for the email
+      properties:
+        total_breaches:
+          type: integer
+          description: Total number of breaches the email appeared in
+          example: 0
+        date_first_breached:
+          type: string
+          format: date
+          description: Date of the earliest known breach
+          example: '2020-01-15'
+        date_last_breached:
+          type: string
+          format: date
+          description: Date of the most recent breach
+          example: '2023-06-01'
+        breached_domains:
+          type: array
+          description: Domains where the email was breached
+          items:
+            type: string
+          example:
+            - breached-site.com
+    ErrorResponse:
+      type: object
+      description: Error response from the API
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+          example: The provided API key is invalid
+        error:
+          type: string
+          description: Error code identifier
+          example: invalid_api_key

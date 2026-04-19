@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/json-structure/ip-intelligence-ip-intelligence-response-structure.json",
+  "name": "IPIntelligenceResponse",
+  "description": "Full IP intelligence response",
+  "type": "object",
+  "properties": {
+    "ip_address": {
+      "type": "string",
+      "description": "Analyzed IP address",
+      "example": "8.8.8.8"
+    },
+    "security": {
+      "$ref": "#/components/schemas/IPSecurityFlags"
+    },
+    "asn": {
+      "$ref": "#/components/schemas/ASNInfo"
+    },
+    "company": {
+      "$ref": "#/components/schemas/CompanyBasic"
+    },
+    "domains": {
+      "type": "array",
+      "description": "Known domains associated with this IP",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "dns.google"
+      ]
+    },
+    "location": {
+      "$ref": "#/components/schemas/LocationInfo"
+    },
+    "timezone": {
+      "$ref": "#/components/schemas/TimezoneInfo"
+    },
+    "flag": {
+      "$ref": "#/components/schemas/FlagInfo"
+    },
+    "currency": {
+      "$ref": "#/components/schemas/CurrencyInfo"
+    }
+  }
+}

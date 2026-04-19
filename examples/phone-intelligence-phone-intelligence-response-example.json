@@ -1,0 +1,10 @@
+{
+  "phone": "+14155552671",
+  "valid": true,
+  "country": "US",
+  "location": "California",
+  "type": "mobile",
+  "carrier": "Verizon",
+  "is_voip": false,
+  "risk_score": 12
+}

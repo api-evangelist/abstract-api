@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/json-schema/email-reputation-email-reputation-response-schema.json",
+  "title": "EmailReputationResponse",
+  "description": "Email reputation and validation response",
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "The email address analyzed",
+      "example": "test@example.com"
+    },
+    "deliverability": {
+      "$ref": "#/components/schemas/Deliverability"
+    },
+    "quality": {
+      "$ref": "#/components/schemas/EmailQuality"
+    },
+    "sender": {
+      "$ref": "#/components/schemas/SenderInfo"
+    },
+    "domain": {
+      "$ref": "#/components/schemas/DomainInfo"
+    },
+    "risk": {
+      "$ref": "#/components/schemas/RiskInfo"
+    },
+    "breaches": {
+      "$ref": "#/components/schemas/BreachInfo"
+    }
+  }
+}

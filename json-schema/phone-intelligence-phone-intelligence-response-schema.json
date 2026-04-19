@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/json-schema/phone-intelligence-phone-intelligence-response-schema.json",
+  "title": "PhoneIntelligenceResponse",
+  "description": "Phone number intelligence response",
+  "type": "object",
+  "properties": {
+    "phone": {
+      "type": "string",
+      "description": "The phone number in E.164 format",
+      "example": "+14155552671"
+    },
+    "valid": {
+      "type": "boolean",
+      "description": "Whether the phone number is valid",
+      "example": true
+    },
+    "country": {
+      "$ref": "#/components/schemas/PhoneCountry"
+    },
+    "location": {
+      "type": "string",
+      "description": "Geographic location of the phone number",
+      "example": "California"
+    },
+    "type": {
+      "type": "string",
+      "description": "Line type",
+      "example": "mobile",
+      "enum": [
+        "mobile",
+        "landline",
+        "voip",
+        "toll_free",
+        "premium_rate",
+        "shared_cost",
+        "unknown"
+      ]
+    },
+    "carrier": {
+      "type": "string",
+      "description": "Carrier or service provider",
+      "example": "Verizon"
+    },
+    "is_voip": {
+      "type": "boolean",
+      "description": "Whether the number is a VoIP number",
+      "example": false
+    },
+    "risk_score": {
+      "type": "integer",
+      "description": "Risk score from 0 (low risk) to 100 (high risk)",
+      "example": 12
+    }
+  }
+}

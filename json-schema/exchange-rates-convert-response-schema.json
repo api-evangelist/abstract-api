@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/json-schema/exchange-rates-convert-response-schema.json",
+  "title": "ConvertResponse",
+  "description": "ConvertResponse schema from Abstract API exchange-rates",
+  "type": "object",
+  "properties": {
+    "base_currency": {
+      "type": "string",
+      "description": "Source currency code",
+      "example": "USD"
+    },
+    "target_currency": {
+      "type": "string",
+      "description": "Target currency code",
+      "example": "EUR"
+    },
+    "base_amount": {
+      "type": "number",
+      "description": "Original amount",
+      "example": 100
+    },
+    "converted_amount": {
+      "type": "number",
+      "description": "Converted amount",
+      "example": 92.34
+    }
+  }
+}

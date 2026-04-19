@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/json-structure/timezones-current-time-response-structure.json",
+  "name": "CurrentTimeResponse",
+  "description": "Current time and timezone data for a location",
+  "type": "object",
+  "properties": {
+    "datetime": {
+      "type": "string",
+      "description": "Current date and time in the target timezone",
+      "example": "2026-04-19 10:30:00"
+    },
+    "timezone_name": {
+      "type": "string",
+      "description": "IANA timezone name",
+      "example": "America/New_York"
+    },
+    "timezone_location": {
+      "type": "string",
+      "description": "Human-readable location description",
+      "example": "New York, United States"
+    },
+    "timezone_abbreviation": {
+      "type": "string",
+      "description": "Timezone abbreviation",
+      "example": "EDT"
+    },
+    "gmt_offset": {
+      "type": "int32",
+      "description": "GMT/UTC offset in hours",
+      "example": -4
+    },
+    "is_dst": {
+      "type": "boolean",
+      "description": "Whether daylight saving time is active",
+      "example": true
+    },
+    "requested_location": {
+      "type": "string",
+      "description": "The input location string",
+      "example": "New York City"
+    },
+    "latitude": {
+      "type": "double",
+      "description": "Latitude of the location",
+      "example": 40.7128
+    },
+    "longitude": {
+      "type": "double",
+      "description": "Longitude of the location",
+      "example": -74.006
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/json-schema/email-reputation-deliverability-schema.json",
+  "title": "Deliverability",
+  "description": "Email deliverability information",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "description": "Overall deliverability status",
+      "example": "DELIVERABLE",
+      "enum": [
+        "DELIVERABLE",
+        "UNDELIVERABLE",
+        "RISKY",
+        "UNKNOWN"
+      ]
+    },
+    "status_detail": {
+      "type": "string",
+      "description": "Detailed deliverability reason",
+      "example": "smtp_valid"
+    },
+    "is_format_valid": {
+      "type": "boolean",
+      "description": "Whether the email format is valid",
+      "example": true
+    },
+    "is_smtp_valid": {
+      "type": "boolean",
+      "description": "Whether the SMTP server responded positively",
+      "example": true
+    },
+    "is_mx_valid": {
+      "type": "boolean",
+      "description": "Whether valid MX records exist for the domain",
+      "example": true
+    },
+    "mx_records": {
+      "type": "array",
+      "description": "List of MX records for the domain",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "mx.example.com"
+      ]
+    }
+  }
+}

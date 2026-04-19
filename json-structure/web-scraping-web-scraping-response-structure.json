@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/json-structure/web-scraping-web-scraping-response-structure.json",
+  "name": "WebScrapingResponse",
+  "description": "Web scraping result",
+  "type": "object",
+  "properties": {
+    "body": {
+      "type": "string",
+      "description": "Full HTML content of the page",
+      "example": "<html><head><title>Example Domain</title></head><body>...</body></html>"
+    },
+    "url": {
+      "type": "uri",
+      "description": "Final URL after redirects",
+      "example": "https://www.example.com"
+    },
+    "status_code": {
+      "type": "int32",
+      "description": "HTTP status code of the scraped page",
+      "example": 200
+    }
+  }
+}

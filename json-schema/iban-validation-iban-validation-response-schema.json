@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/json-schema/iban-validation-iban-validation-response-schema.json",
+  "title": "IBANValidationResponse",
+  "description": "IBAN validation and enrichment response",
+  "type": "object",
+  "properties": {
+    "iban": {
+      "type": "string",
+      "description": "The IBAN submitted for validation",
+      "example": "GB82WEST12345698765432"
+    },
+    "is_valid": {
+      "type": "boolean",
+      "description": "Whether the IBAN is valid",
+      "example": true
+    },
+    "country": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "ISO 3166-1 alpha-2 country code",
+          "example": "GB"
+        },
+        "name": {
+          "type": "string",
+          "description": "Country name",
+          "example": "United Kingdom"
+        }
+      }
+    },
+    "bank": {
+      "type": "object",
+      "properties": {
+        "bank_name": {
+          "type": "string",
+          "description": "Name of the bank",
+          "example": "Westpac Banking Corporation"
+        },
+        "bank_code": {
+          "type": "string",
+          "description": "Bank identifier code within the IBAN",
+          "example": "WEST"
+        },
+        "bic": {
+          "type": "string",
+          "description": "Bank Identifier Code (BIC/SWIFT)",
+          "example": "WESTGB22"
+        }
+      }
+    },
+    "account_number": {
+      "type": "string",
+      "description": "Account number extracted from the IBAN",
+      "example": "98765432"
+    },
+    "check_digits": {
+      "type": "string",
+      "description": "Check digits from the IBAN",
+      "example": "82"
+    },
+    "sepa_member": {
+      "type": "boolean",
+      "description": "Whether the country is a SEPA member",
+      "example": true
+    }
+  }
+}

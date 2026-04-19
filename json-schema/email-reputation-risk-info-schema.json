@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/json-schema/email-reputation-risk-info-schema.json",
+  "title": "RiskInfo",
+  "description": "Risk assessment for the email",
+  "type": "object",
+  "properties": {
+    "address_risk_status": {
+      "type": "string",
+      "description": "Risk level of the specific email address",
+      "example": "low",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ]
+    },
+    "domain_risk_status": {
+      "type": "string",
+      "description": "Risk level of the domain",
+      "example": "low",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ]
+    }
+  }
+}

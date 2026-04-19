@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/json-structure/vat-validation-vat-rates-response-structure.json",
+  "name": "VATRatesResponse",
+  "description": "VATRatesResponse schema from Abstract API vat-validation",
+  "type": "object",
+  "properties": {
+    "country_code": {
+      "type": "string",
+      "example": "DE"
+    },
+    "country_name": {
+      "type": "string",
+      "example": "Germany"
+    },
+    "standard_rate": {
+      "type": "double",
+      "description": "Standard VAT rate percentage",
+      "example": 19
+    },
+    "reduced_rates": {
+      "type": "array",
+      "items": {
+        "type": "double"
+      },
+      "description": "Reduced VAT rate percentages",
+      "example": [
+        7
+      ]
+    },
+    "super_reduced_rate": {
+      "type": "double",
+      "nullable": true,
+      "description": "Super reduced VAT rate if applicable",
+      "example": null
+    },
+    "parking_rate": {
+      "type": "double",
+      "nullable": true,
+      "description": "Parking VAT rate if applicable",
+      "example": null
+    }
+  }
+}

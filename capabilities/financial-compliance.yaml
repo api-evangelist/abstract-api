@@ -1,0 +1,157 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Abstract API Financial Compliance"
+  description: "Unified financial compliance workflow combining exchange rates, VAT validation, and IBAN validation APIs. Used by finance teams, e-commerce platforms, and fintech developers to automate VAT compliance, currency conversion, and banking validation."
+  tags:
+    - Abstract Api
+    - Financial Compliance
+    - Exchange Rates
+    - Vat Validation
+    - Iban Validation
+    - Finance
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      EXCHANGE_RATES_API_KEY: EXCHANGE_RATES_API_KEY
+      VAT_VALIDATION_API_KEY: VAT_VALIDATION_API_KEY
+      IBAN_VALIDATION_API_KEY: IBAN_VALIDATION_API_KEY
+
+capability:
+  consumes:
+    - import: exchange-rates
+      location: ./shared/exchange-rates.yaml
+    - import: vat-validation
+      location: ./shared/vat-validation.yaml
+    - import: iban-validation
+      location: ./shared/iban-validation.yaml
+
+  exposes:
+    - type: rest
+      port: 8082
+      namespace: financial-compliance-api
+      description: "Unified REST API for financial compliance automation."
+      resources:
+        - path: /v1/exchange-rates
+          name: exchange-rates
+          description: "Get live exchange rates"
+          operations:
+            - method: GET
+              name: get-live-rates
+              description: "Retrieve current exchange rates"
+              call: "exchange-rates.getLiveExchangeRates"
+              with:
+                base: "rest.base"
+                target: "rest.target"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/currency-convert
+          name: currency-convert
+          description: "Convert currency amounts"
+          operations:
+            - method: GET
+              name: convert-currency
+              description: "Convert an amount from one currency to another"
+              call: "exchange-rates.convertCurrency"
+              with:
+                base: "rest.base"
+                target: "rest.target"
+                base_amount: "rest.base_amount"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/vat/validate
+          name: vat-validate
+          description: "Validate a VAT number"
+          operations:
+            - method: GET
+              name: validate-vat
+              description: "Validate a VAT number and get company details"
+              call: "vat-validation.validateVATNumber"
+              with:
+                vat_number: "rest.vat_number"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/iban/validate
+          name: iban-validate
+          description: "Validate an IBAN number"
+          operations:
+            - method: GET
+              name: validate-iban
+              description: "Validate an IBAN and get bank details"
+              call: "iban-validation.validateIBAN"
+              with:
+                iban: "rest.iban"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9092
+      namespace: financial-compliance-mcp
+      transport: http
+      description: "MCP server for AI-assisted financial compliance and currency operations."
+      tools:
+        - name: get-live-exchange-rates
+          description: "Get the latest exchange rates for 80+ currencies"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "exchange-rates.getLiveExchangeRates"
+          with:
+            base: "tools.base"
+            target: "tools.target"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: convert-currency
+          description: "Convert an amount from one currency to another using live rates"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "exchange-rates.convertCurrency"
+          with:
+            base: "tools.base"
+            target: "tools.target"
+            base_amount: "tools.base_amount"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: validate-vat-number
+          description: "Validate a VAT number and retrieve associated company details"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "vat-validation.validateVATNumber"
+          with:
+            vat_number: "tools.vat_number"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-vat-rates
+          description: "Get current VAT rates for a country"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "vat-validation.getVATRates"
+          with:
+            country_code: "tools.country_code"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: validate-iban
+          description: "Validate an IBAN number and retrieve bank and account details"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "iban-validation.validateIBAN"
+          with:
+            iban: "tools.iban"
+          outputParameters:
+            - type: object
+              mapping: "$."

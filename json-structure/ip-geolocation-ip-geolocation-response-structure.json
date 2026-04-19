@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/json-structure/ip-geolocation-ip-geolocation-response-structure.json",
+  "name": "IPGeolocationResponse",
+  "description": "IP geolocation response data",
+  "type": "object",
+  "properties": {
+    "ip_address": {
+      "type": "string",
+      "description": "The queried IP address",
+      "example": "8.8.8.8"
+    },
+    "city": {
+      "type": "string",
+      "description": "City name",
+      "example": "Mountain View"
+    },
+    "city_geoname_id": {
+      "type": "int32",
+      "description": "Geonames ID for the city",
+      "example": 5375480
+    },
+    "region": {
+      "type": "string",
+      "description": "Region or state name",
+      "example": "California"
+    },
+    "region_iso_code": {
+      "type": "string",
+      "description": "ISO region code",
+      "example": "CA"
+    },
+    "region_geoname_id": {
+      "type": "int32",
+      "description": "Geonames ID for the region",
+      "example": 5332921
+    },
+    "postal_code": {
+      "type": "string",
+      "description": "Postal or ZIP code",
+      "example": "94043"
+    },
+    "country": {
+      "type": "string",
+      "description": "Country name",
+      "example": "United States"
+    },
+    "country_code": {
+      "type": "string",
+      "description": "ISO 3166-1 alpha-2 country code",
+      "example": "US"
+    },
+    "country_geoname_id": {
+      "type": "int32",
+      "description": "Geonames ID for the country",
+      "example": 6252001
+    },
+    "country_is_eu": {
+      "type": "boolean",
+      "description": "Whether the country is in the EU",
+      "example": false
+    },
+    "continent": {
+      "type": "string",
+      "description": "Continent name",
+      "example": "North America"
+    },
+    "continent_code": {
+      "type": "string",
+      "description": "Continent code",
+      "example": "NA"
+    },
+    "continent_geoname_id": {
+      "type": "int32",
+      "description": "Geonames ID for the continent",
+      "example": 6255149
+    },
+    "longitude": {
+      "type": "double",
+      "description": "Longitude coordinate",
+      "example": -122.0838
+    },
+    "latitude": {
+      "type": "double",
+      "description": "Latitude coordinate",
+      "example": 37.386
+    },
+    "security": {
+      "$ref": "#/components/schemas/SecurityInfo"
+    },
+    "timezone": {
+      "$ref": "#/components/schemas/TimezoneInfo"
+    },
+    "flag": {
+      "$ref": "#/components/schemas/FlagInfo"
+    },
+    "currency": {
+      "$ref": "#/components/schemas/CurrencyInfo"
+    }
+  }
+}

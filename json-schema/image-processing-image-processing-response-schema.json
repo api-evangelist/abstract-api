@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/json-schema/image-processing-image-processing-response-schema.json",
+  "title": "ImageProcessingResponse",
+  "description": "Image processing result",
+  "type": "object",
+  "properties": {
+    "original_size": {
+      "type": "integer",
+      "description": "Original file size in bytes",
+      "example": 102400
+    },
+    "new_size": {
+      "type": "integer",
+      "description": "Processed file size in bytes",
+      "example": 51200
+    },
+    "saved_bytes": {
+      "type": "integer",
+      "description": "Bytes saved by processing",
+      "example": 51200
+    },
+    "saved_percent": {
+      "type": "number",
+      "description": "Percentage of size reduction",
+      "example": 50.0
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL to download the processed image",
+      "example": "https://dl.abstractapi.com/processed/abc123.webp"
+    }
+  }
+}

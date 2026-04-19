@@ -1,0 +1,40 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Avatars API"
+  description: "Create highly customizable avatar images using a person's name or initials. Supports color, font, and size customization for user profile images."
+  tags:
+    - Abstract Api
+    - Avatars
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      AVATARS_API_KEY: AVATARS_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: avatars
+      baseUri: https://avatars.abstractapi.com/v1
+      description: "Avatars API"
+      authentication:
+        type: apikey
+        key: api_key
+        value: "{{env.AVATARS_API_KEY}}"
+        placement: query
+      resources:
+        - name: avatars
+          path: /
+          description: "Avatars API avatars resource"
+          operations:
+            - name: generateAvatar
+              method: GET
+              description: "Abstract API Generate Avatar"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."

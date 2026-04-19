@@ -1,0 +1,157 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "abstract": "https://abstractapi.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "ASNInfo": "abstract:ASNInfo",
+    "CompanyBasic": "abstract:CompanyBasic",
+    "CurrencyInfo": "abstract:CurrencyInfo",
+    "FlagInfo": "abstract:FlagInfo",
+    "IPIntelligenceResponse": "abstract:IPIntelligenceResponse",
+    "IPSecurityFlags": "abstract:IPSecurityFlags",
+    "LocationInfo": "abstract:LocationInfo",
+    "TimezoneInfo": "abstract:TimezoneInfo",
+    "asn": {
+      "@id": "abstract:asn",
+      "@type": "xsd:string"
+    },
+    "name": {
+      "@id": "schema:name"
+    },
+    "domain": {
+      "@id": "abstract:domain",
+      "@type": "xsd:string"
+    },
+    "type": {
+      "@id": "abstract:type",
+      "@type": "xsd:string"
+    },
+    "isoCode": {
+      "@id": "abstract:iso_code",
+      "@type": "xsd:string"
+    },
+    "symbol": {
+      "@id": "abstract:symbol",
+      "@type": "xsd:string"
+    },
+    "emoji": {
+      "@id": "abstract:emoji",
+      "@type": "xsd:string"
+    },
+    "unicode": {
+      "@id": "abstract:unicode",
+      "@type": "xsd:string"
+    },
+    "png": {
+      "@id": "abstract:png",
+      "@type": "@id"
+    },
+    "svg": {
+      "@id": "abstract:svg",
+      "@type": "@id"
+    },
+    "ipAddress": {
+      "@id": "abstract:ip_address",
+      "@type": "xsd:string"
+    },
+    "security": {
+      "@id": "abstract:security",
+      "@type": "xsd:string"
+    },
+    "company": {
+      "@id": "abstract:company",
+      "@type": "xsd:string"
+    },
+    "domains": {
+      "@id": "abstract:domains",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "location": {
+      "@id": "abstract:location",
+      "@type": "xsd:string"
+    },
+    "timezone": {
+      "@id": "abstract:timezone",
+      "@type": "xsd:string"
+    },
+    "flag": {
+      "@id": "abstract:flag",
+      "@type": "xsd:string"
+    },
+    "currency": {
+      "@id": "abstract:currency",
+      "@type": "xsd:string"
+    },
+    "isVpn": {
+      "@id": "abstract:is_vpn",
+      "@type": "xsd:boolean"
+    },
+    "isProxy": {
+      "@id": "abstract:is_proxy",
+      "@type": "xsd:boolean"
+    },
+    "isTor": {
+      "@id": "abstract:is_tor",
+      "@type": "xsd:boolean"
+    },
+    "isHosting": {
+      "@id": "abstract:is_hosting",
+      "@type": "xsd:boolean"
+    },
+    "isRelay": {
+      "@id": "abstract:is_relay",
+      "@type": "xsd:boolean"
+    },
+    "isMobile": {
+      "@id": "abstract:is_mobile",
+      "@type": "xsd:boolean"
+    },
+    "isAbuse": {
+      "@id": "abstract:is_abuse",
+      "@type": "xsd:boolean"
+    },
+    "city": {
+      "@id": "abstract:city",
+      "@type": "xsd:string"
+    },
+    "region": {
+      "@id": "abstract:region",
+      "@type": "xsd:string"
+    },
+    "country": {
+      "@id": "abstract:country",
+      "@type": "xsd:string"
+    },
+    "countryCode": {
+      "@id": "abstract:country_code",
+      "@type": "xsd:string"
+    },
+    "latitude": {
+      "@id": "abstract:latitude",
+      "@type": "xsd:decimal"
+    },
+    "longitude": {
+      "@id": "abstract:longitude",
+      "@type": "xsd:decimal"
+    },
+    "abbreviation": {
+      "@id": "abstract:abbreviation",
+      "@type": "xsd:string"
+    },
+    "utcOffset": {
+      "@id": "abstract:utc_offset",
+      "@type": "xsd:integer"
+    },
+    "localTime": {
+      "@id": "abstract:local_time",
+      "@type": "xsd:string"
+    },
+    "isDst": {
+      "@id": "abstract:is_dst",
+      "@type": "xsd:boolean"
+    }
+  }
+}

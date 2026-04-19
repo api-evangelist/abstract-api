@@ -1,0 +1,6 @@
+{
+  "base_currency": "USD",
+  "target_currency": "EUR",
+  "base_amount": 100,
+  "converted_amount": 92.34
+}

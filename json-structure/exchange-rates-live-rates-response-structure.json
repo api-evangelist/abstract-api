@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/json-structure/exchange-rates-live-rates-response-structure.json",
+  "name": "LiveRatesResponse",
+  "description": "LiveRatesResponse schema from Abstract API exchange-rates",
+  "type": "object",
+  "properties": {
+    "base": {
+      "type": "string",
+      "description": "Base currency code",
+      "example": "USD"
+    },
+    "last_updated": {
+      "type": "int32",
+      "description": "Unix timestamp of last update",
+      "example": 1713518400
+    },
+    "exchange_rates": {
+      "type": "object",
+      "description": "Map of currency codes to exchange rates",
+      "additionalProperties": {
+        "type": "double"
+      }
+    }
+  }
+}

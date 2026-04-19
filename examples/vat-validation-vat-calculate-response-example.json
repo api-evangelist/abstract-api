@@ -1,0 +1,9 @@
+{
+  "amount_excl_vat": 100,
+  "vat_amount": 19,
+  "amount_incl_vat": 119,
+  "vat_category": "standard",
+  "vat_rate": 19,
+  "country_code": "DE",
+  "country_name": "Germany"
+}

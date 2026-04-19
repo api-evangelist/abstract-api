@@ -1,0 +1,11 @@
+{
+  "domain": "example.com",
+  "domain_age": 9000,
+  "is_live_site": true,
+  "registrar": "GoDaddy",
+  "registrar_url": "https://www.godaddy.com",
+  "date_registered": "2015-03-10",
+  "date_last_renewed": "2025-03-10",
+  "date_expires": "2026-03-10",
+  "is_risky_tld": false
+}

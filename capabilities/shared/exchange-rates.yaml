@@ -1,0 +1,64 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Exchange Rates API"
+  description: "Look up the latest exchange rates for 80+ currencies, convert between currencies, and retrieve historical exchange rate data using ISO 4217 currency codes."
+  tags:
+    - Abstract Api
+    - Exchange Rates
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      EXCHANGE_RATES_API_KEY: EXCHANGE_RATES_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: exchange-rates
+      baseUri: https://exchange-rates.abstractapi.com/v1
+      description: "Exchange Rates API"
+      authentication:
+        type: apikey
+        key: api_key
+        value: "{{env.EXCHANGE_RATES_API_KEY}}"
+        placement: query
+      resources:
+        - name: live
+          path: /live
+          description: "Exchange Rates API live resource"
+          operations:
+            - name: getLiveExchangeRates
+              method: GET
+              description: "Abstract API Get Live Exchange Rates"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: convert
+          path: /convert
+          description: "Exchange Rates API convert resource"
+          operations:
+            - name: convertCurrency
+              method: GET
+              description: "Abstract API Convert Currency"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: historical
+          path: /historical
+          description: "Exchange Rates API historical resource"
+          operations:
+            - name: getHistoricalExchangeRates
+              method: GET
+              description: "Abstract API Get Historical Exchange Rates"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."

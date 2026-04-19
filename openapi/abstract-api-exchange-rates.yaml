@@ -1,0 +1,283 @@
+openapi: 3.0.3
+info:
+  title: Abstract API - Exchange Rates API
+  description: Look up the latest exchange rates for 80+ currencies, convert between currencies, and retrieve historical exchange rate data using ISO 4217 currency codes.
+  version: 1.0.0
+  contact:
+    url: https://www.abstractapi.com/
+  x-generated-from: documentation
+servers:
+  - url: https://exchange-rates.abstractapi.com/v1
+    description: Exchange Rates API v1
+security:
+  - apiKey: []
+tags:
+  - name: Exchange Rates
+    description: Currency exchange rate operations
+paths:
+  /live:
+    get:
+      operationId: getLiveExchangeRates
+      summary: Abstract API Get Live Exchange Rates
+      description: Get the latest exchange rates for one or more target currencies relative to a base currency.
+      tags:
+        - Exchange Rates
+      parameters:
+        - name: api_key
+          in: query
+          required: true
+          description: Your unique API key for the Exchange Rates API.
+          schema:
+            type: string
+          example: abc123def456
+        - name: base
+          in: query
+          required: true
+          description: Base currency ISO 4217 code.
+          schema:
+            type: string
+          example: USD
+        - name: target
+          in: query
+          required: false
+          description: Target currency or comma-separated list of currencies. Returns all if omitted.
+          schema:
+            type: string
+          example: EUR,GBP,JPY
+      responses:
+        '200':
+          description: Live exchange rates
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LiveRatesResponse'
+              examples:
+                getLiveExchangeRates200Example:
+                  summary: Default getLiveExchangeRates 200 response
+                  x-microcks-default: true
+                  value:
+                    base: USD
+                    last_updated: 1713518400
+                    exchange_rates:
+                      EUR: 0.9234
+                      GBP: 0.7891
+                      JPY: 154.23
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /convert:
+    get:
+      operationId: convertCurrency
+      summary: Abstract API Convert Currency
+      description: Convert an amount from one currency to another using current exchange rates.
+      tags:
+        - Exchange Rates
+      parameters:
+        - name: api_key
+          in: query
+          required: true
+          description: Your unique API key.
+          schema:
+            type: string
+          example: abc123def456
+        - name: base
+          in: query
+          required: true
+          description: Source currency ISO 4217 code.
+          schema:
+            type: string
+          example: USD
+        - name: target
+          in: query
+          required: true
+          description: Target currency ISO 4217 code.
+          schema:
+            type: string
+          example: EUR
+        - name: base_amount
+          in: query
+          required: true
+          description: Amount to convert.
+          schema:
+            type: number
+          example: 100
+      responses:
+        '200':
+          description: Currency conversion result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConvertResponse'
+              examples:
+                convertCurrency200Example:
+                  summary: Default convertCurrency 200 response
+                  x-microcks-default: true
+                  value:
+                    base_currency: USD
+                    target_currency: EUR
+                    base_amount: 100
+                    converted_amount: 92.34
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /historical:
+    get:
+      operationId: getHistoricalExchangeRates
+      summary: Abstract API Get Historical Exchange Rates
+      description: Retrieve historical exchange rates for a specific date.
+      tags:
+        - Exchange Rates
+      parameters:
+        - name: api_key
+          in: query
+          required: true
+          description: Your unique API key.
+          schema:
+            type: string
+          example: abc123def456
+        - name: base
+          in: query
+          required: true
+          description: Base currency ISO 4217 code.
+          schema:
+            type: string
+          example: USD
+        - name: target
+          in: query
+          required: false
+          description: Target currency or comma-separated list.
+          schema:
+            type: string
+          example: EUR,GBP
+        - name: date
+          in: query
+          required: true
+          description: Date for historical rates in YYYY-MM-DD format.
+          schema:
+            type: string
+            format: date
+          example: '2026-01-01'
+      responses:
+        '200':
+          description: Historical exchange rates
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HistoricalRatesResponse'
+              examples:
+                getHistoricalExchangeRates200Example:
+                  summary: Default getHistoricalExchangeRates 200 response
+                  x-microcks-default: true
+                  value:
+                    base: USD
+                    date: '2026-01-01'
+                    exchange_rates:
+                      EUR: 0.9198
+                      GBP: 0.7844
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: api_key
+  schemas:
+    LiveRatesResponse:
+      type: object
+      properties:
+        base:
+          type: string
+          description: Base currency code
+          example: USD
+        last_updated:
+          type: integer
+          description: Unix timestamp of last update
+          example: 1713518400
+        exchange_rates:
+          type: object
+          description: Map of currency codes to exchange rates
+          additionalProperties:
+            type: number
+    ConvertResponse:
+      type: object
+      properties:
+        base_currency:
+          type: string
+          description: Source currency code
+          example: USD
+        target_currency:
+          type: string
+          description: Target currency code
+          example: EUR
+        base_amount:
+          type: number
+          description: Original amount
+          example: 100
+        converted_amount:
+          type: number
+          description: Converted amount
+          example: 92.34
+    HistoricalRatesResponse:
+      type: object
+      properties:
+        base:
+          type: string
+          description: Base currency code
+          example: USD
+        date:
+          type: string
+          format: date
+          description: Historical date queried
+          example: '2026-01-01'
+        exchange_rates:
+          type: object
+          description: Map of currency codes to historical exchange rates
+          additionalProperties:
+            type: number
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: The provided API key is invalid
+        error:
+          type: string
+          example: invalid_api_key

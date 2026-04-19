@@ -1,0 +1,21 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "abstract": "https://abstractapi.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "WebScrapingResponse": "abstract:WebScrapingResponse",
+    "body": {
+      "@id": "abstract:body",
+      "@type": "xsd:string"
+    },
+    "url": {
+      "@id": "schema:url"
+    },
+    "statusCode": {
+      "@id": "abstract:status_code",
+      "@type": "xsd:integer"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "status": "DELIVERABLE",
+  "status_detail": "smtp_valid",
+  "is_format_valid": true,
+  "is_smtp_valid": true,
+  "is_mx_valid": true,
+  "mx_records": [
+    "mx.example.com"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/json-schema/exchange-rates-historical-rates-response-schema.json",
+  "title": "HistoricalRatesResponse",
+  "description": "HistoricalRatesResponse schema from Abstract API exchange-rates",
+  "type": "object",
+  "properties": {
+    "base": {
+      "type": "string",
+      "description": "Base currency code",
+      "example": "USD"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Historical date queried",
+      "example": "2026-01-01"
+    },
+    "exchange_rates": {
+      "type": "object",
+      "description": "Map of currency codes to historical exchange rates",
+      "additionalProperties": {
+        "type": "number"
+      }
+    }
+  }
+}

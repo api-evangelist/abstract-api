@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/json-structure/ip-intelligence-flag-info-structure.json",
+  "name": "FlagInfo",
+  "description": "FlagInfo schema from Abstract API ip-intelligence",
+  "type": "object",
+  "properties": {
+    "emoji": {
+      "type": "string",
+      "example": "\ud83c\uddfa\ud83c\uddf8"
+    },
+    "unicode": {
+      "type": "string",
+      "example": "U+1F1FA U+1F1F8"
+    },
+    "png": {
+      "type": "uri",
+      "example": "https://static.abstractapi.com/country-flags/US_flag.png"
+    },
+    "svg": {
+      "type": "uri",
+      "example": "https://static.abstractapi.com/country-flags/US_flag.svg"
+    }
+  }
+}

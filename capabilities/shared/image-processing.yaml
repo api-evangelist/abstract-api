@@ -1,0 +1,40 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Image Processing API"
+  description: "Compress, convert, and optimize images by URL or direct upload. Supports format conversion, quality adjustment, and size reduction."
+  tags:
+    - Abstract Api
+    - Image Processing
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      IMAGE_PROCESSING_API_KEY: IMAGE_PROCESSING_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: image-processing
+      baseUri: https://images.abstractapi.com/v1
+      description: "Image Processing API"
+      authentication:
+        type: apikey
+        key: api_key
+        value: "{{env.IMAGE_PROCESSING_API_KEY}}"
+        placement: query
+      resources:
+        - name: url
+          path: /url
+          description: "Image Processing API url resource"
+          operations:
+            - name: processImageByURL
+              method: GET
+              description: "Abstract API Process Image by URL"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."

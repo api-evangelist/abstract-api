@@ -1,0 +1,9 @@
+{
+  "email": "test@example.com",
+  "deliverability": "sample-value",
+  "quality": "sample-value",
+  "sender": "sample-value",
+  "domain": "vpn.example.com",
+  "risk": "sample-value",
+  "breaches": "sample-value"
+}

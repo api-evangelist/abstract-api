@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/json-schema/ip-intelligence-company-basic-schema.json",
+  "title": "CompanyBasic",
+  "description": "Company information for the IP owner",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Company name",
+      "example": "Google LLC"
+    },
+    "domain": {
+      "type": "string",
+      "description": "Company domain",
+      "example": "google.com"
+    },
+    "type": {
+      "type": "string",
+      "description": "Company type",
+      "example": "hosting"
+    }
+  }
+}

@@ -1,0 +1,40 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Email Reputation API"
+  description: "Validate email addresses for deliverability, detect disposable or risky domains, verify SMTP/MX records, and enrich email data with sender information, breach history, and risk scoring."
+  tags:
+    - Abstract Api
+    - Email Reputation
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      EMAIL_REPUTATION_API_KEY: EMAIL_REPUTATION_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: email-reputation
+      baseUri: https://emailreputation.abstractapi.com/v1
+      description: "Email Reputation API"
+      authentication:
+        type: apikey
+        key: api_key
+        value: "{{env.EMAIL_REPUTATION_API_KEY}}"
+        placement: query
+      resources:
+        - name: email-reputation
+          path: /
+          description: "Email Reputation API email-reputation resource"
+          operations:
+            - name: getEmailReputation
+              method: GET
+              description: "Abstract API Get Email Reputation"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."

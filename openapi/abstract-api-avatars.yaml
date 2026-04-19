@@ -1,0 +1,113 @@
+openapi: 3.0.3
+info:
+  title: Abstract API - Avatars API
+  description: Create highly customizable avatar images using a person's name or initials. Supports color, font, and size customization for user profile images.
+  version: 1.0.0
+  contact:
+    url: https://www.abstractapi.com/
+  x-generated-from: documentation
+servers:
+  - url: https://avatars.abstractapi.com/v1
+    description: Avatars API v1
+security:
+  - apiKey: []
+tags:
+  - name: Avatars
+    description: User avatar generation operations
+paths:
+  /:
+    get:
+      operationId: generateAvatar
+      summary: Abstract API Generate Avatar
+      description: Generate a customizable avatar image using a person's name or initials with configurable colors, fonts, and sizes.
+      tags:
+        - Avatars
+      parameters:
+        - name: api_key
+          in: query
+          required: true
+          description: Your unique API key for the Avatars API.
+          schema:
+            type: string
+          example: abc123def456
+        - name: name
+          in: query
+          required: true
+          description: Full name or initials to use for the avatar.
+          schema:
+            type: string
+          example: Jane Smith
+        - name: size
+          in: query
+          required: false
+          description: Size of the avatar in pixels (square). Defaults to 128.
+          schema:
+            type: integer
+          example: 128
+        - name: color
+          in: query
+          required: false
+          description: Text color as a hex code (without #).
+          schema:
+            type: string
+          example: FFFFFF
+        - name: background_color
+          in: query
+          required: false
+          description: Background color as a hex code (without #).
+          schema:
+            type: string
+          example: 4F46E5
+        - name: font_size
+          in: query
+          required: false
+          description: Font size as a fraction of the avatar size (0.1 to 0.9).
+          schema:
+            type: number
+          example: 0.5
+        - name: char_count
+          in: query
+          required: false
+          description: Number of characters to use from the name. Defaults to 2.
+          schema:
+            type: integer
+          example: 2
+      responses:
+        '200':
+          description: Avatar image
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: api_key
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: The provided API key is invalid
+        error:
+          type: string
+          example: invalid_api_key

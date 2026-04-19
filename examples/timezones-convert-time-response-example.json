@@ -1,0 +1,12 @@
+{
+  "base_location": "London",
+  "base_datetime": "2026-04-19 10:30:00",
+  "base_timezone_name": "Europe/London",
+  "base_timezone_abbreviation": "BST",
+  "base_utc_offset": 1,
+  "target_location": "Tokyo",
+  "target_datetime": "2026-04-19 18:30:00",
+  "target_timezone_name": "Asia/Tokyo",
+  "target_timezone_abbreviation": "JST",
+  "target_utc_offset": 9
+}

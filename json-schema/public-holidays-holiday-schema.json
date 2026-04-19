@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/json-schema/public-holidays-holiday-schema.json",
+  "title": "Holiday",
+  "description": "A public holiday entry",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Holiday name in English",
+      "example": "Easter Sunday"
+    },
+    "name_local": {
+      "type": "string",
+      "description": "Holiday name in local language",
+      "example": "Paques"
+    },
+    "language": {
+      "type": "string",
+      "description": "Language of the local name",
+      "example": "FR"
+    },
+    "description": {
+      "type": "string",
+      "description": "Additional details about the holiday",
+      "example": "Easter Sunday marks the resurrection of Jesus Christ"
+    },
+    "country": {
+      "type": "string",
+      "description": "Country code",
+      "example": "US"
+    },
+    "location": {
+      "type": "string",
+      "description": "Specific region where holiday applies",
+      "example": ""
+    },
+    "type": {
+      "type": "string",
+      "description": "Holiday classification",
+      "example": "National",
+      "enum": [
+        "National",
+        "Local",
+        "Religious",
+        "Observance",
+        "Season",
+        "Clock Change/Daylight Saving Time"
+      ]
+    },
+    "date": {
+      "type": "string",
+      "description": "Holiday date in MM/DD/YYYY format",
+      "example": "04/20/2025"
+    },
+    "date_year": {
+      "type": "string",
+      "description": "Year of the holiday",
+      "example": "2025"
+    },
+    "date_month": {
+      "type": "string",
+      "description": "Month of the holiday",
+      "example": "04"
+    },
+    "date_day": {
+      "type": "string",
+      "description": "Day of the holiday",
+      "example": "20"
+    },
+    "week_day": {
+      "type": "string",
+      "description": "Day of the week",
+      "example": "Sunday"
+    }
+  }
+}

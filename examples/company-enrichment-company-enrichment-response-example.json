@@ -1,0 +1,13 @@
+{
+  "name": "Stripe",
+  "domain": "stripe.com",
+  "country": "US",
+  "locality": "San Francisco",
+  "region": "California",
+  "linkedin_url": "https://www.linkedin.com/company/stripe",
+  "logo": "https://logo.clearbit.com/stripe.com",
+  "year_founded": 2010,
+  "industry": "Financial Services",
+  "employees_count": 8000,
+  "description": "Stripe is a technology company that builds economic infrastructure for the internet."
+}

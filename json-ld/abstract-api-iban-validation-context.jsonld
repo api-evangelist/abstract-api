@@ -1,0 +1,57 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "abstract": "https://abstractapi.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "IBANValidationResponse": "abstract:IBANValidationResponse",
+    "iban": {
+      "@id": "abstract:iban",
+      "@type": "xsd:string"
+    },
+    "isValid": {
+      "@id": "abstract:is_valid",
+      "@type": "xsd:boolean"
+    },
+    "country": {
+      "@id": "abstract:country",
+      "@type": "@id"
+    },
+    "code": {
+      "@id": "abstract:code",
+      "@type": "xsd:string"
+    },
+    "name": {
+      "@id": "schema:name"
+    },
+    "bank": {
+      "@id": "abstract:bank",
+      "@type": "@id"
+    },
+    "bankName": {
+      "@id": "abstract:bank_name",
+      "@type": "xsd:string"
+    },
+    "bankCode": {
+      "@id": "abstract:bank_code",
+      "@type": "xsd:string"
+    },
+    "bic": {
+      "@id": "abstract:bic",
+      "@type": "xsd:string"
+    },
+    "accountNumber": {
+      "@id": "abstract:account_number",
+      "@type": "xsd:string"
+    },
+    "checkDigits": {
+      "@id": "abstract:check_digits",
+      "@type": "xsd:string"
+    },
+    "sepaMember": {
+      "@id": "abstract:sepa_member",
+      "@type": "xsd:boolean"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "score": 0.92,
+  "is_free_email": false,
+  "is_username_suspicious": false,
+  "is_disposable": false,
+  "is_catchall": false,
+  "is_subaddress": false,
+  "is_role": false,
+  "is_dmarc_enforced": true,
+  "is_spf_strict": false,
+  "minimum_age": 365
+}

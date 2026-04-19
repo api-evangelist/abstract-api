@@ -1,0 +1,8 @@
+{
+  "total_breaches": 0,
+  "date_first_breached": "2020-01-15",
+  "date_last_breached": "2023-06-01",
+  "breached_domains": [
+    "breached-site.com"
+  ]
+}

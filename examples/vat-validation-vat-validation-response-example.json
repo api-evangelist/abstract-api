@@ -1,0 +1,12 @@
+{
+  "vat_number": "GB123456789",
+  "valid": true,
+  "company": {
+    "name": "Example Ltd",
+    "address": "1 Example Street, London, UK"
+  },
+  "country": {
+    "code": "GB",
+    "name": "United Kingdom"
+  }
+}

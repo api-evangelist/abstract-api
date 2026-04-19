@@ -1,0 +1,315 @@
+openapi: 3.0.3
+info:
+  title: Abstract API - VAT Validation API
+  description: Validate VAT numbers, look up current VAT rates by country, and calculate VAT-inclusive or VAT-exclusive prices to stay compliant for domestic and cross-border sales.
+  version: 1.0.0
+  contact:
+    url: https://www.abstractapi.com/
+  x-generated-from: documentation
+servers:
+  - url: https://vat.abstractapi.com/v1
+    description: VAT Validation API v1
+security:
+  - apiKey: []
+tags:
+  - name: VAT Validation
+    description: VAT number validation and rate lookup
+paths:
+  /validate:
+    get:
+      operationId: validateVATNumber
+      summary: Abstract API Validate VAT Number
+      description: Validate a VAT number and retrieve company details associated with it.
+      tags:
+        - VAT Validation
+      parameters:
+        - name: api_key
+          in: query
+          required: true
+          description: Your unique API key.
+          schema:
+            type: string
+          example: abc123def456
+        - name: vat_number
+          in: query
+          required: true
+          description: The VAT number to validate (with country prefix).
+          schema:
+            type: string
+          example: GB123456789
+      responses:
+        '200':
+          description: VAT validation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VATValidationResponse'
+              examples:
+                validateVATNumber200Example:
+                  summary: Default validateVATNumber 200 response
+                  x-microcks-default: true
+                  value:
+                    vat_number: GB123456789
+                    valid: true
+                    company:
+                      name: Example Ltd
+                      address: 1 Example Street, London, UK
+                    country:
+                      code: GB
+                      name: United Kingdom
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /rates:
+    get:
+      operationId: getVATRates
+      summary: Abstract API Get VAT Rates
+      description: Look up the current VAT rates for a given country.
+      tags:
+        - VAT Validation
+      parameters:
+        - name: api_key
+          in: query
+          required: true
+          description: Your unique API key.
+          schema:
+            type: string
+          example: abc123def456
+        - name: country_code
+          in: query
+          required: true
+          description: ISO 3166-1 alpha-2 country code.
+          schema:
+            type: string
+          example: DE
+      responses:
+        '200':
+          description: VAT rates for the country
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VATRatesResponse'
+              examples:
+                getVATRates200Example:
+                  summary: Default getVATRates 200 response
+                  x-microcks-default: true
+                  value:
+                    country_code: DE
+                    country_name: Germany
+                    standard_rate: 19
+                    reduced_rates:
+                      - 7
+                    super_reduced_rate: null
+                    parking_rate: null
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /calculate:
+    get:
+      operationId: calculateVAT
+      summary: Abstract API Calculate VAT
+      description: Calculate VAT-inclusive or VAT-exclusive price for a given country and amount.
+      tags:
+        - VAT Validation
+      parameters:
+        - name: api_key
+          in: query
+          required: true
+          description: Your unique API key.
+          schema:
+            type: string
+          example: abc123def456
+        - name: amount
+          in: query
+          required: true
+          description: Amount to calculate VAT on.
+          schema:
+            type: number
+          example: 100
+        - name: country_code
+          in: query
+          required: true
+          description: ISO 3166-1 alpha-2 country code.
+          schema:
+            type: string
+          example: DE
+        - name: is_vat_incl
+          in: query
+          required: false
+          description: Whether the amount already includes VAT. Defaults to false.
+          schema:
+            type: boolean
+          example: false
+        - name: vat_category
+          in: query
+          required: false
+          description: VAT rate category (standard, reduced, super_reduced, parking).
+          schema:
+            type: string
+          example: standard
+      responses:
+        '200':
+          description: VAT calculation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VATCalculateResponse'
+              examples:
+                calculateVAT200Example:
+                  summary: Default calculateVAT 200 response
+                  x-microcks-default: true
+                  value:
+                    amount_excl_vat: 100
+                    vat_amount: 19
+                    amount_incl_vat: 119
+                    vat_category: standard
+                    vat_rate: 19
+                    country_code: DE
+                    country_name: Germany
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: api_key
+  schemas:
+    VATValidationResponse:
+      type: object
+      properties:
+        vat_number:
+          type: string
+          description: The VAT number validated
+          example: GB123456789
+        valid:
+          type: boolean
+          description: Whether the VAT number is valid
+          example: true
+        company:
+          type: object
+          properties:
+            name:
+              type: string
+              description: Company name associated with the VAT number
+              example: Example Ltd
+            address:
+              type: string
+              description: Company address
+              example: 1 Example Street, London, UK
+        country:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Country code
+              example: GB
+            name:
+              type: string
+              description: Country name
+              example: United Kingdom
+    VATRatesResponse:
+      type: object
+      properties:
+        country_code:
+          type: string
+          example: DE
+        country_name:
+          type: string
+          example: Germany
+        standard_rate:
+          type: number
+          description: Standard VAT rate percentage
+          example: 19
+        reduced_rates:
+          type: array
+          items:
+            type: number
+          description: Reduced VAT rate percentages
+          example:
+            - 7
+        super_reduced_rate:
+          type: number
+          nullable: true
+          description: Super reduced VAT rate if applicable
+          example: null
+        parking_rate:
+          type: number
+          nullable: true
+          description: Parking VAT rate if applicable
+          example: null
+    VATCalculateResponse:
+      type: object
+      properties:
+        amount_excl_vat:
+          type: number
+          description: Amount excluding VAT
+          example: 100
+        vat_amount:
+          type: number
+          description: VAT amount
+          example: 19
+        amount_incl_vat:
+          type: number
+          description: Amount including VAT
+          example: 119
+        vat_category:
+          type: string
+          description: VAT category used
+          example: standard
+        vat_rate:
+          type: number
+          description: VAT rate applied
+          example: 19
+        country_code:
+          type: string
+          example: DE
+        country_name:
+          type: string
+          example: Germany
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: The provided API key is invalid
+        error:
+          type: string
+          example: invalid_api_key

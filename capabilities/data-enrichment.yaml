@@ -1,0 +1,130 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Abstract API Data Enrichment"
+  description: "Unified data enrichment workflow combining IP geolocation, company enrichment, and timezone APIs. Used by product teams and data engineers to automatically enrich user profiles, personalize experiences, and localize content at signup or session start."
+  tags:
+    - Abstract Api
+    - Data Enrichment
+    - Geolocation
+    - Company Enrichment
+    - Timezones
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      IP_GEOLOCATION_API_KEY: IP_GEOLOCATION_API_KEY
+      COMPANY_ENRICHMENT_API_KEY: COMPANY_ENRICHMENT_API_KEY
+      TIMEZONES_API_KEY: TIMEZONES_API_KEY
+
+capability:
+  consumes:
+    - import: ip-geolocation
+      location: ./shared/ip-geolocation.yaml
+    - import: company-enrichment
+      location: ./shared/company-enrichment.yaml
+    - import: timezones
+      location: ./shared/timezones.yaml
+
+  exposes:
+    - type: rest
+      port: 8081
+      namespace: data-enrichment-api
+      description: "Unified REST API for user and session data enrichment."
+      resources:
+        - path: /v1/ip-location
+          name: ip-location
+          description: "Geolocate an IP address"
+          operations:
+            - method: GET
+              name: geolocate-ip
+              description: "Get location data for an IP address"
+              call: "ip-geolocation.getIPGeolocation"
+              with:
+                ip_address: "rest.ip_address"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/company
+          name: company
+          description: "Enrich company data from domain"
+          operations:
+            - method: GET
+              name: enrich-company
+              description: "Get company details from domain or email"
+              call: "company-enrichment.getCompanyEnrichment"
+              with:
+                domain: "rest.domain"
+                email: "rest.email"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/timezone
+          name: timezone
+          description: "Get current timezone for a location"
+          operations:
+            - method: GET
+              name: get-timezone
+              description: "Retrieve timezone and current time for a location"
+              call: "timezones.getCurrentTime"
+              with:
+                location: "rest.location"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9091
+      namespace: data-enrichment-mcp
+      transport: http
+      description: "MCP server for AI-assisted data enrichment and user personalization."
+      tools:
+        - name: geolocate-ip-address
+          description: "Geolocate an IP address to get country, city, timezone, and currency data"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "ip-geolocation.getIPGeolocation"
+          with:
+            ip_address: "tools.ip_address"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: enrich-company-data
+          description: "Retrieve company name, industry, headcount, logo, and location from a domain or email"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "company-enrichment.getCompanyEnrichment"
+          with:
+            domain: "tools.domain"
+            email: "tools.email"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-current-timezone
+          description: "Get current time and timezone information for any location"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "timezones.getCurrentTime"
+          with:
+            location: "tools.location"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: convert-time-between-zones
+          description: "Convert date/time from one timezone to another"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "timezones.convertTime"
+          with:
+            base_location: "tools.base_location"
+            target_location: "tools.target_location"
+            base_datetime: "tools.base_datetime"
+          outputParameters:
+            - type: object
+              mapping: "$."

@@ -1,0 +1,54 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "abstract": "https://abstractapi.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "PhoneCountry": "abstract:PhoneCountry",
+    "PhoneIntelligenceResponse": "abstract:PhoneIntelligenceResponse",
+    "code": {
+      "@id": "abstract:code",
+      "@type": "xsd:string"
+    },
+    "name": {
+      "@id": "schema:name"
+    },
+    "prefix": {
+      "@id": "abstract:prefix",
+      "@type": "xsd:string"
+    },
+    "phone": {
+      "@id": "abstract:phone",
+      "@type": "xsd:string"
+    },
+    "valid": {
+      "@id": "abstract:valid",
+      "@type": "xsd:boolean"
+    },
+    "country": {
+      "@id": "abstract:country",
+      "@type": "xsd:string"
+    },
+    "location": {
+      "@id": "abstract:location",
+      "@type": "xsd:string"
+    },
+    "type": {
+      "@id": "abstract:type",
+      "@type": "xsd:string"
+    },
+    "carrier": {
+      "@id": "abstract:carrier",
+      "@type": "xsd:string"
+    },
+    "isVoip": {
+      "@id": "abstract:is_voip",
+      "@type": "xsd:boolean"
+    },
+    "riskScore": {
+      "@id": "abstract:risk_score",
+      "@type": "xsd:integer"
+    }
+  }
+}

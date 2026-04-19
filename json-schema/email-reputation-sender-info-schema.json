@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/json-schema/email-reputation-sender-info-schema.json",
+  "title": "SenderInfo",
+  "description": "Sender identity information",
+  "type": "object",
+  "properties": {
+    "first_name": {
+      "type": "string",
+      "description": "Inferred first name of sender",
+      "example": "Jane"
+    },
+    "last_name": {
+      "type": "string",
+      "description": "Inferred last name of sender",
+      "example": "Smith"
+    },
+    "email_provider_name": {
+      "type": "string",
+      "description": "Name of the email provider",
+      "example": "Google Workspace"
+    },
+    "organization_name": {
+      "type": "string",
+      "description": "Organization associated with the email",
+      "example": "Example Corp"
+    },
+    "organization_type": {
+      "type": "string",
+      "description": "Type of organization",
+      "example": "business"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/json-schema/ip-intelligence-timezone-info-schema.json",
+  "title": "TimezoneInfo",
+  "description": "TimezoneInfo schema from Abstract API ip-intelligence",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "example": "America/Los_Angeles"
+    },
+    "abbreviation": {
+      "type": "string",
+      "example": "PST"
+    },
+    "utc_offset": {
+      "type": "integer",
+      "example": -8
+    },
+    "local_time": {
+      "type": "string",
+      "example": "2026-04-19T10:30:00"
+    },
+    "is_dst": {
+      "type": "boolean",
+      "example": false
+    }
+  }
+}

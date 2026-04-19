@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/json-schema/ip-intelligence-currency-info-schema.json",
+  "title": "CurrencyInfo",
+  "description": "CurrencyInfo schema from Abstract API ip-intelligence",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "example": "US Dollar"
+    },
+    "iso_code": {
+      "type": "string",
+      "example": "USD"
+    },
+    "symbol": {
+      "type": "string",
+      "example": "$"
+    }
+  }
+}

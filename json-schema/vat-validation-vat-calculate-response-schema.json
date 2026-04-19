@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/json-schema/vat-validation-vat-calculate-response-schema.json",
+  "title": "VATCalculateResponse",
+  "description": "VATCalculateResponse schema from Abstract API vat-validation",
+  "type": "object",
+  "properties": {
+    "amount_excl_vat": {
+      "type": "number",
+      "description": "Amount excluding VAT",
+      "example": 100
+    },
+    "vat_amount": {
+      "type": "number",
+      "description": "VAT amount",
+      "example": 19
+    },
+    "amount_incl_vat": {
+      "type": "number",
+      "description": "Amount including VAT",
+      "example": 119
+    },
+    "vat_category": {
+      "type": "string",
+      "description": "VAT category used",
+      "example": "standard"
+    },
+    "vat_rate": {
+      "type": "number",
+      "description": "VAT rate applied",
+      "example": 19
+    },
+    "country_code": {
+      "type": "string",
+      "example": "DE"
+    },
+    "country_name": {
+      "type": "string",
+      "example": "Germany"
+    }
+  }
+}

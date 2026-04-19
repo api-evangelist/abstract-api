@@ -1,0 +1,40 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Company Enrichment API"
+  description: "Retrieve comprehensive details about businesses using their domain or email address, including name, logo, headcount, location, industry, and more."
+  tags:
+    - Abstract Api
+    - Company Enrichment
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      COMPANY_ENRICHMENT_API_KEY: COMPANY_ENRICHMENT_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: company-enrichment
+      baseUri: https://companyenrichment.abstractapi.com/v1
+      description: "Company Enrichment API"
+      authentication:
+        type: apikey
+        key: api_key
+        value: "{{env.COMPANY_ENRICHMENT_API_KEY}}"
+        placement: query
+      resources:
+        - name: company-enrichment
+          path: /
+          description: "Company Enrichment API company-enrichment resource"
+          operations:
+            - name: getCompanyEnrichment
+              method: GET
+              description: "Abstract API Get Company Enrichment"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."

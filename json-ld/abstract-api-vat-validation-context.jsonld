@@ -1,0 +1,84 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "abstract": "https://abstractapi.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "VATCalculateResponse": "abstract:VATCalculateResponse",
+    "VATRatesResponse": "abstract:VATRatesResponse",
+    "VATValidationResponse": "abstract:VATValidationResponse",
+    "amountExclVat": {
+      "@id": "abstract:amount_excl_vat",
+      "@type": "xsd:decimal"
+    },
+    "vatAmount": {
+      "@id": "abstract:vat_amount",
+      "@type": "xsd:decimal"
+    },
+    "amountInclVat": {
+      "@id": "abstract:amount_incl_vat",
+      "@type": "xsd:decimal"
+    },
+    "vatCategory": {
+      "@id": "abstract:vat_category",
+      "@type": "xsd:string"
+    },
+    "vatRate": {
+      "@id": "abstract:vat_rate",
+      "@type": "xsd:decimal"
+    },
+    "countryCode": {
+      "@id": "abstract:country_code",
+      "@type": "xsd:string"
+    },
+    "countryName": {
+      "@id": "abstract:country_name",
+      "@type": "xsd:string"
+    },
+    "standardRate": {
+      "@id": "abstract:standard_rate",
+      "@type": "xsd:decimal"
+    },
+    "reducedRates": {
+      "@id": "abstract:reduced_rates",
+      "@container": "@set",
+      "@type": "xsd:decimal"
+    },
+    "superReducedRate": {
+      "@id": "abstract:super_reduced_rate",
+      "@type": "xsd:decimal"
+    },
+    "parkingRate": {
+      "@id": "abstract:parking_rate",
+      "@type": "xsd:decimal"
+    },
+    "vatNumber": {
+      "@id": "abstract:vat_number",
+      "@type": "xsd:string"
+    },
+    "valid": {
+      "@id": "abstract:valid",
+      "@type": "xsd:boolean"
+    },
+    "company": {
+      "@id": "abstract:company",
+      "@type": "@id"
+    },
+    "name": {
+      "@id": "schema:name"
+    },
+    "address": {
+      "@id": "abstract:address",
+      "@type": "xsd:string"
+    },
+    "country": {
+      "@id": "abstract:country",
+      "@type": "@id"
+    },
+    "code": {
+      "@id": "abstract:code",
+      "@type": "xsd:string"
+    }
+  }
+}

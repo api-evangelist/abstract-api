@@ -1,0 +1,64 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "VAT Validation API"
+  description: "Validate VAT numbers, look up current VAT rates by country, and calculate VAT-inclusive or VAT-exclusive prices to stay compliant for domestic and cross-border sales."
+  tags:
+    - Abstract Api
+    - VAT Validation
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      VAT_VALIDATION_API_KEY: VAT_VALIDATION_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: vat-validation
+      baseUri: https://vat.abstractapi.com/v1
+      description: "VAT Validation API"
+      authentication:
+        type: apikey
+        key: api_key
+        value: "{{env.VAT_VALIDATION_API_KEY}}"
+        placement: query
+      resources:
+        - name: validate
+          path: /validate
+          description: "VAT Validation API validate resource"
+          operations:
+            - name: validateVATNumber
+              method: GET
+              description: "Abstract API Validate VAT Number"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: rates
+          path: /rates
+          description: "VAT Validation API rates resource"
+          operations:
+            - name: getVATRates
+              method: GET
+              description: "Abstract API Get VAT Rates"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: calculate
+          path: /calculate
+          description: "VAT Validation API calculate resource"
+          operations:
+            - name: calculateVAT
+              method: GET
+              description: "Abstract API Calculate VAT"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."

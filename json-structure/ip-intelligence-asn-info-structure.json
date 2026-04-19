@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/json-structure/ip-intelligence-asn-info-structure.json",
+  "name": "ASNInfo",
+  "description": "Autonomous System Number information",
+  "type": "object",
+  "properties": {
+    "asn": {
+      "type": "string",
+      "description": "ASN identifier",
+      "example": "AS15169"
+    },
+    "name": {
+      "type": "string",
+      "description": "ASN organization name",
+      "example": "Google LLC"
+    },
+    "domain": {
+      "type": "string",
+      "description": "Primary domain for the ASN",
+      "example": "google.com"
+    },
+    "type": {
+      "type": "string",
+      "description": "Type of ASN (hosting, isp, business, etc.)",
+      "example": "hosting"
+    }
+  }
+}

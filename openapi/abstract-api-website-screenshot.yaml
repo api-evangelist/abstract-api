@@ -1,0 +1,128 @@
+openapi: 3.0.3
+info:
+  title: Abstract API - Website Screenshot API
+  description: Capture high-quality screenshots of any website with optional customizations including CSS injection, delay settings, and viewport configuration.
+  version: 1.0.0
+  contact:
+    url: https://www.abstractapi.com/
+  x-generated-from: documentation
+servers:
+  - url: https://screenshot.abstractapi.com/v1
+    description: Website Screenshot API v1
+security:
+  - apiKey: []
+tags:
+  - name: Website Screenshot
+    description: Website screenshot capture operations
+paths:
+  /:
+    get:
+      operationId: captureWebsiteScreenshot
+      summary: Abstract API Capture Website Screenshot
+      description: Capture a screenshot of any website URL with configurable viewport, delay, and CSS injection options.
+      tags:
+        - Website Screenshot
+      parameters:
+        - name: api_key
+          in: query
+          required: true
+          description: Your unique API key for the Website Screenshot API.
+          schema:
+            type: string
+          example: abc123def456
+        - name: url
+          in: query
+          required: true
+          description: The URL of the website to screenshot.
+          schema:
+            type: string
+            format: uri
+          example: https://www.example.com
+        - name: capture_full_page
+          in: query
+          required: false
+          description: Whether to capture the full scrollable page. Defaults to false.
+          schema:
+            type: boolean
+          example: false
+        - name: width
+          in: query
+          required: false
+          description: Viewport width in pixels. Defaults to 1280.
+          schema:
+            type: integer
+          example: 1280
+        - name: height
+          in: query
+          required: false
+          description: Viewport height in pixels. Defaults to 720.
+          schema:
+            type: integer
+          example: 720
+        - name: delay
+          in: query
+          required: false
+          description: Delay in milliseconds before taking the screenshot.
+          schema:
+            type: integer
+          example: 1000
+        - name: css_injection
+          in: query
+          required: false
+          description: CSS string to inject into the page before screenshotting.
+          schema:
+            type: string
+          example: 'body { background: white; }'
+        - name: export_format
+          in: query
+          required: false
+          description: Output format of the screenshot (jpeg or png). Defaults to jpeg.
+          schema:
+            type: string
+            enum:
+              - jpeg
+              - png
+          example: jpeg
+      responses:
+        '200':
+          description: Screenshot image binary
+          content:
+            image/jpeg:
+              schema:
+                type: string
+                format: binary
+            image/png:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: api_key
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: The provided API key is invalid
+        error:
+          type: string
+          example: invalid_api_key

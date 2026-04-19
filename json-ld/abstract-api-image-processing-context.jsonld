@@ -1,0 +1,29 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "abstract": "https://abstractapi.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "ImageProcessingResponse": "abstract:ImageProcessingResponse",
+    "originalSize": {
+      "@id": "abstract:original_size",
+      "@type": "xsd:integer"
+    },
+    "newSize": {
+      "@id": "abstract:new_size",
+      "@type": "xsd:integer"
+    },
+    "savedBytes": {
+      "@id": "abstract:saved_bytes",
+      "@type": "xsd:integer"
+    },
+    "savedPercent": {
+      "@id": "abstract:saved_percent",
+      "@type": "xsd:decimal"
+    },
+    "url": {
+      "@id": "schema:url"
+    }
+  }
+}

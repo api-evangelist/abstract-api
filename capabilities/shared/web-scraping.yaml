@@ -1,0 +1,40 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Web Scraping API"
+  description: "Extract data from any website by providing the target URL. Handles JavaScript rendering and returns the full HTML content of any web page."
+  tags:
+    - Abstract Api
+    - Web Scraping
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      WEB_SCRAPING_API_KEY: WEB_SCRAPING_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: web-scraping
+      baseUri: https://scrape.abstractapi.com/v1
+      description: "Web Scraping API"
+      authentication:
+        type: apikey
+        key: api_key
+        value: "{{env.WEB_SCRAPING_API_KEY}}"
+        placement: query
+      resources:
+        - name: web-scraping
+          path: /
+          description: "Web Scraping API web-scraping resource"
+          operations:
+            - name: scrapeWebPage
+              method: GET
+              description: "Abstract API Scrape Web Page"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."

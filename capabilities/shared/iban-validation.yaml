@@ -1,0 +1,40 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "IBAN Validation API"
+  description: "Determine the validity and details of International Bank Account Numbers (IBANs), including bank name, account type, and country code."
+  tags:
+    - Abstract Api
+    - IBAN Validation
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      IBAN_VALIDATION_API_KEY: IBAN_VALIDATION_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: iban-validation
+      baseUri: https://ibanvalidation.abstractapi.com/v1
+      description: "IBAN Validation API"
+      authentication:
+        type: apikey
+        key: api_key
+        value: "{{env.IBAN_VALIDATION_API_KEY}}"
+        placement: query
+      resources:
+        - name: iban-validation
+          path: /
+          description: "IBAN Validation API iban-validation resource"
+          operations:
+            - name: validateIBAN
+              method: GET
+              description: "Abstract API Validate IBAN"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."

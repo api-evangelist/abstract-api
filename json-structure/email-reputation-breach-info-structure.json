@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/json-structure/email-reputation-breach-info-structure.json",
+  "name": "BreachInfo",
+  "description": "Data breach history for the email",
+  "type": "object",
+  "properties": {
+    "total_breaches": {
+      "type": "int32",
+      "description": "Total number of breaches the email appeared in",
+      "example": 0
+    },
+    "date_first_breached": {
+      "type": "date",
+      "description": "Date of the earliest known breach",
+      "example": "2020-01-15"
+    },
+    "date_last_breached": {
+      "type": "date",
+      "description": "Date of the most recent breach",
+      "example": "2023-06-01"
+    },
+    "breached_domains": {
+      "type": "array",
+      "description": "Domains where the email was breached",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "breached-site.com"
+      ]
+    }
+  }
+}

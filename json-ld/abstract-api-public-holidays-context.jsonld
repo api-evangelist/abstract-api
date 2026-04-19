@@ -1,0 +1,56 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "abstract": "https://abstractapi.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Holiday": "abstract:Holiday",
+    "name": {
+      "@id": "schema:name"
+    },
+    "nameLocal": {
+      "@id": "abstract:name_local",
+      "@type": "xsd:string"
+    },
+    "language": {
+      "@id": "abstract:language",
+      "@type": "xsd:string"
+    },
+    "description": {
+      "@id": "schema:description"
+    },
+    "country": {
+      "@id": "abstract:country",
+      "@type": "xsd:string"
+    },
+    "location": {
+      "@id": "abstract:location",
+      "@type": "xsd:string"
+    },
+    "type": {
+      "@id": "abstract:type",
+      "@type": "xsd:string"
+    },
+    "date": {
+      "@id": "abstract:date",
+      "@type": "xsd:string"
+    },
+    "dateYear": {
+      "@id": "abstract:date_year",
+      "@type": "xsd:string"
+    },
+    "dateMonth": {
+      "@id": "abstract:date_month",
+      "@type": "xsd:string"
+    },
+    "dateDay": {
+      "@id": "abstract:date_day",
+      "@type": "xsd:string"
+    },
+    "weekDay": {
+      "@id": "abstract:week_day",
+      "@type": "xsd:string"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/json-schema/ip-intelligence-location-info-schema.json",
+  "title": "LocationInfo",
+  "description": "Geographic location for the IP",
+  "type": "object",
+  "properties": {
+    "city": {
+      "type": "string",
+      "description": "City name",
+      "example": "Mountain View"
+    },
+    "region": {
+      "type": "string",
+      "description": "Region or state",
+      "example": "California"
+    },
+    "country": {
+      "type": "string",
+      "description": "Country name",
+      "example": "United States"
+    },
+    "country_code": {
+      "type": "string",
+      "description": "ISO 3166-1 alpha-2 country code",
+      "example": "US"
+    },
+    "latitude": {
+      "type": "number",
+      "format": "double",
+      "description": "Latitude",
+      "example": 37.386
+    },
+    "longitude": {
+      "type": "number",
+      "format": "double",
+      "description": "Longitude",
+      "example": -122.0838
+    }
+  }
+}

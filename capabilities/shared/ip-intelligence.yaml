@@ -1,0 +1,40 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "IP Intelligence API"
+  description: "Detect VPNs, proxies, Tor exit nodes, abuse potential, hosting services, relays, and mobile IPs. Also provides ASN, company, location, timezone, flag, and currency data for any IP address."
+  tags:
+    - Abstract Api
+    - IP Intelligence
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      IP_INTELLIGENCE_API_KEY: IP_INTELLIGENCE_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: ip-intelligence
+      baseUri: https://ip-intelligence.abstractapi.com/v1
+      description: "IP Intelligence API"
+      authentication:
+        type: apikey
+        key: api_key
+        value: "{{env.IP_INTELLIGENCE_API_KEY}}"
+        placement: query
+      resources:
+        - name: ip-intelligence
+          path: /
+          description: "IP Intelligence API ip-intelligence resource"
+          operations:
+            - name: getIPIntelligence
+              method: GET
+              description: "Abstract API Get IP Intelligence"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."

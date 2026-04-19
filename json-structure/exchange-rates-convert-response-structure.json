@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/json-structure/exchange-rates-convert-response-structure.json",
+  "name": "ConvertResponse",
+  "description": "ConvertResponse schema from Abstract API exchange-rates",
+  "type": "object",
+  "properties": {
+    "base_currency": {
+      "type": "string",
+      "description": "Source currency code",
+      "example": "USD"
+    },
+    "target_currency": {
+      "type": "string",
+      "description": "Target currency code",
+      "example": "EUR"
+    },
+    "base_amount": {
+      "type": "double",
+      "description": "Original amount",
+      "example": 100
+    },
+    "converted_amount": {
+      "type": "double",
+      "description": "Converted amount",
+      "example": 92.34
+    }
+  }
+}

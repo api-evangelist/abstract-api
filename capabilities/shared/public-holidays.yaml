@@ -1,0 +1,40 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Public Holidays API"
+  description: "Get public, local, religious, and other holidays for any country. Supports year and country filtering with comprehensive holiday metadata."
+  tags:
+    - Abstract Api
+    - Public Holidays
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      PUBLIC_HOLIDAYS_API_KEY: PUBLIC_HOLIDAYS_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: public-holidays
+      baseUri: https://holidays.abstractapi.com/v1
+      description: "Public Holidays API"
+      authentication:
+        type: apikey
+        key: api_key
+        value: "{{env.PUBLIC_HOLIDAYS_API_KEY}}"
+        placement: query
+      resources:
+        - name: public-holidays
+          path: /
+          description: "Public Holidays API public-holidays resource"
+          operations:
+            - name: getPublicHolidays
+              method: GET
+              description: "Abstract API Get Public Holidays"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
