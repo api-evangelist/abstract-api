@@ -412,6 +412,25 @@ common:
   type: NaftikoCapability
 - url: vocabulary/abstract-api-vocabulary.yaml
   type: Vocabulary
+- type: Integrations
+  url: https://www.abstractapi.com/integrations
+integrations:
+  - name: HubSpot + Phone Validation API
+  - name: HubSpot + Email Validation API
+  - name: HubSpot + IP Geolocation API
+  - name: AWS + IP Geolocation API
+  - name: AWS + Phone Validation API
+  - name: Salesforce + Phone Validation API
+  - name: Salesforce + Email Validation API
+  - name: Salesforce + IP Geolocation API
+  - name: Phone Number Lookup
+  - name: VPN Detector
+  - name: Proxy IP Checker
+  - name: TOR Lookup
+  - name: Disposable Email Checker
+  - name: Domain Age Checker
+  - name: DMARC Record Check
+  - name: SPF Record Check
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
