@@ -1,0 +1,94 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Abstract API - IP Geolocation API — IP Geolocation
+  description: 'Abstract API - IP Geolocation API — IP Geolocation. 1 operations. Lead operation: Abstract API Get IP Geolocation.
+    Self-contained Naftiko capability covering one Abstract Api business surface.'
+  tags:
+  - Abstract Api
+  - IP Geolocation
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ABSTRACT_API_API_KEY: ABSTRACT_API_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: ip-geolocation-ip-geolocation
+    baseUri: https://ipgeolocation.abstractapi.com/v1
+    description: Abstract API - IP Geolocation API — IP Geolocation business capability. Self-contained, no shared references.
+    resources:
+    - name: root
+      path: /
+      operations:
+      - name: getipgeolocation
+        method: GET
+        description: Abstract API Get IP Geolocation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: api_key
+          in: query
+          type: string
+          description: Your unique API key for the IP Geolocation API.
+          required: true
+        - name: ip_address
+          in: query
+          type: string
+          description: IPv4 or IPv6 address to geolocate. If omitted, the request IP is used.
+        - name: fields
+          in: query
+          type: string
+          description: Comma-separated list of top-level fields to return in the response.
+    authentication:
+      type: apikey
+      key: api_key
+      value: '{{env.ABSTRACT_API_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: ip-geolocation-ip-geolocation-rest
+    port: 8080
+    description: REST adapter for Abstract API - IP Geolocation API — IP Geolocation. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1
+      name: root
+      description: REST surface for root.
+      operations:
+      - method: GET
+        name: getipgeolocation
+        description: Abstract API Get IP Geolocation
+        call: ip-geolocation-ip-geolocation.getipgeolocation
+        with:
+          api_key: rest.api_key
+          ip_address: rest.ip_address
+          fields: rest.fields
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: ip-geolocation-ip-geolocation-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Abstract API - IP Geolocation API — IP Geolocation. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: abstract-api-get-ip-geolocation
+      description: Abstract API Get IP Geolocation
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ip-geolocation-ip-geolocation.getipgeolocation
+      with:
+        api_key: tools.api_key
+        ip_address: tools.ip_address
+        fields: tools.fields
+      outputParameters:
+      - type: object
+        mapping: $.

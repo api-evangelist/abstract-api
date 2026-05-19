@@ -1,0 +1,96 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Abstract API - Phone Intelligence API — Phone Intelligence
+  description: 'Abstract API - Phone Intelligence API — Phone Intelligence. 1 operations. Lead operation: Abstract API Get
+    Phone Intelligence. Self-contained Naftiko capability covering one Abstract Api business surface.'
+  tags:
+  - Abstract Api
+  - Phone Intelligence
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ABSTRACT_API_API_KEY: ABSTRACT_API_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: phone-intelligence-phone-intelligence
+    baseUri: https://phoneintelligence.abstractapi.com/v1
+    description: Abstract API - Phone Intelligence API — Phone Intelligence business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: root
+      path: /
+      operations:
+      - name: getphoneintelligence
+        method: GET
+        description: Abstract API Get Phone Intelligence
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: api_key
+          in: query
+          type: string
+          description: Your unique API key for the Phone Intelligence API.
+          required: true
+        - name: phone
+          in: query
+          type: string
+          description: The phone number to validate and analyze.
+          required: true
+        - name: country
+          in: query
+          type: string
+          description: ISO 3166-1 alpha-2 country code to specify the phone number origin.
+    authentication:
+      type: apikey
+      key: api_key
+      value: '{{env.ABSTRACT_API_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: phone-intelligence-phone-intelligence-rest
+    port: 8080
+    description: REST adapter for Abstract API - Phone Intelligence API — Phone Intelligence. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1
+      name: root
+      description: REST surface for root.
+      operations:
+      - method: GET
+        name: getphoneintelligence
+        description: Abstract API Get Phone Intelligence
+        call: phone-intelligence-phone-intelligence.getphoneintelligence
+        with:
+          api_key: rest.api_key
+          phone: rest.phone
+          country: rest.country
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: phone-intelligence-phone-intelligence-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Abstract API - Phone Intelligence API — Phone Intelligence. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: abstract-api-get-phone-intelligence
+      description: Abstract API Get Phone Intelligence
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: phone-intelligence-phone-intelligence.getphoneintelligence
+      with:
+        api_key: tools.api_key
+        phone: tools.phone
+        country: tools.country
+      outputParameters:
+      - type: object
+        mapping: $.

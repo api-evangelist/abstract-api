@@ -1,0 +1,95 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Abstract API - Company Enrichment API — Company Enrichment
+  description: 'Abstract API - Company Enrichment API — Company Enrichment. 1 operations. Lead operation: Abstract API Get
+    Company Enrichment. Self-contained Naftiko capability covering one Abstract Api business surface.'
+  tags:
+  - Abstract Api
+  - Company Enrichment
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ABSTRACT_API_API_KEY: ABSTRACT_API_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: company-enrichment-company-enrichment
+    baseUri: https://companyenrichment.abstractapi.com/v1
+    description: Abstract API - Company Enrichment API — Company Enrichment business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: root
+      path: /
+      operations:
+      - name: getcompanyenrichment
+        method: GET
+        description: Abstract API Get Company Enrichment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: api_key
+          in: query
+          type: string
+          description: Your unique API key for the Company Enrichment API.
+          required: true
+        - name: domain
+          in: query
+          type: string
+          description: Company domain name to enrich (e.g., stripe.com). Use domain or email.
+        - name: email
+          in: query
+          type: string
+          description: Business email address to derive the company domain from. Use domain or email.
+    authentication:
+      type: apikey
+      key: api_key
+      value: '{{env.ABSTRACT_API_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: company-enrichment-company-enrichment-rest
+    port: 8080
+    description: REST adapter for Abstract API - Company Enrichment API — Company Enrichment. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1
+      name: root
+      description: REST surface for root.
+      operations:
+      - method: GET
+        name: getcompanyenrichment
+        description: Abstract API Get Company Enrichment
+        call: company-enrichment-company-enrichment.getcompanyenrichment
+        with:
+          api_key: rest.api_key
+          domain: rest.domain
+          email: rest.email
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: company-enrichment-company-enrichment-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Abstract API - Company Enrichment API — Company Enrichment. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: abstract-api-get-company-enrichment
+      description: Abstract API Get Company Enrichment
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: company-enrichment-company-enrichment.getcompanyenrichment
+      with:
+        api_key: tools.api_key
+        domain: tools.domain
+        email: tools.email
+      outputParameters:
+      - type: object
+        mapping: $.

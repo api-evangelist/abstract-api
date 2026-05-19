@@ -1,0 +1,107 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Abstract API - Public Holidays API — Public Holidays
+  description: 'Abstract API - Public Holidays API — Public Holidays. 1 operations. Lead operation: Abstract API Get Public
+    Holidays. Self-contained Naftiko capability covering one Abstract Api business surface.'
+  tags:
+  - Abstract Api
+  - Public Holidays
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ABSTRACT_API_API_KEY: ABSTRACT_API_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: public-holidays-public-holidays
+    baseUri: https://holidays.abstractapi.com/v1
+    description: Abstract API - Public Holidays API — Public Holidays business capability. Self-contained, no shared references.
+    resources:
+    - name: root
+      path: /
+      operations:
+      - name: getpublicholidays
+        method: GET
+        description: Abstract API Get Public Holidays
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: api_key
+          in: query
+          type: string
+          description: Your unique API key for the Public Holidays API.
+          required: true
+        - name: country
+          in: query
+          type: string
+          description: ISO 3166-1 alpha-2 two-letter country code.
+          required: true
+        - name: year
+          in: query
+          type: string
+          description: Year to query (required on free plan). Defaults to current year on paid.
+        - name: month
+          in: query
+          type: string
+          description: Month to query (1-12, required on free plan). Defaults to current month.
+        - name: day
+          in: query
+          type: string
+          description: Day to query (1-31, required on free plan). Defaults to current day.
+    authentication:
+      type: apikey
+      key: api_key
+      value: '{{env.ABSTRACT_API_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: public-holidays-public-holidays-rest
+    port: 8080
+    description: REST adapter for Abstract API - Public Holidays API — Public Holidays. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1
+      name: root
+      description: REST surface for root.
+      operations:
+      - method: GET
+        name: getpublicholidays
+        description: Abstract API Get Public Holidays
+        call: public-holidays-public-holidays.getpublicholidays
+        with:
+          api_key: rest.api_key
+          country: rest.country
+          year: rest.year
+          month: rest.month
+          day: rest.day
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: public-holidays-public-holidays-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Abstract API - Public Holidays API — Public Holidays. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: abstract-api-get-public-holidays
+      description: Abstract API Get Public Holidays
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: public-holidays-public-holidays.getpublicholidays
+      with:
+        api_key: tools.api_key
+        country: tools.country
+        year: tools.year
+        month: tools.month
+        day: tools.day
+      outputParameters:
+      - type: object
+        mapping: $.

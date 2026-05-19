@@ -1,0 +1,94 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Abstract API - IP Intelligence API — IP Intelligence
+  description: 'Abstract API - IP Intelligence API — IP Intelligence. 1 operations. Lead operation: Abstract API Get IP Intelligence.
+    Self-contained Naftiko capability covering one Abstract Api business surface.'
+  tags:
+  - Abstract Api
+  - IP Intelligence
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ABSTRACT_API_API_KEY: ABSTRACT_API_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: ip-intelligence-ip-intelligence
+    baseUri: https://ip-intelligence.abstractapi.com/v1
+    description: Abstract API - IP Intelligence API — IP Intelligence business capability. Self-contained, no shared references.
+    resources:
+    - name: root
+      path: /
+      operations:
+      - name: getipintelligence
+        method: GET
+        description: Abstract API Get IP Intelligence
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: api_key
+          in: query
+          type: string
+          description: Your unique API key for the IP Intelligence API.
+          required: true
+        - name: ip_address
+          in: query
+          type: string
+          description: IPv4 or IPv6 address to analyze. Auto-detects request IP if omitted.
+        - name: fields
+          in: query
+          type: string
+          description: Comma-separated list of top-level keys to return.
+    authentication:
+      type: apikey
+      key: api_key
+      value: '{{env.ABSTRACT_API_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: ip-intelligence-ip-intelligence-rest
+    port: 8080
+    description: REST adapter for Abstract API - IP Intelligence API — IP Intelligence. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1
+      name: root
+      description: REST surface for root.
+      operations:
+      - method: GET
+        name: getipintelligence
+        description: Abstract API Get IP Intelligence
+        call: ip-intelligence-ip-intelligence.getipintelligence
+        with:
+          api_key: rest.api_key
+          ip_address: rest.ip_address
+          fields: rest.fields
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: ip-intelligence-ip-intelligence-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Abstract API - IP Intelligence API — IP Intelligence. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: abstract-api-get-ip-intelligence
+      description: Abstract API Get IP Intelligence
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ip-intelligence-ip-intelligence.getipintelligence
+      with:
+        api_key: tools.api_key
+        ip_address: tools.ip_address
+        fields: tools.fields
+      outputParameters:
+      - type: object
+        mapping: $.

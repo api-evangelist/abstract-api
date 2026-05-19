@@ -334,6 +334,8 @@ apis:
     images.
 
 common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/abstractapi
 - type: Website
   url: https://www.abstractapi.com/
 - type: Portal

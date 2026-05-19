@@ -1,0 +1,89 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Abstract API - Email Reputation API — Email Reputation
+  description: 'Abstract API - Email Reputation API — Email Reputation. 1 operations. Lead operation: Abstract API Get Email
+    Reputation. Self-contained Naftiko capability covering one Abstract Api business surface.'
+  tags:
+  - Abstract Api
+  - Email Reputation
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ABSTRACT_API_API_KEY: ABSTRACT_API_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: email-reputation-email-reputation
+    baseUri: https://emailreputation.abstractapi.com/v1
+    description: Abstract API - Email Reputation API — Email Reputation business capability. Self-contained, no shared references.
+    resources:
+    - name: root
+      path: /
+      operations:
+      - name: getemailreputation
+        method: GET
+        description: Abstract API Get Email Reputation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: api_key
+          in: query
+          type: string
+          description: Your unique API key for the Email Reputation API.
+          required: true
+        - name: email
+          in: query
+          type: string
+          description: The email address to validate and analyze.
+          required: true
+    authentication:
+      type: apikey
+      key: api_key
+      value: '{{env.ABSTRACT_API_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: email-reputation-email-reputation-rest
+    port: 8080
+    description: REST adapter for Abstract API - Email Reputation API — Email Reputation. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1
+      name: root
+      description: REST surface for root.
+      operations:
+      - method: GET
+        name: getemailreputation
+        description: Abstract API Get Email Reputation
+        call: email-reputation-email-reputation.getemailreputation
+        with:
+          api_key: rest.api_key
+          email: rest.email
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: email-reputation-email-reputation-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Abstract API - Email Reputation API — Email Reputation. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: abstract-api-get-email-reputation
+      description: Abstract API Get Email Reputation
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: email-reputation-email-reputation.getemailreputation
+      with:
+        api_key: tools.api_key
+        email: tools.email
+      outputParameters:
+      - type: object
+        mapping: $.
