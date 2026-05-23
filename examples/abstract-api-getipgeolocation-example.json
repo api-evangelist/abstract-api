@@ -1,0 +1,52 @@
+{
+  "operationId": "getIPGeolocation",
+  "method": "GET",
+  "path": "/",
+  "summary": "Abstract API Get IP Geolocation",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "getIPGeolocation200Example",
+      "example": {
+        "ip_address": "8.8.8.8",
+        "city": "Mountain View",
+        "city_geoname_id": 5375480,
+        "region": "California",
+        "region_iso_code": "CA",
+        "region_geoname_id": 5332921,
+        "postal_code": "94043",
+        "country": "United States",
+        "country_code": "US",
+        "country_geoname_id": 6252001,
+        "country_is_eu": false,
+        "continent": "North America",
+        "continent_code": "NA",
+        "continent_geoname_id": 6255149,
+        "longitude": -122.0838,
+        "latitude": 37.386,
+        "security": {
+          "is_vpn": false
+        },
+        "timezone": {
+          "name": "America/Los_Angeles",
+          "abbreviation": "PST",
+          "gmt_offset": -8,
+          "current_time": "2026-04-19 10:30:00",
+          "is_dst": false
+        },
+        "flag": {
+          "emoji": "\ud83c\uddfa\ud83c\uddf8",
+          "unicode": "U+1F1FA U+1F1F8",
+          "png": "https://static.abstractapi.com/country-flags/US_flag.png",
+          "svg": "https://static.abstractapi.com/country-flags/US_flag.svg"
+        },
+        "currency": {
+          "currency_name": "US Dollar",
+          "currency_code": "USD"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BreachInfo",
+  "title": "BreachInfo",
+  "type": "object",
+  "description": "Data breach history for the email",
+  "properties": {
+    "total_breaches": {
+      "type": "integer",
+      "description": "Total number of breaches the email appeared in",
+      "example": 0
+    },
+    "date_first_breached": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of the earliest known breach",
+      "example": "2020-01-15"
+    },
+    "date_last_breached": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of the most recent breach",
+      "example": "2023-06-01"
+    },
+    "breached_domains": {
+      "type": "array",
+      "description": "Domains where the email was breached",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "breached-site.com"
+      ]
+    }
+  }
+}

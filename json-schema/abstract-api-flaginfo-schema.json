@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/FlagInfo",
+  "title": "FlagInfo",
+  "type": "object",
+  "properties": {
+    "emoji": {
+      "type": "string",
+      "description": "Flag emoji",
+      "example": "\ud83c\uddfa\ud83c\uddf8"
+    },
+    "unicode": {
+      "type": "string",
+      "description": "Unicode code points for the flag",
+      "example": "U+1F1FA U+1F1F8"
+    },
+    "png": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL to PNG flag image",
+      "example": "https://static.abstractapi.com/country-flags/US_flag.png"
+    },
+    "svg": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL to SVG flag image",
+      "example": "https://static.abstractapi.com/country-flags/US_flag.svg"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TimezoneInfo",
+  "title": "TimezoneInfo",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "IANA timezone name",
+      "example": "America/Los_Angeles"
+    },
+    "abbreviation": {
+      "type": "string",
+      "description": "Timezone abbreviation",
+      "example": "PST"
+    },
+    "gmt_offset": {
+      "type": "integer",
+      "description": "GMT/UTC offset in hours",
+      "example": -8
+    },
+    "current_time": {
+      "type": "string",
+      "description": "Current local time",
+      "example": "2026-04-19 10:30:00"
+    },
+    "is_dst": {
+      "type": "boolean",
+      "description": "Whether daylight saving time is active",
+      "example": false
+    }
+  }
+}

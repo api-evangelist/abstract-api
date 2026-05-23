@@ -1,0 +1,20 @@
+{
+  "operationId": "convertCurrency",
+  "method": "GET",
+  "path": "/convert",
+  "summary": "Abstract API Convert Currency",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "convertCurrency200Example",
+      "example": {
+        "base_currency": "USD",
+        "target_currency": "EUR",
+        "base_amount": 100,
+        "converted_amount": 92.34
+      }
+    }
+  ]
+}

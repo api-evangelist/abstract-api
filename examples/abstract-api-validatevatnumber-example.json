@@ -1,0 +1,26 @@
+{
+  "operationId": "validateVATNumber",
+  "method": "GET",
+  "path": "/validate",
+  "summary": "Abstract API Validate VAT Number",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "validateVATNumber200Example",
+      "example": {
+        "vat_number": "GB123456789",
+        "valid": true,
+        "company": {
+          "name": "Example Ltd",
+          "address": "1 Example Street, London, UK"
+        },
+        "country": {
+          "code": "GB",
+          "name": "United Kingdom"
+        }
+      }
+    }
+  ]
+}

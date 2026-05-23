@@ -1,0 +1,46 @@
+{
+  "operationId": "getEmailReputation",
+  "method": "GET",
+  "path": "/",
+  "summary": "Abstract API Get Email Reputation",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "getEmailReputation200Example",
+      "example": {
+        "email": "test@example.com",
+        "deliverability": {
+          "status": "DELIVERABLE",
+          "status_detail": "smtp_valid",
+          "is_format_valid": true,
+          "is_smtp_valid": true,
+          "is_mx_valid": true,
+          "mx_records": [
+            "mx.example.com"
+          ]
+        },
+        "quality": {
+          "score": 0.92,
+          "is_free_email": false,
+          "is_disposable": false,
+          "is_catchall": false,
+          "is_role": false
+        },
+        "domain": {
+          "domain": "example.com",
+          "domain_age": 9000,
+          "is_live_site": true
+        },
+        "risk": {
+          "address_risk_status": "low",
+          "domain_risk_status": "low"
+        },
+        "breaches": {
+          "total_breaches": 0
+        }
+      }
+    }
+  ]
+}

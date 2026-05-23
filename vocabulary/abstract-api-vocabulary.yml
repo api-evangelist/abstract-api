@@ -1,0 +1,7 @@
+name: Abstract API Domain Vocabulary
+provider: Abstract API
+providerId: abstract-api
+description: Tag-derived vocabulary for the Abstract API API surface; sourced from openapi/ tags.
+terms:
+- term: Email Reputation
+  description: Email validation and reputation operations

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ASNInfo",
+  "title": "ASNInfo",
+  "type": "object",
+  "description": "Autonomous System Number information",
+  "properties": {
+    "asn": {
+      "type": "string",
+      "description": "ASN identifier",
+      "example": "AS15169"
+    },
+    "name": {
+      "type": "string",
+      "description": "ASN organization name",
+      "example": "Google LLC"
+    },
+    "domain": {
+      "type": "string",
+      "description": "Primary domain for the ASN",
+      "example": "google.com"
+    },
+    "type": {
+      "type": "string",
+      "description": "Type of ASN (hosting, isp, business, etc.)",
+      "example": "hosting"
+    }
+  }
+}

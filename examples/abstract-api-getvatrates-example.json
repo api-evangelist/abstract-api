@@ -1,0 +1,24 @@
+{
+  "operationId": "getVATRates",
+  "method": "GET",
+  "path": "/rates",
+  "summary": "Abstract API Get VAT Rates",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "getVATRates200Example",
+      "example": {
+        "country_code": "DE",
+        "country_name": "Germany",
+        "standard_rate": 19,
+        "reduced_rates": [
+          7
+        ],
+        "super_reduced_rate": null,
+        "parking_rate": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/VATRatesResponse",
+  "title": "VATRatesResponse",
+  "type": "object",
+  "properties": {
+    "country_code": {
+      "type": "string",
+      "example": "DE"
+    },
+    "country_name": {
+      "type": "string",
+      "example": "Germany"
+    },
+    "standard_rate": {
+      "type": "number",
+      "description": "Standard VAT rate percentage",
+      "example": 19
+    },
+    "reduced_rates": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Reduced VAT rate percentages",
+      "example": [
+        7
+      ]
+    },
+    "super_reduced_rate": {
+      "type": "number",
+      "nullable": true,
+      "description": "Super reduced VAT rate if applicable",
+      "example": null
+    },
+    "parking_rate": {
+      "type": "number",
+      "nullable": true,
+      "description": "Parking VAT rate if applicable",
+      "example": null
+    }
+  }
+}

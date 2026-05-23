@@ -1,0 +1,69 @@
+{
+  "provider": "Abstract API",
+  "providerId": "abstract-api",
+  "kind": "json-structure",
+  "description": "Structural overview of the Abstract API API surface; extracted from openapi/.",
+  "schemaCount": 8,
+  "operationCount": 1,
+  "schemas": [
+    {
+      "name": "EmailReputationResponse",
+      "type": "object",
+      "propertyCount": 7,
+      "required": []
+    },
+    {
+      "name": "Deliverability",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "EmailQuality",
+      "type": "object",
+      "propertyCount": 10,
+      "required": []
+    },
+    {
+      "name": "SenderInfo",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "DomainInfo",
+      "type": "object",
+      "propertyCount": 9,
+      "required": []
+    },
+    {
+      "name": "RiskInfo",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "BreachInfo",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "ErrorResponse",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/",
+      "operationId": "getEmailReputation",
+      "summary": "Abstract API Get Email Reputation",
+      "tags": [
+        "Email Reputation"
+      ]
+    }
+  ]
+}

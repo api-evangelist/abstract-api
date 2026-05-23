@@ -1,0 +1,19 @@
+{
+  "operationId": "scrapeWebPage",
+  "method": "GET",
+  "path": "/",
+  "summary": "Abstract API Scrape Web Page",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "scrapeWebPage200Example",
+      "example": {
+        "body": "<html><head><title>Example Domain</title></head><body>...</body></html>",
+        "url": "https://www.example.com",
+        "status_code": 200
+      }
+    }
+  ]
+}

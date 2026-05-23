@@ -1,0 +1,23 @@
+{
+  "operationId": "getLiveExchangeRates",
+  "method": "GET",
+  "path": "/live",
+  "summary": "Abstract API Get Live Exchange Rates",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "getLiveExchangeRates200Example",
+      "example": {
+        "base": "USD",
+        "last_updated": 1713518400,
+        "exchange_rates": {
+          "EUR": 0.9234,
+          "GBP": 0.7891,
+          "JPY": 154.23
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "operationId": "getHistoricalExchangeRates",
+  "method": "GET",
+  "path": "/historical",
+  "summary": "Abstract API Get Historical Exchange Rates",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "getHistoricalExchangeRates200Example",
+      "example": {
+        "base": "USD",
+        "date": "2026-01-01",
+        "exchange_rates": {
+          "EUR": 0.9198,
+          "GBP": 0.7844
+        }
+      }
+    }
+  ]
+}

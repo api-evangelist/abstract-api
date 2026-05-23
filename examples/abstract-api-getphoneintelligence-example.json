@@ -1,0 +1,28 @@
+{
+  "operationId": "getPhoneIntelligence",
+  "method": "GET",
+  "path": "/",
+  "summary": "Abstract API Get Phone Intelligence",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "getPhoneIntelligence200Example",
+      "example": {
+        "phone": "+14155552671",
+        "valid": true,
+        "country": {
+          "code": "US",
+          "name": "United States",
+          "prefix": "1"
+        },
+        "location": "California",
+        "type": "mobile",
+        "carrier": "Verizon",
+        "is_voip": false,
+        "risk_score": 12
+      }
+    }
+  ]
+}

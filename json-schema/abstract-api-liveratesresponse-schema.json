@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/LiveRatesResponse",
+  "title": "LiveRatesResponse",
+  "type": "object",
+  "properties": {
+    "base": {
+      "type": "string",
+      "description": "Base currency code",
+      "example": "USD"
+    },
+    "last_updated": {
+      "type": "integer",
+      "description": "Unix timestamp of last update",
+      "example": 1713518400
+    },
+    "exchange_rates": {
+      "type": "object",
+      "description": "Map of currency codes to exchange rates",
+      "additionalProperties": {
+        "type": "number"
+      }
+    }
+  }
+}
