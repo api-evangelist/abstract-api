@@ -1,0 +1,108 @@
+arazzo: 1.0.1
+info:
+  title: Abstract API Screenshot, Scrape, and Image Processing
+  summary: Capture a website screenshot, scrape its HTML, then optimize an image asset.
+  description: >-
+    A site-capture flow that takes a full-page screenshot of a URL, scrapes the
+    same URL's rendered HTML, and then runs an image through the Image Processing
+    API to produce an optimized, compressed asset. Note an adaptation: the
+    Website Screenshot operation returns a binary image rather than a JSON URL,
+    so its output cannot be chained downstream; the Image Processing step instead
+    operates on a separately supplied image URL. Every step inlines the api_key
+    query parameter and request so the flow reads and runs without opening the
+    underlying OpenAPI descriptions.
+  version: 1.0.0
+sourceDescriptions:
+- name: websiteScreenshotApi
+  url: ../openapi/abstract-api-website-screenshot.yaml
+  type: openapi
+- name: webScrapingApi
+  url: ../openapi/abstract-api-web-scraping.yaml
+  type: openapi
+- name: imageProcessingApi
+  url: ../openapi/abstract-api-image-processing.yaml
+  type: openapi
+workflows:
+- workflowId: screenshot-scrape-and-process
+  summary: Screenshot a URL, scrape it, and optimize the resulting screenshot image.
+  description: >-
+    Captures a full-page screenshot of a URL, scrapes the same page's rendered
+    HTML, and feeds the screenshot URL into image processing to produce an
+    optimized asset.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - url
+    - imageUrl
+    properties:
+      apiKey:
+        type: string
+        description: Abstract API key valid for Website Screenshot, Web Scraping, and Image Processing.
+      url:
+        type: string
+        description: The page URL to screenshot and scrape.
+      imageUrl:
+        type: string
+        description: An image URL to optimize via the Image Processing API (the screenshot returns binary, so it cannot be chained).
+  steps:
+  - stepId: captureScreenshot
+    description: >-
+      Capture a full-page screenshot of the target URL. The response is the
+      screenshot image binary, so there are no JSON body outputs to chain.
+    operationId: captureWebsiteScreenshot
+    parameters:
+    - name: api_key
+      in: query
+      value: $inputs.apiKey
+    - name: url
+      in: query
+      value: $inputs.url
+    - name: capture_full_page
+      in: query
+      value: true
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: scrapePage
+    description: >-
+      Scrape the rendered HTML of the same URL with JavaScript rendering enabled.
+    operationId: scrapeWebPage
+    parameters:
+    - name: api_key
+      in: query
+      value: $inputs.apiKey
+    - name: url
+      in: query
+      value: $inputs.url
+    - name: render_js
+      in: query
+      value: true
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: optimizeImage
+    description: >-
+      Run the supplied image URL through image processing to produce a lossy,
+      compressed WebP asset and report the bytes saved.
+    operationId: processImageByURL
+    parameters:
+    - name: api_key
+      in: query
+      value: $inputs.apiKey
+    - name: url
+      in: query
+      value: $inputs.imageUrl
+    - name: lossy
+      in: query
+      value: true
+    - name: output_format
+      in: query
+      value: webp
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      processedUrl: $response.body#/url
+      savedBytes: $response.body#/saved_bytes
+      savedPercent: $response.body#/saved_percent
+  outputs:
+    processedUrl: $steps.optimizeImage.outputs.processedUrl
+    savedBytes: $steps.optimizeImage.outputs.savedBytes

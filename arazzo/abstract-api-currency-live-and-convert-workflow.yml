@@ -1,0 +1,117 @@
+arazzo: 1.0.1
+info:
+  title: Abstract API Live Exchange Rate and Conversion
+  summary: Read the live rate, convert an amount, and compare against a historical rate.
+  description: >-
+    A currency-pricing flow that reads the live exchange rate for a base
+    currency, converts a supplied amount into a target currency, and then pulls
+    the historical rate for the same pair on a given date so the live conversion
+    can be compared against a reference point. Every step inlines the api_key
+    query parameter and request so the flow reads and runs without opening the
+    underlying OpenAPI descriptions.
+  version: 1.0.0
+sourceDescriptions:
+- name: exchangeRatesApi
+  url: ../openapi/abstract-api-exchange-rates.yaml
+  type: openapi
+workflows:
+- workflowId: currency-live-and-convert
+  summary: Read the live rate, convert an amount, then fetch a historical rate.
+  description: >-
+    Retrieves the live exchange rate for a base currency, converts an amount
+    into a target currency, and fetches the historical rate for the same pair on
+    a reference date for comparison.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - base
+    - target
+    - baseAmount
+    - date
+    properties:
+      apiKey:
+        type: string
+        description: Abstract API key valid for the Exchange Rates API.
+      base:
+        type: string
+        description: The base currency ISO code (e.g. USD).
+      target:
+        type: string
+        description: The target currency ISO code (e.g. EUR).
+      baseAmount:
+        type: number
+        description: The amount in the base currency to convert.
+      date:
+        type: string
+        description: The historical date to fetch a reference rate for (YYYY-MM-DD).
+  steps:
+  - stepId: getLiveRate
+    description: >-
+      Retrieve the live exchange rates for the base currency against the target
+      currency.
+    operationId: getLiveExchangeRates
+    parameters:
+    - name: api_key
+      in: query
+      value: $inputs.apiKey
+    - name: base
+      in: query
+      value: $inputs.base
+    - name: target
+      in: query
+      value: $inputs.target
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      base: $response.body#/base
+      lastUpdated: $response.body#/last_updated
+      exchangeRates: $response.body#/exchange_rates
+  - stepId: convertAmount
+    description: >-
+      Convert the supplied base amount into the target currency at the live rate.
+    operationId: convertCurrency
+    parameters:
+    - name: api_key
+      in: query
+      value: $inputs.apiKey
+    - name: base
+      in: query
+      value: $inputs.base
+    - name: target
+      in: query
+      value: $inputs.target
+    - name: base_amount
+      in: query
+      value: $inputs.baseAmount
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      convertedBase: $response.body#/base
+  - stepId: getHistoricalRate
+    description: >-
+      Retrieve the historical exchange rate for the same currency pair on the
+      reference date for comparison.
+    operationId: getHistoricalExchangeRates
+    parameters:
+    - name: api_key
+      in: query
+      value: $inputs.apiKey
+    - name: base
+      in: query
+      value: $inputs.base
+    - name: target
+      in: query
+      value: $inputs.target
+    - name: date
+      in: query
+      value: $inputs.date
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      historicalBase: $response.body#/base
+      historicalDate: $response.body#/date
+  outputs:
+    base: $steps.getLiveRate.outputs.base
+    liveRates: $steps.getLiveRate.outputs.exchangeRates
+    historicalDate: $steps.getHistoricalRate.outputs.historicalDate

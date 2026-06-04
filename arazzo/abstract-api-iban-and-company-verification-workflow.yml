@@ -1,0 +1,97 @@
+arazzo: 1.0.1
+info:
+  title: Abstract API IBAN and Company Verification
+  summary: Validate an IBAN, then enrich the company it belongs to for a KYB check.
+  description: >-
+    A know-your-business flow that validates an IBAN with the IBAN Validation API
+    for bank and country details, and branches: when the IBAN is invalid it ends
+    with the verdict, and when it is valid it enriches the associated company by
+    domain so the bank account can be matched to a verified business profile. The
+    IBAN response carries no company domain, so the company domain is supplied as
+    a separate input. Every step inlines the api_key query parameter and request
+    so the flow reads and runs without opening the underlying OpenAPI descriptions.
+  version: 1.0.0
+sourceDescriptions:
+- name: ibanValidationApi
+  url: ../openapi/abstract-api-iban-validation.yaml
+  type: openapi
+- name: companyEnrichmentApi
+  url: ../openapi/abstract-api-company-enrichment.yaml
+  type: openapi
+workflows:
+- workflowId: iban-and-company-verification
+  summary: Validate an IBAN and enrich the company it is associated with.
+  description: >-
+    Validates an IBAN and, for a valid IBAN, branches to a company enrichment
+    lookup on the supplied company domain so a bank account can be tied to a
+    verified business profile.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - iban
+    - companyDomain
+    properties:
+      apiKey:
+        type: string
+        description: Abstract API key valid for IBAN Validation and Company Enrichment.
+      iban:
+        type: string
+        description: The IBAN to validate.
+      companyDomain:
+        type: string
+        description: The domain of the company that owns the bank account, used for enrichment.
+  steps:
+  - stepId: validateIban
+    description: >-
+      Validate the IBAN and retrieve bank name, country, and account details.
+    operationId: validateIBAN
+    parameters:
+    - name: api_key
+      in: query
+      value: $inputs.apiKey
+    - name: iban
+      in: query
+      value: $inputs.iban
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      isValid: $response.body#/is_valid
+      countryCode: $response.body#/country/code
+      bankName: $response.body#/bank/bank_name
+    onSuccess:
+    - name: ibanValid
+      type: goto
+      stepId: enrichCompany
+      criteria:
+      - context: $response.body
+        condition: $.is_valid == true
+        type: jsonpath
+    - name: ibanInvalid
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.is_valid == false
+        type: jsonpath
+  - stepId: enrichCompany
+    description: >-
+      Enrich the company that owns the validated bank account using its domain.
+    operationId: getCompanyEnrichment
+    parameters:
+    - name: api_key
+      in: query
+      value: $inputs.apiKey
+    - name: domain
+      in: query
+      value: $inputs.companyDomain
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      companyName: $response.body#/name
+      companyCountry: $response.body#/country
+      industry: $response.body#/industry
+  outputs:
+    isValid: $steps.validateIban.outputs.isValid
+    bankName: $steps.validateIban.outputs.bankName
+    companyName: $steps.enrichCompany.outputs.companyName
+    industry: $steps.enrichCompany.outputs.industry

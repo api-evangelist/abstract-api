@@ -1,0 +1,95 @@
+arazzo: 1.0.1
+info:
+  title: Abstract API Email to Company Enrichment
+  summary: Validate an email address, then enrich the company behind its domain.
+  description: >-
+    A lead-qualification flow that first runs an email address through the Email
+    Reputation API to confirm it is deliverable and not disposable, and then,
+    when the address looks legitimate, uses the domain extracted from the email
+    to retrieve full company firmographics from the Company Enrichment API. Each
+    step inlines the api_key query parameter and its request so the flow can be
+    read and executed without opening the underlying OpenAPI descriptions.
+  version: 1.0.0
+sourceDescriptions:
+- name: emailReputationApi
+  url: ../openapi/abstract-api-email-reputation.yaml
+  type: openapi
+- name: companyEnrichmentApi
+  url: ../openapi/abstract-api-company-enrichment.yaml
+  type: openapi
+workflows:
+- workflowId: email-to-company-enrichment
+  summary: Validate an email and enrich the company tied to its domain.
+  description: >-
+    Checks email deliverability and, for a valid email, branches to a company
+    enrichment lookup keyed on the email's domain so a verified lead arrives
+    with firmographic context attached.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - email
+    properties:
+      apiKey:
+        type: string
+        description: Abstract API key valid for both the Email Reputation and Company Enrichment APIs.
+      email:
+        type: string
+        description: The email address to validate and use as the enrichment seed.
+  steps:
+  - stepId: validateEmail
+    description: >-
+      Run the email through the Email Reputation API to retrieve deliverability,
+      quality signals, and the parsed domain.
+    operationId: getEmailReputation
+    parameters:
+    - name: api_key
+      in: query
+      value: $inputs.apiKey
+    - name: email
+      in: query
+      value: $inputs.email
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      deliverability: $response.body#/deliverability/status
+      isDisposable: $response.body#/deliverability/is_disposable
+      emailDomain: $response.body#/domain/domain
+    onSuccess:
+    - name: emailDeliverable
+      type: goto
+      stepId: enrichCompany
+      criteria:
+      - context: $response.body
+        condition: $.deliverability.status == "deliverable"
+        type: jsonpath
+    - name: emailUndeliverable
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.deliverability.status != "deliverable"
+        type: jsonpath
+  - stepId: enrichCompany
+    description: >-
+      Look up company firmographics using the domain parsed from the validated
+      email address.
+    operationId: getCompanyEnrichment
+    parameters:
+    - name: api_key
+      in: query
+      value: $inputs.apiKey
+    - name: domain
+      in: query
+      value: $steps.validateEmail.outputs.emailDomain
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      companyName: $response.body#/name
+      industry: $response.body#/industry
+      employeesCount: $response.body#/employees_count
+      country: $response.body#/country
+  outputs:
+    deliverability: $steps.validateEmail.outputs.deliverability
+    emailDomain: $steps.validateEmail.outputs.emailDomain
+    companyName: $steps.enrichCompany.outputs.companyName
+    industry: $steps.enrichCompany.outputs.industry

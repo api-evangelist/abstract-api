@@ -1,0 +1,96 @@
+arazzo: 1.0.1
+info:
+  title: Abstract API Company Enrichment to Screenshot and Avatar
+  summary: Enrich a company by domain, screenshot its site, and generate a name avatar.
+  description: >-
+    A brand-asset flow that enriches a company by its domain, captures a
+    full-page screenshot of the company website using the resolved domain, and
+    generates a fallback initials avatar from the company name. The screenshot
+    and avatar operations return image binaries, so they are terminal capture
+    steps rather than sources of chainable JSON. Every step inlines the api_key
+    query parameter and request so the flow reads and runs without opening the
+    underlying OpenAPI descriptions.
+  version: 1.0.0
+sourceDescriptions:
+- name: companyEnrichmentApi
+  url: ../openapi/abstract-api-company-enrichment.yaml
+  type: openapi
+- name: websiteScreenshotApi
+  url: ../openapi/abstract-api-website-screenshot.yaml
+  type: openapi
+- name: avatarsApi
+  url: ../openapi/abstract-api-avatars.yaml
+  type: openapi
+workflows:
+- workflowId: company-to-screenshot-and-avatar
+  summary: Enrich a company then capture its website screenshot and a name avatar.
+  description: >-
+    Enriches a company by domain, screenshots the resolved company website, and
+    generates an initials avatar from the company name for use as a brand
+    fallback image.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - domain
+    properties:
+      apiKey:
+        type: string
+        description: Abstract API key valid for Company Enrichment, Website Screenshot, and Avatars.
+      domain:
+        type: string
+        description: The company domain to enrich and capture.
+  steps:
+  - stepId: enrichCompany
+    description: >-
+      Enrich the company by domain to retrieve its canonical name and domain.
+    operationId: getCompanyEnrichment
+    parameters:
+    - name: api_key
+      in: query
+      value: $inputs.apiKey
+    - name: domain
+      in: query
+      value: $inputs.domain
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      companyName: $response.body#/name
+      companyDomain: $response.body#/domain
+  - stepId: screenshotSite
+    description: >-
+      Capture a full-page screenshot of the resolved company domain. The
+      response is the screenshot image binary, so there are no JSON outputs.
+    operationId: captureWebsiteScreenshot
+    parameters:
+    - name: api_key
+      in: query
+      value: $inputs.apiKey
+    - name: url
+      in: query
+      value: $steps.enrichCompany.outputs.companyDomain
+    - name: capture_full_page
+      in: query
+      value: true
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: generateAvatar
+    description: >-
+      Generate an initials avatar from the enriched company name. The response
+      is a PNG image binary, so there are no JSON outputs.
+    operationId: generateAvatar
+    parameters:
+    - name: api_key
+      in: query
+      value: $inputs.apiKey
+    - name: name
+      in: query
+      value: $steps.enrichCompany.outputs.companyName
+    - name: size
+      in: query
+      value: 256
+    successCriteria:
+    - condition: $statusCode == 200
+  outputs:
+    companyName: $steps.enrichCompany.outputs.companyName
+    companyDomain: $steps.enrichCompany.outputs.companyDomain

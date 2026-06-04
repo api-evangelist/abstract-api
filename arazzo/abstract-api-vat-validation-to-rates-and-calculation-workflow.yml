@@ -1,0 +1,116 @@
+arazzo: 1.0.1
+info:
+  title: Abstract API VAT Validation to Rates and Calculation
+  summary: Validate a VAT number, fetch its country rates, then calculate VAT on an amount.
+  description: >-
+    A tax-compliance flow that validates a VAT number with the VAT Validation
+    API and branches: when the number is invalid it ends with the verdict, and
+    when it is valid it uses the resolved country code to look up the country's
+    VAT rates and then calculate the VAT due on a supplied amount. Every step
+    inlines the api_key query parameter and request so the flow reads and runs
+    without opening the underlying OpenAPI descriptions.
+  version: 1.0.0
+sourceDescriptions:
+- name: vatValidationApi
+  url: ../openapi/abstract-api-vat-validation.yaml
+  type: openapi
+workflows:
+- workflowId: vat-validation-to-rates-and-calculation
+  summary: Validate a VAT number then resolve rates and calculate VAT for its country.
+  description: >-
+    Validates a VAT number and, for a valid number, branches to retrieve the
+    country's VAT rates and calculate the VAT due on the supplied amount using
+    the resolved country code.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - vatNumber
+    - amount
+    properties:
+      apiKey:
+        type: string
+        description: Abstract API key valid for the VAT Validation API.
+      vatNumber:
+        type: string
+        description: The VAT number to validate (e.g. GB123456789).
+      amount:
+        type: number
+        description: The monetary amount to calculate VAT on.
+      isVatIncl:
+        type: boolean
+        description: Whether the supplied amount already includes VAT.
+  steps:
+  - stepId: validateVat
+    description: >-
+      Validate the VAT number and retrieve the associated company and country
+      details.
+    operationId: validateVATNumber
+    parameters:
+    - name: api_key
+      in: query
+      value: $inputs.apiKey
+    - name: vat_number
+      in: query
+      value: $inputs.vatNumber
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      isValid: $response.body#/is_valid
+      countryCode: $response.body#/country/code
+      companyName: $response.body#/company/name
+    onSuccess:
+    - name: vatValid
+      type: goto
+      stepId: getRates
+      criteria:
+      - context: $response.body
+        condition: $.is_valid == true
+        type: jsonpath
+    - name: vatInvalid
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.is_valid == false
+        type: jsonpath
+  - stepId: getRates
+    description: >-
+      Retrieve the VAT rates for the country resolved from the validated VAT
+      number.
+    operationId: getVATRates
+    parameters:
+    - name: api_key
+      in: query
+      value: $inputs.apiKey
+    - name: country_code
+      in: query
+      value: $steps.validateVat.outputs.countryCode
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      countryName: $response.body#/country_name
+  - stepId: calculateVat
+    description: >-
+      Calculate the VAT due on the supplied amount for the resolved country.
+    operationId: calculateVAT
+    parameters:
+    - name: api_key
+      in: query
+      value: $inputs.apiKey
+    - name: amount
+      in: query
+      value: $inputs.amount
+    - name: country_code
+      in: query
+      value: $steps.validateVat.outputs.countryCode
+    - name: is_vat_incl
+      in: query
+      value: $inputs.isVatIncl
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      vatCountryName: $response.body#/country_name
+  outputs:
+    isValid: $steps.validateVat.outputs.isValid
+    countryCode: $steps.validateVat.outputs.countryCode
+    countryName: $steps.getRates.outputs.countryName

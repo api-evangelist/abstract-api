@@ -1,0 +1,101 @@
+arazzo: 1.0.1
+info:
+  title: Abstract API Phone Validation to Local Time
+  summary: Validate a phone number, then resolve the local time of its region.
+  description: >-
+    A contact-timing flow that validates a phone number with the Phone
+    Intelligence API for carrier, line type, and region, and branches: when the
+    number is invalid it ends with the verdict, and when it is valid it uses the
+    parsed location to look up the current local time so outreach can be timed
+    politely. Every step inlines the api_key query parameter and request so the
+    flow reads and runs without opening the underlying OpenAPI descriptions.
+  version: 1.0.0
+sourceDescriptions:
+- name: phoneIntelligenceApi
+  url: ../openapi/abstract-api-phone-intelligence.yaml
+  type: openapi
+- name: timezonesApi
+  url: ../openapi/abstract-api-timezones.yaml
+  type: openapi
+workflows:
+- workflowId: phone-to-timezone
+  summary: Validate a phone number and resolve the local time of its location.
+  description: >-
+    Validates a phone number and, for a valid number, branches to a current-time
+    lookup keyed on the parsed location so the recipient's local time is known
+    before contact.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - phone
+    properties:
+      apiKey:
+        type: string
+        description: Abstract API key valid for Phone Intelligence and Timezones.
+      phone:
+        type: string
+        description: The phone number to validate, ideally in E.164 format.
+      country:
+        type: string
+        description: Optional ISO country code hint for phone numbers in local format.
+  steps:
+  - stepId: validatePhone
+    description: >-
+      Validate the phone number and retrieve carrier, line type, and parsed
+      location data.
+    operationId: getPhoneIntelligence
+    parameters:
+    - name: api_key
+      in: query
+      value: $inputs.apiKey
+    - name: phone
+      in: query
+      value: $inputs.phone
+    - name: country
+      in: query
+      value: $inputs.country
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      valid: $response.body#/valid
+      location: $response.body#/location
+      carrier: $response.body#/carrier
+      lineType: $response.body#/type
+    onSuccess:
+    - name: phoneValid
+      type: goto
+      stepId: getLocalTime
+      criteria:
+      - context: $response.body
+        condition: $.valid == true
+        type: jsonpath
+    - name: phoneInvalid
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.valid == false
+        type: jsonpath
+  - stepId: getLocalTime
+    description: >-
+      Resolve the current local time for the location parsed from the validated
+      phone number.
+    operationId: getCurrentTime
+    parameters:
+    - name: api_key
+      in: query
+      value: $inputs.apiKey
+    - name: location
+      in: query
+      value: $steps.validatePhone.outputs.location
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      datetime: $response.body#/datetime
+      timezoneName: $response.body#/timezone_name
+      gmtOffset: $response.body#/gmt_offset
+  outputs:
+    valid: $steps.validatePhone.outputs.valid
+    location: $steps.validatePhone.outputs.location
+    localDatetime: $steps.getLocalTime.outputs.datetime
+    timezoneName: $steps.getLocalTime.outputs.timezoneName

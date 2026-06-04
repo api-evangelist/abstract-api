@@ -1,0 +1,87 @@
+arazzo: 1.0.1
+info:
+  title: Abstract API IP Geolocation to Currency Conversion
+  summary: Geolocate an IP, read its local currency, then convert a price into it.
+  description: >-
+    A localized-pricing flow that geolocates an IP address to determine the
+    visitor's country and local currency, then converts a base price into that
+    currency at the live exchange rate. This powers showing prices in a
+    visitor's own currency based on their IP. Every step inlines the api_key
+    query parameter and request so the flow reads and runs without opening the
+    underlying OpenAPI descriptions.
+  version: 1.0.0
+sourceDescriptions:
+- name: ipGeolocationApi
+  url: ../openapi/abstract-api-ip-geolocation.yaml
+  type: openapi
+- name: exchangeRatesApi
+  url: ../openapi/abstract-api-exchange-rates.yaml
+  type: openapi
+workflows:
+- workflowId: ip-geolocation-to-currency-conversion
+  summary: Resolve a visitor's local currency from their IP and convert a price into it.
+  description: >-
+    Geolocates an IP to its local currency code and converts a base-currency
+    amount into that currency at the live rate for localized price display.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - ipAddress
+    - baseCurrency
+    - baseAmount
+    properties:
+      apiKey:
+        type: string
+        description: Abstract API key valid for IP Geolocation and Exchange Rates.
+      ipAddress:
+        type: string
+        description: The visitor IP address to geolocate.
+      baseCurrency:
+        type: string
+        description: The base currency ISO code the price is quoted in (e.g. USD).
+      baseAmount:
+        type: number
+        description: The amount in the base currency to convert into the local currency.
+  steps:
+  - stepId: geolocateIp
+    description: >-
+      Geolocate the IP to determine the visitor's country and local currency
+      code.
+    operationId: getIPGeolocation
+    parameters:
+    - name: api_key
+      in: query
+      value: $inputs.apiKey
+    - name: ip_address
+      in: query
+      value: $inputs.ipAddress
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      countryCode: $response.body#/country_code
+      currencyCode: $response.body#/currency/currency_code
+  - stepId: convertToLocalCurrency
+    description: >-
+      Convert the base amount into the visitor's local currency at the live rate.
+    operationId: convertCurrency
+    parameters:
+    - name: api_key
+      in: query
+      value: $inputs.apiKey
+    - name: base
+      in: query
+      value: $inputs.baseCurrency
+    - name: target
+      in: query
+      value: $steps.geolocateIp.outputs.currencyCode
+    - name: base_amount
+      in: query
+      value: $inputs.baseAmount
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      convertedBase: $response.body#/base
+  outputs:
+    countryCode: $steps.geolocateIp.outputs.countryCode
+    localCurrency: $steps.geolocateIp.outputs.currencyCode

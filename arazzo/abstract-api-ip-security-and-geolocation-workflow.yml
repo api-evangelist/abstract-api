@@ -1,0 +1,99 @@
+arazzo: 1.0.1
+info:
+  title: Abstract API IP Security and Geolocation
+  summary: Screen an IP for VPN/proxy/Tor risk, then geolocate clean traffic.
+  description: >-
+    A fraud-screening flow that first analyzes an IP address with the IP
+    Intelligence API for VPN, proxy, Tor, and abuse signals, and branches: when
+    the IP is flagged as risky it ends with the security verdict, and when it is
+    clean it proceeds to the IP Geolocation API for detailed city, region, and
+    timezone data. Every step inlines the api_key query parameter and request so
+    the flow reads and runs without opening the underlying OpenAPI descriptions.
+  version: 1.0.0
+sourceDescriptions:
+- name: ipIntelligenceApi
+  url: ../openapi/abstract-api-ip-intelligence.yaml
+  type: openapi
+- name: ipGeolocationApi
+  url: ../openapi/abstract-api-ip-geolocation.yaml
+  type: openapi
+workflows:
+- workflowId: ip-security-and-geolocation
+  summary: Security-screen an IP and geolocate it only when it is not flagged.
+  description: >-
+    Runs an IP through security intelligence for anonymizer and abuse signals,
+    then branches to a detailed geolocation lookup for traffic that passes the
+    screen.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - ipAddress
+    properties:
+      apiKey:
+        type: string
+        description: Abstract API key valid for IP Intelligence and IP Geolocation.
+      ipAddress:
+        type: string
+        description: The IPv4 or IPv6 address to screen and geolocate.
+  steps:
+  - stepId: screenIp
+    description: >-
+      Analyze the IP for VPN, proxy, Tor, and abuse signals using the IP
+      Intelligence API.
+    operationId: getIPIntelligence
+    parameters:
+    - name: api_key
+      in: query
+      value: $inputs.apiKey
+    - name: ip_address
+      in: query
+      value: $inputs.ipAddress
+    - name: fields
+      in: query
+      value: security,location
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      isVpn: $response.body#/security/is_vpn
+      isProxy: $response.body#/security/is_proxy
+      isTor: $response.body#/security/is_tor
+      isAbuse: $response.body#/security/is_abuse
+    onSuccess:
+    - name: ipClean
+      type: goto
+      stepId: geolocateIp
+      criteria:
+      - context: $response.body
+        condition: $.security.is_vpn == false && $.security.is_proxy == false && $.security.is_tor == false
+        type: jsonpath
+    - name: ipFlagged
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.security.is_vpn == true || $.security.is_proxy == true || $.security.is_tor == true
+        type: jsonpath
+  - stepId: geolocateIp
+    description: >-
+      Retrieve detailed city, region, country, and timezone data for the IP that
+      passed the security screen.
+    operationId: getIPGeolocation
+    parameters:
+    - name: api_key
+      in: query
+      value: $inputs.apiKey
+    - name: ip_address
+      in: query
+      value: $inputs.ipAddress
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      city: $response.body#/city
+      region: $response.body#/region
+      countryCode: $response.body#/country_code
+      timezoneName: $response.body#/timezone/name
+  outputs:
+    isVpn: $steps.screenIp.outputs.isVpn
+    isProxy: $steps.screenIp.outputs.isProxy
+    city: $steps.geolocateIp.outputs.city
+    countryCode: $steps.geolocateIp.outputs.countryCode

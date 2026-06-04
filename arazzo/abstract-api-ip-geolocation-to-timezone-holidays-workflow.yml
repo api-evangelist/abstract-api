@@ -1,0 +1,110 @@
+arazzo: 1.0.1
+info:
+  title: Abstract API IP Geolocation to Timezone and Holidays
+  summary: Geolocate an IP, get its local time, and list the country's public holidays.
+  description: >-
+    A localization flow that geolocates an IP address to coordinates, timezone,
+    and country, then uses those coordinates to fetch the current local time and
+    finally pulls the public holidays for the resolved country and year. This is
+    the backbone of an "personalize by visitor IP" experience. Every step inlines
+    the api_key query parameter and request so the flow reads and runs without
+    opening the underlying OpenAPI descriptions.
+  version: 1.0.0
+sourceDescriptions:
+- name: ipGeolocationApi
+  url: ../openapi/abstract-api-ip-geolocation.yaml
+  type: openapi
+- name: timezonesApi
+  url: ../openapi/abstract-api-timezones.yaml
+  type: openapi
+- name: publicHolidaysApi
+  url: ../openapi/abstract-api-public-holidays.yaml
+  type: openapi
+workflows:
+- workflowId: ip-geolocation-to-timezone-holidays
+  summary: Resolve location, local time, and holidays from a single IP address.
+  description: >-
+    Geolocates an IP to coordinates and country, reads the current local time at
+    those coordinates, and lists the public holidays for the resolved country in
+    the requested year.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - ipAddress
+    - year
+    properties:
+      apiKey:
+        type: string
+        description: Abstract API key valid for IP Geolocation, Timezones, and Public Holidays.
+      ipAddress:
+        type: string
+        description: The IPv4 or IPv6 address to geolocate.
+      year:
+        type: integer
+        description: The four-digit year to list public holidays for.
+  steps:
+  - stepId: geolocateIp
+    description: >-
+      Geolocate the IP address to retrieve country code, coordinates, and the
+      IANA timezone name.
+    operationId: getIPGeolocation
+    parameters:
+    - name: api_key
+      in: query
+      value: $inputs.apiKey
+    - name: ip_address
+      in: query
+      value: $inputs.ipAddress
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      countryCode: $response.body#/country_code
+      latitude: $response.body#/latitude
+      longitude: $response.body#/longitude
+      timezoneName: $response.body#/timezone/name
+  - stepId: getLocalTime
+    description: >-
+      Resolve the current local time at the coordinates returned by the
+      geolocation step.
+    operationId: getCurrentTime
+    parameters:
+    - name: api_key
+      in: query
+      value: $inputs.apiKey
+    - name: latitude
+      in: query
+      value: $steps.geolocateIp.outputs.latitude
+    - name: longitude
+      in: query
+      value: $steps.geolocateIp.outputs.longitude
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      datetime: $response.body#/datetime
+      gmtOffset: $response.body#/gmt_offset
+      timezoneName: $response.body#/timezone_name
+  - stepId: getHolidays
+    description: >-
+      List the public holidays for the country resolved from the IP address in
+      the requested year.
+    operationId: getPublicHolidays
+    parameters:
+    - name: api_key
+      in: query
+      value: $inputs.apiKey
+    - name: country
+      in: query
+      value: $steps.geolocateIp.outputs.countryCode
+    - name: year
+      in: query
+      value: $inputs.year
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstHolidayName: $response.body#/0/name
+  outputs:
+    countryCode: $steps.geolocateIp.outputs.countryCode
+    localDatetime: $steps.getLocalTime.outputs.datetime
+    timezoneName: $steps.getLocalTime.outputs.timezoneName
+    firstHolidayName: $steps.getHolidays.outputs.firstHolidayName
