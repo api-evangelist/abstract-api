@@ -334,6 +334,8 @@ apis:
       images.
 
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/abstract-api/overview
   - type: ArazzoWorkflows
     url: arazzo/
     workflows:
