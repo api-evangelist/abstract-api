@@ -1,0 +1,313 @@
+{
+  "info": {
+    "_postman_id": "d6bbc808-22bc-4978-8e22-764367b03765",
+    "name": "Abstract API - Company Enrichment API",
+    "description": "Retrieve comprehensive details about businesses using their domain or email address, including name, logo, headcount, location, industry, and more.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:02:33.000Z",
+    "updatedAt": "2026-06-05T15:02:33.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d6bbc808-22bc-4978-8e22-764367b03765"
+  },
+  "item": [
+    {
+      "name": "/",
+      "item": [
+        {
+          "name": "Abstract API Get Company Enrichment",
+          "id": "7400ee61-a4fb-49c1-9b64-c227743f827b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/?api_key=<string>&domain=<string>&email=<email>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "query": [
+                {
+                  "description": "(Required) Your unique API key for the Company Enrichment API.",
+                  "key": "api_key",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Company domain name to enrich (e.g., stripe.com). Use domain or email.",
+                  "key": "domain",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Business email address to derive the company domain from. Use domain or email.",
+                  "key": "email",
+                  "value": "<email>"
+                }
+              ]
+            },
+            "description": "Retrieve company data including name, logo, description, industry, headcount, and location using a domain name or email."
+          },
+          "response": [
+            {
+              "id": "aab625ca-277f-478d-8f1e-358bd6559e30",
+              "name": "Company enrichment data",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?api_key=<API Key>&domain=<string>&email=<email>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the Company Enrichment API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "Company domain name to enrich (e.g., stripe.com). Use domain or email.",
+                      "key": "domain",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Business email address to derive the company domain from. Use domain or email.",
+                      "key": "email",
+                      "value": "<email>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"name\": \"<string>\",\n  \"domain\": \"<string>\",\n  \"country\": \"<string>\",\n  \"locality\": \"<string>\",\n  \"region\": \"<string>\",\n  \"linkedin_url\": \"<uri>\",\n  \"logo\": \"<uri>\",\n  \"year_founded\": \"<integer>\",\n  \"industry\": \"<string>\",\n  \"employees_count\": \"<integer>\",\n  \"description\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:34.000Z",
+              "updatedAt": "2026-06-05T15:02:34.000Z",
+              "uid": "35240-aab625ca-277f-478d-8f1e-358bd6559e30"
+            },
+            {
+              "id": "0124193a-19cf-4749-a45e-a08b06da4d09",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?api_key=<API Key>&domain=<string>&email=<email>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the Company Enrichment API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "Company domain name to enrich (e.g., stripe.com). Use domain or email.",
+                      "key": "domain",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Business email address to derive the company domain from. Use domain or email.",
+                      "key": "email",
+                      "value": "<email>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:34.000Z",
+              "updatedAt": "2026-06-05T15:02:34.000Z",
+              "uid": "35240-0124193a-19cf-4749-a45e-a08b06da4d09"
+            },
+            {
+              "id": "85f3e71d-8e7e-4930-b790-0efe8e701a59",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?api_key=<API Key>&domain=<string>&email=<email>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the Company Enrichment API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "Company domain name to enrich (e.g., stripe.com). Use domain or email.",
+                      "key": "domain",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Business email address to derive the company domain from. Use domain or email.",
+                      "key": "email",
+                      "value": "<email>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:34.000Z",
+              "updatedAt": "2026-06-05T15:02:34.000Z",
+              "uid": "35240-85f3e71d-8e7e-4930-b790-0efe8e701a59"
+            },
+            {
+              "id": "6e66216d-d4b6-4291-94fb-53605fb4c11e",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?api_key=<API Key>&domain=<string>&email=<email>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the Company Enrichment API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "Company domain name to enrich (e.g., stripe.com). Use domain or email.",
+                      "key": "domain",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Business email address to derive the company domain from. Use domain or email.",
+                      "key": "email",
+                      "value": "<email>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:34.000Z",
+              "updatedAt": "2026-06-05T15:02:34.000Z",
+              "uid": "35240-6e66216d-d4b6-4291-94fb-53605fb4c11e"
+            }
+          ],
+          "createdAt": "2026-06-05T15:02:34.000Z",
+          "updatedAt": "2026-06-05T15:02:34.000Z",
+          "uid": "35240-7400ee61-a4fb-49c1-9b64-c227743f827b"
+        }
+      ],
+      "id": "9c6b9c3b-dff2-458b-a44b-f315c1782b8a",
+      "createdAt": "2026-06-05T15:02:34.000Z",
+      "updatedAt": "2026-06-05T15:02:34.000Z",
+      "uid": "35240-9c6b9c3b-dff2-458b-a44b-f315c1782b8a"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "query",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://companyenrichment.abstractapi.com/v1"
+    }
+  ]
+}

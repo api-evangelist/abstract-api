@@ -1,0 +1,737 @@
+{
+  "info": {
+    "_postman_id": "d716c61f-e5e1-447a-94f2-28ca0e50a263",
+    "name": "Abstract API - Exchange Rates API",
+    "description": "Look up the latest exchange rates for 80+ currencies, convert between currencies, and retrieve historical exchange rate data using ISO 4217 currency codes.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:02:34.000Z",
+    "updatedAt": "2026-06-05T15:02:35.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d716c61f-e5e1-447a-94f2-28ca0e50a263"
+  },
+  "item": [
+    {
+      "name": "live",
+      "item": [
+        {
+          "name": "Abstract API Get Live Exchange Rates",
+          "id": "e023ceeb-e0e4-43ff-ba43-58b0ec842628",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/live?api_key=<string>&base=<string>&target=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "live"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Your unique API key for the Exchange Rates API.",
+                  "key": "api_key",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) Base currency ISO 4217 code.",
+                  "key": "base",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Target currency or comma-separated list of currencies. Returns all if omitted.",
+                  "key": "target",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Get the latest exchange rates for one or more target currencies relative to a base currency."
+          },
+          "response": [
+            {
+              "id": "ff00157a-5291-4403-bb88-8bdc13f2e533",
+              "name": "Live exchange rates",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/live?api_key=<API Key>&base=<string>&target=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "live"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the Exchange Rates API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) Base currency ISO 4217 code.",
+                      "key": "base",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Target currency or comma-separated list of currencies. Returns all if omitted.",
+                      "key": "target",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"base\": \"<string>\",\n  \"last_updated\": \"<integer>\",\n  \"exchange_rates\": {\n    \"sint_c\": \"<number>\"\n  }\n}",
+              "createdAt": "2026-06-05T15:02:35.000Z",
+              "updatedAt": "2026-06-05T15:02:35.000Z",
+              "uid": "35240-ff00157a-5291-4403-bb88-8bdc13f2e533"
+            },
+            {
+              "id": "9960413f-ce97-40f7-9144-6d6d88419803",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/live?api_key=<API Key>&base=<string>&target=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "live"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the Exchange Rates API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) Base currency ISO 4217 code.",
+                      "key": "base",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Target currency or comma-separated list of currencies. Returns all if omitted.",
+                      "key": "target",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:35.000Z",
+              "updatedAt": "2026-06-05T15:02:35.000Z",
+              "uid": "35240-9960413f-ce97-40f7-9144-6d6d88419803"
+            },
+            {
+              "id": "c3cc6b91-a467-450b-9eb0-3fca49703dfd",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/live?api_key=<API Key>&base=<string>&target=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "live"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the Exchange Rates API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) Base currency ISO 4217 code.",
+                      "key": "base",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Target currency or comma-separated list of currencies. Returns all if omitted.",
+                      "key": "target",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:35.000Z",
+              "updatedAt": "2026-06-05T15:02:35.000Z",
+              "uid": "35240-c3cc6b91-a467-450b-9eb0-3fca49703dfd"
+            }
+          ],
+          "createdAt": "2026-06-05T15:02:35.000Z",
+          "updatedAt": "2026-06-05T15:02:35.000Z",
+          "uid": "35240-e023ceeb-e0e4-43ff-ba43-58b0ec842628"
+        }
+      ],
+      "id": "de1eb69b-035d-4b3b-a183-28d18907eaab",
+      "createdAt": "2026-06-05T15:02:35.000Z",
+      "updatedAt": "2026-06-05T15:02:35.000Z",
+      "uid": "35240-de1eb69b-035d-4b3b-a183-28d18907eaab"
+    },
+    {
+      "name": "convert",
+      "item": [
+        {
+          "name": "Abstract API Convert Currency",
+          "id": "76d764c8-3357-487a-9a18-c954b5967bfe",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/convert?api_key=<string>&base=<string>&target=<string>&base_amount=<number>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "convert"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Your unique API key.",
+                  "key": "api_key",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) Source currency ISO 4217 code.",
+                  "key": "base",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) Target currency ISO 4217 code.",
+                  "key": "target",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) Amount to convert.",
+                  "key": "base_amount",
+                  "value": "<number>"
+                }
+              ]
+            },
+            "description": "Convert an amount from one currency to another using current exchange rates."
+          },
+          "response": [
+            {
+              "id": "bc2941c3-59c3-4991-b13d-9d6473b89a07",
+              "name": "Currency conversion result",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/convert?api_key=<API Key>&base=<string>&target=<string>&base_amount=<number>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "convert"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) Source currency ISO 4217 code.",
+                      "key": "base",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Target currency ISO 4217 code.",
+                      "key": "target",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Amount to convert.",
+                      "key": "base_amount",
+                      "value": "<number>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"base_currency\": \"<string>\",\n  \"target_currency\": \"<string>\",\n  \"base_amount\": \"<number>\",\n  \"converted_amount\": \"<number>\"\n}",
+              "createdAt": "2026-06-05T15:02:35.000Z",
+              "updatedAt": "2026-06-05T15:02:35.000Z",
+              "uid": "35240-bc2941c3-59c3-4991-b13d-9d6473b89a07"
+            },
+            {
+              "id": "dcf65065-e528-47d2-8994-f215e2ec253b",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/convert?api_key=<API Key>&base=<string>&target=<string>&base_amount=<number>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "convert"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) Source currency ISO 4217 code.",
+                      "key": "base",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Target currency ISO 4217 code.",
+                      "key": "target",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Amount to convert.",
+                      "key": "base_amount",
+                      "value": "<number>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:35.000Z",
+              "updatedAt": "2026-06-05T15:02:35.000Z",
+              "uid": "35240-dcf65065-e528-47d2-8994-f215e2ec253b"
+            },
+            {
+              "id": "dd92d49b-b7fd-4b99-9536-b044c365134e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/convert?api_key=<API Key>&base=<string>&target=<string>&base_amount=<number>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "convert"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) Source currency ISO 4217 code.",
+                      "key": "base",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Target currency ISO 4217 code.",
+                      "key": "target",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Amount to convert.",
+                      "key": "base_amount",
+                      "value": "<number>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:35.000Z",
+              "updatedAt": "2026-06-05T15:02:35.000Z",
+              "uid": "35240-dd92d49b-b7fd-4b99-9536-b044c365134e"
+            }
+          ],
+          "createdAt": "2026-06-05T15:02:35.000Z",
+          "updatedAt": "2026-06-05T15:02:35.000Z",
+          "uid": "35240-76d764c8-3357-487a-9a18-c954b5967bfe"
+        }
+      ],
+      "id": "ab14a5d9-3938-4579-91c3-ea469774a33a",
+      "createdAt": "2026-06-05T15:02:35.000Z",
+      "updatedAt": "2026-06-05T15:02:35.000Z",
+      "uid": "35240-ab14a5d9-3938-4579-91c3-ea469774a33a"
+    },
+    {
+      "name": "historical",
+      "item": [
+        {
+          "name": "Abstract API Get Historical Exchange Rates",
+          "id": "51ca248b-8301-4752-b8fd-40044a2df61f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/historical?api_key=<string>&base=<string>&target=<string>&date=<date>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "historical"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Your unique API key.",
+                  "key": "api_key",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) Base currency ISO 4217 code.",
+                  "key": "base",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Target currency or comma-separated list.",
+                  "key": "target",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) Date for historical rates in YYYY-MM-DD format.",
+                  "key": "date",
+                  "value": "<date>"
+                }
+              ]
+            },
+            "description": "Retrieve historical exchange rates for a specific date."
+          },
+          "response": [
+            {
+              "id": "f2bd563c-a0a0-4736-b553-99011070857f",
+              "name": "Historical exchange rates",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/historical?api_key=<API Key>&base=<string>&target=<string>&date=<date>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "historical"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) Base currency ISO 4217 code.",
+                      "key": "base",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Target currency or comma-separated list.",
+                      "key": "target",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Date for historical rates in YYYY-MM-DD format.",
+                      "key": "date",
+                      "value": "<date>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"base\": \"<string>\",\n  \"date\": \"<date>\",\n  \"exchange_rates\": {\n    \"qui_e\": \"<number>\",\n    \"qui_17f\": \"<number>\"\n  }\n}",
+              "createdAt": "2026-06-05T15:02:35.000Z",
+              "updatedAt": "2026-06-05T15:02:35.000Z",
+              "uid": "35240-f2bd563c-a0a0-4736-b553-99011070857f"
+            },
+            {
+              "id": "c03e4a61-d3d9-4b9e-8c4c-f13d891c749f",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/historical?api_key=<API Key>&base=<string>&target=<string>&date=<date>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "historical"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) Base currency ISO 4217 code.",
+                      "key": "base",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Target currency or comma-separated list.",
+                      "key": "target",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Date for historical rates in YYYY-MM-DD format.",
+                      "key": "date",
+                      "value": "<date>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:35.000Z",
+              "updatedAt": "2026-06-05T15:02:35.000Z",
+              "uid": "35240-c03e4a61-d3d9-4b9e-8c4c-f13d891c749f"
+            },
+            {
+              "id": "7faf112b-82b3-48bf-a6e9-cf84eb6c434e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/historical?api_key=<API Key>&base=<string>&target=<string>&date=<date>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "historical"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) Base currency ISO 4217 code.",
+                      "key": "base",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Target currency or comma-separated list.",
+                      "key": "target",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Date for historical rates in YYYY-MM-DD format.",
+                      "key": "date",
+                      "value": "<date>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:35.000Z",
+              "updatedAt": "2026-06-05T15:02:35.000Z",
+              "uid": "35240-7faf112b-82b3-48bf-a6e9-cf84eb6c434e"
+            }
+          ],
+          "createdAt": "2026-06-05T15:02:35.000Z",
+          "updatedAt": "2026-06-05T15:02:35.000Z",
+          "uid": "35240-51ca248b-8301-4752-b8fd-40044a2df61f"
+        }
+      ],
+      "id": "c36992c9-9699-4a40-8be9-d1e0f25b5be7",
+      "createdAt": "2026-06-05T15:02:35.000Z",
+      "updatedAt": "2026-06-05T15:02:35.000Z",
+      "uid": "35240-c36992c9-9699-4a40-8be9-d1e0f25b5be7"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "query",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://exchange-rates.abstractapi.com/v1"
+    }
+  ]
+}

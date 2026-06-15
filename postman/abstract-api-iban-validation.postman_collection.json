@@ -1,0 +1,239 @@
+{
+  "info": {
+    "_postman_id": "b4015b3d-1279-49da-a0ea-bca5c0992529",
+    "name": "Abstract API - IBAN Validation API",
+    "description": "Determine the validity and details of International Bank Account Numbers (IBANs), including bank name, account type, and country code.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:02:39.000Z",
+    "updatedAt": "2026-06-05T15:02:39.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b4015b3d-1279-49da-a0ea-bca5c0992529"
+  },
+  "item": [
+    {
+      "name": "/",
+      "item": [
+        {
+          "name": "Abstract API Validate IBAN",
+          "id": "f9fdc309-0b3c-4f47-a82a-5751341ece7b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/?api_key=<string>&iban=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "query": [
+                {
+                  "description": "(Required) Your unique API key for the IBAN Validation API.",
+                  "key": "api_key",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) The IBAN to validate.",
+                  "key": "iban",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Validate an IBAN number and retrieve bank details, account type, and country information."
+          },
+          "response": [
+            {
+              "id": "38dab47b-ae02-4e3c-8cf3-1e7d70b6aad4",
+              "name": "IBAN validation result",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?api_key=<API Key>&iban=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the IBAN Validation API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) The IBAN to validate.",
+                      "key": "iban",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"iban\": \"<string>\",\n  \"is_valid\": \"<boolean>\",\n  \"country\": {\n    \"code\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"bank\": {\n    \"bank_name\": \"<string>\",\n    \"bank_code\": \"<string>\",\n    \"bic\": \"<string>\"\n  },\n  \"account_number\": \"<string>\",\n  \"check_digits\": \"<string>\",\n  \"sepa_member\": \"<boolean>\"\n}",
+              "createdAt": "2026-06-05T15:02:40.000Z",
+              "updatedAt": "2026-06-05T15:02:40.000Z",
+              "uid": "35240-38dab47b-ae02-4e3c-8cf3-1e7d70b6aad4"
+            },
+            {
+              "id": "e31e8112-9eb0-46bd-838b-f04dace00471",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?api_key=<API Key>&iban=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the IBAN Validation API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) The IBAN to validate.",
+                      "key": "iban",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:40.000Z",
+              "updatedAt": "2026-06-05T15:02:40.000Z",
+              "uid": "35240-e31e8112-9eb0-46bd-838b-f04dace00471"
+            },
+            {
+              "id": "42577baf-f73e-400f-a7eb-f378a4d4f2af",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?api_key=<API Key>&iban=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the IBAN Validation API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) The IBAN to validate.",
+                      "key": "iban",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:40.000Z",
+              "updatedAt": "2026-06-05T15:02:40.000Z",
+              "uid": "35240-42577baf-f73e-400f-a7eb-f378a4d4f2af"
+            }
+          ],
+          "createdAt": "2026-06-05T15:02:40.000Z",
+          "updatedAt": "2026-06-05T15:02:40.000Z",
+          "uid": "35240-f9fdc309-0b3c-4f47-a82a-5751341ece7b"
+        }
+      ],
+      "id": "f1d64693-239f-47b8-952a-c0a4fb7e3cc1",
+      "createdAt": "2026-06-05T15:02:40.000Z",
+      "updatedAt": "2026-06-05T15:02:40.000Z",
+      "uid": "35240-f1d64693-239f-47b8-952a-c0a4fb7e3cc1"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "query",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://ibanvalidation.abstractapi.com/v1"
+    }
+  ]
+}

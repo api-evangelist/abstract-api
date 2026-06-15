@@ -1,0 +1,339 @@
+{
+  "info": {
+    "_postman_id": "34a48534-0ed9-4a2f-b547-4d957ff2cf3b",
+    "name": "Abstract API - Avatars API",
+    "description": "Create highly customizable avatar images using a person's name or initials. Supports color, font, and size customization for user profile images.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:02:43.000Z",
+    "updatedAt": "2026-06-05T15:02:44.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-34a48534-0ed9-4a2f-b547-4d957ff2cf3b"
+  },
+  "item": [
+    {
+      "name": "/",
+      "item": [
+        {
+          "name": "Abstract API Generate Avatar",
+          "id": "35f3c2f8-a064-4f3e-9de8-6cc205396c8b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "image/png"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/?api_key=<string>&name=<string>&size=<integer>&color=<string>&background_color=<string>&font_size=<number>&char_count=<integer>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "query": [
+                {
+                  "description": "(Required) Your unique API key for the Avatars API.",
+                  "key": "api_key",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) Full name or initials to use for the avatar.",
+                  "key": "name",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Size of the avatar in pixels (square). Defaults to 128.",
+                  "key": "size",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Text color as a hex code (without",
+                  "key": "color",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Background color as a hex code (without",
+                  "key": "background_color",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Font size as a fraction of the avatar size (0.1 to 0.9).",
+                  "key": "font_size",
+                  "value": "<number>"
+                },
+                {
+                  "description": "Number of characters to use from the name. Defaults to 2.",
+                  "key": "char_count",
+                  "value": "<integer>"
+                }
+              ]
+            },
+            "description": "Generate a customizable avatar image using a person's name or initials with configurable colors, fonts, and sizes."
+          },
+          "response": [
+            {
+              "id": "73fa073b-7053-46f4-8065-6ac02e7f2d1f",
+              "name": "Avatar image",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "image/png"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?api_key=<API Key>&name=<string>&size=<integer>&color=<string>&background_color=<string>&font_size=<number>&char_count=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the Avatars API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) Full name or initials to use for the avatar.",
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Size of the avatar in pixels (square). Defaults to 128.",
+                      "key": "size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Text color as a hex code (without",
+                      "key": "color",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Background color as a hex code (without",
+                      "key": "background_color",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Font size as a fraction of the avatar size (0.1 to 0.9).",
+                      "key": "font_size",
+                      "value": "<number>"
+                    },
+                    {
+                      "description": "Number of characters to use from the name. Defaults to 2.",
+                      "key": "char_count",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "image/png"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "<binary>",
+              "createdAt": "2026-06-05T15:02:44.000Z",
+              "updatedAt": "2026-06-05T15:02:44.000Z",
+              "uid": "35240-73fa073b-7053-46f4-8065-6ac02e7f2d1f"
+            },
+            {
+              "id": "79b7e1b7-39eb-438e-b248-6a0c60a9d20b",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?api_key=<API Key>&name=<string>&size=<integer>&color=<string>&background_color=<string>&font_size=<number>&char_count=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the Avatars API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) Full name or initials to use for the avatar.",
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Size of the avatar in pixels (square). Defaults to 128.",
+                      "key": "size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Text color as a hex code (without",
+                      "key": "color",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Background color as a hex code (without",
+                      "key": "background_color",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Font size as a fraction of the avatar size (0.1 to 0.9).",
+                      "key": "font_size",
+                      "value": "<number>"
+                    },
+                    {
+                      "description": "Number of characters to use from the name. Defaults to 2.",
+                      "key": "char_count",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:44.000Z",
+              "updatedAt": "2026-06-05T15:02:44.000Z",
+              "uid": "35240-79b7e1b7-39eb-438e-b248-6a0c60a9d20b"
+            },
+            {
+              "id": "94fc6d32-aed9-4be8-b88d-f584bba74ae0",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?api_key=<API Key>&name=<string>&size=<integer>&color=<string>&background_color=<string>&font_size=<number>&char_count=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the Avatars API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) Full name or initials to use for the avatar.",
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Size of the avatar in pixels (square). Defaults to 128.",
+                      "key": "size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Text color as a hex code (without",
+                      "key": "color",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Background color as a hex code (without",
+                      "key": "background_color",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Font size as a fraction of the avatar size (0.1 to 0.9).",
+                      "key": "font_size",
+                      "value": "<number>"
+                    },
+                    {
+                      "description": "Number of characters to use from the name. Defaults to 2.",
+                      "key": "char_count",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:44.000Z",
+              "updatedAt": "2026-06-05T15:02:44.000Z",
+              "uid": "35240-94fc6d32-aed9-4be8-b88d-f584bba74ae0"
+            }
+          ],
+          "createdAt": "2026-06-05T15:02:44.000Z",
+          "updatedAt": "2026-06-05T15:02:44.000Z",
+          "uid": "35240-35f3c2f8-a064-4f3e-9de8-6cc205396c8b"
+        }
+      ],
+      "id": "53d95c33-890c-4092-89a5-c2808224baab",
+      "createdAt": "2026-06-05T15:02:44.000Z",
+      "updatedAt": "2026-06-05T15:02:44.000Z",
+      "uid": "35240-53d95c33-890c-4092-89a5-c2808224baab"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "query",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://avatars.abstractapi.com/v1"
+    }
+  ]
+}

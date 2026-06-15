@@ -1,0 +1,288 @@
+{
+  "info": {
+    "_postman_id": "7e46c9e5-f2ac-47b5-b3c2-729c7706cb5a",
+    "name": "Abstract API - Email Reputation API",
+    "description": "Validate email addresses for deliverability, detect disposable or risky domains, verify SMTP/MX records, and enrich email data with sender information, breach history, and risk scoring.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:02:29.000Z",
+    "updatedAt": "2026-06-05T15:02:29.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7e46c9e5-f2ac-47b5-b3c2-729c7706cb5a"
+  },
+  "item": [
+    {
+      "name": "/",
+      "item": [
+        {
+          "name": "Abstract API Get Email Reputation",
+          "id": "9e5349f4-ebe2-4999-b9ca-8479a2b7c9a8",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/?api_key=<string>&email=<email>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "query": [
+                {
+                  "description": "(Required) Your unique API key for the Email Reputation API.",
+                  "key": "api_key",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) The email address to validate and analyze.",
+                  "key": "email",
+                  "value": "<email>"
+                }
+              ]
+            },
+            "description": "Validate an email address and retrieve reputation, deliverability, and enrichment data."
+          },
+          "response": [
+            {
+              "id": "b7ce9d05-22e1-4107-a128-ae9ca178729e",
+              "name": "Successful email reputation lookup",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?api_key=<API Key>&email=<email>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the Email Reputation API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) The email address to validate and analyze.",
+                      "key": "email",
+                      "value": "<email>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"email\": \"<email>\",\n  \"deliverability\": {\n    \"status\": \"UNDELIVERABLE\",\n    \"status_detail\": \"<string>\",\n    \"is_format_valid\": \"<boolean>\",\n    \"is_smtp_valid\": \"<boolean>\",\n    \"is_mx_valid\": \"<boolean>\",\n    \"mx_records\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"quality\": {\n    \"score\": \"<float>\",\n    \"is_free_email\": \"<boolean>\",\n    \"is_username_suspicious\": \"<boolean>\",\n    \"is_disposable\": \"<boolean>\",\n    \"is_catchall\": \"<boolean>\",\n    \"is_subaddress\": \"<boolean>\",\n    \"is_role\": \"<boolean>\",\n    \"is_dmarc_enforced\": \"<boolean>\",\n    \"is_spf_strict\": \"<boolean>\",\n    \"minimum_age\": \"<integer>\"\n  },\n  \"sender\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"email_provider_name\": \"<string>\",\n    \"organization_name\": \"<string>\",\n    \"organization_type\": \"<string>\"\n  },\n  \"domain\": {\n    \"domain\": \"<string>\",\n    \"domain_age\": \"<integer>\",\n    \"is_live_site\": \"<boolean>\",\n    \"registrar\": \"<string>\",\n    \"registrar_url\": \"<uri>\",\n    \"date_registered\": \"<date>\",\n    \"date_last_renewed\": \"<date>\",\n    \"date_expires\": \"<date>\",\n    \"is_risky_tld\": \"<boolean>\"\n  },\n  \"risk\": {\n    \"address_risk_status\": \"medium\",\n    \"domain_risk_status\": \"low\"\n  },\n  \"breaches\": {\n    \"total_breaches\": \"<integer>\",\n    \"date_first_breached\": \"<date>\",\n    \"date_last_breached\": \"<date>\",\n    \"breached_domains\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T15:02:29.000Z",
+              "updatedAt": "2026-06-05T15:02:29.000Z",
+              "uid": "35240-b7ce9d05-22e1-4107-a128-ae9ca178729e"
+            },
+            {
+              "id": "27d579fd-db98-4014-863d-875488d9ec4e",
+              "name": "Bad request - missing or invalid parameters",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?api_key=<API Key>&email=<email>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the Email Reputation API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) The email address to validate and analyze.",
+                      "key": "email",
+                      "value": "<email>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:29.000Z",
+              "updatedAt": "2026-06-05T15:02:29.000Z",
+              "uid": "35240-27d579fd-db98-4014-863d-875488d9ec4e"
+            },
+            {
+              "id": "cbf02959-dc48-4d41-8f9c-f62233a44102",
+              "name": "Unauthorized - invalid or missing API key",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?api_key=<API Key>&email=<email>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the Email Reputation API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) The email address to validate and analyze.",
+                      "key": "email",
+                      "value": "<email>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:29.000Z",
+              "updatedAt": "2026-06-05T15:02:29.000Z",
+              "uid": "35240-cbf02959-dc48-4d41-8f9c-f62233a44102"
+            },
+            {
+              "id": "84b649bf-fd11-40e9-b6e8-2b46fb449983",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?api_key=<API Key>&email=<email>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the Email Reputation API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) The email address to validate and analyze.",
+                      "key": "email",
+                      "value": "<email>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:29.000Z",
+              "updatedAt": "2026-06-05T15:02:29.000Z",
+              "uid": "35240-84b649bf-fd11-40e9-b6e8-2b46fb449983"
+            }
+          ],
+          "createdAt": "2026-06-05T15:02:29.000Z",
+          "updatedAt": "2026-06-05T15:02:29.000Z",
+          "uid": "35240-9e5349f4-ebe2-4999-b9ca-8479a2b7c9a8"
+        }
+      ],
+      "id": "aea4a586-c37d-49af-a223-a5f23c422376",
+      "createdAt": "2026-06-05T15:02:29.000Z",
+      "updatedAt": "2026-06-05T15:02:29.000Z",
+      "uid": "35240-aea4a586-c37d-49af-a223-a5f23c422376"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "query",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://emailreputation.abstractapi.com/v1"
+    }
+  ]
+}

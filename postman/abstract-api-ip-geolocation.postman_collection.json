@@ -1,0 +1,313 @@
+{
+  "info": {
+    "_postman_id": "cb1f9d81-f7ca-42f5-b24f-011203a05274",
+    "name": "Abstract API - IP Geolocation API",
+    "description": "Geolocate any IPv4 or IPv6 address to country, region, city, coordinates, timezone, currency, and flag data covering 4 billion+ IP addresses across 250,000+ cities worldwide.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:02:31.000Z",
+    "updatedAt": "2026-06-05T15:02:31.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-cb1f9d81-f7ca-42f5-b24f-011203a05274"
+  },
+  "item": [
+    {
+      "name": "/",
+      "item": [
+        {
+          "name": "Abstract API Get IP Geolocation",
+          "id": "185e01fe-5808-4305-adf3-79681c874cf3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/?api_key=<string>&ip_address=<string>&fields=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "query": [
+                {
+                  "description": "(Required) Your unique API key for the IP Geolocation API.",
+                  "key": "api_key",
+                  "value": "<string>"
+                },
+                {
+                  "description": "IPv4 or IPv6 address to geolocate. If omitted, the request IP is used.",
+                  "key": "ip_address",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Comma-separated list of top-level fields to return in the response.",
+                  "key": "fields",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Geolocate an IP address and retrieve location, timezone, currency, and flag data."
+          },
+          "response": [
+            {
+              "id": "0e115e7e-cca0-45ad-99de-b9169df9fc99",
+              "name": "Successful IP geolocation response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?api_key=<API Key>&ip_address=<string>&fields=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the IP Geolocation API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "IPv4 or IPv6 address to geolocate. If omitted, the request IP is used.",
+                      "key": "ip_address",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Comma-separated list of top-level fields to return in the response.",
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"ip_address\": \"<string>\",\n  \"city\": \"<string>\",\n  \"city_geoname_id\": \"<integer>\",\n  \"region\": \"<string>\",\n  \"region_iso_code\": \"<string>\",\n  \"region_geoname_id\": \"<integer>\",\n  \"postal_code\": \"<string>\",\n  \"country\": \"<string>\",\n  \"country_code\": \"<string>\",\n  \"country_geoname_id\": \"<integer>\",\n  \"country_is_eu\": \"<boolean>\",\n  \"continent\": \"<string>\",\n  \"continent_code\": \"<string>\",\n  \"continent_geoname_id\": \"<integer>\",\n  \"longitude\": \"<double>\",\n  \"latitude\": \"<double>\",\n  \"security\": {\n    \"is_vpn\": \"<boolean>\"\n  },\n  \"timezone\": {\n    \"name\": \"<string>\",\n    \"abbreviation\": \"<string>\",\n    \"gmt_offset\": \"<integer>\",\n    \"current_time\": \"<string>\",\n    \"is_dst\": \"<boolean>\"\n  },\n  \"flag\": {\n    \"emoji\": \"<string>\",\n    \"unicode\": \"<string>\",\n    \"png\": \"<uri>\",\n    \"svg\": \"<uri>\"\n  },\n  \"currency\": {\n    \"currency_name\": \"<string>\",\n    \"currency_code\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-06-05T15:02:32.000Z",
+              "updatedAt": "2026-06-05T15:02:32.000Z",
+              "uid": "35240-0e115e7e-cca0-45ad-99de-b9169df9fc99"
+            },
+            {
+              "id": "fd445bca-6f11-4145-a705-118ff5d52cfe",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?api_key=<API Key>&ip_address=<string>&fields=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the IP Geolocation API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "IPv4 or IPv6 address to geolocate. If omitted, the request IP is used.",
+                      "key": "ip_address",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Comma-separated list of top-level fields to return in the response.",
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:32.000Z",
+              "updatedAt": "2026-06-05T15:02:32.000Z",
+              "uid": "35240-fd445bca-6f11-4145-a705-118ff5d52cfe"
+            },
+            {
+              "id": "7cc05afc-d51a-4ee5-a5b3-9ee3f581a338",
+              "name": "Unauthorized - invalid API key",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?api_key=<API Key>&ip_address=<string>&fields=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the IP Geolocation API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "IPv4 or IPv6 address to geolocate. If omitted, the request IP is used.",
+                      "key": "ip_address",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Comma-separated list of top-level fields to return in the response.",
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:32.000Z",
+              "updatedAt": "2026-06-05T15:02:32.000Z",
+              "uid": "35240-7cc05afc-d51a-4ee5-a5b3-9ee3f581a338"
+            },
+            {
+              "id": "bbbfcee8-2798-4318-bc3e-41850aed9a40",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?api_key=<API Key>&ip_address=<string>&fields=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the IP Geolocation API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "IPv4 or IPv6 address to geolocate. If omitted, the request IP is used.",
+                      "key": "ip_address",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Comma-separated list of top-level fields to return in the response.",
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:32.000Z",
+              "updatedAt": "2026-06-05T15:02:32.000Z",
+              "uid": "35240-bbbfcee8-2798-4318-bc3e-41850aed9a40"
+            }
+          ],
+          "createdAt": "2026-06-05T15:02:32.000Z",
+          "updatedAt": "2026-06-05T15:02:32.000Z",
+          "uid": "35240-185e01fe-5808-4305-adf3-79681c874cf3"
+        }
+      ],
+      "id": "7576c2a4-33d6-411e-a625-58a6f77eb5b8",
+      "createdAt": "2026-06-05T15:02:32.000Z",
+      "updatedAt": "2026-06-05T15:02:32.000Z",
+      "uid": "35240-7576c2a4-33d6-411e-a625-58a6f77eb5b8"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "query",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://ipgeolocation.abstractapi.com/v1"
+    }
+  ]
+}

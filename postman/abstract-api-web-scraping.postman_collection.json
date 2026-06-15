@@ -1,0 +1,259 @@
+{
+  "info": {
+    "_postman_id": "45006c0d-f875-4c9c-a673-50fd8aed0c5b",
+    "name": "Abstract API - Web Scraping API",
+    "description": "Extract data from any website by providing the target URL. Handles JavaScript rendering and returns the full HTML content of any web page.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:02:42.000Z",
+    "updatedAt": "2026-06-05T15:02:43.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-45006c0d-f875-4c9c-a673-50fd8aed0c5b"
+  },
+  "item": [
+    {
+      "name": "/",
+      "item": [
+        {
+          "name": "Abstract API Scrape Web Page",
+          "id": "0b1e24af-02b8-4a54-a60f-abcf5a30f2b9",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/?api_key=<string>&url=<uri>&render_js=<boolean>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "query": [
+                {
+                  "description": "(Required) Your unique API key for the Web Scraping API.",
+                  "key": "api_key",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) The URL of the webpage to scrape.",
+                  "key": "url",
+                  "value": "<uri>"
+                },
+                {
+                  "description": "Whether to render JavaScript before returning HTML. Defaults to false.",
+                  "key": "render_js",
+                  "value": "<boolean>"
+                }
+              ]
+            },
+            "description": "Extract the full HTML content of any website URL, with support for JavaScript-rendered pages."
+          },
+          "response": [
+            {
+              "id": "8d3a7a93-8713-4e4b-aeea-90befea63fc6",
+              "name": "Scraped HTML content",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?api_key=<API Key>&url=<uri>&render_js=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the Web Scraping API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) The URL of the webpage to scrape.",
+                      "key": "url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Whether to render JavaScript before returning HTML. Defaults to false.",
+                      "key": "render_js",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"body\": \"<string>\",\n  \"url\": \"<uri>\",\n  \"status_code\": \"<integer>\"\n}",
+              "createdAt": "2026-06-05T15:02:43.000Z",
+              "updatedAt": "2026-06-05T15:02:43.000Z",
+              "uid": "35240-8d3a7a93-8713-4e4b-aeea-90befea63fc6"
+            },
+            {
+              "id": "86da98db-7bff-440b-a2f7-8b0aac532db7",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?api_key=<API Key>&url=<uri>&render_js=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the Web Scraping API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) The URL of the webpage to scrape.",
+                      "key": "url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Whether to render JavaScript before returning HTML. Defaults to false.",
+                      "key": "render_js",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:43.000Z",
+              "updatedAt": "2026-06-05T15:02:43.000Z",
+              "uid": "35240-86da98db-7bff-440b-a2f7-8b0aac532db7"
+            },
+            {
+              "id": "7b15207b-fb63-498d-983c-0cde738648e5",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?api_key=<API Key>&url=<uri>&render_js=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the Web Scraping API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) The URL of the webpage to scrape.",
+                      "key": "url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Whether to render JavaScript before returning HTML. Defaults to false.",
+                      "key": "render_js",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:43.000Z",
+              "updatedAt": "2026-06-05T15:02:43.000Z",
+              "uid": "35240-7b15207b-fb63-498d-983c-0cde738648e5"
+            }
+          ],
+          "createdAt": "2026-06-05T15:02:43.000Z",
+          "updatedAt": "2026-06-05T15:02:43.000Z",
+          "uid": "35240-0b1e24af-02b8-4a54-a60f-abcf5a30f2b9"
+        }
+      ],
+      "id": "43479847-bc44-4d41-9cdf-8de3f031581e",
+      "createdAt": "2026-06-05T15:02:43.000Z",
+      "updatedAt": "2026-06-05T15:02:43.000Z",
+      "uid": "35240-43479847-bc44-4d41-9cdf-8de3f031581e"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "query",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://scrape.abstractapi.com/v1"
+    }
+  ]
+}

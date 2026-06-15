@@ -1,0 +1,299 @@
+{
+  "info": {
+    "_postman_id": "91379712-b9f8-4c8d-b900-3408c5af7562",
+    "name": "Abstract API - Public Holidays API",
+    "description": "Get public, local, religious, and other holidays for any country. Supports year and country filtering with comprehensive holiday metadata.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:02:36.000Z",
+    "updatedAt": "2026-06-05T15:02:36.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-91379712-b9f8-4c8d-b900-3408c5af7562"
+  },
+  "item": [
+    {
+      "name": "/",
+      "item": [
+        {
+          "name": "Abstract API Get Public Holidays",
+          "id": "19b3fa3c-dbec-41e4-a7e6-d887e1d25bd3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/?api_key=<string>&country=<string>&year=<string>&month=<string>&day=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "query": [
+                {
+                  "description": "(Required) Your unique API key for the Public Holidays API.",
+                  "key": "api_key",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) ISO 3166-1 alpha-2 two-letter country code.",
+                  "key": "country",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Year to query (required on free plan). Defaults to current year on paid.",
+                  "key": "year",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Month to query (1-12, required on free plan). Defaults to current month.",
+                  "key": "month",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Day to query (1-31, required on free plan). Defaults to current day.",
+                  "key": "day",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Retrieve public, local, religious, and other holidays for a given country and optional date filter."
+          },
+          "response": [
+            {
+              "id": "cd2d412a-2ee1-4e46-883a-4fb4e60dae9d",
+              "name": "List of public holidays",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?api_key=<API Key>&country=<string>&year=<string>&month=<string>&day=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the Public Holidays API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) ISO 3166-1 alpha-2 two-letter country code.",
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Year to query (required on free plan). Defaults to current year on paid.",
+                      "key": "year",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Month to query (1-12, required on free plan). Defaults to current month.",
+                      "key": "month",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Day to query (1-31, required on free plan). Defaults to current day.",
+                      "key": "day",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"name\": \"<string>\",\n    \"name_local\": \"<string>\",\n    \"language\": \"<string>\",\n    \"description\": \"<string>\",\n    \"country\": \"<string>\",\n    \"location\": \"<string>\",\n    \"type\": \"Religious\",\n    \"date\": \"<string>\",\n    \"date_year\": \"<string>\",\n    \"date_month\": \"<string>\",\n    \"date_day\": \"<string>\",\n    \"week_day\": \"<string>\"\n  },\n  {\n    \"name\": \"<string>\",\n    \"name_local\": \"<string>\",\n    \"language\": \"<string>\",\n    \"description\": \"<string>\",\n    \"country\": \"<string>\",\n    \"location\": \"<string>\",\n    \"type\": \"Observance\",\n    \"date\": \"<string>\",\n    \"date_year\": \"<string>\",\n    \"date_month\": \"<string>\",\n    \"date_day\": \"<string>\",\n    \"week_day\": \"<string>\"\n  }\n]",
+              "createdAt": "2026-06-05T15:02:36.000Z",
+              "updatedAt": "2026-06-05T15:02:36.000Z",
+              "uid": "35240-cd2d412a-2ee1-4e46-883a-4fb4e60dae9d"
+            },
+            {
+              "id": "50171638-6a76-437a-a0fc-5e36dcb6f20d",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?api_key=<API Key>&country=<string>&year=<string>&month=<string>&day=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the Public Holidays API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) ISO 3166-1 alpha-2 two-letter country code.",
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Year to query (required on free plan). Defaults to current year on paid.",
+                      "key": "year",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Month to query (1-12, required on free plan). Defaults to current month.",
+                      "key": "month",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Day to query (1-31, required on free plan). Defaults to current day.",
+                      "key": "day",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:36.000Z",
+              "updatedAt": "2026-06-05T15:02:36.000Z",
+              "uid": "35240-50171638-6a76-437a-a0fc-5e36dcb6f20d"
+            },
+            {
+              "id": "6cdac8d9-8689-4396-9242-b131ccc10303",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?api_key=<API Key>&country=<string>&year=<string>&month=<string>&day=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the Public Holidays API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) ISO 3166-1 alpha-2 two-letter country code.",
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Year to query (required on free plan). Defaults to current year on paid.",
+                      "key": "year",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Month to query (1-12, required on free plan). Defaults to current month.",
+                      "key": "month",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Day to query (1-31, required on free plan). Defaults to current day.",
+                      "key": "day",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:36.000Z",
+              "updatedAt": "2026-06-05T15:02:36.000Z",
+              "uid": "35240-6cdac8d9-8689-4396-9242-b131ccc10303"
+            }
+          ],
+          "createdAt": "2026-06-05T15:02:36.000Z",
+          "updatedAt": "2026-06-05T15:02:36.000Z",
+          "uid": "35240-19b3fa3c-dbec-41e4-a7e6-d887e1d25bd3"
+        }
+      ],
+      "id": "1be771d6-0e0e-42b8-b86f-35eb6216b8b5",
+      "createdAt": "2026-06-05T15:02:36.000Z",
+      "updatedAt": "2026-06-05T15:02:36.000Z",
+      "uid": "35240-1be771d6-0e0e-42b8-b86f-35eb6216b8b5"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "query",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://holidays.abstractapi.com/v1"
+    }
+  ]
+}

@@ -1,0 +1,313 @@
+{
+  "info": {
+    "_postman_id": "fb20d3b5-bb3e-46b9-acdb-434953f3209a",
+    "name": "Abstract API - Phone Intelligence API",
+    "description": "Identify carrier, line type, validity, location, and get deep insights including line status, VoIP detection, and risk scoring for any phone number globally.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:02:30.000Z",
+    "updatedAt": "2026-06-05T15:02:30.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-fb20d3b5-bb3e-46b9-acdb-434953f3209a"
+  },
+  "item": [
+    {
+      "name": "/",
+      "item": [
+        {
+          "name": "Abstract API Get Phone Intelligence",
+          "id": "35a45f86-d405-4220-8b79-540b52af98fa",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/?api_key=<string>&phone=<string>&country=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "query": [
+                {
+                  "description": "(Required) Your unique API key for the Phone Intelligence API.",
+                  "key": "api_key",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) The phone number to validate and analyze.",
+                  "key": "phone",
+                  "value": "<string>"
+                },
+                {
+                  "description": "ISO 3166-1 alpha-2 country code to specify the phone number origin.",
+                  "key": "country",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Validate a phone number and retrieve carrier, location, line type, VoIP status, and risk information."
+          },
+          "response": [
+            {
+              "id": "532d9754-bab5-4669-91c9-72920bf3dec3",
+              "name": "Successful phone intelligence response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?api_key=<API Key>&phone=<string>&country=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the Phone Intelligence API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) The phone number to validate and analyze.",
+                      "key": "phone",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "ISO 3166-1 alpha-2 country code to specify the phone number origin.",
+                      "key": "country",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"phone\": \"<string>\",\n  \"valid\": \"<boolean>\",\n  \"country\": {\n    \"code\": \"<string>\",\n    \"name\": \"<string>\",\n    \"prefix\": \"<string>\"\n  },\n  \"location\": \"<string>\",\n  \"type\": \"mobile\",\n  \"carrier\": \"<string>\",\n  \"is_voip\": \"<boolean>\",\n  \"risk_score\": \"<integer>\"\n}",
+              "createdAt": "2026-06-05T15:02:31.000Z",
+              "updatedAt": "2026-06-05T15:02:31.000Z",
+              "uid": "35240-532d9754-bab5-4669-91c9-72920bf3dec3"
+            },
+            {
+              "id": "11a7e645-fd20-4d92-a2f6-7aa249bfb0a7",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?api_key=<API Key>&phone=<string>&country=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the Phone Intelligence API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) The phone number to validate and analyze.",
+                      "key": "phone",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "ISO 3166-1 alpha-2 country code to specify the phone number origin.",
+                      "key": "country",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:31.000Z",
+              "updatedAt": "2026-06-05T15:02:31.000Z",
+              "uid": "35240-11a7e645-fd20-4d92-a2f6-7aa249bfb0a7"
+            },
+            {
+              "id": "7269b04b-6cb1-4622-bf1e-18bafaa0f7b2",
+              "name": "Unauthorized - invalid API key",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?api_key=<API Key>&phone=<string>&country=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the Phone Intelligence API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) The phone number to validate and analyze.",
+                      "key": "phone",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "ISO 3166-1 alpha-2 country code to specify the phone number origin.",
+                      "key": "country",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:31.000Z",
+              "updatedAt": "2026-06-05T15:02:31.000Z",
+              "uid": "35240-7269b04b-6cb1-4622-bf1e-18bafaa0f7b2"
+            },
+            {
+              "id": "50124add-580f-4040-b6c3-288174dfc788",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?api_key=<API Key>&phone=<string>&country=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the Phone Intelligence API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) The phone number to validate and analyze.",
+                      "key": "phone",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "ISO 3166-1 alpha-2 country code to specify the phone number origin.",
+                      "key": "country",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:31.000Z",
+              "updatedAt": "2026-06-05T15:02:31.000Z",
+              "uid": "35240-50124add-580f-4040-b6c3-288174dfc788"
+            }
+          ],
+          "createdAt": "2026-06-05T15:02:31.000Z",
+          "updatedAt": "2026-06-05T15:02:31.000Z",
+          "uid": "35240-35a45f86-d405-4220-8b79-540b52af98fa"
+        }
+      ],
+      "id": "926e3e16-9e3c-4579-8886-85cf9e75a42e",
+      "createdAt": "2026-06-05T15:02:31.000Z",
+      "updatedAt": "2026-06-05T15:02:31.000Z",
+      "uid": "35240-926e3e16-9e3c-4579-8886-85cf9e75a42e"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "query",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://phoneintelligence.abstractapi.com/v1"
+    }
+  ]
+}

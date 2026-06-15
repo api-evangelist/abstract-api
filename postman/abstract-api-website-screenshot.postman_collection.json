@@ -1,0 +1,359 @@
+{
+  "info": {
+    "_postman_id": "dd526655-9fa4-45f4-b21a-08bb12e493e9",
+    "name": "Abstract API - Website Screenshot API",
+    "description": "Capture high-quality screenshots of any website with optional customizations including CSS injection, delay settings, and viewport configuration.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:02:40.000Z",
+    "updatedAt": "2026-06-05T15:02:40.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-dd526655-9fa4-45f4-b21a-08bb12e493e9"
+  },
+  "item": [
+    {
+      "name": "/",
+      "item": [
+        {
+          "name": "Abstract API Capture Website Screenshot",
+          "id": "0e2bd857-7576-47e8-9db5-b2c62b4ef3ef",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "image/jpeg"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/?api_key=<string>&url=<uri>&capture_full_page=<boolean>&width=<integer>&height=<integer>&delay=<integer>&css_injection=<string>&export_format=png",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "query": [
+                {
+                  "description": "(Required) Your unique API key for the Website Screenshot API.",
+                  "key": "api_key",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) The URL of the website to screenshot.",
+                  "key": "url",
+                  "value": "<uri>"
+                },
+                {
+                  "description": "Whether to capture the full scrollable page. Defaults to false.",
+                  "key": "capture_full_page",
+                  "value": "<boolean>"
+                },
+                {
+                  "description": "Viewport width in pixels. Defaults to 1280.",
+                  "key": "width",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Viewport height in pixels. Defaults to 720.",
+                  "key": "height",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Delay in milliseconds before taking the screenshot.",
+                  "key": "delay",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "CSS string to inject into the page before screenshotting.",
+                  "key": "css_injection",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Output format of the screenshot (jpeg or png). Defaults to jpeg.",
+                  "key": "export_format",
+                  "value": "png"
+                }
+              ]
+            },
+            "description": "Capture a screenshot of any website URL with configurable viewport, delay, and CSS injection options."
+          },
+          "response": [
+            {
+              "id": "f7281efc-3c85-4a07-9877-cb178e0a373c",
+              "name": "Screenshot image binary",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "image/jpeg"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?api_key=<API Key>&url=<uri>&capture_full_page=<boolean>&width=<integer>&height=<integer>&delay=<integer>&css_injection=<string>&export_format=png",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the Website Screenshot API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) The URL of the website to screenshot.",
+                      "key": "url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Whether to capture the full scrollable page. Defaults to false.",
+                      "key": "capture_full_page",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "Viewport width in pixels. Defaults to 1280.",
+                      "key": "width",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Viewport height in pixels. Defaults to 720.",
+                      "key": "height",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Delay in milliseconds before taking the screenshot.",
+                      "key": "delay",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "CSS string to inject into the page before screenshotting.",
+                      "key": "css_injection",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Output format of the screenshot (jpeg or png). Defaults to jpeg.",
+                      "key": "export_format",
+                      "value": "png"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "image/jpeg"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "<binary>",
+              "createdAt": "2026-06-05T15:02:41.000Z",
+              "updatedAt": "2026-06-05T15:02:41.000Z",
+              "uid": "35240-f7281efc-3c85-4a07-9877-cb178e0a373c"
+            },
+            {
+              "id": "8043a9ad-a264-4f7b-a337-70d27a8002ea",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?api_key=<API Key>&url=<uri>&capture_full_page=<boolean>&width=<integer>&height=<integer>&delay=<integer>&css_injection=<string>&export_format=png",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the Website Screenshot API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) The URL of the website to screenshot.",
+                      "key": "url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Whether to capture the full scrollable page. Defaults to false.",
+                      "key": "capture_full_page",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "Viewport width in pixels. Defaults to 1280.",
+                      "key": "width",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Viewport height in pixels. Defaults to 720.",
+                      "key": "height",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Delay in milliseconds before taking the screenshot.",
+                      "key": "delay",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "CSS string to inject into the page before screenshotting.",
+                      "key": "css_injection",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Output format of the screenshot (jpeg or png). Defaults to jpeg.",
+                      "key": "export_format",
+                      "value": "png"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:41.000Z",
+              "updatedAt": "2026-06-05T15:02:41.000Z",
+              "uid": "35240-8043a9ad-a264-4f7b-a337-70d27a8002ea"
+            },
+            {
+              "id": "a0aa6355-29bd-40ba-8d0c-e0f5fc911995",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?api_key=<API Key>&url=<uri>&capture_full_page=<boolean>&width=<integer>&height=<integer>&delay=<integer>&css_injection=<string>&export_format=png",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the Website Screenshot API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) The URL of the website to screenshot.",
+                      "key": "url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Whether to capture the full scrollable page. Defaults to false.",
+                      "key": "capture_full_page",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "Viewport width in pixels. Defaults to 1280.",
+                      "key": "width",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Viewport height in pixels. Defaults to 720.",
+                      "key": "height",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Delay in milliseconds before taking the screenshot.",
+                      "key": "delay",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "CSS string to inject into the page before screenshotting.",
+                      "key": "css_injection",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Output format of the screenshot (jpeg or png). Defaults to jpeg.",
+                      "key": "export_format",
+                      "value": "png"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:41.000Z",
+              "updatedAt": "2026-06-05T15:02:41.000Z",
+              "uid": "35240-a0aa6355-29bd-40ba-8d0c-e0f5fc911995"
+            }
+          ],
+          "createdAt": "2026-06-05T15:02:41.000Z",
+          "updatedAt": "2026-06-05T15:02:41.000Z",
+          "uid": "35240-0e2bd857-7576-47e8-9db5-b2c62b4ef3ef"
+        }
+      ],
+      "id": "57e69037-7031-4784-b240-987b9d910329",
+      "createdAt": "2026-06-05T15:02:41.000Z",
+      "updatedAt": "2026-06-05T15:02:41.000Z",
+      "uid": "35240-57e69037-7031-4784-b240-987b9d910329"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "query",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://screenshot.abstractapi.com/v1"
+    }
+  ]
+}

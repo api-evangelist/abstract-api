@@ -1,0 +1,299 @@
+{
+  "info": {
+    "_postman_id": "e97182d7-c79f-4429-ba5d-2e7e81f556bf",
+    "name": "Abstract API - Image Processing API",
+    "description": "Compress, convert, and optimize images by URL or direct upload. Supports format conversion, quality adjustment, and size reduction.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:02:41.000Z",
+    "updatedAt": "2026-06-05T15:02:41.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e97182d7-c79f-4429-ba5d-2e7e81f556bf"
+  },
+  "item": [
+    {
+      "name": "url",
+      "item": [
+        {
+          "name": "Abstract API Process Image by URL",
+          "id": "750d84f1-68f7-44e6-ba81-81fb026925ac",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/url?api_key=<string>&url=<uri>&lossy=<boolean>&quality=<integer>&output_format=webp",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "url"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Your unique API key for the Image Processing API.",
+                  "key": "api_key",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) URL of the image to process.",
+                  "key": "url",
+                  "value": "<uri>"
+                },
+                {
+                  "description": "Whether to apply lossy compression. Defaults to true.",
+                  "key": "lossy",
+                  "value": "<boolean>"
+                },
+                {
+                  "description": "Image quality from 1 to 100 (for lossy compression).",
+                  "key": "quality",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Target output format (jpeg, png, webp, gif).",
+                  "key": "output_format",
+                  "value": "webp"
+                }
+              ]
+            },
+            "description": "Compress, convert, or optimize an image from a given URL."
+          },
+          "response": [
+            {
+              "id": "c8b7158f-9013-4350-8917-3c4246e1dfdd",
+              "name": "Processed image result",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/url?api_key=<API Key>&url=<uri>&lossy=<boolean>&quality=<integer>&output_format=webp",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "url"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the Image Processing API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) URL of the image to process.",
+                      "key": "url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Whether to apply lossy compression. Defaults to true.",
+                      "key": "lossy",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "Image quality from 1 to 100 (for lossy compression).",
+                      "key": "quality",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Target output format (jpeg, png, webp, gif).",
+                      "key": "output_format",
+                      "value": "webp"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"original_size\": \"<integer>\",\n  \"new_size\": \"<integer>\",\n  \"saved_bytes\": \"<integer>\",\n  \"saved_percent\": \"<number>\",\n  \"url\": \"<uri>\"\n}",
+              "createdAt": "2026-06-05T15:02:42.000Z",
+              "updatedAt": "2026-06-05T15:02:42.000Z",
+              "uid": "35240-c8b7158f-9013-4350-8917-3c4246e1dfdd"
+            },
+            {
+              "id": "d96dfeec-0a81-4fda-b059-bb787f07a3eb",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/url?api_key=<API Key>&url=<uri>&lossy=<boolean>&quality=<integer>&output_format=webp",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "url"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the Image Processing API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) URL of the image to process.",
+                      "key": "url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Whether to apply lossy compression. Defaults to true.",
+                      "key": "lossy",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "Image quality from 1 to 100 (for lossy compression).",
+                      "key": "quality",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Target output format (jpeg, png, webp, gif).",
+                      "key": "output_format",
+                      "value": "webp"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:42.000Z",
+              "updatedAt": "2026-06-05T15:02:42.000Z",
+              "uid": "35240-d96dfeec-0a81-4fda-b059-bb787f07a3eb"
+            },
+            {
+              "id": "b43d5a75-11b5-4eb0-8f39-64eaef993536",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/url?api_key=<API Key>&url=<uri>&lossy=<boolean>&quality=<integer>&output_format=webp",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "url"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the Image Processing API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) URL of the image to process.",
+                      "key": "url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "Whether to apply lossy compression. Defaults to true.",
+                      "key": "lossy",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "Image quality from 1 to 100 (for lossy compression).",
+                      "key": "quality",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Target output format (jpeg, png, webp, gif).",
+                      "key": "output_format",
+                      "value": "webp"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:42.000Z",
+              "updatedAt": "2026-06-05T15:02:42.000Z",
+              "uid": "35240-b43d5a75-11b5-4eb0-8f39-64eaef993536"
+            }
+          ],
+          "createdAt": "2026-06-05T15:02:42.000Z",
+          "updatedAt": "2026-06-05T15:02:42.000Z",
+          "uid": "35240-750d84f1-68f7-44e6-ba81-81fb026925ac"
+        }
+      ],
+      "id": "fdaf3a25-87e1-44b5-a8f3-45e2ad2125d1",
+      "createdAt": "2026-06-05T15:02:42.000Z",
+      "updatedAt": "2026-06-05T15:02:42.000Z",
+      "uid": "35240-fdaf3a25-87e1-44b5-a8f3-45e2ad2125d1"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "query",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://images.abstractapi.com/v1"
+    }
+  ]
+}

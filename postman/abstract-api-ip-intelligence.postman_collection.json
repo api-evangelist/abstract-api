@@ -1,0 +1,313 @@
+{
+  "info": {
+    "_postman_id": "6dd934e9-6c73-469c-a864-f2dffd1168f3",
+    "name": "Abstract API - IP Intelligence API",
+    "description": "Detect VPNs, proxies, Tor exit nodes, abuse potential, hosting services, relays, and mobile IPs. Also provides ASN, company, location, timezone, flag, and currency data for any IP address.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:02:32.000Z",
+    "updatedAt": "2026-06-05T15:02:32.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-6dd934e9-6c73-469c-a864-f2dffd1168f3"
+  },
+  "item": [
+    {
+      "name": "/",
+      "item": [
+        {
+          "name": "Abstract API Get IP Intelligence",
+          "id": "db3a6061-fa4b-4aea-be82-7066d0cc5e1b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/?api_key=<string>&ip_address=<string>&fields=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "query": [
+                {
+                  "description": "(Required) Your unique API key for the IP Intelligence API.",
+                  "key": "api_key",
+                  "value": "<string>"
+                },
+                {
+                  "description": "IPv4 or IPv6 address to analyze. Auto-detects request IP if omitted.",
+                  "key": "ip_address",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Comma-separated list of top-level keys to return.",
+                  "key": "fields",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Analyze an IP address for security signals including VPN, proxy, Tor, abuse, hosting, relay, and mobile detection along with location and ASN data."
+          },
+          "response": [
+            {
+              "id": "5292c326-dc67-4f80-90e5-8bef63c6f3ee",
+              "name": "Successful IP intelligence response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?api_key=<API Key>&ip_address=<string>&fields=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the IP Intelligence API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "IPv4 or IPv6 address to analyze. Auto-detects request IP if omitted.",
+                      "key": "ip_address",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Comma-separated list of top-level keys to return.",
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"ip_address\": \"<string>\",\n  \"security\": {\n    \"is_vpn\": \"<boolean>\",\n    \"is_proxy\": \"<boolean>\",\n    \"is_tor\": \"<boolean>\",\n    \"is_hosting\": \"<boolean>\",\n    \"is_relay\": \"<boolean>\",\n    \"is_mobile\": \"<boolean>\",\n    \"is_abuse\": \"<boolean>\"\n  },\n  \"asn\": {\n    \"asn\": \"<string>\",\n    \"name\": \"<string>\",\n    \"domain\": \"<string>\",\n    \"type\": \"<string>\"\n  },\n  \"company\": {\n    \"name\": \"<string>\",\n    \"domain\": \"<string>\",\n    \"type\": \"<string>\"\n  },\n  \"domains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"location\": {\n    \"city\": \"<string>\",\n    \"region\": \"<string>\",\n    \"country\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"latitude\": \"<double>\",\n    \"longitude\": \"<double>\"\n  },\n  \"timezone\": {\n    \"name\": \"<string>\",\n    \"abbreviation\": \"<string>\",\n    \"utc_offset\": \"<integer>\",\n    \"local_time\": \"<string>\",\n    \"is_dst\": \"<boolean>\"\n  },\n  \"flag\": {\n    \"emoji\": \"<string>\",\n    \"unicode\": \"<string>\",\n    \"png\": \"<uri>\",\n    \"svg\": \"<uri>\"\n  },\n  \"currency\": {\n    \"name\": \"<string>\",\n    \"iso_code\": \"<string>\",\n    \"symbol\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-06-05T15:02:33.000Z",
+              "updatedAt": "2026-06-05T15:02:33.000Z",
+              "uid": "35240-5292c326-dc67-4f80-90e5-8bef63c6f3ee"
+            },
+            {
+              "id": "c851d878-4577-46e6-af05-6e0f9cb531b8",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?api_key=<API Key>&ip_address=<string>&fields=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the IP Intelligence API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "IPv4 or IPv6 address to analyze. Auto-detects request IP if omitted.",
+                      "key": "ip_address",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Comma-separated list of top-level keys to return.",
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:33.000Z",
+              "updatedAt": "2026-06-05T15:02:33.000Z",
+              "uid": "35240-c851d878-4577-46e6-af05-6e0f9cb531b8"
+            },
+            {
+              "id": "aa9d57a2-1e50-4792-aa1a-4c3b3ac9ea14",
+              "name": "Unauthorized - invalid API key",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?api_key=<API Key>&ip_address=<string>&fields=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the IP Intelligence API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "IPv4 or IPv6 address to analyze. Auto-detects request IP if omitted.",
+                      "key": "ip_address",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Comma-separated list of top-level keys to return.",
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:33.000Z",
+              "updatedAt": "2026-06-05T15:02:33.000Z",
+              "uid": "35240-aa9d57a2-1e50-4792-aa1a-4c3b3ac9ea14"
+            },
+            {
+              "id": "89fe7884-fdb7-43a9-9d90-dbb5fe0095a7",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/?api_key=<API Key>&ip_address=<string>&fields=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the IP Intelligence API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "IPv4 or IPv6 address to analyze. Auto-detects request IP if omitted.",
+                      "key": "ip_address",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Comma-separated list of top-level keys to return.",
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:33.000Z",
+              "updatedAt": "2026-06-05T15:02:33.000Z",
+              "uid": "35240-89fe7884-fdb7-43a9-9d90-dbb5fe0095a7"
+            }
+          ],
+          "createdAt": "2026-06-05T15:02:33.000Z",
+          "updatedAt": "2026-06-05T15:02:33.000Z",
+          "uid": "35240-db3a6061-fa4b-4aea-be82-7066d0cc5e1b"
+        }
+      ],
+      "id": "397bd973-cce7-4e86-a302-a4a04612583b",
+      "createdAt": "2026-06-05T15:02:33.000Z",
+      "updatedAt": "2026-06-05T15:02:33.000Z",
+      "uid": "35240-397bd973-cce7-4e86-a302-a4a04612583b"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "query",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://ip-intelligence.abstractapi.com/v1"
+    }
+  ]
+}

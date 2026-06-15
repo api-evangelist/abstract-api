@@ -1,0 +1,538 @@
+{
+  "info": {
+    "_postman_id": "9afa24a6-4f47-4960-af5a-e1664ca0a899",
+    "name": "Abstract API - Timezone API",
+    "description": "Find, convert, and manage time and timezone data across the world. Supports lookup by location or coordinates and returns local time, timezone abbreviation, UTC offset, and DST information.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:02:37.000Z",
+    "updatedAt": "2026-06-05T15:02:37.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9afa24a6-4f47-4960-af5a-e1664ca0a899"
+  },
+  "item": [
+    {
+      "name": "current_time",
+      "item": [
+        {
+          "name": "Abstract API Get Current Time",
+          "id": "9f9d3b44-10af-42d7-94ab-5337bd2e43d8",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/current_time?api_key=<string>&location=<string>&latitude=<double>&longitude=<double>&ip_address=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "current_time"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Your unique API key for the Timezone API.",
+                  "key": "api_key",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Location name (e.g., city, address). Use location, latitude+longitude, or ip_address.",
+                  "key": "location",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Latitude coordinate. Used with longitude.",
+                  "key": "latitude",
+                  "value": "<double>"
+                },
+                {
+                  "description": "Longitude coordinate. Used with latitude.",
+                  "key": "longitude",
+                  "value": "<double>"
+                },
+                {
+                  "description": "IP address to determine timezone from.",
+                  "key": "ip_address",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Get the current time, date, and timezone for a location specified by name, coordinates, or IP address."
+          },
+          "response": [
+            {
+              "id": "813815e2-fbcf-4d20-9757-de7b7d5cb69f",
+              "name": "Current time and timezone information",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/current_time?api_key=<API Key>&location=<string>&latitude=<double>&longitude=<double>&ip_address=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "current_time"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the Timezone API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "Location name (e.g., city, address). Use location, latitude+longitude, or ip_address.",
+                      "key": "location",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Latitude coordinate. Used with longitude.",
+                      "key": "latitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "description": "Longitude coordinate. Used with latitude.",
+                      "key": "longitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "description": "IP address to determine timezone from.",
+                      "key": "ip_address",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"datetime\": \"<string>\",\n  \"timezone_name\": \"<string>\",\n  \"timezone_location\": \"<string>\",\n  \"timezone_abbreviation\": \"<string>\",\n  \"gmt_offset\": \"<integer>\",\n  \"is_dst\": \"<boolean>\",\n  \"requested_location\": \"<string>\",\n  \"latitude\": \"<double>\",\n  \"longitude\": \"<double>\"\n}",
+              "createdAt": "2026-06-05T15:02:38.000Z",
+              "updatedAt": "2026-06-05T15:02:38.000Z",
+              "uid": "35240-813815e2-fbcf-4d20-9757-de7b7d5cb69f"
+            },
+            {
+              "id": "1d49f225-c8ac-4234-bbd2-098b4bb8c9d7",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/current_time?api_key=<API Key>&location=<string>&latitude=<double>&longitude=<double>&ip_address=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "current_time"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the Timezone API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "Location name (e.g., city, address). Use location, latitude+longitude, or ip_address.",
+                      "key": "location",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Latitude coordinate. Used with longitude.",
+                      "key": "latitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "description": "Longitude coordinate. Used with latitude.",
+                      "key": "longitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "description": "IP address to determine timezone from.",
+                      "key": "ip_address",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:38.000Z",
+              "updatedAt": "2026-06-05T15:02:38.000Z",
+              "uid": "35240-1d49f225-c8ac-4234-bbd2-098b4bb8c9d7"
+            },
+            {
+              "id": "9ec8be2f-fcb5-4a0c-aa0c-3501d47a592a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/current_time?api_key=<API Key>&location=<string>&latitude=<double>&longitude=<double>&ip_address=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "current_time"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key for the Timezone API.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "Location name (e.g., city, address). Use location, latitude+longitude, or ip_address.",
+                      "key": "location",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Latitude coordinate. Used with longitude.",
+                      "key": "latitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "description": "Longitude coordinate. Used with latitude.",
+                      "key": "longitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "description": "IP address to determine timezone from.",
+                      "key": "ip_address",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:38.000Z",
+              "updatedAt": "2026-06-05T15:02:38.000Z",
+              "uid": "35240-9ec8be2f-fcb5-4a0c-aa0c-3501d47a592a"
+            }
+          ],
+          "createdAt": "2026-06-05T15:02:38.000Z",
+          "updatedAt": "2026-06-05T15:02:38.000Z",
+          "uid": "35240-9f9d3b44-10af-42d7-94ab-5337bd2e43d8"
+        }
+      ],
+      "id": "5bfff290-e89c-44b9-87fd-33a8cf686234",
+      "createdAt": "2026-06-05T15:02:38.000Z",
+      "updatedAt": "2026-06-05T15:02:38.000Z",
+      "uid": "35240-5bfff290-e89c-44b9-87fd-33a8cf686234"
+    },
+    {
+      "name": "convert_time",
+      "item": [
+        {
+          "name": "Abstract API Convert Time Between Timezones",
+          "id": "adf6571f-5b90-4814-832c-6ed053038652",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/convert_time?api_key=<string>&base_location=<string>&base_datetime=<string>&target_location=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "convert_time"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Your unique API key.",
+                  "key": "api_key",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) Source location name or coordinates.",
+                  "key": "base_location",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Date and time to convert (YYYY-MM-DD HH:MM:SS). Defaults to current time.",
+                  "key": "base_datetime",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) Target location name or coordinates.",
+                  "key": "target_location",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Convert time from one location to another, or convert to and from UTC."
+          },
+          "response": [
+            {
+              "id": "d7046e2e-3a21-4daf-b075-54992eea1767",
+              "name": "Time conversion result",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/convert_time?api_key=<API Key>&base_location=<string>&base_datetime=<string>&target_location=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "convert_time"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) Source location name or coordinates.",
+                      "key": "base_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Date and time to convert (YYYY-MM-DD HH:MM:SS). Defaults to current time.",
+                      "key": "base_datetime",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Target location name or coordinates.",
+                      "key": "target_location",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"base_location\": \"<string>\",\n  \"base_datetime\": \"<string>\",\n  \"base_timezone_name\": \"<string>\",\n  \"base_timezone_abbreviation\": \"<string>\",\n  \"base_utc_offset\": \"<integer>\",\n  \"target_location\": \"<string>\",\n  \"target_datetime\": \"<string>\",\n  \"target_timezone_name\": \"<string>\",\n  \"target_timezone_abbreviation\": \"<string>\",\n  \"target_utc_offset\": \"<integer>\"\n}",
+              "createdAt": "2026-06-05T15:02:38.000Z",
+              "updatedAt": "2026-06-05T15:02:38.000Z",
+              "uid": "35240-d7046e2e-3a21-4daf-b075-54992eea1767"
+            },
+            {
+              "id": "567f61bb-59b7-474e-bdf4-78084a333347",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/convert_time?api_key=<API Key>&base_location=<string>&base_datetime=<string>&target_location=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "convert_time"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) Source location name or coordinates.",
+                      "key": "base_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Date and time to convert (YYYY-MM-DD HH:MM:SS). Defaults to current time.",
+                      "key": "base_datetime",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Target location name or coordinates.",
+                      "key": "target_location",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:38.000Z",
+              "updatedAt": "2026-06-05T15:02:38.000Z",
+              "uid": "35240-567f61bb-59b7-474e-bdf4-78084a333347"
+            },
+            {
+              "id": "cd69d7a1-e00d-4056-af82-9c8b9ace1adf",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/convert_time?api_key=<API Key>&base_location=<string>&base_datetime=<string>&target_location=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "convert_time"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Your unique API key.",
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "(Required) Source location name or coordinates.",
+                      "key": "base_location",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Date and time to convert (YYYY-MM-DD HH:MM:SS). Defaults to current time.",
+                      "key": "base_datetime",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Target location name or coordinates.",
+                      "key": "target_location",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:38.000Z",
+              "updatedAt": "2026-06-05T15:02:38.000Z",
+              "uid": "35240-cd69d7a1-e00d-4056-af82-9c8b9ace1adf"
+            }
+          ],
+          "createdAt": "2026-06-05T15:02:38.000Z",
+          "updatedAt": "2026-06-05T15:02:38.000Z",
+          "uid": "35240-adf6571f-5b90-4814-832c-6ed053038652"
+        }
+      ],
+      "id": "a1152d1c-2309-46a8-bf28-f8d1c3367ad5",
+      "createdAt": "2026-06-05T15:02:38.000Z",
+      "updatedAt": "2026-06-05T15:02:38.000Z",
+      "uid": "35240-a1152d1c-2309-46a8-bf28-f8d1c3367ad5"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "query",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://timezone.abstractapi.com/v1"
+    }
+  ]
+}
