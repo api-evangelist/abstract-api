@@ -50,7 +50,7 @@ apis:
     - url: json-schema/email-reputation-breach-info-schema.json
       type: JSONSchema
     - url: examples/email-reputation-breach-info-example.json
-      type: Example
+      type: Examples
     description: >-
       Validate email addresses for deliverability, detect disposable or risky
       domains, verify SMTP/MX records, and enrich email data with sender
@@ -72,7 +72,7 @@ apis:
     - url: json-schema/phone-intelligence-phone-country-schema.json
       type: JSONSchema
     - url: examples/phone-intelligence-phone-country-example.json
-      type: Example
+      type: Examples
     description: >-
       Identify carrier, line type, validity, location, and get deep insights
       including line status, VoIP detection, and risk scoring for any phone
@@ -94,7 +94,7 @@ apis:
     - url: json-schema/ip-geolocation-currency-info-schema.json
       type: JSONSchema
     - url: examples/ip-geolocation-currency-info-example.json
-      type: Example
+      type: Examples
     description: >-
       Geolocate any IPv4 or IPv6 address to country, region, city, coordinates,
       timezone, currency, and flag data covering 4 billion+ IP addresses across
@@ -117,7 +117,7 @@ apis:
     - url: json-schema/ip-intelligence-asn-info-schema.json
       type: JSONSchema
     - url: examples/ip-intelligence-asn-info-example.json
-      type: Example
+      type: Examples
     description: >-
       Detect VPNs, proxies, Tor exit nodes, abuse potential, hosting services,
       relays, and mobile IPs. Also provides ASN, company, location, timezone,
@@ -139,7 +139,7 @@ apis:
     - url: json-schema/company-enrichment-company-enrichment-response-schema.json
       type: JSONSchema
     - url: examples/company-enrichment-company-enrichment-response-example.json
-      type: Example
+      type: Examples
     description: >-
       Retrieve comprehensive details about businesses using their domain or
       email address, including name, logo, headcount, location, industry, and
@@ -161,7 +161,7 @@ apis:
     - url: json-schema/exchange-rates-convert-response-schema.json
       type: JSONSchema
     - url: examples/exchange-rates-convert-response-example.json
-      type: Example
+      type: Examples
     description: >-
       Look up the latest exchange rates for 80+ currencies, convert between
       currencies, and retrieve historical exchange rate data using ISO 4217
@@ -183,7 +183,7 @@ apis:
     - url: json-schema/public-holidays-holiday-schema.json
       type: JSONSchema
     - url: examples/public-holidays-holiday-example.json
-      type: Example
+      type: Examples
     description: >-
       Get public, local, religious, and other holidays for any country. Supports
       year and country filtering with comprehensive holiday metadata.
@@ -205,7 +205,7 @@ apis:
     - url: json-schema/timezones-convert-time-response-schema.json
       type: JSONSchema
     - url: examples/timezones-convert-time-response-example.json
-      type: Example
+      type: Examples
     description: >-
       Find, convert, and manage time and timezone data across the world.
       Supports lookup by location or coordinates and returns local time,
@@ -228,7 +228,7 @@ apis:
     - url: json-schema/vat-validation-vat-calculate-response-schema.json
       type: JSONSchema
     - url: examples/vat-validation-vat-calculate-response-example.json
-      type: Example
+      type: Examples
     description: >-
       Validate VAT numbers, look up current VAT rates by country, and calculate
       VAT-inclusive or VAT-exclusive prices to stay compliant for domestic and
@@ -250,7 +250,7 @@ apis:
     - url: json-schema/iban-validation-iban-validation-response-schema.json
       type: JSONSchema
     - url: examples/iban-validation-iban-validation-response-example.json
-      type: Example
+      type: Examples
     description: >-
       Determine the validity and details of International Bank Account Numbers
       (IBANs), including bank name, account type, and country code.
@@ -289,7 +289,7 @@ apis:
     - url: json-schema/image-processing-image-processing-response-schema.json
       type: JSONSchema
     - url: examples/image-processing-image-processing-response-example.json
-      type: Example
+      type: Examples
     description: >-
       Compress, convert, and optimize images by URL or direct upload. Supports
       format conversion, quality adjustment, and size reduction.
@@ -310,7 +310,7 @@ apis:
     - url: json-schema/web-scraping-web-scraping-response-schema.json
       type: JSONSchema
     - url: examples/web-scraping-web-scraping-response-example.json
-      type: Example
+      type: Examples
     description: >-
       Extract data from any website by providing the target URL. Handles
       JavaScript rendering and returns the full HTML content of any web page.
@@ -336,46 +336,43 @@ apis:
 common:
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/abstract-api/overview
-  - type: ArazzoWorkflows
-    url: arazzo/
-    workflows:
-    - url: arazzo/abstract-api-company-to-screenshot-and-avatar-workflow.yml
-      name: Abstract API Company Enrichment to Screenshot and Avatar
-      summary: Enrich a company by domain, screenshot its site, and generate a name avatar.
-    - url: arazzo/abstract-api-currency-live-and-convert-workflow.yml
-      name: Abstract API Live Exchange Rate and Conversion
-      summary: Read the live rate, convert an amount, and compare against a historical rate.
-    - url: arazzo/abstract-api-email-to-company-enrichment-workflow.yml
-      name: Abstract API Email to Company Enrichment
-      summary: Validate an email address, then enrich the company behind its domain.
-    - url: arazzo/abstract-api-iban-and-company-verification-workflow.yml
-      name: Abstract API IBAN and Company Verification
-      summary: Validate an IBAN, then enrich the company it belongs to for a KYB check.
-    - url: arazzo/abstract-api-ip-geolocation-to-currency-conversion-workflow.yml
-      name: Abstract API IP Geolocation to Currency Conversion
-      summary: Geolocate an IP, read its local currency, then convert a price into it.
-    - url: arazzo/abstract-api-ip-geolocation-to-timezone-holidays-workflow.yml
-      name: Abstract API IP Geolocation to Timezone and Holidays
-      summary: Geolocate an IP, get its local time, and list the country's public holidays.
-    - url: arazzo/abstract-api-ip-security-and-geolocation-workflow.yml
-      name: Abstract API IP Security and Geolocation
-      summary: Screen an IP for VPN/proxy/Tor risk, then geolocate clean traffic.
-    - url: arazzo/abstract-api-phone-to-timezone-workflow.yml
-      name: Abstract API Phone Validation to Local Time
-      summary: Validate a phone number, then resolve the local time of its region.
-    - url: arazzo/abstract-api-screenshot-scrape-and-process-workflow.yml
-      name: Abstract API Screenshot, Scrape, and Image Processing
-      summary: Capture a website screenshot, scrape its HTML, then optimize an image asset.
-    - url: arazzo/abstract-api-vat-validation-to-rates-and-calculation-workflow.yml
-      name: Abstract API VAT Validation to Rates and Calculation
-      summary: Validate a VAT number, fetch its country rates, then calculate VAT on an amount.
+  - type: Arazzo
+    url: arazzo/abstract-api-company-to-screenshot-and-avatar-workflow.yml
+    name: Abstract API Company Enrichment to Screenshot and Avatar
+  - type: Arazzo
+    url: arazzo/abstract-api-currency-live-and-convert-workflow.yml
+    name: Abstract API Live Exchange Rate and Conversion
+  - type: Arazzo
+    url: arazzo/abstract-api-email-to-company-enrichment-workflow.yml
+    name: Abstract API Email to Company Enrichment
+  - type: Arazzo
+    url: arazzo/abstract-api-iban-and-company-verification-workflow.yml
+    name: Abstract API IBAN and Company Verification
+  - type: Arazzo
+    url: arazzo/abstract-api-ip-geolocation-to-currency-conversion-workflow.yml
+    name: Abstract API IP Geolocation to Currency Conversion
+  - type: Arazzo
+    url: arazzo/abstract-api-ip-geolocation-to-timezone-holidays-workflow.yml
+    name: Abstract API IP Geolocation to Timezone and Holidays
+  - type: Arazzo
+    url: arazzo/abstract-api-ip-security-and-geolocation-workflow.yml
+    name: Abstract API IP Security and Geolocation
+  - type: Arazzo
+    url: arazzo/abstract-api-phone-to-timezone-workflow.yml
+    name: Abstract API Phone Validation to Local Time
+  - type: Arazzo
+    url: arazzo/abstract-api-screenshot-scrape-and-process-workflow.yml
+    name: Abstract API Screenshot, Scrape, and Image Processing
+  - type: Arazzo
+    url: arazzo/abstract-api-vat-validation-to-rates-and-calculation-workflow.yml
+    name: Abstract API VAT Validation to Rates and Calculation
   - type: LinkedIn
     url: https://www.linkedin.com/company/abstractapi
   - type: Website
     url: https://www.abstractapi.com/
   - type: Portal
     url: https://app.abstractapi.com/
-  - type: SignUp
+  - type: Signup
     url: https://app.abstractapi.com/users/signup
   - type: Login
     url: https://app.abstractapi.com/users/login
@@ -442,11 +439,11 @@ common:
   - url: rules/abstract-api-spectral-rules.yml
     type: SpectralRules
   - url: capabilities/fraud-detection.yaml
-    type: NaftikoCapability
+    type: X-NaftikoCapability
   - url: capabilities/data-enrichment.yaml
-    type: NaftikoCapability
+    type: X-NaftikoCapability
   - url: capabilities/financial-compliance.yaml
-    type: NaftikoCapability
+    type: X-NaftikoCapability
   - url: vocabulary/abstract-api-vocabulary.yaml
     type: Vocabulary
   - type: Integrations
