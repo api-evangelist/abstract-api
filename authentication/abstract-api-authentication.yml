@@ -1,0 +1,32 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/abstract-api-avatars.yaml, openapi/abstract-api-company-enrichment.yaml, openapi/abstract-api-email-reputation.yaml,
+  openapi/abstract-api-exchange-rates.yaml, openapi/abstract-api-iban-validation.yaml, openapi/abstract-api-image-processing.yaml,
+  openapi/abstract-api-ip-geolocation.yaml, openapi/abstract-api-ip-intelligence.yaml, openapi/abstract-api-phone-intelligence.yaml,
+  openapi/abstract-api-public-holidays.yaml, openapi/abstract-api-timezones.yaml, openapi/abstract-api-vat-validation.yaml
+  ...
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - query
+schemes:
+- name: apiKey
+  type: apiKey
+  in: query
+  parameter: api_key
+  sources:
+  - openapi/abstract-api-avatars.yaml
+  - openapi/abstract-api-company-enrichment.yaml
+  - openapi/abstract-api-email-reputation.yaml
+  - openapi/abstract-api-exchange-rates.yaml
+  - openapi/abstract-api-iban-validation.yaml
+  - openapi/abstract-api-image-processing.yaml
+  - openapi/abstract-api-ip-geolocation.yaml
+  - openapi/abstract-api-ip-intelligence.yaml
+  - openapi/abstract-api-phone-intelligence.yaml
+  - openapi/abstract-api-public-holidays.yaml
+  - openapi/abstract-api-timezones.yaml
+  - openapi/abstract-api-vat-validation.yaml
+  - openapi/abstract-api-web-scraping.yaml
+  - openapi/abstract-api-website-screenshot.yaml

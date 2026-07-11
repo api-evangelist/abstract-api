@@ -334,6 +334,10 @@ apis:
       images.
 
 common:
+  - type: DomainSecurity
+    url: security/abstract-api-domain-security.yml
+  - type: Authentication
+    url: authentication/abstract-api-authentication.yml
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/abstract-api/overview
   - type: Arazzo
