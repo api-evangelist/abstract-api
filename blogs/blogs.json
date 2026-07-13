@@ -2,18 +2,11 @@
   "repo": "abstract-api",
   "feeds": [
     {
-      "source": "https://www.abstractapi.com/blog",
-      "saved": 0,
-      "error": "HTTP 404 Not Found"
-    },
-    {
-      "source": "https://www.abstractapi.com/guides",
-      "feed_url": "",
-      "saved": 2,
-      "method": "agent-scrape"
+      "source": "https://www.abstractapi.com/pricing",
+      "error": "HTTPError"
     }
   ],
   "post_count": 2,
-  "fetched": "2026-06-27T12:21:33Z",
-  "agent_pulled": "2026-06-27"
+  "fetched": "2026-07-11T11:50:51Z",
+  "agent_pulled": "2026-07-04"
 }
