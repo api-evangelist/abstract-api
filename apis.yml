@@ -334,6 +334,8 @@ apis:
       images.
 
 common:
+  - type: AgenticAccess
+    url: agentic-access/abstract-api-agentic-access.yml
   - type: DomainSecurity
     url: security/abstract-api-domain-security.yml
   - type: Authentication
