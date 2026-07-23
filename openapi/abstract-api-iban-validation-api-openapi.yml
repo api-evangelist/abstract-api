@@ -1,19 +1,19 @@
 openapi: 3.0.3
 info:
-  title: Abstract API - IBAN Validation API
-  description: Determine the validity and details of International Bank Account Numbers (IBANs), including bank name, account type, and country code.
+  title: Abstract API Avatars IBAN Validation API
+  description: Create highly customizable avatar images using a person's name or initials. Supports color, font, and size customization for user profile images.
   version: 1.0.0
   contact:
     url: https://www.abstractapi.com/
   x-generated-from: documentation
 servers:
-  - url: https://ibanvalidation.abstractapi.com/v1
-    description: IBAN Validation API v1
+- url: https://avatars.abstractapi.com/v1
+  description: Avatars API v1
 security:
-  - apiKey: []
+- apiKey: []
 tags:
-  - name: IBAN Validation
-    description: IBAN number validation operations
+- name: IBAN Validation
+  description: IBAN number validation operations
 paths:
   /:
     get:
@@ -21,22 +21,22 @@ paths:
       summary: Abstract API Validate IBAN
       description: Validate an IBAN number and retrieve bank details, account type, and country information.
       tags:
-        - IBAN Validation
+      - IBAN Validation
       parameters:
-        - name: api_key
-          in: query
-          required: true
-          description: Your unique API key for the IBAN Validation API.
-          schema:
-            type: string
-          example: abc123def456
-        - name: iban
-          in: query
-          required: true
-          description: The IBAN to validate.
-          schema:
-            type: string
-          example: GB82WEST12345698765432
+      - name: api_key
+        in: query
+        required: true
+        description: Your unique API key for the IBAN Validation API.
+        schema:
+          type: string
+        example: abc123def456
+      - name: iban
+        in: query
+        required: true
+        description: The IBAN to validate.
+        schema:
+          type: string
+        example: GB82WEST12345698765432
       responses:
         '200':
           description: IBAN validation result
@@ -77,12 +77,16 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  securitySchemes:
-    apiKey:
-      type: apiKey
-      in: query
-      name: api_key
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: The provided API key is invalid
+        error:
+          type: string
+          example: invalid_api_key
     IBANValidationResponse:
       type: object
       description: IBAN validation and enrichment response
@@ -133,12 +137,8 @@ components:
           type: boolean
           description: Whether the country is a SEPA member
           example: true
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          example: The provided API key is invalid
-        error:
-          type: string
-          example: invalid_api_key
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: api_key

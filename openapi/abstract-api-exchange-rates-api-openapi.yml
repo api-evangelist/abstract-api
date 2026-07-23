@@ -1,19 +1,19 @@
 openapi: 3.0.3
 info:
-  title: Abstract API - Exchange Rates API
-  description: Look up the latest exchange rates for 80+ currencies, convert between currencies, and retrieve historical exchange rate data using ISO 4217 currency codes.
+  title: Abstract API Avatars Exchange Rates API
+  description: Create highly customizable avatar images using a person's name or initials. Supports color, font, and size customization for user profile images.
   version: 1.0.0
   contact:
     url: https://www.abstractapi.com/
   x-generated-from: documentation
 servers:
-  - url: https://exchange-rates.abstractapi.com/v1
-    description: Exchange Rates API v1
+- url: https://avatars.abstractapi.com/v1
+  description: Avatars API v1
 security:
-  - apiKey: []
+- apiKey: []
 tags:
-  - name: Exchange Rates
-    description: Currency exchange rate operations
+- name: Exchange Rates
+  description: Currency exchange rate operations
 paths:
   /live:
     get:
@@ -21,29 +21,29 @@ paths:
       summary: Abstract API Get Live Exchange Rates
       description: Get the latest exchange rates for one or more target currencies relative to a base currency.
       tags:
-        - Exchange Rates
+      - Exchange Rates
       parameters:
-        - name: api_key
-          in: query
-          required: true
-          description: Your unique API key for the Exchange Rates API.
-          schema:
-            type: string
-          example: abc123def456
-        - name: base
-          in: query
-          required: true
-          description: Base currency ISO 4217 code.
-          schema:
-            type: string
-          example: USD
-        - name: target
-          in: query
-          required: false
-          description: Target currency or comma-separated list of currencies. Returns all if omitted.
-          schema:
-            type: string
-          example: EUR,GBP,JPY
+      - name: api_key
+        in: query
+        required: true
+        description: Your unique API key for the Exchange Rates API.
+        schema:
+          type: string
+        example: abc123def456
+      - name: base
+        in: query
+        required: true
+        description: Base currency ISO 4217 code.
+        schema:
+          type: string
+        example: USD
+      - name: target
+        in: query
+        required: false
+        description: Target currency or comma-separated list of currencies. Returns all if omitted.
+        schema:
+          type: string
+        example: EUR,GBP,JPY
       responses:
         '200':
           description: Live exchange rates
@@ -83,36 +83,36 @@ paths:
       summary: Abstract API Convert Currency
       description: Convert an amount from one currency to another using current exchange rates.
       tags:
-        - Exchange Rates
+      - Exchange Rates
       parameters:
-        - name: api_key
-          in: query
-          required: true
-          description: Your unique API key.
-          schema:
-            type: string
-          example: abc123def456
-        - name: base
-          in: query
-          required: true
-          description: Source currency ISO 4217 code.
-          schema:
-            type: string
-          example: USD
-        - name: target
-          in: query
-          required: true
-          description: Target currency ISO 4217 code.
-          schema:
-            type: string
-          example: EUR
-        - name: base_amount
-          in: query
-          required: true
-          description: Amount to convert.
-          schema:
-            type: number
-          example: 100
+      - name: api_key
+        in: query
+        required: true
+        description: Your unique API key.
+        schema:
+          type: string
+        example: abc123def456
+      - name: base
+        in: query
+        required: true
+        description: Source currency ISO 4217 code.
+        schema:
+          type: string
+        example: USD
+      - name: target
+        in: query
+        required: true
+        description: Target currency ISO 4217 code.
+        schema:
+          type: string
+        example: EUR
+      - name: base_amount
+        in: query
+        required: true
+        description: Amount to convert.
+        schema:
+          type: number
+        example: 100
       responses:
         '200':
           description: Currency conversion result
@@ -150,37 +150,37 @@ paths:
       summary: Abstract API Get Historical Exchange Rates
       description: Retrieve historical exchange rates for a specific date.
       tags:
-        - Exchange Rates
+      - Exchange Rates
       parameters:
-        - name: api_key
-          in: query
-          required: true
-          description: Your unique API key.
-          schema:
-            type: string
-          example: abc123def456
-        - name: base
-          in: query
-          required: true
-          description: Base currency ISO 4217 code.
-          schema:
-            type: string
-          example: USD
-        - name: target
-          in: query
-          required: false
-          description: Target currency or comma-separated list.
-          schema:
-            type: string
-          example: EUR,GBP
-        - name: date
-          in: query
-          required: true
-          description: Date for historical rates in YYYY-MM-DD format.
-          schema:
-            type: string
-            format: date
-          example: '2026-01-01'
+      - name: api_key
+        in: query
+        required: true
+        description: Your unique API key.
+        schema:
+          type: string
+        example: abc123def456
+      - name: base
+        in: query
+        required: true
+        description: Base currency ISO 4217 code.
+        schema:
+          type: string
+        example: USD
+      - name: target
+        in: query
+        required: false
+        description: Target currency or comma-separated list.
+        schema:
+          type: string
+        example: EUR,GBP
+      - name: date
+        in: query
+        required: true
+        description: Date for historical rates in YYYY-MM-DD format.
+        schema:
+          type: string
+          format: date
+        example: '2026-01-01'
       responses:
         '200':
           description: Historical exchange rates
@@ -214,28 +214,16 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  securitySchemes:
-    apiKey:
-      type: apiKey
-      in: query
-      name: api_key
   schemas:
-    LiveRatesResponse:
+    ErrorResponse:
       type: object
       properties:
-        base:
+        message:
           type: string
-          description: Base currency code
-          example: USD
-        last_updated:
-          type: integer
-          description: Unix timestamp of last update
-          example: 1713518400
-        exchange_rates:
-          type: object
-          description: Map of currency codes to exchange rates
-          additionalProperties:
-            type: number
+          example: The provided API key is invalid
+        error:
+          type: string
+          example: invalid_api_key
     ConvertResponse:
       type: object
       properties:
@@ -272,12 +260,24 @@ components:
           description: Map of currency codes to historical exchange rates
           additionalProperties:
             type: number
-    ErrorResponse:
+    LiveRatesResponse:
       type: object
       properties:
-        message:
+        base:
           type: string
-          example: The provided API key is invalid
-        error:
-          type: string
-          example: invalid_api_key
+          description: Base currency code
+          example: USD
+        last_updated:
+          type: integer
+          description: Unix timestamp of last update
+          example: 1713518400
+        exchange_rates:
+          type: object
+          description: Map of currency codes to exchange rates
+          additionalProperties:
+            type: number
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: api_key

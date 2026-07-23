@@ -1,19 +1,19 @@
 openapi: 3.0.3
 info:
-  title: Abstract API - Phone Intelligence API
-  description: Identify carrier, line type, validity, location, and get deep insights including line status, VoIP detection, and risk scoring for any phone number globally.
+  title: Abstract API Avatars Phone Intelligence API
+  description: Create highly customizable avatar images using a person's name or initials. Supports color, font, and size customization for user profile images.
   version: 1.0.0
   contact:
     url: https://www.abstractapi.com/
   x-generated-from: documentation
 servers:
-  - url: https://phoneintelligence.abstractapi.com/v1
-    description: Phone Intelligence API v1
+- url: https://avatars.abstractapi.com/v1
+  description: Avatars API v1
 security:
-  - apiKey: []
+- apiKey: []
 tags:
-  - name: Phone Intelligence
-    description: Phone number validation and intelligence
+- name: Phone Intelligence
+  description: Phone number validation and intelligence
 paths:
   /:
     get:
@@ -21,29 +21,29 @@ paths:
       summary: Abstract API Get Phone Intelligence
       description: Validate a phone number and retrieve carrier, location, line type, VoIP status, and risk information.
       tags:
-        - Phone Intelligence
+      - Phone Intelligence
       parameters:
-        - name: api_key
-          in: query
-          description: Your unique API key for the Phone Intelligence API.
-          required: true
-          schema:
-            type: string
-          example: abc123def456
-        - name: phone
-          in: query
-          description: The phone number to validate and analyze.
-          required: true
-          schema:
-            type: string
-          example: '+14155552671'
-        - name: country
-          in: query
-          description: ISO 3166-1 alpha-2 country code to specify the phone number origin.
-          required: false
-          schema:
-            type: string
-          example: US
+      - name: api_key
+        in: query
+        description: Your unique API key for the Phone Intelligence API.
+        required: true
+        schema:
+          type: string
+        example: abc123def456
+      - name: phone
+        in: query
+        description: The phone number to validate and analyze.
+        required: true
+        schema:
+          type: string
+        example: '+14155552671'
+      - name: country
+        in: query
+        description: ISO 3166-1 alpha-2 country code to specify the phone number origin.
+        required: false
+        schema:
+          type: string
+        example: US
       responses:
         '200':
           description: Successful phone intelligence response
@@ -89,12 +89,16 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  securitySchemes:
-    apiKey:
-      type: apiKey
-      in: query
-      name: api_key
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: The provided API key is invalid
+        error:
+          type: string
+          example: invalid_api_key
     PhoneIntelligenceResponse:
       type: object
       description: Phone number intelligence response
@@ -118,13 +122,13 @@ components:
           description: Line type
           example: mobile
           enum:
-            - mobile
-            - landline
-            - voip
-            - toll_free
-            - premium_rate
-            - shared_cost
-            - unknown
+          - mobile
+          - landline
+          - voip
+          - toll_free
+          - premium_rate
+          - shared_cost
+          - unknown
         carrier:
           type: string
           description: Carrier or service provider
@@ -152,12 +156,8 @@ components:
           type: string
           description: International dialing prefix
           example: '1'
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          example: The provided API key is invalid
-        error:
-          type: string
-          example: invalid_api_key
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: api_key

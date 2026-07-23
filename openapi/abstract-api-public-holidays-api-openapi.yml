@@ -1,19 +1,19 @@
 openapi: 3.0.3
 info:
-  title: Abstract API - Public Holidays API
-  description: Get public, local, religious, and other holidays for any country. Supports year and country filtering with comprehensive holiday metadata.
+  title: Abstract API Avatars Public Holidays API
+  description: Create highly customizable avatar images using a person's name or initials. Supports color, font, and size customization for user profile images.
   version: 1.0.0
   contact:
     url: https://www.abstractapi.com/
   x-generated-from: documentation
 servers:
-  - url: https://holidays.abstractapi.com/v1
-    description: Public Holidays API v1
+- url: https://avatars.abstractapi.com/v1
+  description: Avatars API v1
 security:
-  - apiKey: []
+- apiKey: []
 tags:
-  - name: Public Holidays
-    description: Holiday lookup operations
+- name: Public Holidays
+  description: Holiday lookup operations
 paths:
   /:
     get:
@@ -21,43 +21,43 @@ paths:
       summary: Abstract API Get Public Holidays
       description: Retrieve public, local, religious, and other holidays for a given country and optional date filter.
       tags:
-        - Public Holidays
+      - Public Holidays
       parameters:
-        - name: api_key
-          in: query
-          required: true
-          description: Your unique API key for the Public Holidays API.
-          schema:
-            type: string
-          example: abc123def456
-        - name: country
-          in: query
-          required: true
-          description: ISO 3166-1 alpha-2 two-letter country code.
-          schema:
-            type: string
-          example: US
-        - name: year
-          in: query
-          required: false
-          description: Year to query (required on free plan). Defaults to current year on paid.
-          schema:
-            type: string
-          example: '2026'
-        - name: month
-          in: query
-          required: false
-          description: Month to query (1-12, required on free plan). Defaults to current month.
-          schema:
-            type: string
-          example: '4'
-        - name: day
-          in: query
-          required: false
-          description: Day to query (1-31, required on free plan). Defaults to current day.
-          schema:
-            type: string
-          example: '19'
+      - name: api_key
+        in: query
+        required: true
+        description: Your unique API key for the Public Holidays API.
+        schema:
+          type: string
+        example: abc123def456
+      - name: country
+        in: query
+        required: true
+        description: ISO 3166-1 alpha-2 two-letter country code.
+        schema:
+          type: string
+        example: US
+      - name: year
+        in: query
+        required: false
+        description: Year to query (required on free plan). Defaults to current year on paid.
+        schema:
+          type: string
+        example: '2026'
+      - name: month
+        in: query
+        required: false
+        description: Month to query (1-12, required on free plan). Defaults to current month.
+        schema:
+          type: string
+        example: '4'
+      - name: day
+        in: query
+        required: false
+        description: Day to query (1-31, required on free plan). Defaults to current day.
+        schema:
+          type: string
+        example: '19'
       responses:
         '200':
           description: List of public holidays
@@ -72,18 +72,18 @@ paths:
                   summary: Default getPublicHolidays 200 response
                   x-microcks-default: true
                   value:
-                    - name: Easter Sunday
-                      name_local: Easter Sunday
-                      language: EN
-                      description: Easter Sunday marks the resurrection of Jesus Christ
-                      country: US
-                      location: ''
-                      type: National
-                      date: 04/20/2025
-                      date_year: '2025'
-                      date_month: '04'
-                      date_day: '20'
-                      week_day: Sunday
+                  - name: Easter Sunday
+                    name_local: Easter Sunday
+                    language: EN
+                    description: Easter Sunday marks the resurrection of Jesus Christ
+                    country: US
+                    location: ''
+                    type: National
+                    date: 04/20/2025
+                    date_year: '2025'
+                    date_month: '04'
+                    date_day: '20'
+                    week_day: Sunday
         '400':
           description: Bad request
           content:
@@ -100,12 +100,16 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  securitySchemes:
-    apiKey:
-      type: apiKey
-      in: query
-      name: api_key
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: The provided API key is invalid
+        error:
+          type: string
+          example: invalid_api_key
     Holiday:
       type: object
       description: A public holiday entry
@@ -139,12 +143,12 @@ components:
           description: Holiday classification
           example: National
           enum:
-            - National
-            - Local
-            - Religious
-            - Observance
-            - Season
-            - Clock Change/Daylight Saving Time
+          - National
+          - Local
+          - Religious
+          - Observance
+          - Season
+          - Clock Change/Daylight Saving Time
         date:
           type: string
           description: Holiday date in MM/DD/YYYY format
@@ -165,12 +169,8 @@ components:
           type: string
           description: Day of the week
           example: Sunday
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          example: The provided API key is invalid
-        error:
-          type: string
-          example: invalid_api_key
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: api_key

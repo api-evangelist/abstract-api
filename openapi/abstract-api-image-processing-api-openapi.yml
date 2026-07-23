@@ -1,19 +1,19 @@
 openapi: 3.0.3
 info:
-  title: Abstract API - Image Processing API
-  description: Compress, convert, and optimize images by URL or direct upload. Supports format conversion, quality adjustment, and size reduction.
+  title: Abstract API Avatars Image Processing API
+  description: Create highly customizable avatar images using a person's name or initials. Supports color, font, and size customization for user profile images.
   version: 1.0.0
   contact:
     url: https://www.abstractapi.com/
   x-generated-from: documentation
 servers:
-  - url: https://images.abstractapi.com/v1
-    description: Image Processing API v1
+- url: https://avatars.abstractapi.com/v1
+  description: Avatars API v1
 security:
-  - apiKey: []
+- apiKey: []
 tags:
-  - name: Image Processing
-    description: Image compression and optimization operations
+- name: Image Processing
+  description: Image compression and optimization operations
 paths:
   /url:
     get:
@@ -21,51 +21,51 @@ paths:
       summary: Abstract API Process Image by URL
       description: Compress, convert, or optimize an image from a given URL.
       tags:
-        - Image Processing
+      - Image Processing
       parameters:
-        - name: api_key
-          in: query
-          required: true
-          description: Your unique API key for the Image Processing API.
-          schema:
-            type: string
-          example: abc123def456
-        - name: url
-          in: query
-          required: true
-          description: URL of the image to process.
-          schema:
-            type: string
-            format: uri
-          example: https://www.example.com/image.png
-        - name: lossy
-          in: query
-          required: false
-          description: Whether to apply lossy compression. Defaults to true.
-          schema:
-            type: boolean
-          example: true
-        - name: quality
-          in: query
-          required: false
-          description: Image quality from 1 to 100 (for lossy compression).
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 100
-          example: 80
-        - name: output_format
-          in: query
-          required: false
-          description: Target output format (jpeg, png, webp, gif).
-          schema:
-            type: string
-            enum:
-              - jpeg
-              - png
-              - webp
-              - gif
-          example: webp
+      - name: api_key
+        in: query
+        required: true
+        description: Your unique API key for the Image Processing API.
+        schema:
+          type: string
+        example: abc123def456
+      - name: url
+        in: query
+        required: true
+        description: URL of the image to process.
+        schema:
+          type: string
+          format: uri
+        example: https://www.example.com/image.png
+      - name: lossy
+        in: query
+        required: false
+        description: Whether to apply lossy compression. Defaults to true.
+        schema:
+          type: boolean
+        example: true
+      - name: quality
+        in: query
+        required: false
+        description: Image quality from 1 to 100 (for lossy compression).
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+        example: 80
+      - name: output_format
+        in: query
+        required: false
+        description: Target output format (jpeg, png, webp, gif).
+        schema:
+          type: string
+          enum:
+          - jpeg
+          - png
+          - webp
+          - gif
+        example: webp
       responses:
         '200':
           description: Processed image result
@@ -99,12 +99,16 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  securitySchemes:
-    apiKey:
-      type: apiKey
-      in: query
-      name: api_key
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: The provided API key is invalid
+        error:
+          type: string
+          example: invalid_api_key
     ImageProcessingResponse:
       type: object
       description: Image processing result
@@ -130,12 +134,8 @@ components:
           format: uri
           description: URL to download the processed image
           example: https://dl.abstractapi.com/processed/abc123.webp
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          example: The provided API key is invalid
-        error:
-          type: string
-          example: invalid_api_key
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: api_key

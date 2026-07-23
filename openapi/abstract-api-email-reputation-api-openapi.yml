@@ -1,19 +1,19 @@
 openapi: 3.0.3
 info:
-  title: Abstract API - Email Reputation API
-  description: Validate email addresses for deliverability, detect disposable or risky domains, verify SMTP/MX records, and enrich email data with sender information, breach history, and risk scoring.
+  title: Abstract API Avatars Email Reputation API
+  description: Create highly customizable avatar images using a person's name or initials. Supports color, font, and size customization for user profile images.
   version: 1.0.0
   contact:
     url: https://www.abstractapi.com/
   x-generated-from: documentation
 servers:
-  - url: https://emailreputation.abstractapi.com/v1
-    description: Email Reputation API v1
+- url: https://avatars.abstractapi.com/v1
+  description: Avatars API v1
 security:
-  - apiKey: []
+- apiKey: []
 tags:
-  - name: Email Reputation
-    description: Email validation and reputation operations
+- name: Email Reputation
+  description: Email validation and reputation operations
 paths:
   /:
     get:
@@ -21,23 +21,23 @@ paths:
       summary: Abstract API Get Email Reputation
       description: Validate an email address and retrieve reputation, deliverability, and enrichment data.
       tags:
-        - Email Reputation
+      - Email Reputation
       parameters:
-        - name: api_key
-          in: query
-          description: Your unique API key for the Email Reputation API.
-          required: true
-          schema:
-            type: string
-          example: abc123def456
-        - name: email
-          in: query
-          description: The email address to validate and analyze.
-          required: true
-          schema:
-            type: string
-            format: email
-          example: test@example.com
+      - name: api_key
+        in: query
+        description: Your unique API key for the Email Reputation API.
+        required: true
+        schema:
+          type: string
+        example: abc123def456
+      - name: email
+        in: query
+        description: The email address to validate and analyze.
+        required: true
+        schema:
+          type: string
+          format: email
+        example: test@example.com
       responses:
         '200':
           description: Successful email reputation lookup
@@ -58,7 +58,7 @@ paths:
                       is_smtp_valid: true
                       is_mx_valid: true
                       mx_records:
-                        - mx.example.com
+                      - mx.example.com
                     quality:
                       score: 0.92
                       is_free_email: false
@@ -96,34 +96,51 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  securitySchemes:
-    apiKey:
-      type: apiKey
-      in: query
-      name: api_key
-      description: Unique API key per Abstract API service
   schemas:
-    EmailReputationResponse:
+    DomainInfo:
       type: object
-      description: Email reputation and validation response
+      description: Domain-level information
       properties:
-        email:
-          type: string
-          format: email
-          description: The email address analyzed
-          example: test@example.com
-        deliverability:
-          $ref: '#/components/schemas/Deliverability'
-        quality:
-          $ref: '#/components/schemas/EmailQuality'
-        sender:
-          $ref: '#/components/schemas/SenderInfo'
         domain:
-          $ref: '#/components/schemas/DomainInfo'
-        risk:
-          $ref: '#/components/schemas/RiskInfo'
-        breaches:
-          $ref: '#/components/schemas/BreachInfo'
+          type: string
+          description: Domain extracted from email
+          example: example.com
+        domain_age:
+          type: integer
+          description: Age of the domain in days
+          example: 9000
+        is_live_site:
+          type: boolean
+          description: Whether the domain hosts a live website
+          example: true
+        registrar:
+          type: string
+          description: Domain registrar name
+          example: GoDaddy
+        registrar_url:
+          type: string
+          format: uri
+          description: URL of the registrar
+          example: https://www.godaddy.com
+        date_registered:
+          type: string
+          format: date
+          description: Date the domain was registered
+          example: '2015-03-10'
+        date_last_renewed:
+          type: string
+          format: date
+          description: Date the domain was last renewed
+          example: '2025-03-10'
+        date_expires:
+          type: string
+          format: date
+          description: Date the domain expires
+          example: '2026-03-10'
+        is_risky_tld:
+          type: boolean
+          description: Whether the TLD is associated with risky domains
+          example: false
     Deliverability:
       type: object
       description: Email deliverability information
@@ -133,10 +150,10 @@ components:
           description: Overall deliverability status
           example: DELIVERABLE
           enum:
-            - DELIVERABLE
-            - UNDELIVERABLE
-            - RISKY
-            - UNKNOWN
+          - DELIVERABLE
+          - UNDELIVERABLE
+          - RISKY
+          - UNKNOWN
         status_detail:
           type: string
           description: Detailed deliverability reason
@@ -159,7 +176,7 @@ components:
           items:
             type: string
           example:
-            - mx.example.com
+          - mx.example.com
     EmailQuality:
       type: object
       description: Email quality signals
@@ -205,74 +222,6 @@ components:
           type: integer
           description: Minimum estimated age of the email in days
           example: 365
-    SenderInfo:
-      type: object
-      description: Sender identity information
-      properties:
-        first_name:
-          type: string
-          description: Inferred first name of sender
-          example: Jane
-        last_name:
-          type: string
-          description: Inferred last name of sender
-          example: Smith
-        email_provider_name:
-          type: string
-          description: Name of the email provider
-          example: Google Workspace
-        organization_name:
-          type: string
-          description: Organization associated with the email
-          example: Example Corp
-        organization_type:
-          type: string
-          description: Type of organization
-          example: business
-    DomainInfo:
-      type: object
-      description: Domain-level information
-      properties:
-        domain:
-          type: string
-          description: Domain extracted from email
-          example: example.com
-        domain_age:
-          type: integer
-          description: Age of the domain in days
-          example: 9000
-        is_live_site:
-          type: boolean
-          description: Whether the domain hosts a live website
-          example: true
-        registrar:
-          type: string
-          description: Domain registrar name
-          example: GoDaddy
-        registrar_url:
-          type: string
-          format: uri
-          description: URL of the registrar
-          example: https://www.godaddy.com
-        date_registered:
-          type: string
-          format: date
-          description: Date the domain was registered
-          example: '2015-03-10'
-        date_last_renewed:
-          type: string
-          format: date
-          description: Date the domain was last renewed
-          example: '2025-03-10'
-        date_expires:
-          type: string
-          format: date
-          description: Date the domain expires
-          example: '2026-03-10'
-        is_risky_tld:
-          type: boolean
-          description: Whether the TLD is associated with risky domains
-          example: false
     RiskInfo:
       type: object
       description: Risk assessment for the email
@@ -282,19 +231,40 @@ components:
           description: Risk level of the specific email address
           example: low
           enum:
-            - low
-            - medium
-            - high
-            - critical
+          - low
+          - medium
+          - high
+          - critical
         domain_risk_status:
           type: string
           description: Risk level of the domain
           example: low
           enum:
-            - low
-            - medium
-            - high
-            - critical
+          - low
+          - medium
+          - high
+          - critical
+    EmailReputationResponse:
+      type: object
+      description: Email reputation and validation response
+      properties:
+        email:
+          type: string
+          format: email
+          description: The email address analyzed
+          example: test@example.com
+        deliverability:
+          $ref: '#/components/schemas/Deliverability'
+        quality:
+          $ref: '#/components/schemas/EmailQuality'
+        sender:
+          $ref: '#/components/schemas/SenderInfo'
+        domain:
+          $ref: '#/components/schemas/DomainInfo'
+        risk:
+          $ref: '#/components/schemas/RiskInfo'
+        breaches:
+          $ref: '#/components/schemas/BreachInfo'
     BreachInfo:
       type: object
       description: Data breach history for the email
@@ -319,7 +289,7 @@ components:
           items:
             type: string
           example:
-            - breached-site.com
+          - breached-site.com
     ErrorResponse:
       type: object
       description: Error response from the API
@@ -332,3 +302,32 @@ components:
           type: string
           description: Error code identifier
           example: invalid_api_key
+    SenderInfo:
+      type: object
+      description: Sender identity information
+      properties:
+        first_name:
+          type: string
+          description: Inferred first name of sender
+          example: Jane
+        last_name:
+          type: string
+          description: Inferred last name of sender
+          example: Smith
+        email_provider_name:
+          type: string
+          description: Name of the email provider
+          example: Google Workspace
+        organization_name:
+          type: string
+          description: Organization associated with the email
+          example: Example Corp
+        organization_type:
+          type: string
+          description: Type of organization
+          example: business
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: api_key
