@@ -3,7 +3,20 @@ url: >-
   https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/apis.yml
 name: Abstract API
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/abstract-api.png
 tags:
   - Avatars
   - Company Enrichment
@@ -34,305 +47,1210 @@ created: '2025-02-24'
 modified: '2026-04-19'
 specificationVersion: '0.19'
 apis:
-  - aid: abstract-api:email-reputation
-    name: Email Reputation API
-    tags:
-    - Email Validation
-    - Email Reputation
-    - Fraud Detection
-    humanURL: https://www.abstractapi.com/api/email-verification-validation-api
-    baseURL: https://emailreputation.abstractapi.com/v1/
-    properties:
-    - url: https://docs.abstractapi.com/api/email-reputation.md
-      type: Documentation
-    - url: openapi/abstract-api-email-reputation.yaml
-      type: OpenAPI
-    - url: json-schema/email-reputation-breach-info-schema.json
-      type: JSONSchema
-    - url: examples/email-reputation-breach-info-example.json
-      type: Examples
-    description: >-
-      Validate email addresses for deliverability, detect disposable or risky
-      domains, verify SMTP/MX records, and enrich email data with sender
-      information, breach history, and risk scoring.
-
-  - aid: abstract-api:phone-intelligence
-    name: Phone Intelligence API
-    tags:
-    - Phone Validation
-    - Phone Intelligence
-    - Fraud Detection
-    humanURL: https://www.abstractapi.com/api/phone-validation-api
-    baseURL: https://phoneintelligence.abstractapi.com/v1/
-    properties:
-    - url: https://docs.abstractapi.com/api/phone-intelligence.md
-      type: Documentation
-    - url: openapi/abstract-api-phone-intelligence.yaml
-      type: OpenAPI
-    - url: json-schema/phone-intelligence-phone-country-schema.json
-      type: JSONSchema
-    - url: examples/phone-intelligence-phone-country-example.json
-      type: Examples
-    description: >-
-      Identify carrier, line type, validity, location, and get deep insights
-      including line status, VoIP detection, and risk scoring for any phone
-      number globally.
-
-  - aid: abstract-api:ip-geolocation
-    name: IP Geolocation API
-    tags:
-    - IP Geolocation
-    - IP Addresses
-    - Geolocation
-    humanURL: https://www.abstractapi.com/api/ip-geolocation-api
-    baseURL: https://ipgeolocation.abstractapi.com/v1/
-    properties:
-    - url: https://www.abstractapi.com/api/ip-geolocation-api
-      type: Documentation
-    - url: openapi/abstract-api-ip-geolocation.yaml
-      type: OpenAPI
-    - url: json-schema/ip-geolocation-currency-info-schema.json
-      type: JSONSchema
-    - url: examples/ip-geolocation-currency-info-example.json
-      type: Examples
-    description: >-
-      Geolocate any IPv4 or IPv6 address to country, region, city, coordinates,
-      timezone, currency, and flag data covering 4 billion+ IP addresses across
-      250,000+ cities worldwide.
-
-  - aid: abstract-api:ip-intelligence
-    name: IP Intelligence API
-    tags:
-    - IP Intelligence
-    - IP Addresses
-    - Security
-    - Fraud Detection
-    humanURL: https://www.abstractapi.com/api/ip-intelligence
-    baseURL: https://ip-intelligence.abstractapi.com/v1/
-    properties:
-    - url: https://docs.abstractapi.com/api/ip-intelligence.md
-      type: Documentation
-    - url: openapi/abstract-api-ip-intelligence.yaml
-      type: OpenAPI
-    - url: json-schema/ip-intelligence-asn-info-schema.json
-      type: JSONSchema
-    - url: examples/ip-intelligence-asn-info-example.json
-      type: Examples
-    description: >-
-      Detect VPNs, proxies, Tor exit nodes, abuse potential, hosting services,
-      relays, and mobile IPs. Also provides ASN, company, location, timezone,
-      flag, and currency data for any IP address.
-
-  - aid: abstract-api:company-enrichment
-    name: Company Enrichment API
-    tags:
-    - Company Enrichment
-    - Business Data
-    - Data Enrichment
-    humanURL: https://www.abstractapi.com/api/company-enrichment
-    baseURL: https://companyenrichment.abstractapi.com/v1/
-    properties:
-    - url: https://docs.abstractapi.com/api/company-enrichment.md
-      type: Documentation
-    - url: openapi/abstract-api-company-enrichment.yaml
-      type: OpenAPI
-    - url: json-schema/company-enrichment-company-enrichment-response-schema.json
-      type: JSONSchema
-    - url: examples/company-enrichment-company-enrichment-response-example.json
-      type: Examples
-    description: >-
-      Retrieve comprehensive details about businesses using their domain or
-      email address, including name, logo, headcount, location, industry, and
-      more.
-
-  - aid: abstract-api:exchange-rates
-    name: Exchange Rates API
-    tags:
-    - Currencies
-    - Exchange Rates
-    - Finance
-    humanURL: https://www.abstractapi.com/api/exchange-rate-api
-    baseURL: https://exchange-rates.abstractapi.com/v1/
-    properties:
-    - url: https://docs.abstractapi.com/api/exchange-rates.md
-      type: Documentation
-    - url: openapi/abstract-api-exchange-rates.yaml
-      type: OpenAPI
-    - url: json-schema/exchange-rates-convert-response-schema.json
-      type: JSONSchema
-    - url: examples/exchange-rates-convert-response-example.json
-      type: Examples
-    description: >-
-      Look up the latest exchange rates for 80+ currencies, convert between
-      currencies, and retrieve historical exchange rate data using ISO 4217
-      currency codes.
-
-  - aid: abstract-api:public-holidays
-    name: Public Holidays API
-    tags:
-    - Public Holidays
-    - Calendar
-    - Global Data
-    humanURL: https://www.abstractapi.com/api/holidays-api
-    baseURL: https://holidays.abstractapi.com/v1/
-    properties:
-    - url: https://docs.abstractapi.com/api/holidays.md
-      type: Documentation
-    - url: openapi/abstract-api-public-holidays.yaml
-      type: OpenAPI
-    - url: json-schema/public-holidays-holiday-schema.json
-      type: JSONSchema
-    - url: examples/public-holidays-holiday-example.json
-      type: Examples
-    description: >-
-      Get public, local, religious, and other holidays for any country. Supports
-      year and country filtering with comprehensive holiday metadata.
-
-  - aid: abstract-api:timezones
-    name: Timezone API
-    tags:
-    - Timezones
-    - Time
-    - Date
-    - Calendar
-    humanURL: https://www.abstractapi.com/api/time-date-timezone-api
-    baseURL: https://timezone.abstractapi.com/v1/
-    properties:
-    - url: https://docs.abstractapi.com/api/timezones.md
-      type: Documentation
-    - url: openapi/abstract-api-timezones.yaml
-      type: OpenAPI
-    - url: json-schema/timezones-convert-time-response-schema.json
-      type: JSONSchema
-    - url: examples/timezones-convert-time-response-example.json
-      type: Examples
-    description: >-
-      Find, convert, and manage time and timezone data across the world.
-      Supports lookup by location or coordinates and returns local time,
-      timezone abbreviation, UTC offset, and DST information.
-
-  - aid: abstract-api:vat-validation
-    name: VAT Validation API
-    tags:
-    - VAT Validation
-    - Finance
-    - Compliance
-    - Tax
-    humanURL: https://www.abstractapi.com/api/vat-validation-rates-api
-    baseURL: https://vat.abstractapi.com/v1/
-    properties:
-    - url: https://docs.abstractapi.com/api/vat-validation.md
-      type: Documentation
-    - url: openapi/abstract-api-vat-validation.yaml
-      type: OpenAPI
-    - url: json-schema/vat-validation-vat-calculate-response-schema.json
-      type: JSONSchema
-    - url: examples/vat-validation-vat-calculate-response-example.json
-      type: Examples
-    description: >-
-      Validate VAT numbers, look up current VAT rates by country, and calculate
-      VAT-inclusive or VAT-exclusive prices to stay compliant for domestic and
-      cross-border sales.
-
-  - aid: abstract-api:iban-validation
-    name: IBAN Validation API
-    tags:
-    - IBAN Validation
-    - Finance
-    - Banking
-    humanURL: https://www.abstractapi.com/api/iban-validation
-    baseURL: https://ibanvalidation.abstractapi.com/v1/
-    properties:
-    - url: https://docs.abstractapi.com/api/iban-validation.md
-      type: Documentation
-    - url: openapi/abstract-api-iban-validation.yaml
-      type: OpenAPI
-    - url: json-schema/iban-validation-iban-validation-response-schema.json
-      type: JSONSchema
-    - url: examples/iban-validation-iban-validation-response-example.json
-      type: Examples
-    description: >-
-      Determine the validity and details of International Bank Account Numbers
-      (IBANs), including bank name, account type, and country code.
-
-  - aid: abstract-api:website-screenshot
-    name: Website Screenshot API
-    tags:
-    - Screenshots
-    - Web Capture
-    - Images
-    humanURL: https://www.abstractapi.com/api/website-screenshot-api
-    baseURL: https://screenshot.abstractapi.com/v1/
-    properties:
-    - url: https://docs.abstractapi.com/api/screenshot.md
-      type: Documentation
-    - url: openapi/abstract-api-website-screenshot.yaml
-      type: OpenAPI
-    description: >-
-      Capture high-quality screenshots of any website with optional
-      customizations including CSS injection, delay settings, and viewport
-      configuration.
-
-  - aid: abstract-api:image-processing
-    name: Image Processing API
-    tags:
-    - Image Processing
-    - Images
-    - Optimization
-    humanURL: https://www.abstractapi.com/api/image-processing-optimization-api
-    baseURL: https://images.abstractapi.com/v1/
-    properties:
-    - url: https://docs.abstractapi.com/api/images.md
-      type: Documentation
-    - url: openapi/abstract-api-image-processing.yaml
-      type: OpenAPI
-    - url: json-schema/image-processing-image-processing-response-schema.json
-      type: JSONSchema
-    - url: examples/image-processing-image-processing-response-example.json
-      type: Examples
-    description: >-
-      Compress, convert, and optimize images by URL or direct upload. Supports
-      format conversion, quality adjustment, and size reduction.
-
-  - aid: abstract-api:web-scraping
-    name: Web Scraping API
-    tags:
-    - Web Scraping
-    - Data Extraction
-    - HTML
-    humanURL: https://www.abstractapi.com/api/web-scraping-api
-    baseURL: https://scrape.abstractapi.com/v1/
-    properties:
-    - url: https://docs.abstractapi.com/api/scrape.md
-      type: Documentation
-    - url: openapi/abstract-api-web-scraping.yaml
-      type: OpenAPI
-    - url: json-schema/web-scraping-web-scraping-response-schema.json
-      type: JSONSchema
-    - url: examples/web-scraping-web-scraping-response-example.json
-      type: Examples
-    description: >-
-      Extract data from any website by providing the target URL. Handles
-      JavaScript rendering and returns the full HTML content of any web page.
-
-  - aid: abstract-api:avatars
-    name: Avatars API
-    tags:
-    - Avatars
-    - Images
-    - User Interface
-    humanURL: https://www.abstractapi.com/api/user-avatar-api
-    baseURL: https://avatars.abstractapi.com/v1/
-    properties:
-    - url: https://docs.abstractapi.com/api/avatars.md
-      type: Documentation
-    - url: openapi/abstract-api-avatars.yaml
-      type: OpenAPI
-    description: >-
-      Create highly customizable avatar images using a person's name or
-      initials. Supports color, font, and size customization for user profile
-      images.
-
+- aid: abstract-api:abstract-api-avatars-api
+  name: Abstract API Avatars API
+  description: User avatar generation operations
+  humanURL: https://www.abstractapi.com/api/email-verification-validation-api
+  baseURL: https://emailreputation.abstractapi.com/v1/
+  tags:
+  - Avatars
+  properties:
+  - type: OpenAPI
+    url: openapi/abstract-api-avatars-api-openapi.yml
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/email-reputation.md
+  - type: JSONSchema
+    url: json-schema/email-reputation-breach-info-schema.json
+  - type: Examples
+    url: examples/email-reputation-breach-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/phone-intelligence.md
+  - type: JSONSchema
+    url: json-schema/phone-intelligence-phone-country-schema.json
+  - type: Examples
+    url: examples/phone-intelligence-phone-country-example.json
+  - type: Documentation
+    url: https://www.abstractapi.com/api/ip-geolocation-api
+  - type: JSONSchema
+    url: json-schema/ip-geolocation-currency-info-schema.json
+  - type: Examples
+    url: examples/ip-geolocation-currency-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/ip-intelligence.md
+  - type: JSONSchema
+    url: json-schema/ip-intelligence-asn-info-schema.json
+  - type: Examples
+    url: examples/ip-intelligence-asn-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/company-enrichment.md
+  - type: JSONSchema
+    url: json-schema/company-enrichment-company-enrichment-response-schema.json
+  - type: Examples
+    url: examples/company-enrichment-company-enrichment-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/exchange-rates.md
+  - type: JSONSchema
+    url: json-schema/exchange-rates-convert-response-schema.json
+  - type: Examples
+    url: examples/exchange-rates-convert-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/holidays.md
+  - type: JSONSchema
+    url: json-schema/public-holidays-holiday-schema.json
+  - type: Examples
+    url: examples/public-holidays-holiday-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/timezones.md
+  - type: JSONSchema
+    url: json-schema/timezones-convert-time-response-schema.json
+  - type: Examples
+    url: examples/timezones-convert-time-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/vat-validation.md
+  - type: JSONSchema
+    url: json-schema/vat-validation-vat-calculate-response-schema.json
+  - type: Examples
+    url: examples/vat-validation-vat-calculate-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/iban-validation.md
+  - type: JSONSchema
+    url: json-schema/iban-validation-iban-validation-response-schema.json
+  - type: Examples
+    url: examples/iban-validation-iban-validation-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/screenshot.md
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/images.md
+  - type: JSONSchema
+    url: json-schema/image-processing-image-processing-response-schema.json
+  - type: Examples
+    url: examples/image-processing-image-processing-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/scrape.md
+  - type: JSONSchema
+    url: json-schema/web-scraping-web-scraping-response-schema.json
+  - type: Examples
+    url: examples/web-scraping-web-scraping-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/avatars.md
+- aid: abstract-api:abstract-api-company-enrichment-api
+  name: Abstract API Company Enrichment API
+  description: Company data enrichment operations
+  humanURL: https://www.abstractapi.com/api/email-verification-validation-api
+  baseURL: https://emailreputation.abstractapi.com/v1/
+  tags:
+  - Company Enrichment
+  properties:
+  - type: OpenAPI
+    url: openapi/abstract-api-company-enrichment-api-openapi.yml
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/email-reputation.md
+  - type: JSONSchema
+    url: json-schema/email-reputation-breach-info-schema.json
+  - type: Examples
+    url: examples/email-reputation-breach-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/phone-intelligence.md
+  - type: JSONSchema
+    url: json-schema/phone-intelligence-phone-country-schema.json
+  - type: Examples
+    url: examples/phone-intelligence-phone-country-example.json
+  - type: Documentation
+    url: https://www.abstractapi.com/api/ip-geolocation-api
+  - type: JSONSchema
+    url: json-schema/ip-geolocation-currency-info-schema.json
+  - type: Examples
+    url: examples/ip-geolocation-currency-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/ip-intelligence.md
+  - type: JSONSchema
+    url: json-schema/ip-intelligence-asn-info-schema.json
+  - type: Examples
+    url: examples/ip-intelligence-asn-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/company-enrichment.md
+  - type: JSONSchema
+    url: json-schema/company-enrichment-company-enrichment-response-schema.json
+  - type: Examples
+    url: examples/company-enrichment-company-enrichment-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/exchange-rates.md
+  - type: JSONSchema
+    url: json-schema/exchange-rates-convert-response-schema.json
+  - type: Examples
+    url: examples/exchange-rates-convert-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/holidays.md
+  - type: JSONSchema
+    url: json-schema/public-holidays-holiday-schema.json
+  - type: Examples
+    url: examples/public-holidays-holiday-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/timezones.md
+  - type: JSONSchema
+    url: json-schema/timezones-convert-time-response-schema.json
+  - type: Examples
+    url: examples/timezones-convert-time-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/vat-validation.md
+  - type: JSONSchema
+    url: json-schema/vat-validation-vat-calculate-response-schema.json
+  - type: Examples
+    url: examples/vat-validation-vat-calculate-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/iban-validation.md
+  - type: JSONSchema
+    url: json-schema/iban-validation-iban-validation-response-schema.json
+  - type: Examples
+    url: examples/iban-validation-iban-validation-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/screenshot.md
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/images.md
+  - type: JSONSchema
+    url: json-schema/image-processing-image-processing-response-schema.json
+  - type: Examples
+    url: examples/image-processing-image-processing-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/scrape.md
+  - type: JSONSchema
+    url: json-schema/web-scraping-web-scraping-response-schema.json
+  - type: Examples
+    url: examples/web-scraping-web-scraping-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/avatars.md
+- aid: abstract-api:abstract-api-email-reputation-api
+  name: Abstract API Email Reputation API
+  description: Email validation and reputation operations
+  humanURL: https://www.abstractapi.com/api/email-verification-validation-api
+  baseURL: https://emailreputation.abstractapi.com/v1/
+  tags:
+  - Email Reputation
+  properties:
+  - type: OpenAPI
+    url: openapi/abstract-api-email-reputation-api-openapi.yml
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/email-reputation.md
+  - type: JSONSchema
+    url: json-schema/email-reputation-breach-info-schema.json
+  - type: Examples
+    url: examples/email-reputation-breach-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/phone-intelligence.md
+  - type: JSONSchema
+    url: json-schema/phone-intelligence-phone-country-schema.json
+  - type: Examples
+    url: examples/phone-intelligence-phone-country-example.json
+  - type: Documentation
+    url: https://www.abstractapi.com/api/ip-geolocation-api
+  - type: JSONSchema
+    url: json-schema/ip-geolocation-currency-info-schema.json
+  - type: Examples
+    url: examples/ip-geolocation-currency-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/ip-intelligence.md
+  - type: JSONSchema
+    url: json-schema/ip-intelligence-asn-info-schema.json
+  - type: Examples
+    url: examples/ip-intelligence-asn-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/company-enrichment.md
+  - type: JSONSchema
+    url: json-schema/company-enrichment-company-enrichment-response-schema.json
+  - type: Examples
+    url: examples/company-enrichment-company-enrichment-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/exchange-rates.md
+  - type: JSONSchema
+    url: json-schema/exchange-rates-convert-response-schema.json
+  - type: Examples
+    url: examples/exchange-rates-convert-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/holidays.md
+  - type: JSONSchema
+    url: json-schema/public-holidays-holiday-schema.json
+  - type: Examples
+    url: examples/public-holidays-holiday-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/timezones.md
+  - type: JSONSchema
+    url: json-schema/timezones-convert-time-response-schema.json
+  - type: Examples
+    url: examples/timezones-convert-time-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/vat-validation.md
+  - type: JSONSchema
+    url: json-schema/vat-validation-vat-calculate-response-schema.json
+  - type: Examples
+    url: examples/vat-validation-vat-calculate-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/iban-validation.md
+  - type: JSONSchema
+    url: json-schema/iban-validation-iban-validation-response-schema.json
+  - type: Examples
+    url: examples/iban-validation-iban-validation-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/screenshot.md
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/images.md
+  - type: JSONSchema
+    url: json-schema/image-processing-image-processing-response-schema.json
+  - type: Examples
+    url: examples/image-processing-image-processing-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/scrape.md
+  - type: JSONSchema
+    url: json-schema/web-scraping-web-scraping-response-schema.json
+  - type: Examples
+    url: examples/web-scraping-web-scraping-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/avatars.md
+- aid: abstract-api:abstract-api-exchange-rates-api
+  name: Abstract API Exchange Rates API
+  description: Currency exchange rate operations
+  humanURL: https://www.abstractapi.com/api/email-verification-validation-api
+  baseURL: https://emailreputation.abstractapi.com/v1/
+  tags:
+  - Exchange Rates
+  properties:
+  - type: OpenAPI
+    url: openapi/abstract-api-exchange-rates-api-openapi.yml
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/email-reputation.md
+  - type: JSONSchema
+    url: json-schema/email-reputation-breach-info-schema.json
+  - type: Examples
+    url: examples/email-reputation-breach-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/phone-intelligence.md
+  - type: JSONSchema
+    url: json-schema/phone-intelligence-phone-country-schema.json
+  - type: Examples
+    url: examples/phone-intelligence-phone-country-example.json
+  - type: Documentation
+    url: https://www.abstractapi.com/api/ip-geolocation-api
+  - type: JSONSchema
+    url: json-schema/ip-geolocation-currency-info-schema.json
+  - type: Examples
+    url: examples/ip-geolocation-currency-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/ip-intelligence.md
+  - type: JSONSchema
+    url: json-schema/ip-intelligence-asn-info-schema.json
+  - type: Examples
+    url: examples/ip-intelligence-asn-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/company-enrichment.md
+  - type: JSONSchema
+    url: json-schema/company-enrichment-company-enrichment-response-schema.json
+  - type: Examples
+    url: examples/company-enrichment-company-enrichment-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/exchange-rates.md
+  - type: JSONSchema
+    url: json-schema/exchange-rates-convert-response-schema.json
+  - type: Examples
+    url: examples/exchange-rates-convert-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/holidays.md
+  - type: JSONSchema
+    url: json-schema/public-holidays-holiday-schema.json
+  - type: Examples
+    url: examples/public-holidays-holiday-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/timezones.md
+  - type: JSONSchema
+    url: json-schema/timezones-convert-time-response-schema.json
+  - type: Examples
+    url: examples/timezones-convert-time-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/vat-validation.md
+  - type: JSONSchema
+    url: json-schema/vat-validation-vat-calculate-response-schema.json
+  - type: Examples
+    url: examples/vat-validation-vat-calculate-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/iban-validation.md
+  - type: JSONSchema
+    url: json-schema/iban-validation-iban-validation-response-schema.json
+  - type: Examples
+    url: examples/iban-validation-iban-validation-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/screenshot.md
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/images.md
+  - type: JSONSchema
+    url: json-schema/image-processing-image-processing-response-schema.json
+  - type: Examples
+    url: examples/image-processing-image-processing-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/scrape.md
+  - type: JSONSchema
+    url: json-schema/web-scraping-web-scraping-response-schema.json
+  - type: Examples
+    url: examples/web-scraping-web-scraping-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/avatars.md
+- aid: abstract-api:abstract-api-iban-validation-api
+  name: Abstract API IBAN Validation API
+  description: IBAN number validation operations
+  humanURL: https://www.abstractapi.com/api/email-verification-validation-api
+  baseURL: https://emailreputation.abstractapi.com/v1/
+  tags:
+  - IBAN Validation
+  properties:
+  - type: OpenAPI
+    url: openapi/abstract-api-iban-validation-api-openapi.yml
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/email-reputation.md
+  - type: JSONSchema
+    url: json-schema/email-reputation-breach-info-schema.json
+  - type: Examples
+    url: examples/email-reputation-breach-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/phone-intelligence.md
+  - type: JSONSchema
+    url: json-schema/phone-intelligence-phone-country-schema.json
+  - type: Examples
+    url: examples/phone-intelligence-phone-country-example.json
+  - type: Documentation
+    url: https://www.abstractapi.com/api/ip-geolocation-api
+  - type: JSONSchema
+    url: json-schema/ip-geolocation-currency-info-schema.json
+  - type: Examples
+    url: examples/ip-geolocation-currency-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/ip-intelligence.md
+  - type: JSONSchema
+    url: json-schema/ip-intelligence-asn-info-schema.json
+  - type: Examples
+    url: examples/ip-intelligence-asn-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/company-enrichment.md
+  - type: JSONSchema
+    url: json-schema/company-enrichment-company-enrichment-response-schema.json
+  - type: Examples
+    url: examples/company-enrichment-company-enrichment-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/exchange-rates.md
+  - type: JSONSchema
+    url: json-schema/exchange-rates-convert-response-schema.json
+  - type: Examples
+    url: examples/exchange-rates-convert-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/holidays.md
+  - type: JSONSchema
+    url: json-schema/public-holidays-holiday-schema.json
+  - type: Examples
+    url: examples/public-holidays-holiday-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/timezones.md
+  - type: JSONSchema
+    url: json-schema/timezones-convert-time-response-schema.json
+  - type: Examples
+    url: examples/timezones-convert-time-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/vat-validation.md
+  - type: JSONSchema
+    url: json-schema/vat-validation-vat-calculate-response-schema.json
+  - type: Examples
+    url: examples/vat-validation-vat-calculate-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/iban-validation.md
+  - type: JSONSchema
+    url: json-schema/iban-validation-iban-validation-response-schema.json
+  - type: Examples
+    url: examples/iban-validation-iban-validation-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/screenshot.md
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/images.md
+  - type: JSONSchema
+    url: json-schema/image-processing-image-processing-response-schema.json
+  - type: Examples
+    url: examples/image-processing-image-processing-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/scrape.md
+  - type: JSONSchema
+    url: json-schema/web-scraping-web-scraping-response-schema.json
+  - type: Examples
+    url: examples/web-scraping-web-scraping-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/avatars.md
+- aid: abstract-api:abstract-api-image-processing-api
+  name: Abstract API Image Processing API
+  description: Image compression and optimization operations
+  humanURL: https://www.abstractapi.com/api/email-verification-validation-api
+  baseURL: https://emailreputation.abstractapi.com/v1/
+  tags:
+  - Image Processing
+  properties:
+  - type: OpenAPI
+    url: openapi/abstract-api-image-processing-api-openapi.yml
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/email-reputation.md
+  - type: JSONSchema
+    url: json-schema/email-reputation-breach-info-schema.json
+  - type: Examples
+    url: examples/email-reputation-breach-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/phone-intelligence.md
+  - type: JSONSchema
+    url: json-schema/phone-intelligence-phone-country-schema.json
+  - type: Examples
+    url: examples/phone-intelligence-phone-country-example.json
+  - type: Documentation
+    url: https://www.abstractapi.com/api/ip-geolocation-api
+  - type: JSONSchema
+    url: json-schema/ip-geolocation-currency-info-schema.json
+  - type: Examples
+    url: examples/ip-geolocation-currency-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/ip-intelligence.md
+  - type: JSONSchema
+    url: json-schema/ip-intelligence-asn-info-schema.json
+  - type: Examples
+    url: examples/ip-intelligence-asn-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/company-enrichment.md
+  - type: JSONSchema
+    url: json-schema/company-enrichment-company-enrichment-response-schema.json
+  - type: Examples
+    url: examples/company-enrichment-company-enrichment-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/exchange-rates.md
+  - type: JSONSchema
+    url: json-schema/exchange-rates-convert-response-schema.json
+  - type: Examples
+    url: examples/exchange-rates-convert-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/holidays.md
+  - type: JSONSchema
+    url: json-schema/public-holidays-holiday-schema.json
+  - type: Examples
+    url: examples/public-holidays-holiday-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/timezones.md
+  - type: JSONSchema
+    url: json-schema/timezones-convert-time-response-schema.json
+  - type: Examples
+    url: examples/timezones-convert-time-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/vat-validation.md
+  - type: JSONSchema
+    url: json-schema/vat-validation-vat-calculate-response-schema.json
+  - type: Examples
+    url: examples/vat-validation-vat-calculate-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/iban-validation.md
+  - type: JSONSchema
+    url: json-schema/iban-validation-iban-validation-response-schema.json
+  - type: Examples
+    url: examples/iban-validation-iban-validation-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/screenshot.md
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/images.md
+  - type: JSONSchema
+    url: json-schema/image-processing-image-processing-response-schema.json
+  - type: Examples
+    url: examples/image-processing-image-processing-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/scrape.md
+  - type: JSONSchema
+    url: json-schema/web-scraping-web-scraping-response-schema.json
+  - type: Examples
+    url: examples/web-scraping-web-scraping-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/avatars.md
+- aid: abstract-api:abstract-api-ip-geolocation-api
+  name: Abstract API IP Geolocation API
+  description: IP address geolocation operations
+  humanURL: https://www.abstractapi.com/api/email-verification-validation-api
+  baseURL: https://emailreputation.abstractapi.com/v1/
+  tags:
+  - IP Geolocation
+  properties:
+  - type: OpenAPI
+    url: openapi/abstract-api-ip-geolocation-api-openapi.yml
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/email-reputation.md
+  - type: JSONSchema
+    url: json-schema/email-reputation-breach-info-schema.json
+  - type: Examples
+    url: examples/email-reputation-breach-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/phone-intelligence.md
+  - type: JSONSchema
+    url: json-schema/phone-intelligence-phone-country-schema.json
+  - type: Examples
+    url: examples/phone-intelligence-phone-country-example.json
+  - type: Documentation
+    url: https://www.abstractapi.com/api/ip-geolocation-api
+  - type: JSONSchema
+    url: json-schema/ip-geolocation-currency-info-schema.json
+  - type: Examples
+    url: examples/ip-geolocation-currency-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/ip-intelligence.md
+  - type: JSONSchema
+    url: json-schema/ip-intelligence-asn-info-schema.json
+  - type: Examples
+    url: examples/ip-intelligence-asn-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/company-enrichment.md
+  - type: JSONSchema
+    url: json-schema/company-enrichment-company-enrichment-response-schema.json
+  - type: Examples
+    url: examples/company-enrichment-company-enrichment-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/exchange-rates.md
+  - type: JSONSchema
+    url: json-schema/exchange-rates-convert-response-schema.json
+  - type: Examples
+    url: examples/exchange-rates-convert-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/holidays.md
+  - type: JSONSchema
+    url: json-schema/public-holidays-holiday-schema.json
+  - type: Examples
+    url: examples/public-holidays-holiday-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/timezones.md
+  - type: JSONSchema
+    url: json-schema/timezones-convert-time-response-schema.json
+  - type: Examples
+    url: examples/timezones-convert-time-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/vat-validation.md
+  - type: JSONSchema
+    url: json-schema/vat-validation-vat-calculate-response-schema.json
+  - type: Examples
+    url: examples/vat-validation-vat-calculate-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/iban-validation.md
+  - type: JSONSchema
+    url: json-schema/iban-validation-iban-validation-response-schema.json
+  - type: Examples
+    url: examples/iban-validation-iban-validation-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/screenshot.md
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/images.md
+  - type: JSONSchema
+    url: json-schema/image-processing-image-processing-response-schema.json
+  - type: Examples
+    url: examples/image-processing-image-processing-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/scrape.md
+  - type: JSONSchema
+    url: json-schema/web-scraping-web-scraping-response-schema.json
+  - type: Examples
+    url: examples/web-scraping-web-scraping-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/avatars.md
+- aid: abstract-api:abstract-api-ip-intelligence-api
+  name: Abstract API IP Intelligence API
+  description: Advanced IP address intelligence and security operations
+  humanURL: https://www.abstractapi.com/api/email-verification-validation-api
+  baseURL: https://emailreputation.abstractapi.com/v1/
+  tags:
+  - IP Intelligence
+  properties:
+  - type: OpenAPI
+    url: openapi/abstract-api-ip-intelligence-api-openapi.yml
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/email-reputation.md
+  - type: JSONSchema
+    url: json-schema/email-reputation-breach-info-schema.json
+  - type: Examples
+    url: examples/email-reputation-breach-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/phone-intelligence.md
+  - type: JSONSchema
+    url: json-schema/phone-intelligence-phone-country-schema.json
+  - type: Examples
+    url: examples/phone-intelligence-phone-country-example.json
+  - type: Documentation
+    url: https://www.abstractapi.com/api/ip-geolocation-api
+  - type: JSONSchema
+    url: json-schema/ip-geolocation-currency-info-schema.json
+  - type: Examples
+    url: examples/ip-geolocation-currency-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/ip-intelligence.md
+  - type: JSONSchema
+    url: json-schema/ip-intelligence-asn-info-schema.json
+  - type: Examples
+    url: examples/ip-intelligence-asn-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/company-enrichment.md
+  - type: JSONSchema
+    url: json-schema/company-enrichment-company-enrichment-response-schema.json
+  - type: Examples
+    url: examples/company-enrichment-company-enrichment-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/exchange-rates.md
+  - type: JSONSchema
+    url: json-schema/exchange-rates-convert-response-schema.json
+  - type: Examples
+    url: examples/exchange-rates-convert-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/holidays.md
+  - type: JSONSchema
+    url: json-schema/public-holidays-holiday-schema.json
+  - type: Examples
+    url: examples/public-holidays-holiday-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/timezones.md
+  - type: JSONSchema
+    url: json-schema/timezones-convert-time-response-schema.json
+  - type: Examples
+    url: examples/timezones-convert-time-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/vat-validation.md
+  - type: JSONSchema
+    url: json-schema/vat-validation-vat-calculate-response-schema.json
+  - type: Examples
+    url: examples/vat-validation-vat-calculate-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/iban-validation.md
+  - type: JSONSchema
+    url: json-schema/iban-validation-iban-validation-response-schema.json
+  - type: Examples
+    url: examples/iban-validation-iban-validation-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/screenshot.md
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/images.md
+  - type: JSONSchema
+    url: json-schema/image-processing-image-processing-response-schema.json
+  - type: Examples
+    url: examples/image-processing-image-processing-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/scrape.md
+  - type: JSONSchema
+    url: json-schema/web-scraping-web-scraping-response-schema.json
+  - type: Examples
+    url: examples/web-scraping-web-scraping-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/avatars.md
+- aid: abstract-api:abstract-api-phone-intelligence-api
+  name: Abstract API Phone Intelligence API
+  description: Phone number validation and intelligence
+  humanURL: https://www.abstractapi.com/api/email-verification-validation-api
+  baseURL: https://emailreputation.abstractapi.com/v1/
+  tags:
+  - Phone Intelligence
+  properties:
+  - type: OpenAPI
+    url: openapi/abstract-api-phone-intelligence-api-openapi.yml
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/email-reputation.md
+  - type: JSONSchema
+    url: json-schema/email-reputation-breach-info-schema.json
+  - type: Examples
+    url: examples/email-reputation-breach-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/phone-intelligence.md
+  - type: JSONSchema
+    url: json-schema/phone-intelligence-phone-country-schema.json
+  - type: Examples
+    url: examples/phone-intelligence-phone-country-example.json
+  - type: Documentation
+    url: https://www.abstractapi.com/api/ip-geolocation-api
+  - type: JSONSchema
+    url: json-schema/ip-geolocation-currency-info-schema.json
+  - type: Examples
+    url: examples/ip-geolocation-currency-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/ip-intelligence.md
+  - type: JSONSchema
+    url: json-schema/ip-intelligence-asn-info-schema.json
+  - type: Examples
+    url: examples/ip-intelligence-asn-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/company-enrichment.md
+  - type: JSONSchema
+    url: json-schema/company-enrichment-company-enrichment-response-schema.json
+  - type: Examples
+    url: examples/company-enrichment-company-enrichment-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/exchange-rates.md
+  - type: JSONSchema
+    url: json-schema/exchange-rates-convert-response-schema.json
+  - type: Examples
+    url: examples/exchange-rates-convert-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/holidays.md
+  - type: JSONSchema
+    url: json-schema/public-holidays-holiday-schema.json
+  - type: Examples
+    url: examples/public-holidays-holiday-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/timezones.md
+  - type: JSONSchema
+    url: json-schema/timezones-convert-time-response-schema.json
+  - type: Examples
+    url: examples/timezones-convert-time-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/vat-validation.md
+  - type: JSONSchema
+    url: json-schema/vat-validation-vat-calculate-response-schema.json
+  - type: Examples
+    url: examples/vat-validation-vat-calculate-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/iban-validation.md
+  - type: JSONSchema
+    url: json-schema/iban-validation-iban-validation-response-schema.json
+  - type: Examples
+    url: examples/iban-validation-iban-validation-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/screenshot.md
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/images.md
+  - type: JSONSchema
+    url: json-schema/image-processing-image-processing-response-schema.json
+  - type: Examples
+    url: examples/image-processing-image-processing-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/scrape.md
+  - type: JSONSchema
+    url: json-schema/web-scraping-web-scraping-response-schema.json
+  - type: Examples
+    url: examples/web-scraping-web-scraping-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/avatars.md
+- aid: abstract-api:abstract-api-public-holidays-api
+  name: Abstract API Public Holidays API
+  description: Holiday lookup operations
+  humanURL: https://www.abstractapi.com/api/email-verification-validation-api
+  baseURL: https://emailreputation.abstractapi.com/v1/
+  tags:
+  - Public Holidays
+  properties:
+  - type: OpenAPI
+    url: openapi/abstract-api-public-holidays-api-openapi.yml
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/email-reputation.md
+  - type: JSONSchema
+    url: json-schema/email-reputation-breach-info-schema.json
+  - type: Examples
+    url: examples/email-reputation-breach-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/phone-intelligence.md
+  - type: JSONSchema
+    url: json-schema/phone-intelligence-phone-country-schema.json
+  - type: Examples
+    url: examples/phone-intelligence-phone-country-example.json
+  - type: Documentation
+    url: https://www.abstractapi.com/api/ip-geolocation-api
+  - type: JSONSchema
+    url: json-schema/ip-geolocation-currency-info-schema.json
+  - type: Examples
+    url: examples/ip-geolocation-currency-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/ip-intelligence.md
+  - type: JSONSchema
+    url: json-schema/ip-intelligence-asn-info-schema.json
+  - type: Examples
+    url: examples/ip-intelligence-asn-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/company-enrichment.md
+  - type: JSONSchema
+    url: json-schema/company-enrichment-company-enrichment-response-schema.json
+  - type: Examples
+    url: examples/company-enrichment-company-enrichment-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/exchange-rates.md
+  - type: JSONSchema
+    url: json-schema/exchange-rates-convert-response-schema.json
+  - type: Examples
+    url: examples/exchange-rates-convert-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/holidays.md
+  - type: JSONSchema
+    url: json-schema/public-holidays-holiday-schema.json
+  - type: Examples
+    url: examples/public-holidays-holiday-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/timezones.md
+  - type: JSONSchema
+    url: json-schema/timezones-convert-time-response-schema.json
+  - type: Examples
+    url: examples/timezones-convert-time-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/vat-validation.md
+  - type: JSONSchema
+    url: json-schema/vat-validation-vat-calculate-response-schema.json
+  - type: Examples
+    url: examples/vat-validation-vat-calculate-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/iban-validation.md
+  - type: JSONSchema
+    url: json-schema/iban-validation-iban-validation-response-schema.json
+  - type: Examples
+    url: examples/iban-validation-iban-validation-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/screenshot.md
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/images.md
+  - type: JSONSchema
+    url: json-schema/image-processing-image-processing-response-schema.json
+  - type: Examples
+    url: examples/image-processing-image-processing-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/scrape.md
+  - type: JSONSchema
+    url: json-schema/web-scraping-web-scraping-response-schema.json
+  - type: Examples
+    url: examples/web-scraping-web-scraping-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/avatars.md
+- aid: abstract-api:abstract-api-timezones-api
+  name: Abstract API Timezones API
+  description: Timezone lookup and conversion operations
+  humanURL: https://www.abstractapi.com/api/email-verification-validation-api
+  baseURL: https://emailreputation.abstractapi.com/v1/
+  tags:
+  - Timezones
+  properties:
+  - type: OpenAPI
+    url: openapi/abstract-api-timezones-api-openapi.yml
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/email-reputation.md
+  - type: JSONSchema
+    url: json-schema/email-reputation-breach-info-schema.json
+  - type: Examples
+    url: examples/email-reputation-breach-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/phone-intelligence.md
+  - type: JSONSchema
+    url: json-schema/phone-intelligence-phone-country-schema.json
+  - type: Examples
+    url: examples/phone-intelligence-phone-country-example.json
+  - type: Documentation
+    url: https://www.abstractapi.com/api/ip-geolocation-api
+  - type: JSONSchema
+    url: json-schema/ip-geolocation-currency-info-schema.json
+  - type: Examples
+    url: examples/ip-geolocation-currency-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/ip-intelligence.md
+  - type: JSONSchema
+    url: json-schema/ip-intelligence-asn-info-schema.json
+  - type: Examples
+    url: examples/ip-intelligence-asn-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/company-enrichment.md
+  - type: JSONSchema
+    url: json-schema/company-enrichment-company-enrichment-response-schema.json
+  - type: Examples
+    url: examples/company-enrichment-company-enrichment-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/exchange-rates.md
+  - type: JSONSchema
+    url: json-schema/exchange-rates-convert-response-schema.json
+  - type: Examples
+    url: examples/exchange-rates-convert-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/holidays.md
+  - type: JSONSchema
+    url: json-schema/public-holidays-holiday-schema.json
+  - type: Examples
+    url: examples/public-holidays-holiday-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/timezones.md
+  - type: JSONSchema
+    url: json-schema/timezones-convert-time-response-schema.json
+  - type: Examples
+    url: examples/timezones-convert-time-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/vat-validation.md
+  - type: JSONSchema
+    url: json-schema/vat-validation-vat-calculate-response-schema.json
+  - type: Examples
+    url: examples/vat-validation-vat-calculate-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/iban-validation.md
+  - type: JSONSchema
+    url: json-schema/iban-validation-iban-validation-response-schema.json
+  - type: Examples
+    url: examples/iban-validation-iban-validation-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/screenshot.md
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/images.md
+  - type: JSONSchema
+    url: json-schema/image-processing-image-processing-response-schema.json
+  - type: Examples
+    url: examples/image-processing-image-processing-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/scrape.md
+  - type: JSONSchema
+    url: json-schema/web-scraping-web-scraping-response-schema.json
+  - type: Examples
+    url: examples/web-scraping-web-scraping-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/avatars.md
+- aid: abstract-api:abstract-api-vat-validation-api
+  name: Abstract API VAT Validation API
+  description: VAT number validation and rate lookup
+  humanURL: https://www.abstractapi.com/api/email-verification-validation-api
+  baseURL: https://emailreputation.abstractapi.com/v1/
+  tags:
+  - VAT Validation
+  properties:
+  - type: OpenAPI
+    url: openapi/abstract-api-vat-validation-api-openapi.yml
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/email-reputation.md
+  - type: JSONSchema
+    url: json-schema/email-reputation-breach-info-schema.json
+  - type: Examples
+    url: examples/email-reputation-breach-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/phone-intelligence.md
+  - type: JSONSchema
+    url: json-schema/phone-intelligence-phone-country-schema.json
+  - type: Examples
+    url: examples/phone-intelligence-phone-country-example.json
+  - type: Documentation
+    url: https://www.abstractapi.com/api/ip-geolocation-api
+  - type: JSONSchema
+    url: json-schema/ip-geolocation-currency-info-schema.json
+  - type: Examples
+    url: examples/ip-geolocation-currency-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/ip-intelligence.md
+  - type: JSONSchema
+    url: json-schema/ip-intelligence-asn-info-schema.json
+  - type: Examples
+    url: examples/ip-intelligence-asn-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/company-enrichment.md
+  - type: JSONSchema
+    url: json-schema/company-enrichment-company-enrichment-response-schema.json
+  - type: Examples
+    url: examples/company-enrichment-company-enrichment-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/exchange-rates.md
+  - type: JSONSchema
+    url: json-schema/exchange-rates-convert-response-schema.json
+  - type: Examples
+    url: examples/exchange-rates-convert-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/holidays.md
+  - type: JSONSchema
+    url: json-schema/public-holidays-holiday-schema.json
+  - type: Examples
+    url: examples/public-holidays-holiday-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/timezones.md
+  - type: JSONSchema
+    url: json-schema/timezones-convert-time-response-schema.json
+  - type: Examples
+    url: examples/timezones-convert-time-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/vat-validation.md
+  - type: JSONSchema
+    url: json-schema/vat-validation-vat-calculate-response-schema.json
+  - type: Examples
+    url: examples/vat-validation-vat-calculate-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/iban-validation.md
+  - type: JSONSchema
+    url: json-schema/iban-validation-iban-validation-response-schema.json
+  - type: Examples
+    url: examples/iban-validation-iban-validation-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/screenshot.md
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/images.md
+  - type: JSONSchema
+    url: json-schema/image-processing-image-processing-response-schema.json
+  - type: Examples
+    url: examples/image-processing-image-processing-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/scrape.md
+  - type: JSONSchema
+    url: json-schema/web-scraping-web-scraping-response-schema.json
+  - type: Examples
+    url: examples/web-scraping-web-scraping-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/avatars.md
+- aid: abstract-api:abstract-api-web-scraping-api
+  name: Abstract API Web Scraping API
+  description: Web content extraction operations
+  humanURL: https://www.abstractapi.com/api/email-verification-validation-api
+  baseURL: https://emailreputation.abstractapi.com/v1/
+  tags:
+  - Web Scraping
+  properties:
+  - type: OpenAPI
+    url: openapi/abstract-api-web-scraping-api-openapi.yml
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/email-reputation.md
+  - type: JSONSchema
+    url: json-schema/email-reputation-breach-info-schema.json
+  - type: Examples
+    url: examples/email-reputation-breach-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/phone-intelligence.md
+  - type: JSONSchema
+    url: json-schema/phone-intelligence-phone-country-schema.json
+  - type: Examples
+    url: examples/phone-intelligence-phone-country-example.json
+  - type: Documentation
+    url: https://www.abstractapi.com/api/ip-geolocation-api
+  - type: JSONSchema
+    url: json-schema/ip-geolocation-currency-info-schema.json
+  - type: Examples
+    url: examples/ip-geolocation-currency-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/ip-intelligence.md
+  - type: JSONSchema
+    url: json-schema/ip-intelligence-asn-info-schema.json
+  - type: Examples
+    url: examples/ip-intelligence-asn-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/company-enrichment.md
+  - type: JSONSchema
+    url: json-schema/company-enrichment-company-enrichment-response-schema.json
+  - type: Examples
+    url: examples/company-enrichment-company-enrichment-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/exchange-rates.md
+  - type: JSONSchema
+    url: json-schema/exchange-rates-convert-response-schema.json
+  - type: Examples
+    url: examples/exchange-rates-convert-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/holidays.md
+  - type: JSONSchema
+    url: json-schema/public-holidays-holiday-schema.json
+  - type: Examples
+    url: examples/public-holidays-holiday-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/timezones.md
+  - type: JSONSchema
+    url: json-schema/timezones-convert-time-response-schema.json
+  - type: Examples
+    url: examples/timezones-convert-time-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/vat-validation.md
+  - type: JSONSchema
+    url: json-schema/vat-validation-vat-calculate-response-schema.json
+  - type: Examples
+    url: examples/vat-validation-vat-calculate-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/iban-validation.md
+  - type: JSONSchema
+    url: json-schema/iban-validation-iban-validation-response-schema.json
+  - type: Examples
+    url: examples/iban-validation-iban-validation-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/screenshot.md
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/images.md
+  - type: JSONSchema
+    url: json-schema/image-processing-image-processing-response-schema.json
+  - type: Examples
+    url: examples/image-processing-image-processing-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/scrape.md
+  - type: JSONSchema
+    url: json-schema/web-scraping-web-scraping-response-schema.json
+  - type: Examples
+    url: examples/web-scraping-web-scraping-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/avatars.md
+- aid: abstract-api:abstract-api-website-screenshot-api
+  name: Abstract API Website Screenshot API
+  description: Website screenshot capture operations
+  humanURL: https://www.abstractapi.com/api/email-verification-validation-api
+  baseURL: https://emailreputation.abstractapi.com/v1/
+  tags:
+  - Website Screenshot
+  properties:
+  - type: OpenAPI
+    url: openapi/abstract-api-website-screenshot-api-openapi.yml
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/email-reputation.md
+  - type: JSONSchema
+    url: json-schema/email-reputation-breach-info-schema.json
+  - type: Examples
+    url: examples/email-reputation-breach-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/phone-intelligence.md
+  - type: JSONSchema
+    url: json-schema/phone-intelligence-phone-country-schema.json
+  - type: Examples
+    url: examples/phone-intelligence-phone-country-example.json
+  - type: Documentation
+    url: https://www.abstractapi.com/api/ip-geolocation-api
+  - type: JSONSchema
+    url: json-schema/ip-geolocation-currency-info-schema.json
+  - type: Examples
+    url: examples/ip-geolocation-currency-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/ip-intelligence.md
+  - type: JSONSchema
+    url: json-schema/ip-intelligence-asn-info-schema.json
+  - type: Examples
+    url: examples/ip-intelligence-asn-info-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/company-enrichment.md
+  - type: JSONSchema
+    url: json-schema/company-enrichment-company-enrichment-response-schema.json
+  - type: Examples
+    url: examples/company-enrichment-company-enrichment-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/exchange-rates.md
+  - type: JSONSchema
+    url: json-schema/exchange-rates-convert-response-schema.json
+  - type: Examples
+    url: examples/exchange-rates-convert-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/holidays.md
+  - type: JSONSchema
+    url: json-schema/public-holidays-holiday-schema.json
+  - type: Examples
+    url: examples/public-holidays-holiday-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/timezones.md
+  - type: JSONSchema
+    url: json-schema/timezones-convert-time-response-schema.json
+  - type: Examples
+    url: examples/timezones-convert-time-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/vat-validation.md
+  - type: JSONSchema
+    url: json-schema/vat-validation-vat-calculate-response-schema.json
+  - type: Examples
+    url: examples/vat-validation-vat-calculate-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/iban-validation.md
+  - type: JSONSchema
+    url: json-schema/iban-validation-iban-validation-response-schema.json
+  - type: Examples
+    url: examples/iban-validation-iban-validation-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/screenshot.md
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/images.md
+  - type: JSONSchema
+    url: json-schema/image-processing-image-processing-response-schema.json
+  - type: Examples
+    url: examples/image-processing-image-processing-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/scrape.md
+  - type: JSONSchema
+    url: json-schema/web-scraping-web-scraping-response-schema.json
+  - type: Examples
+    url: examples/web-scraping-web-scraping-response-example.json
+  - type: Documentation
+    url: https://docs.abstractapi.com/api/avatars.md
 common:
   - type: AgenticAccess
     url: agentic-access/abstract-api-agentic-access.yml
