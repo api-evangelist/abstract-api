@@ -1,0 +1,157 @@
+openapi: 3.0.3
+info:
+  title: Abstract API - Company Enrichment API
+  description: Retrieve comprehensive details about businesses using their domain or email address, including name, logo, headcount, location, industry, and more.
+  version: 1.0.0
+  contact:
+    url: https://www.abstractapi.com/
+  x-generated-from: documentation
+servers:
+  - url: https://companyenrichment.abstractapi.com/v1
+    description: Company Enrichment API v1
+security:
+  - apiKey: []
+tags:
+  - name: Company Enrichment
+    description: Company data enrichment operations
+paths:
+  /:
+    get:
+      operationId: getCompanyEnrichment
+      summary: Abstract API Get Company Enrichment
+      description: Retrieve company data including name, logo, description, industry, headcount, and location using a domain name or email.
+      tags:
+        - Company Enrichment
+      parameters:
+        - name: api_key
+          in: query
+          required: true
+          description: Your unique API key for the Company Enrichment API.
+          schema:
+            type: string
+          example: abc123def456
+        - name: domain
+          in: query
+          required: false
+          description: Company domain name to enrich (e.g., stripe.com). Use domain or email.
+          schema:
+            type: string
+          example: stripe.com
+        - name: email
+          in: query
+          required: false
+          description: Business email address to derive the company domain from. Use domain or email.
+          schema:
+            type: string
+            format: email
+          example: billing@stripe.com
+      responses:
+        '200':
+          description: Company enrichment data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyEnrichmentResponse'
+              examples:
+                getCompanyEnrichment200Example:
+                  summary: Default getCompanyEnrichment 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Stripe
+                    domain: stripe.com
+                    country: US
+                    locality: San Francisco
+                    region: California
+                    linkedin_url: https://www.linkedin.com/company/stripe
+                    logo: https://logo.clearbit.com/stripe.com
+                    year_founded: 2010
+                    industry: Financial Services
+                    employees_count: 8000
+                    description: Stripe is a technology company that builds economic infrastructure for the internet.
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: api_key
+  schemas:
+    CompanyEnrichmentResponse:
+      type: object
+      description: Company enrichment data
+      properties:
+        name:
+          type: string
+          description: Company name
+          example: Stripe
+        domain:
+          type: string
+          description: Company domain
+          example: stripe.com
+        country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code
+          example: US
+        locality:
+          type: string
+          description: City or locality
+          example: San Francisco
+        region:
+          type: string
+          description: State or region
+          example: California
+        linkedin_url:
+          type: string
+          format: uri
+          description: LinkedIn company profile URL
+          example: https://www.linkedin.com/company/stripe
+        logo:
+          type: string
+          format: uri
+          description: URL to company logo image
+          example: https://logo.clearbit.com/stripe.com
+        year_founded:
+          type: integer
+          description: Year the company was founded
+          example: 2010
+        industry:
+          type: string
+          description: Industry classification
+          example: Financial Services
+        employees_count:
+          type: integer
+          description: Approximate number of employees
+          example: 8000
+        description:
+          type: string
+          description: Short company description
+          example: Stripe is a technology company that builds economic infrastructure for the internet.
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: The provided API key is invalid
+        error:
+          type: string
+          example: invalid_api_key

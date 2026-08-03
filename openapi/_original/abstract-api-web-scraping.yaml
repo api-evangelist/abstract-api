@@ -1,0 +1,110 @@
+openapi: 3.0.3
+info:
+  title: Abstract API - Web Scraping API
+  description: Extract data from any website by providing the target URL. Handles JavaScript rendering and returns the full HTML content of any web page.
+  version: 1.0.0
+  contact:
+    url: https://www.abstractapi.com/
+  x-generated-from: documentation
+servers:
+  - url: https://scrape.abstractapi.com/v1
+    description: Web Scraping API v1
+security:
+  - apiKey: []
+tags:
+  - name: Web Scraping
+    description: Web content extraction operations
+paths:
+  /:
+    get:
+      operationId: scrapeWebPage
+      summary: Abstract API Scrape Web Page
+      description: Extract the full HTML content of any website URL, with support for JavaScript-rendered pages.
+      tags:
+        - Web Scraping
+      parameters:
+        - name: api_key
+          in: query
+          required: true
+          description: Your unique API key for the Web Scraping API.
+          schema:
+            type: string
+          example: abc123def456
+        - name: url
+          in: query
+          required: true
+          description: The URL of the webpage to scrape.
+          schema:
+            type: string
+            format: uri
+          example: https://www.example.com
+        - name: render_js
+          in: query
+          required: false
+          description: Whether to render JavaScript before returning HTML. Defaults to false.
+          schema:
+            type: boolean
+          example: false
+      responses:
+        '200':
+          description: Scraped HTML content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebScrapingResponse'
+              examples:
+                scrapeWebPage200Example:
+                  summary: Default scrapeWebPage 200 response
+                  x-microcks-default: true
+                  value:
+                    body: '<html><head><title>Example Domain</title></head><body>...</body></html>'
+                    url: https://www.example.com
+                    status_code: 200
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: api_key
+  schemas:
+    WebScrapingResponse:
+      type: object
+      description: Web scraping result
+      properties:
+        body:
+          type: string
+          description: Full HTML content of the page
+          example: '<html><head><title>Example Domain</title></head><body>...</body></html>'
+        url:
+          type: string
+          format: uri
+          description: Final URL after redirects
+          example: https://www.example.com
+        status_code:
+          type: integer
+          description: HTTP status code of the scraped page
+          example: 200
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: The provided API key is invalid
+        error:
+          type: string
+          example: invalid_api_key

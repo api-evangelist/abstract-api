@@ -1,0 +1,40 @@
+{
+  "provider": "abstract-api",
+  "sources": [
+    "abstract-api-avatars-api-openapi.yml",
+    "abstract-api-company-enrichment-api-openapi.yml",
+    "abstract-api-email-reputation-api-openapi.yml",
+    "abstract-api-exchange-rates-api-openapi.yml",
+    "abstract-api-iban-validation-api-openapi.yml",
+    "abstract-api-image-processing-api-openapi.yml",
+    "abstract-api-ip-geolocation-api-openapi.yml",
+    "abstract-api-ip-intelligence-api-openapi.yml",
+    "abstract-api-phone-intelligence-api-openapi.yml",
+    "abstract-api-public-holidays-api-openapi.yml",
+    "abstract-api-timezones-api-openapi.yml",
+    "abstract-api-vat-validation-api-openapi.yml",
+    "abstract-api-web-scraping-api-openapi.yml",
+    "abstract-api-website-screenshot-api-openapi.yml"
+  ],
+  "outputs": [
+    "abstract-api-avatars-api-openapi.yml",
+    "abstract-api-company-enrichment-api-openapi.yml",
+    "abstract-api-email-reputation-api-openapi.yml",
+    "abstract-api-exchange-rates-api-openapi.yml",
+    "abstract-api-iban-validation-api-openapi.yml",
+    "abstract-api-image-processing-api-openapi.yml",
+    "abstract-api-ip-geolocation-api-openapi.yml",
+    "abstract-api-ip-intelligence-api-openapi.yml",
+    "abstract-api-phone-intelligence-api-openapi.yml",
+    "abstract-api-public-holidays-api-openapi.yml",
+    "abstract-api-timezones-api-openapi.yml",
+    "abstract-api-vat-validation-api-openapi.yml",
+    "abstract-api-web-scraping-api-openapi.yml",
+    "abstract-api-website-screenshot-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

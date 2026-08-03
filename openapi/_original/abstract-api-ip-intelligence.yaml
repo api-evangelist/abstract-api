@@ -1,0 +1,311 @@
+openapi: 3.0.3
+info:
+  title: Abstract API - IP Intelligence API
+  description: Detect VPNs, proxies, Tor exit nodes, abuse potential, hosting services, relays, and mobile IPs. Also provides ASN, company, location, timezone, flag, and currency data for any IP address.
+  version: 1.0.0
+  contact:
+    url: https://www.abstractapi.com/
+  x-generated-from: documentation
+servers:
+  - url: https://ip-intelligence.abstractapi.com/v1
+    description: IP Intelligence API v1
+security:
+  - apiKey: []
+tags:
+  - name: IP Intelligence
+    description: Advanced IP address intelligence and security operations
+paths:
+  /:
+    get:
+      operationId: getIPIntelligence
+      summary: Abstract API Get IP Intelligence
+      description: Analyze an IP address for security signals including VPN, proxy, Tor, abuse, hosting, relay, and mobile detection along with location and ASN data.
+      tags:
+        - IP Intelligence
+      parameters:
+        - name: api_key
+          in: query
+          description: Your unique API key for the IP Intelligence API.
+          required: true
+          schema:
+            type: string
+          example: abc123def456
+        - name: ip_address
+          in: query
+          description: IPv4 or IPv6 address to analyze. Auto-detects request IP if omitted.
+          required: false
+          schema:
+            type: string
+          example: 8.8.8.8
+        - name: fields
+          in: query
+          description: Comma-separated list of top-level keys to return.
+          required: false
+          schema:
+            type: string
+          example: security,location,asn
+      responses:
+        '200':
+          description: Successful IP intelligence response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IPIntelligenceResponse'
+              examples:
+                getIPIntelligence200Example:
+                  summary: Default getIPIntelligence 200 response
+                  x-microcks-default: true
+                  value:
+                    ip_address: 8.8.8.8
+                    security:
+                      is_vpn: false
+                      is_proxy: false
+                      is_tor: false
+                      is_hosting: true
+                      is_relay: false
+                      is_mobile: false
+                      is_abuse: false
+                    asn:
+                      asn: AS15169
+                      name: Google LLC
+                      domain: google.com
+                      type: hosting
+                    company:
+                      name: Google LLC
+                      domain: google.com
+                      type: hosting
+                    domains:
+                      - dns.google
+                    location:
+                      city: Mountain View
+                      region: California
+                      country: United States
+                      country_code: US
+                      latitude: 37.386
+                      longitude: -122.0838
+                    timezone:
+                      name: America/Los_Angeles
+                      abbreviation: PST
+                      utc_offset: -8
+                      local_time: '2026-04-19T10:30:00'
+                      is_dst: false
+                    flag:
+                      emoji: "🇺🇸"
+                      unicode: U+1F1FA U+1F1F8
+                      png: https://static.abstractapi.com/country-flags/US_flag.png
+                      svg: https://static.abstractapi.com/country-flags/US_flag.svg
+                    currency:
+                      name: US Dollar
+                      iso_code: USD
+                      symbol: $
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized - invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: api_key
+  schemas:
+    IPIntelligenceResponse:
+      type: object
+      description: Full IP intelligence response
+      properties:
+        ip_address:
+          type: string
+          description: Analyzed IP address
+          example: 8.8.8.8
+        security:
+          $ref: '#/components/schemas/IPSecurityFlags'
+        asn:
+          $ref: '#/components/schemas/ASNInfo'
+        company:
+          $ref: '#/components/schemas/CompanyBasic'
+        domains:
+          type: array
+          description: Known domains associated with this IP
+          items:
+            type: string
+          example:
+            - dns.google
+        location:
+          $ref: '#/components/schemas/LocationInfo'
+        timezone:
+          $ref: '#/components/schemas/TimezoneInfo'
+        flag:
+          $ref: '#/components/schemas/FlagInfo'
+        currency:
+          $ref: '#/components/schemas/CurrencyInfo'
+    IPSecurityFlags:
+      type: object
+      description: Security classification flags for the IP
+      properties:
+        is_vpn:
+          type: boolean
+          description: IP is a known VPN endpoint
+          example: false
+        is_proxy:
+          type: boolean
+          description: IP is a known proxy server
+          example: false
+        is_tor:
+          type: boolean
+          description: IP is a Tor exit node
+          example: false
+        is_hosting:
+          type: boolean
+          description: IP belongs to a hosting or cloud provider
+          example: true
+        is_relay:
+          type: boolean
+          description: IP is used as a relay (e.g., Apple Private Relay)
+          example: false
+        is_mobile:
+          type: boolean
+          description: IP is associated with a mobile network
+          example: false
+        is_abuse:
+          type: boolean
+          description: IP has been flagged for abuse
+          example: false
+    ASNInfo:
+      type: object
+      description: Autonomous System Number information
+      properties:
+        asn:
+          type: string
+          description: ASN identifier
+          example: AS15169
+        name:
+          type: string
+          description: ASN organization name
+          example: Google LLC
+        domain:
+          type: string
+          description: Primary domain for the ASN
+          example: google.com
+        type:
+          type: string
+          description: Type of ASN (hosting, isp, business, etc.)
+          example: hosting
+    CompanyBasic:
+      type: object
+      description: Company information for the IP owner
+      properties:
+        name:
+          type: string
+          description: Company name
+          example: Google LLC
+        domain:
+          type: string
+          description: Company domain
+          example: google.com
+        type:
+          type: string
+          description: Company type
+          example: hosting
+    LocationInfo:
+      type: object
+      description: Geographic location for the IP
+      properties:
+        city:
+          type: string
+          description: City name
+          example: Mountain View
+        region:
+          type: string
+          description: Region or state
+          example: California
+        country:
+          type: string
+          description: Country name
+          example: United States
+        country_code:
+          type: string
+          description: ISO 3166-1 alpha-2 country code
+          example: US
+        latitude:
+          type: number
+          format: double
+          description: Latitude
+          example: 37.386
+        longitude:
+          type: number
+          format: double
+          description: Longitude
+          example: -122.0838
+    TimezoneInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          example: America/Los_Angeles
+        abbreviation:
+          type: string
+          example: PST
+        utc_offset:
+          type: integer
+          example: -8
+        local_time:
+          type: string
+          example: '2026-04-19T10:30:00'
+        is_dst:
+          type: boolean
+          example: false
+    FlagInfo:
+      type: object
+      properties:
+        emoji:
+          type: string
+          example: "🇺🇸"
+        unicode:
+          type: string
+          example: U+1F1FA U+1F1F8
+        png:
+          type: string
+          format: uri
+          example: https://static.abstractapi.com/country-flags/US_flag.png
+        svg:
+          type: string
+          format: uri
+          example: https://static.abstractapi.com/country-flags/US_flag.svg
+    CurrencyInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          example: US Dollar
+        iso_code:
+          type: string
+          example: USD
+        symbol:
+          type: string
+          example: $
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: The provided API key is invalid
+        error:
+          type: string
+          example: invalid_api_key

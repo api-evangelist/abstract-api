@@ -1,0 +1,144 @@
+openapi: 3.0.3
+info:
+  title: Abstract API - IBAN Validation API
+  description: Determine the validity and details of International Bank Account Numbers (IBANs), including bank name, account type, and country code.
+  version: 1.0.0
+  contact:
+    url: https://www.abstractapi.com/
+  x-generated-from: documentation
+servers:
+  - url: https://ibanvalidation.abstractapi.com/v1
+    description: IBAN Validation API v1
+security:
+  - apiKey: []
+tags:
+  - name: IBAN Validation
+    description: IBAN number validation operations
+paths:
+  /:
+    get:
+      operationId: validateIBAN
+      summary: Abstract API Validate IBAN
+      description: Validate an IBAN number and retrieve bank details, account type, and country information.
+      tags:
+        - IBAN Validation
+      parameters:
+        - name: api_key
+          in: query
+          required: true
+          description: Your unique API key for the IBAN Validation API.
+          schema:
+            type: string
+          example: abc123def456
+        - name: iban
+          in: query
+          required: true
+          description: The IBAN to validate.
+          schema:
+            type: string
+          example: GB82WEST12345698765432
+      responses:
+        '200':
+          description: IBAN validation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IBANValidationResponse'
+              examples:
+                validateIBAN200Example:
+                  summary: Default validateIBAN 200 response
+                  x-microcks-default: true
+                  value:
+                    iban: GB82WEST12345698765432
+                    is_valid: true
+                    country:
+                      code: GB
+                      name: United Kingdom
+                    bank:
+                      bank_name: Westpac Banking Corporation
+                      bank_code: WEST
+                      bic: WESTGB22
+                    account_number: 98765432
+                    check_digits: '82'
+                    sepa_member: true
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: api_key
+  schemas:
+    IBANValidationResponse:
+      type: object
+      description: IBAN validation and enrichment response
+      properties:
+        iban:
+          type: string
+          description: The IBAN submitted for validation
+          example: GB82WEST12345698765432
+        is_valid:
+          type: boolean
+          description: Whether the IBAN is valid
+          example: true
+        country:
+          type: object
+          properties:
+            code:
+              type: string
+              description: ISO 3166-1 alpha-2 country code
+              example: GB
+            name:
+              type: string
+              description: Country name
+              example: United Kingdom
+        bank:
+          type: object
+          properties:
+            bank_name:
+              type: string
+              description: Name of the bank
+              example: Westpac Banking Corporation
+            bank_code:
+              type: string
+              description: Bank identifier code within the IBAN
+              example: WEST
+            bic:
+              type: string
+              description: Bank Identifier Code (BIC/SWIFT)
+              example: WESTGB22
+        account_number:
+          type: string
+          description: Account number extracted from the IBAN
+          example: '98765432'
+        check_digits:
+          type: string
+          description: Check digits from the IBAN
+          example: '82'
+        sepa_member:
+          type: boolean
+          description: Whether the country is a SEPA member
+          example: true
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: The provided API key is invalid
+        error:
+          type: string
+          example: invalid_api_key

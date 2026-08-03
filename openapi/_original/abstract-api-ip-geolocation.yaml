@@ -1,0 +1,269 @@
+openapi: 3.0.3
+info:
+  title: Abstract API - IP Geolocation API
+  description: Geolocate any IPv4 or IPv6 address to country, region, city, coordinates, timezone, currency, and flag data covering 4 billion+ IP addresses across 250,000+ cities worldwide.
+  version: 1.0.0
+  contact:
+    url: https://www.abstractapi.com/
+  x-generated-from: documentation
+servers:
+  - url: https://ipgeolocation.abstractapi.com/v1
+    description: IP Geolocation API v1
+security:
+  - apiKey: []
+tags:
+  - name: IP Geolocation
+    description: IP address geolocation operations
+paths:
+  /:
+    get:
+      operationId: getIPGeolocation
+      summary: Abstract API Get IP Geolocation
+      description: Geolocate an IP address and retrieve location, timezone, currency, and flag data.
+      tags:
+        - IP Geolocation
+      parameters:
+        - name: api_key
+          in: query
+          description: Your unique API key for the IP Geolocation API.
+          required: true
+          schema:
+            type: string
+          example: abc123def456
+        - name: ip_address
+          in: query
+          description: IPv4 or IPv6 address to geolocate. If omitted, the request IP is used.
+          required: false
+          schema:
+            type: string
+          example: 8.8.8.8
+        - name: fields
+          in: query
+          description: Comma-separated list of top-level fields to return in the response.
+          required: false
+          schema:
+            type: string
+          example: city,region,country,latitude,longitude
+      responses:
+        '200':
+          description: Successful IP geolocation response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IPGeolocationResponse'
+              examples:
+                getIPGeolocation200Example:
+                  summary: Default getIPGeolocation 200 response
+                  x-microcks-default: true
+                  value:
+                    ip_address: 8.8.8.8
+                    city: Mountain View
+                    city_geoname_id: 5375480
+                    region: California
+                    region_iso_code: CA
+                    region_geoname_id: 5332921
+                    postal_code: '94043'
+                    country: United States
+                    country_code: US
+                    country_geoname_id: 6252001
+                    country_is_eu: false
+                    continent: North America
+                    continent_code: NA
+                    continent_geoname_id: 6255149
+                    longitude: -122.0838
+                    latitude: 37.386
+                    security:
+                      is_vpn: false
+                    timezone:
+                      name: America/Los_Angeles
+                      abbreviation: PST
+                      gmt_offset: -8
+                      current_time: '2026-04-19 10:30:00'
+                      is_dst: false
+                    flag:
+                      emoji: "🇺🇸"
+                      unicode: U+1F1FA U+1F1F8
+                      png: https://static.abstractapi.com/country-flags/US_flag.png
+                      svg: https://static.abstractapi.com/country-flags/US_flag.svg
+                    currency:
+                      currency_name: US Dollar
+                      currency_code: USD
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized - invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: api_key
+  schemas:
+    IPGeolocationResponse:
+      type: object
+      description: IP geolocation response data
+      properties:
+        ip_address:
+          type: string
+          description: The queried IP address
+          example: 8.8.8.8
+        city:
+          type: string
+          description: City name
+          example: Mountain View
+        city_geoname_id:
+          type: integer
+          description: Geonames ID for the city
+          example: 5375480
+        region:
+          type: string
+          description: Region or state name
+          example: California
+        region_iso_code:
+          type: string
+          description: ISO region code
+          example: CA
+        region_geoname_id:
+          type: integer
+          description: Geonames ID for the region
+          example: 5332921
+        postal_code:
+          type: string
+          description: Postal or ZIP code
+          example: '94043'
+        country:
+          type: string
+          description: Country name
+          example: United States
+        country_code:
+          type: string
+          description: ISO 3166-1 alpha-2 country code
+          example: US
+        country_geoname_id:
+          type: integer
+          description: Geonames ID for the country
+          example: 6252001
+        country_is_eu:
+          type: boolean
+          description: Whether the country is in the EU
+          example: false
+        continent:
+          type: string
+          description: Continent name
+          example: North America
+        continent_code:
+          type: string
+          description: Continent code
+          example: NA
+        continent_geoname_id:
+          type: integer
+          description: Geonames ID for the continent
+          example: 6255149
+        longitude:
+          type: number
+          format: double
+          description: Longitude coordinate
+          example: -122.0838
+        latitude:
+          type: number
+          format: double
+          description: Latitude coordinate
+          example: 37.386
+        security:
+          $ref: '#/components/schemas/SecurityInfo'
+        timezone:
+          $ref: '#/components/schemas/TimezoneInfo'
+        flag:
+          $ref: '#/components/schemas/FlagInfo'
+        currency:
+          $ref: '#/components/schemas/CurrencyInfo'
+    SecurityInfo:
+      type: object
+      properties:
+        is_vpn:
+          type: boolean
+          description: Whether the IP is a known VPN
+          example: false
+    TimezoneInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          description: IANA timezone name
+          example: America/Los_Angeles
+        abbreviation:
+          type: string
+          description: Timezone abbreviation
+          example: PST
+        gmt_offset:
+          type: integer
+          description: GMT/UTC offset in hours
+          example: -8
+        current_time:
+          type: string
+          description: Current local time
+          example: '2026-04-19 10:30:00'
+        is_dst:
+          type: boolean
+          description: Whether daylight saving time is active
+          example: false
+    FlagInfo:
+      type: object
+      properties:
+        emoji:
+          type: string
+          description: Flag emoji
+          example: "🇺🇸"
+        unicode:
+          type: string
+          description: Unicode code points for the flag
+          example: U+1F1FA U+1F1F8
+        png:
+          type: string
+          format: uri
+          description: URL to PNG flag image
+          example: https://static.abstractapi.com/country-flags/US_flag.png
+        svg:
+          type: string
+          format: uri
+          description: URL to SVG flag image
+          example: https://static.abstractapi.com/country-flags/US_flag.svg
+    CurrencyInfo:
+      type: object
+      properties:
+        currency_name:
+          type: string
+          description: Currency full name
+          example: US Dollar
+        currency_code:
+          type: string
+          description: ISO 4217 currency code
+          example: USD
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+          example: The provided API key is invalid
+        error:
+          type: string
+          description: Error code
+          example: invalid_api_key

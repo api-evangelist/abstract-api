@@ -1,0 +1,141 @@
+openapi: 3.0.3
+info:
+  title: Abstract API - Image Processing API
+  description: Compress, convert, and optimize images by URL or direct upload. Supports format conversion, quality adjustment, and size reduction.
+  version: 1.0.0
+  contact:
+    url: https://www.abstractapi.com/
+  x-generated-from: documentation
+servers:
+  - url: https://images.abstractapi.com/v1
+    description: Image Processing API v1
+security:
+  - apiKey: []
+tags:
+  - name: Image Processing
+    description: Image compression and optimization operations
+paths:
+  /url:
+    get:
+      operationId: processImageByURL
+      summary: Abstract API Process Image by URL
+      description: Compress, convert, or optimize an image from a given URL.
+      tags:
+        - Image Processing
+      parameters:
+        - name: api_key
+          in: query
+          required: true
+          description: Your unique API key for the Image Processing API.
+          schema:
+            type: string
+          example: abc123def456
+        - name: url
+          in: query
+          required: true
+          description: URL of the image to process.
+          schema:
+            type: string
+            format: uri
+          example: https://www.example.com/image.png
+        - name: lossy
+          in: query
+          required: false
+          description: Whether to apply lossy compression. Defaults to true.
+          schema:
+            type: boolean
+          example: true
+        - name: quality
+          in: query
+          required: false
+          description: Image quality from 1 to 100 (for lossy compression).
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+          example: 80
+        - name: output_format
+          in: query
+          required: false
+          description: Target output format (jpeg, png, webp, gif).
+          schema:
+            type: string
+            enum:
+              - jpeg
+              - png
+              - webp
+              - gif
+          example: webp
+      responses:
+        '200':
+          description: Processed image result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageProcessingResponse'
+              examples:
+                processImageByURL200Example:
+                  summary: Default processImageByURL 200 response
+                  x-microcks-default: true
+                  value:
+                    original_size: 102400
+                    new_size: 51200
+                    saved_bytes: 51200
+                    saved_percent: 50.0
+                    url: https://dl.abstractapi.com/processed/abc123.webp
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: api_key
+  schemas:
+    ImageProcessingResponse:
+      type: object
+      description: Image processing result
+      properties:
+        original_size:
+          type: integer
+          description: Original file size in bytes
+          example: 102400
+        new_size:
+          type: integer
+          description: Processed file size in bytes
+          example: 51200
+        saved_bytes:
+          type: integer
+          description: Bytes saved by processing
+          example: 51200
+        saved_percent:
+          type: number
+          description: Percentage of size reduction
+          example: 50.0
+        url:
+          type: string
+          format: uri
+          description: URL to download the processed image
+          example: https://dl.abstractapi.com/processed/abc123.webp
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: The provided API key is invalid
+        error:
+          type: string
+          example: invalid_api_key

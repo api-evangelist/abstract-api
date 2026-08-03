@@ -1,0 +1,273 @@
+openapi: 3.0.3
+info:
+  title: Abstract API - Timezone API
+  description: Find, convert, and manage time and timezone data across the world. Supports lookup by location or coordinates and returns local time, timezone abbreviation, UTC offset, and DST information.
+  version: 1.0.0
+  contact:
+    url: https://www.abstractapi.com/
+  x-generated-from: documentation
+servers:
+  - url: https://timezone.abstractapi.com/v1
+    description: Timezone API v1
+security:
+  - apiKey: []
+tags:
+  - name: Timezones
+    description: Timezone lookup and conversion operations
+paths:
+  /current_time:
+    get:
+      operationId: getCurrentTime
+      summary: Abstract API Get Current Time
+      description: Get the current time, date, and timezone for a location specified by name, coordinates, or IP address.
+      tags:
+        - Timezones
+      parameters:
+        - name: api_key
+          in: query
+          required: true
+          description: Your unique API key for the Timezone API.
+          schema:
+            type: string
+          example: abc123def456
+        - name: location
+          in: query
+          required: false
+          description: Location name (e.g., city, address). Use location, latitude+longitude, or ip_address.
+          schema:
+            type: string
+          example: New York City
+        - name: latitude
+          in: query
+          required: false
+          description: Latitude coordinate. Used with longitude.
+          schema:
+            type: number
+            format: double
+          example: 40.7128
+        - name: longitude
+          in: query
+          required: false
+          description: Longitude coordinate. Used with latitude.
+          schema:
+            type: number
+            format: double
+          example: -74.006
+        - name: ip_address
+          in: query
+          required: false
+          description: IP address to determine timezone from.
+          schema:
+            type: string
+          example: 8.8.8.8
+      responses:
+        '200':
+          description: Current time and timezone information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CurrentTimeResponse'
+              examples:
+                getCurrentTime200Example:
+                  summary: Default getCurrentTime 200 response
+                  x-microcks-default: true
+                  value:
+                    datetime: '2026-04-19 10:30:00'
+                    timezone_name: America/New_York
+                    timezone_location: New York, United States
+                    timezone_abbreviation: EDT
+                    gmt_offset: -4
+                    is_dst: true
+                    requested_location: New York City
+                    latitude: 40.7128
+                    longitude: -74.006
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /convert_time:
+    get:
+      operationId: convertTime
+      summary: Abstract API Convert Time Between Timezones
+      description: Convert time from one location to another, or convert to and from UTC.
+      tags:
+        - Timezones
+      parameters:
+        - name: api_key
+          in: query
+          required: true
+          description: Your unique API key.
+          schema:
+            type: string
+          example: abc123def456
+        - name: base_location
+          in: query
+          required: true
+          description: Source location name or coordinates.
+          schema:
+            type: string
+          example: London
+        - name: base_datetime
+          in: query
+          required: false
+          description: Date and time to convert (YYYY-MM-DD HH:MM:SS). Defaults to current time.
+          schema:
+            type: string
+          example: '2026-04-19 10:30:00'
+        - name: target_location
+          in: query
+          required: true
+          description: Target location name or coordinates.
+          schema:
+            type: string
+          example: Tokyo
+      responses:
+        '200':
+          description: Time conversion result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConvertTimeResponse'
+              examples:
+                convertTime200Example:
+                  summary: Default convertTime 200 response
+                  x-microcks-default: true
+                  value:
+                    base_location: London
+                    base_datetime: '2026-04-19 10:30:00'
+                    base_timezone_name: Europe/London
+                    base_timezone_abbreviation: BST
+                    base_utc_offset: 1
+                    target_location: Tokyo
+                    target_datetime: '2026-04-19 18:30:00'
+                    target_timezone_name: Asia/Tokyo
+                    target_timezone_abbreviation: JST
+                    target_utc_offset: 9
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: api_key
+  schemas:
+    CurrentTimeResponse:
+      type: object
+      description: Current time and timezone data for a location
+      properties:
+        datetime:
+          type: string
+          description: Current date and time in the target timezone
+          example: '2026-04-19 10:30:00'
+        timezone_name:
+          type: string
+          description: IANA timezone name
+          example: America/New_York
+        timezone_location:
+          type: string
+          description: Human-readable location description
+          example: New York, United States
+        timezone_abbreviation:
+          type: string
+          description: Timezone abbreviation
+          example: EDT
+        gmt_offset:
+          type: integer
+          description: GMT/UTC offset in hours
+          example: -4
+        is_dst:
+          type: boolean
+          description: Whether daylight saving time is active
+          example: true
+        requested_location:
+          type: string
+          description: The input location string
+          example: New York City
+        latitude:
+          type: number
+          format: double
+          description: Latitude of the location
+          example: 40.7128
+        longitude:
+          type: number
+          format: double
+          description: Longitude of the location
+          example: -74.006
+    ConvertTimeResponse:
+      type: object
+      description: Time zone conversion result
+      properties:
+        base_location:
+          type: string
+          description: Source location
+          example: London
+        base_datetime:
+          type: string
+          description: Input date and time
+          example: '2026-04-19 10:30:00'
+        base_timezone_name:
+          type: string
+          description: Source IANA timezone name
+          example: Europe/London
+        base_timezone_abbreviation:
+          type: string
+          description: Source timezone abbreviation
+          example: BST
+        base_utc_offset:
+          type: integer
+          description: Source UTC offset in hours
+          example: 1
+        target_location:
+          type: string
+          description: Target location
+          example: Tokyo
+        target_datetime:
+          type: string
+          description: Converted date and time
+          example: '2026-04-19 18:30:00'
+        target_timezone_name:
+          type: string
+          description: Target IANA timezone name
+          example: Asia/Tokyo
+        target_timezone_abbreviation:
+          type: string
+          description: Target timezone abbreviation
+          example: JST
+        target_utc_offset:
+          type: integer
+          description: Target UTC offset in hours
+          example: 9
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: The provided API key is invalid
+        error:
+          type: string
+          example: invalid_api_key

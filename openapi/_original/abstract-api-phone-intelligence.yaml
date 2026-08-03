@@ -1,0 +1,163 @@
+openapi: 3.0.3
+info:
+  title: Abstract API - Phone Intelligence API
+  description: Identify carrier, line type, validity, location, and get deep insights including line status, VoIP detection, and risk scoring for any phone number globally.
+  version: 1.0.0
+  contact:
+    url: https://www.abstractapi.com/
+  x-generated-from: documentation
+servers:
+  - url: https://phoneintelligence.abstractapi.com/v1
+    description: Phone Intelligence API v1
+security:
+  - apiKey: []
+tags:
+  - name: Phone Intelligence
+    description: Phone number validation and intelligence
+paths:
+  /:
+    get:
+      operationId: getPhoneIntelligence
+      summary: Abstract API Get Phone Intelligence
+      description: Validate a phone number and retrieve carrier, location, line type, VoIP status, and risk information.
+      tags:
+        - Phone Intelligence
+      parameters:
+        - name: api_key
+          in: query
+          description: Your unique API key for the Phone Intelligence API.
+          required: true
+          schema:
+            type: string
+          example: abc123def456
+        - name: phone
+          in: query
+          description: The phone number to validate and analyze.
+          required: true
+          schema:
+            type: string
+          example: '+14155552671'
+        - name: country
+          in: query
+          description: ISO 3166-1 alpha-2 country code to specify the phone number origin.
+          required: false
+          schema:
+            type: string
+          example: US
+      responses:
+        '200':
+          description: Successful phone intelligence response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhoneIntelligenceResponse'
+              examples:
+                getPhoneIntelligence200Example:
+                  summary: Default getPhoneIntelligence 200 response
+                  x-microcks-default: true
+                  value:
+                    phone: '+14155552671'
+                    valid: true
+                    country:
+                      code: US
+                      name: United States
+                      prefix: '1'
+                    location: California
+                    type: mobile
+                    carrier: Verizon
+                    is_voip: false
+                    risk_score: 12
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized - invalid API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: api_key
+  schemas:
+    PhoneIntelligenceResponse:
+      type: object
+      description: Phone number intelligence response
+      properties:
+        phone:
+          type: string
+          description: The phone number in E.164 format
+          example: '+14155552671'
+        valid:
+          type: boolean
+          description: Whether the phone number is valid
+          example: true
+        country:
+          $ref: '#/components/schemas/PhoneCountry'
+        location:
+          type: string
+          description: Geographic location of the phone number
+          example: California
+        type:
+          type: string
+          description: Line type
+          example: mobile
+          enum:
+            - mobile
+            - landline
+            - voip
+            - toll_free
+            - premium_rate
+            - shared_cost
+            - unknown
+        carrier:
+          type: string
+          description: Carrier or service provider
+          example: Verizon
+        is_voip:
+          type: boolean
+          description: Whether the number is a VoIP number
+          example: false
+        risk_score:
+          type: integer
+          description: Risk score from 0 (low risk) to 100 (high risk)
+          example: 12
+    PhoneCountry:
+      type: object
+      properties:
+        code:
+          type: string
+          description: ISO 3166-1 alpha-2 country code
+          example: US
+        name:
+          type: string
+          description: Country name
+          example: United States
+        prefix:
+          type: string
+          description: International dialing prefix
+          example: '1'
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: The provided API key is invalid
+        error:
+          type: string
+          example: invalid_api_key
