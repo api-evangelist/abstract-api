@@ -1362,12 +1362,6 @@ common:
 
   - url: rules/abstract-api-spectral-rules.yml
     type: SpectralRules
-  - url: capabilities/fraud-detection.yaml
-    type: X-NaftikoCapability
-  - url: capabilities/data-enrichment.yaml
-    type: X-NaftikoCapability
-  - url: capabilities/financial-compliance.yaml
-    type: X-NaftikoCapability
   - url: vocabulary/abstract-api-vocabulary.yaml
     type: Vocabulary
   - type: Integrations
