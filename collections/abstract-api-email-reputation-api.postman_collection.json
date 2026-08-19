@@ -1,0 +1,289 @@
+{
+  "item": [
+    {
+      "id": "a78120ad-32df-407d-8aa7-1ccc9cf2ecc0",
+      "name": "Email Reputation",
+      "description": {
+        "content": "Email validation and reputation operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "df4b057d-7125-4751-9ae0-a8a1e142dddd",
+          "name": "Abstract API Get Email Reputation",
+          "request": {
+            "name": "Abstract API Get Email Reputation",
+            "description": {
+              "content": "Validate an email address and retrieve reputation, deliverability, and enrichment data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Your unique API key for the Email Reputation API."
+                },
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<email>",
+                  "description": "(Required) The email address to validate and analyze."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "643e247f-28ef-473d-9fae-64b70063bca8",
+              "name": "Successful email reputation lookup",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "email",
+                      "value": "test@example.com"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"email\": \"test@example.com\",\n  \"deliverability\": {\n    \"status\": \"DELIVERABLE\",\n    \"status_detail\": \"smtp_valid\",\n    \"is_format_valid\": true,\n    \"is_smtp_valid\": true,\n    \"is_mx_valid\": true,\n    \"mx_records\": [\n      \"mx.example.com\"\n    ]\n  },\n  \"quality\": {\n    \"score\": 0.92,\n    \"is_free_email\": false,\n    \"is_disposable\": false,\n    \"is_catchall\": false,\n    \"is_role\": false\n  },\n  \"domain\": {\n    \"domain\": \"example.com\",\n    \"domain_age\": 9000,\n    \"is_live_site\": true\n  },\n  \"risk\": {\n    \"address_risk_status\": \"low\",\n    \"domain_risk_status\": \"low\"\n  },\n  \"breaches\": {\n    \"total_breaches\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "be917bb9-e6c9-4863-85f1-ffc9470afed3",
+              "name": "Bad request - missing or invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "email",
+                      "value": "test@example.com"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The provided API key is invalid\",\n  \"error\": \"invalid_api_key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "767eb5e6-43e9-4ca1-86ce-95b6636b464c",
+              "name": "Unauthorized - invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "email",
+                      "value": "test@example.com"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The provided API key is invalid\",\n  \"error\": \"invalid_api_key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f789c5f-d6cf-472b-b7f5-a159fb222ab3",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "email",
+                      "value": "test@example.com"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The provided API key is invalid\",\n  \"error\": \"invalid_api_key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://avatars.abstractapi.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "27531e38-4297-4400-98ad-5de1ddad972f",
+    "name": "Abstract API Avatars Email Reputation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Create highly customizable avatar images using a person's name or initials. Supports color, font, and size customization for user profile images.",
+      "type": "text/plain"
+    }
+  }
+}

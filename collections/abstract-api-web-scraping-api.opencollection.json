@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Abstract API Avatars Web Scraping API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Web Scraping",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Abstract API Scrape Web Page",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://avatars.abstractapi.com/v1/",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "abc123def456",
+                "type": "query",
+                "description": "Your unique API key for the Web Scraping API."
+              },
+              {
+                "name": "url",
+                "value": "https://www.example.com",
+                "type": "query",
+                "description": "The URL of the webpage to scrape."
+              },
+              {
+                "name": "render_js",
+                "value": "false",
+                "type": "query",
+                "description": "Whether to render JavaScript before returning HTML. Defaults to false."
+              }
+            ]
+          },
+          "docs": "Extract the full HTML content of any website URL, with support for JavaScript-rendered pages."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

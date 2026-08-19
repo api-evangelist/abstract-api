@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Abstract API Avatars Image Processing API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Image Processing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Abstract API Process Image by URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://avatars.abstractapi.com/v1/url",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "abc123def456",
+                "type": "query",
+                "description": "Your unique API key for the Image Processing API."
+              },
+              {
+                "name": "url",
+                "value": "https://www.example.com/image.png",
+                "type": "query",
+                "description": "URL of the image to process."
+              },
+              {
+                "name": "lossy",
+                "value": "true",
+                "type": "query",
+                "description": "Whether to apply lossy compression. Defaults to true."
+              },
+              {
+                "name": "quality",
+                "value": "80",
+                "type": "query",
+                "description": "Image quality from 1 to 100 (for lossy compression)."
+              },
+              {
+                "name": "output_format",
+                "value": "webp",
+                "type": "query",
+                "description": "Target output format (jpeg, png, webp, gif)."
+              }
+            ]
+          },
+          "docs": "Compress, convert, or optimize an image from a given URL."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

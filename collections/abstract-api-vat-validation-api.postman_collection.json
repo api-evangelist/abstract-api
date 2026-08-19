@@ -1,0 +1,679 @@
+{
+  "item": [
+    {
+      "id": "5e8111e3-da7b-4c59-8dd5-8c69b8ebb710",
+      "name": "VAT Validation",
+      "description": {
+        "content": "VAT number validation and rate lookup",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cd98f324-551f-4420-88d3-a22c63885d78",
+          "name": "Abstract API Validate VAT Number",
+          "request": {
+            "name": "Abstract API Validate VAT Number",
+            "description": {
+              "content": "Validate a VAT number and retrieve company details associated with it.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "validate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Your unique API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "vat_number",
+                  "value": "<string>",
+                  "description": "(Required) The VAT number to validate (with country prefix)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "37c42920-2086-46da-96a3-4fe367117889",
+              "name": "VAT validation result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "vat_number",
+                      "value": "GB123456789"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"vat_number\": \"GB123456789\",\n  \"valid\": true,\n  \"company\": {\n    \"name\": \"Example Ltd\",\n    \"address\": \"1 Example Street, London, UK\"\n  },\n  \"country\": {\n    \"code\": \"GB\",\n    \"name\": \"United Kingdom\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a6a3bef-9fed-490c-bcb8-01e0525331c4",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "vat_number",
+                      "value": "GB123456789"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The provided API key is invalid\",\n  \"error\": \"invalid_api_key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca9a1540-f736-405a-8536-b10b37ff81f4",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "vat_number",
+                      "value": "GB123456789"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The provided API key is invalid\",\n  \"error\": \"invalid_api_key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cc1dcc3d-0398-47ef-90e5-b6ec1fe4be2e",
+          "name": "Abstract API Get VAT Rates",
+          "request": {
+            "name": "Abstract API Get VAT Rates",
+            "description": {
+              "content": "Look up the current VAT rates for a given country.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Your unique API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "country_code",
+                  "value": "<string>",
+                  "description": "(Required) ISO 3166-1 alpha-2 country code."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0cff8d53-f693-4de3-b895-4015cb0396d9",
+              "name": "VAT rates for the country",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "country_code",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"country_code\": \"DE\",\n  \"country_name\": \"Germany\",\n  \"standard_rate\": 19,\n  \"reduced_rates\": [\n    7\n  ],\n  \"super_reduced_rate\": null,\n  \"parking_rate\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b50216be-5084-4def-aa03-ded4b27ddaa8",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "country_code",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The provided API key is invalid\",\n  \"error\": \"invalid_api_key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b7d7c64-2af3-435a-a836-e1d7a7386041",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "country_code",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The provided API key is invalid\",\n  \"error\": \"invalid_api_key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6f4c486e-61ac-4f80-8a0d-f6f954f1cf35",
+          "name": "Abstract API Calculate VAT",
+          "request": {
+            "name": "Abstract API Calculate VAT",
+            "description": {
+              "content": "Calculate VAT-inclusive or VAT-exclusive price for a given country and amount.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "calculate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Your unique API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "amount",
+                  "value": "<number>",
+                  "description": "(Required) Amount to calculate VAT on."
+                },
+                {
+                  "disabled": false,
+                  "key": "country_code",
+                  "value": "<string>",
+                  "description": "(Required) ISO 3166-1 alpha-2 country code."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_vat_incl",
+                  "value": "<boolean>",
+                  "description": "Whether the amount already includes VAT. Defaults to false."
+                },
+                {
+                  "disabled": false,
+                  "key": "vat_category",
+                  "value": "<string>",
+                  "description": "VAT rate category (standard, reduced, super_reduced, parking)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5b99b581-c94c-4bbc-88ed-30f0c6fa2888",
+              "name": "VAT calculation result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calculate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "100"
+                    },
+                    {
+                      "key": "country_code",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "is_vat_incl",
+                      "value": "false"
+                    },
+                    {
+                      "key": "vat_category",
+                      "value": "standard"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"amount_excl_vat\": 100,\n  \"vat_amount\": 19,\n  \"amount_incl_vat\": 119,\n  \"vat_category\": \"standard\",\n  \"vat_rate\": 19,\n  \"country_code\": \"DE\",\n  \"country_name\": \"Germany\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c1c9a86-26f8-4d44-a874-963344ad2b02",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calculate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "100"
+                    },
+                    {
+                      "key": "country_code",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "is_vat_incl",
+                      "value": "false"
+                    },
+                    {
+                      "key": "vat_category",
+                      "value": "standard"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The provided API key is invalid\",\n  \"error\": \"invalid_api_key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b532a3d4-effe-49db-9392-f23da702b055",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calculate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "100"
+                    },
+                    {
+                      "key": "country_code",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "is_vat_incl",
+                      "value": "false"
+                    },
+                    {
+                      "key": "vat_category",
+                      "value": "standard"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The provided API key is invalid\",\n  \"error\": \"invalid_api_key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://avatars.abstractapi.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "206d6c76-eb89-44ab-9e06-aaf9b04a7549",
+    "name": "Abstract API Avatars VAT Validation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Create highly customizable avatar images using a person's name or initials. Supports color, font, and size customization for user profile images.",
+      "type": "text/plain"
+    }
+  }
+}

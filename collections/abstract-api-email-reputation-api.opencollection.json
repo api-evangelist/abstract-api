@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Abstract API Avatars Email Reputation API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Email Reputation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Abstract API Get Email Reputation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://avatars.abstractapi.com/v1/",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "abc123def456",
+                "type": "query",
+                "description": "Your unique API key for the Email Reputation API."
+              },
+              {
+                "name": "email",
+                "value": "test@example.com",
+                "type": "query",
+                "description": "The email address to validate and analyze."
+              }
+            ]
+          },
+          "docs": "Validate an email address and retrieve reputation, deliverability, and enrichment data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

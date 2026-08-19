@@ -1,0 +1,241 @@
+{
+  "item": [
+    {
+      "id": "a56cd2ca-bda1-49be-8fbd-3f00d27babc9",
+      "name": "IBAN Validation",
+      "description": {
+        "content": "IBAN number validation operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8046750e-a5fa-496c-9dff-200ed8131a16",
+          "name": "Abstract API Validate IBAN",
+          "request": {
+            "name": "Abstract API Validate IBAN",
+            "description": {
+              "content": "Validate an IBAN number and retrieve bank details, account type, and country information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Your unique API key for the IBAN Validation API."
+                },
+                {
+                  "disabled": false,
+                  "key": "iban",
+                  "value": "<string>",
+                  "description": "(Required) The IBAN to validate."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "321b0456-8587-4a04-a8c0-c593bd3e449c",
+              "name": "IBAN validation result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "iban",
+                      "value": "GB82WEST12345698765432"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"iban\": \"GB82WEST12345698765432\",\n  \"is_valid\": true,\n  \"country\": {\n    \"code\": \"GB\",\n    \"name\": \"United Kingdom\"\n  },\n  \"bank\": {\n    \"bank_name\": \"Westpac Banking Corporation\",\n    \"bank_code\": \"WEST\",\n    \"bic\": \"WESTGB22\"\n  },\n  \"account_number\": 98765432,\n  \"check_digits\": \"82\",\n  \"sepa_member\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "513a8e2b-c5f7-40ae-ac9e-82973fd25ef8",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "iban",
+                      "value": "GB82WEST12345698765432"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The provided API key is invalid\",\n  \"error\": \"invalid_api_key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "510c5518-09cf-4370-903f-694ce036cead",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "iban",
+                      "value": "GB82WEST12345698765432"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The provided API key is invalid\",\n  \"error\": \"invalid_api_key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://avatars.abstractapi.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7ff664ac-b10f-4b30-8995-1f694c48fcfb",
+    "name": "Abstract API Avatars IBAN Validation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Create highly customizable avatar images using a person's name or initials. Supports color, font, and size customization for user profile images.",
+      "type": "text/plain"
+    }
+  }
+}

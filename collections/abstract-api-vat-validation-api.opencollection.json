@@ -1,0 +1,119 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Abstract API Avatars VAT Validation API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "VAT Validation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Abstract API Validate VAT Number",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://avatars.abstractapi.com/v1/validate",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "abc123def456",
+                "type": "query",
+                "description": "Your unique API key."
+              },
+              {
+                "name": "vat_number",
+                "value": "GB123456789",
+                "type": "query",
+                "description": "The VAT number to validate (with country prefix)."
+              }
+            ]
+          },
+          "docs": "Validate a VAT number and retrieve company details associated with it."
+        },
+        {
+          "info": {
+            "name": "Abstract API Get VAT Rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://avatars.abstractapi.com/v1/rates",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "abc123def456",
+                "type": "query",
+                "description": "Your unique API key."
+              },
+              {
+                "name": "country_code",
+                "value": "DE",
+                "type": "query",
+                "description": "ISO 3166-1 alpha-2 country code."
+              }
+            ]
+          },
+          "docs": "Look up the current VAT rates for a given country."
+        },
+        {
+          "info": {
+            "name": "Abstract API Calculate VAT",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://avatars.abstractapi.com/v1/calculate",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "abc123def456",
+                "type": "query",
+                "description": "Your unique API key."
+              },
+              {
+                "name": "amount",
+                "value": "100",
+                "type": "query",
+                "description": "Amount to calculate VAT on."
+              },
+              {
+                "name": "country_code",
+                "value": "DE",
+                "type": "query",
+                "description": "ISO 3166-1 alpha-2 country code."
+              },
+              {
+                "name": "is_vat_incl",
+                "value": "false",
+                "type": "query",
+                "description": "Whether the amount already includes VAT. Defaults to false."
+              },
+              {
+                "name": "vat_category",
+                "value": "standard",
+                "type": "query",
+                "description": "VAT rate category (standard, reduced, super_reduced, parking)."
+              }
+            ]
+          },
+          "docs": "Calculate VAT-inclusive or VAT-exclusive price for a given country and amount."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

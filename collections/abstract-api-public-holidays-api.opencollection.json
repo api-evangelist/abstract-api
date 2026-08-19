@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Abstract API Avatars Public Holidays API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Public Holidays",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Abstract API Get Public Holidays",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://avatars.abstractapi.com/v1/",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "abc123def456",
+                "type": "query",
+                "description": "Your unique API key for the Public Holidays API."
+              },
+              {
+                "name": "country",
+                "value": "US",
+                "type": "query",
+                "description": "ISO 3166-1 alpha-2 two-letter country code."
+              },
+              {
+                "name": "year",
+                "value": "2026",
+                "type": "query",
+                "description": "Year to query (required on free plan). Defaults to current year on paid."
+              },
+              {
+                "name": "month",
+                "value": "4",
+                "type": "query",
+                "description": "Month to query (1-12, required on free plan). Defaults to current month."
+              },
+              {
+                "name": "day",
+                "value": "19",
+                "type": "query",
+                "description": "Day to query (1-31, required on free plan). Defaults to current day."
+              }
+            ]
+          },
+          "docs": "Retrieve public, local, religious, and other holidays for a given country and optional date filter."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

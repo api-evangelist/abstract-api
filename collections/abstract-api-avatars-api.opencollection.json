@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Abstract API Avatars API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Avatars",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Abstract API Generate Avatar",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://avatars.abstractapi.com/v1/",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "abc123def456",
+                "type": "query",
+                "description": "Your unique API key for the Avatars API."
+              },
+              {
+                "name": "name",
+                "value": "Jane Smith",
+                "type": "query",
+                "description": "Full name or initials to use for the avatar."
+              },
+              {
+                "name": "size",
+                "value": "128",
+                "type": "query",
+                "description": "Size of the avatar in pixels (square). Defaults to 128."
+              },
+              {
+                "name": "color",
+                "value": "FFFFFF",
+                "type": "query",
+                "description": "Text color as a hex code (without"
+              },
+              {
+                "name": "background_color",
+                "value": "4F46E5",
+                "type": "query",
+                "description": "Background color as a hex code (without"
+              },
+              {
+                "name": "font_size",
+                "value": "0.5",
+                "type": "query",
+                "description": "Font size as a fraction of the avatar size (0.1 to 0.9)."
+              },
+              {
+                "name": "char_count",
+                "value": "2",
+                "type": "query",
+                "description": "Number of characters to use from the name. Defaults to 2."
+              }
+            ]
+          },
+          "docs": "Generate a customizable avatar image using a person's name or initials with configurable colors, fonts, and sizes."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

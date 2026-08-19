@@ -1,0 +1,295 @@
+{
+  "item": [
+    {
+      "id": "6a7a0adb-5bba-48b3-8d5e-5be23c40d047",
+      "name": "Image Processing",
+      "description": {
+        "content": "Image compression and optimization operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7cc4bc8c-5b46-47f3-84e7-2e8379986391",
+          "name": "Abstract API Process Image by URL",
+          "request": {
+            "name": "Abstract API Process Image by URL",
+            "description": {
+              "content": "Compress, convert, or optimize an image from a given URL.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "url"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Your unique API key for the Image Processing API."
+                },
+                {
+                  "disabled": false,
+                  "key": "url",
+                  "value": "<uri>",
+                  "description": "(Required) URL of the image to process."
+                },
+                {
+                  "disabled": false,
+                  "key": "lossy",
+                  "value": "<boolean>",
+                  "description": "Whether to apply lossy compression. Defaults to true."
+                },
+                {
+                  "disabled": false,
+                  "key": "quality",
+                  "value": "<integer>",
+                  "description": "Image quality from 1 to 100 (for lossy compression)."
+                },
+                {
+                  "disabled": false,
+                  "key": "output_format",
+                  "value": "<string>",
+                  "description": "Target output format (jpeg, png, webp, gif)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d7b4f72e-c8c8-4daf-934b-2e4b552d27ed",
+              "name": "Processed image result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "url",
+                      "value": "https://www.example.com/image.png"
+                    },
+                    {
+                      "key": "lossy",
+                      "value": "true"
+                    },
+                    {
+                      "key": "quality",
+                      "value": "80"
+                    },
+                    {
+                      "key": "output_format",
+                      "value": "webp"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"original_size\": 102400,\n  \"new_size\": 51200,\n  \"saved_bytes\": 51200,\n  \"saved_percent\": 50,\n  \"url\": \"https://dl.abstractapi.com/processed/abc123.webp\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54a3bf10-2742-45cd-b619-9a787e462d05",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "url",
+                      "value": "https://www.example.com/image.png"
+                    },
+                    {
+                      "key": "lossy",
+                      "value": "true"
+                    },
+                    {
+                      "key": "quality",
+                      "value": "80"
+                    },
+                    {
+                      "key": "output_format",
+                      "value": "webp"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The provided API key is invalid\",\n  \"error\": \"invalid_api_key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0fe4ce07-46fd-445d-8c9c-61307cb1dd48",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "url",
+                      "value": "https://www.example.com/image.png"
+                    },
+                    {
+                      "key": "lossy",
+                      "value": "true"
+                    },
+                    {
+                      "key": "quality",
+                      "value": "80"
+                    },
+                    {
+                      "key": "output_format",
+                      "value": "webp"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The provided API key is invalid\",\n  \"error\": \"invalid_api_key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://avatars.abstractapi.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1e502dcd-92e7-43f0-afab-cd1f75122509",
+    "name": "Abstract API Avatars Image Processing API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Create highly customizable avatar images using a person's name or initials. Supports color, font, and size customization for user profile images.",
+      "type": "text/plain"
+    }
+  }
+}

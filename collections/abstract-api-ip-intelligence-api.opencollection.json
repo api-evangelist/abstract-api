@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Abstract API Avatars IP Intelligence API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "IP Intelligence",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Abstract API Get IP Intelligence",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://avatars.abstractapi.com/v1/",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "abc123def456",
+                "type": "query",
+                "description": "Your unique API key for the IP Intelligence API."
+              },
+              {
+                "name": "ip_address",
+                "value": "8.8.8.8",
+                "type": "query",
+                "description": "IPv4 or IPv6 address to analyze. Auto-detects request IP if omitted."
+              },
+              {
+                "name": "fields",
+                "value": "security,location,asn",
+                "type": "query",
+                "description": "Comma-separated list of top-level keys to return."
+              }
+            ]
+          },
+          "docs": "Analyze an IP address for security signals including VPN, proxy, Tor, abuse, hosting, relay, and mobile detection along with location and ASN data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

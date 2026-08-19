@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Abstract API Avatars IP Geolocation API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "IP Geolocation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Abstract API Get IP Geolocation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://avatars.abstractapi.com/v1/",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "abc123def456",
+                "type": "query",
+                "description": "Your unique API key for the IP Geolocation API."
+              },
+              {
+                "name": "ip_address",
+                "value": "8.8.8.8",
+                "type": "query",
+                "description": "IPv4 or IPv6 address to geolocate. If omitted, the request IP is used."
+              },
+              {
+                "name": "fields",
+                "value": "city,region,country,latitude,longitude",
+                "type": "query",
+                "description": "Comma-separated list of top-level fields to return in the response."
+              }
+            ]
+          },
+          "docs": "Geolocate an IP address and retrieve location, timezone, currency, and flag data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

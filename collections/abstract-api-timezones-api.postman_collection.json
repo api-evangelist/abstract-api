@@ -1,0 +1,523 @@
+{
+  "item": [
+    {
+      "id": "8ded46e8-de08-4d41-aaf9-49887a3e627d",
+      "name": "Timezones",
+      "description": {
+        "content": "Timezone lookup and conversion operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "795ade41-6991-41ee-af52-f875b007255a",
+          "name": "Abstract API Get Current Time",
+          "request": {
+            "name": "Abstract API Get Current Time",
+            "description": {
+              "content": "Get the current time, date, and timezone for a location specified by name, coordinates, or IP address.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "current_time"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Your unique API key for the Timezone API."
+                },
+                {
+                  "disabled": false,
+                  "key": "location",
+                  "value": "<string>",
+                  "description": "Location name (e.g., city, address). Use location, latitude+longitude, or ip_address."
+                },
+                {
+                  "disabled": false,
+                  "key": "latitude",
+                  "value": "<double>",
+                  "description": "Latitude coordinate. Used with longitude."
+                },
+                {
+                  "disabled": false,
+                  "key": "longitude",
+                  "value": "<double>",
+                  "description": "Longitude coordinate. Used with latitude."
+                },
+                {
+                  "disabled": false,
+                  "key": "ip_address",
+                  "value": "<string>",
+                  "description": "IP address to determine timezone from."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dc3d10b9-e0b3-4d0d-ae0b-5211a2d6b017",
+              "name": "Current time and timezone information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "current_time"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "location",
+                      "value": "New York City"
+                    },
+                    {
+                      "key": "latitude",
+                      "value": "40.7128"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "-74.006"
+                    },
+                    {
+                      "key": "ip_address",
+                      "value": "8.8.8.8"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"datetime\": \"2026-04-19 10:30:00\",\n  \"timezone_name\": \"America/New_York\",\n  \"timezone_location\": \"New York, United States\",\n  \"timezone_abbreviation\": \"EDT\",\n  \"gmt_offset\": -4,\n  \"is_dst\": true,\n  \"requested_location\": \"New York City\",\n  \"latitude\": 40.7128,\n  \"longitude\": -74.006\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f6aecd97-3a17-4ef4-ba4e-80c604c10977",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "current_time"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "location",
+                      "value": "New York City"
+                    },
+                    {
+                      "key": "latitude",
+                      "value": "40.7128"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "-74.006"
+                    },
+                    {
+                      "key": "ip_address",
+                      "value": "8.8.8.8"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The provided API key is invalid\",\n  \"error\": \"invalid_api_key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c88d8fc2-c074-4e6d-b3f0-be605d030a43",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "current_time"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "location",
+                      "value": "New York City"
+                    },
+                    {
+                      "key": "latitude",
+                      "value": "40.7128"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "-74.006"
+                    },
+                    {
+                      "key": "ip_address",
+                      "value": "8.8.8.8"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The provided API key is invalid\",\n  \"error\": \"invalid_api_key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e7ad0907-4668-4dde-94b4-63ff0f5c7291",
+          "name": "Abstract API Convert Time Between Timezones",
+          "request": {
+            "name": "Abstract API Convert Time Between Timezones",
+            "description": {
+              "content": "Convert time from one location to another, or convert to and from UTC.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "convert_time"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Your unique API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "base_location",
+                  "value": "<string>",
+                  "description": "(Required) Source location name or coordinates."
+                },
+                {
+                  "disabled": false,
+                  "key": "base_datetime",
+                  "value": "<string>",
+                  "description": "Date and time to convert (YYYY-MM-DD HH:MM:SS). Defaults to current time."
+                },
+                {
+                  "disabled": false,
+                  "key": "target_location",
+                  "value": "<string>",
+                  "description": "(Required) Target location name or coordinates."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8b9f40a8-6b84-4259-a59e-4cba81fc6af3",
+              "name": "Time conversion result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "convert_time"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "base_location",
+                      "value": "London"
+                    },
+                    {
+                      "key": "base_datetime",
+                      "value": "2026-04-19 10:30:00"
+                    },
+                    {
+                      "key": "target_location",
+                      "value": "Tokyo"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"base_location\": \"London\",\n  \"base_datetime\": \"2026-04-19 10:30:00\",\n  \"base_timezone_name\": \"Europe/London\",\n  \"base_timezone_abbreviation\": \"BST\",\n  \"base_utc_offset\": 1,\n  \"target_location\": \"Tokyo\",\n  \"target_datetime\": \"2026-04-19 18:30:00\",\n  \"target_timezone_name\": \"Asia/Tokyo\",\n  \"target_timezone_abbreviation\": \"JST\",\n  \"target_utc_offset\": 9\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1f1cce3-8c89-494b-b913-71dab1dec928",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "convert_time"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "base_location",
+                      "value": "London"
+                    },
+                    {
+                      "key": "base_datetime",
+                      "value": "2026-04-19 10:30:00"
+                    },
+                    {
+                      "key": "target_location",
+                      "value": "Tokyo"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The provided API key is invalid\",\n  \"error\": \"invalid_api_key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f8e92a42-a1b1-4b5e-9eba-4bd55906f45f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "convert_time"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "base_location",
+                      "value": "London"
+                    },
+                    {
+                      "key": "base_datetime",
+                      "value": "2026-04-19 10:30:00"
+                    },
+                    {
+                      "key": "target_location",
+                      "value": "Tokyo"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The provided API key is invalid\",\n  \"error\": \"invalid_api_key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://avatars.abstractapi.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "cbf1a078-a313-4c29-84bb-895d8f39f509",
+    "name": "Abstract API Avatars Timezones API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Create highly customizable avatar images using a person's name or initials. Supports color, font, and size customization for user profile images.",
+      "type": "text/plain"
+    }
+  }
+}

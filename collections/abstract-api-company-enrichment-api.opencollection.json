@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Abstract API Avatars Company Enrichment API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Company Enrichment",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Abstract API Get Company Enrichment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://avatars.abstractapi.com/v1/",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "abc123def456",
+                "type": "query",
+                "description": "Your unique API key for the Company Enrichment API."
+              },
+              {
+                "name": "domain",
+                "value": "stripe.com",
+                "type": "query",
+                "description": "Company domain name to enrich (e.g., stripe.com). Use domain or email."
+              },
+              {
+                "name": "email",
+                "value": "billing@stripe.com",
+                "type": "query",
+                "description": "Business email address to derive the company domain from. Use domain or email."
+              }
+            ]
+          },
+          "docs": "Retrieve company data including name, logo, description, industry, headcount, and location using a domain name or email."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

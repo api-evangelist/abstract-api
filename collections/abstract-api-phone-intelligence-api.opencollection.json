@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Abstract API Avatars Phone Intelligence API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Phone Intelligence",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Abstract API Get Phone Intelligence",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://avatars.abstractapi.com/v1/",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "abc123def456",
+                "type": "query",
+                "description": "Your unique API key for the Phone Intelligence API."
+              },
+              {
+                "name": "phone",
+                "value": "+14155552671",
+                "type": "query",
+                "description": "The phone number to validate and analyze."
+              },
+              {
+                "name": "country",
+                "value": "US",
+                "type": "query",
+                "description": "ISO 3166-1 alpha-2 country code to specify the phone number origin."
+              }
+            ]
+          },
+          "docs": "Validate a phone number and retrieve carrier, location, line type, VoIP status, and risk information."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

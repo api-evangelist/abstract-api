@@ -1,0 +1,311 @@
+{
+  "item": [
+    {
+      "id": "c0ded9e5-023d-49fe-ba75-34d35b56d78b",
+      "name": "IP Intelligence",
+      "description": {
+        "content": "Advanced IP address intelligence and security operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d0b2678f-0cd6-4450-8d67-2a732f97fc7b",
+          "name": "Abstract API Get IP Intelligence",
+          "request": {
+            "name": "Abstract API Get IP Intelligence",
+            "description": {
+              "content": "Analyze an IP address for security signals including VPN, proxy, Tor, abuse, hosting, relay, and mobile detection along with location and ASN data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Your unique API key for the IP Intelligence API."
+                },
+                {
+                  "disabled": false,
+                  "key": "ip_address",
+                  "value": "<string>",
+                  "description": "IPv4 or IPv6 address to analyze. Auto-detects request IP if omitted."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Comma-separated list of top-level keys to return."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d845eaf9-457c-46a7-8fd5-7ace5d89b88b",
+              "name": "Successful IP intelligence response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "ip_address",
+                      "value": "8.8.8.8"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "security,location,asn"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ip_address\": \"8.8.8.8\",\n  \"security\": {\n    \"is_vpn\": false,\n    \"is_proxy\": false,\n    \"is_tor\": false,\n    \"is_hosting\": true,\n    \"is_relay\": false,\n    \"is_mobile\": false,\n    \"is_abuse\": false\n  },\n  \"asn\": {\n    \"asn\": \"AS15169\",\n    \"name\": \"Google LLC\",\n    \"domain\": \"google.com\",\n    \"type\": \"hosting\"\n  },\n  \"company\": {\n    \"name\": \"Google LLC\",\n    \"domain\": \"google.com\",\n    \"type\": \"hosting\"\n  },\n  \"domains\": [\n    \"dns.google\"\n  ],\n  \"location\": {\n    \"city\": \"Mountain View\",\n    \"region\": \"California\",\n    \"country\": \"United States\",\n    \"country_code\": \"US\",\n    \"latitude\": 37.386,\n    \"longitude\": -122.0838\n  },\n  \"timezone\": {\n    \"name\": \"America/Los_Angeles\",\n    \"abbreviation\": \"PST\",\n    \"utc_offset\": -8,\n    \"local_time\": \"2026-04-19T10:30:00\",\n    \"is_dst\": false\n  },\n  \"flag\": {\n    \"emoji\": \"🇺🇸\",\n    \"unicode\": \"U+1F1FA U+1F1F8\",\n    \"png\": \"https://static.abstractapi.com/country-flags/US_flag.png\",\n    \"svg\": \"https://static.abstractapi.com/country-flags/US_flag.svg\"\n  },\n  \"currency\": {\n    \"name\": \"US Dollar\",\n    \"iso_code\": \"USD\",\n    \"symbol\": \"$\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e16263c-24ed-4cbf-986a-5021f668ec33",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "ip_address",
+                      "value": "8.8.8.8"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "security,location,asn"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The provided API key is invalid\",\n  \"error\": \"invalid_api_key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "72e8ed5c-3634-4f0f-b913-5f278969bbe6",
+              "name": "Unauthorized - invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "ip_address",
+                      "value": "8.8.8.8"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "security,location,asn"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The provided API key is invalid\",\n  \"error\": \"invalid_api_key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca6a0e99-f104-416d-9b27-6a27114b2e11",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "ip_address",
+                      "value": "8.8.8.8"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "security,location,asn"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The provided API key is invalid\",\n  \"error\": \"invalid_api_key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://avatars.abstractapi.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5a9e6620-56f4-4d1b-a5f5-c59359c78842",
+    "name": "Abstract API Avatars IP Intelligence API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Create highly customizable avatar images using a person's name or initials. Supports color, font, and size customization for user profile images.",
+      "type": "text/plain"
+    }
+  }
+}

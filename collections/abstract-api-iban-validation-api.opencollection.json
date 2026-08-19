@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Abstract API Avatars IBAN Validation API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "IBAN Validation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Abstract API Validate IBAN",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://avatars.abstractapi.com/v1/",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "abc123def456",
+                "type": "query",
+                "description": "Your unique API key for the IBAN Validation API."
+              },
+              {
+                "name": "iban",
+                "value": "GB82WEST12345698765432",
+                "type": "query",
+                "description": "The IBAN to validate."
+              }
+            ]
+          },
+          "docs": "Validate an IBAN number and retrieve bank details, account type, and country information."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

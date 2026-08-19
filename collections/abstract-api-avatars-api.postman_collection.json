@@ -1,0 +1,331 @@
+{
+  "item": [
+    {
+      "id": "7861a729-0524-43e1-aa61-66e014380f53",
+      "name": "Avatars",
+      "description": {
+        "content": "User avatar generation operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a2433539-4b06-4513-99ad-5f76d3fd2575",
+          "name": "Abstract API Generate Avatar",
+          "request": {
+            "name": "Abstract API Generate Avatar",
+            "description": {
+              "content": "Generate a customizable avatar image using a person's name or initials with configurable colors, fonts, and sizes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Your unique API key for the Avatars API."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) Full name or initials to use for the avatar."
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "<integer>",
+                  "description": "Size of the avatar in pixels (square). Defaults to 128."
+                },
+                {
+                  "disabled": false,
+                  "key": "color",
+                  "value": "<string>",
+                  "description": "Text color as a hex code (without"
+                },
+                {
+                  "disabled": false,
+                  "key": "background_color",
+                  "value": "<string>",
+                  "description": "Background color as a hex code (without"
+                },
+                {
+                  "disabled": false,
+                  "key": "font_size",
+                  "value": "<number>",
+                  "description": "Font size as a fraction of the avatar size (0.1 to 0.9)."
+                },
+                {
+                  "disabled": false,
+                  "key": "char_count",
+                  "value": "<integer>",
+                  "description": "Number of characters to use from the name. Defaults to 2."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "image/png"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7debbab0-52b9-4d58-a6cc-b636c4447b96",
+              "name": "Avatar image",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "name",
+                      "value": "Jane Smith"
+                    },
+                    {
+                      "key": "size",
+                      "value": "128"
+                    },
+                    {
+                      "key": "color",
+                      "value": "FFFFFF"
+                    },
+                    {
+                      "key": "background_color",
+                      "value": "4F46E5"
+                    },
+                    {
+                      "key": "font_size",
+                      "value": "0.5"
+                    },
+                    {
+                      "key": "char_count",
+                      "value": "2"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "image/png"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "image/png"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5a207712-0d30-4aad-a0ed-796454ec882e",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "name",
+                      "value": "Jane Smith"
+                    },
+                    {
+                      "key": "size",
+                      "value": "128"
+                    },
+                    {
+                      "key": "color",
+                      "value": "FFFFFF"
+                    },
+                    {
+                      "key": "background_color",
+                      "value": "4F46E5"
+                    },
+                    {
+                      "key": "font_size",
+                      "value": "0.5"
+                    },
+                    {
+                      "key": "char_count",
+                      "value": "2"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The provided API key is invalid\",\n  \"error\": \"invalid_api_key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7d29199-d9de-4466-925e-6e946d67b12d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "name",
+                      "value": "Jane Smith"
+                    },
+                    {
+                      "key": "size",
+                      "value": "128"
+                    },
+                    {
+                      "key": "color",
+                      "value": "FFFFFF"
+                    },
+                    {
+                      "key": "background_color",
+                      "value": "4F46E5"
+                    },
+                    {
+                      "key": "font_size",
+                      "value": "0.5"
+                    },
+                    {
+                      "key": "char_count",
+                      "value": "2"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The provided API key is invalid\",\n  \"error\": \"invalid_api_key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://avatars.abstractapi.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3d9c3301-eeb9-4e2c-854b-51f76739767d",
+    "name": "Abstract API Avatars API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Create highly customizable avatar images using a person's name or initials. Supports color, font, and size customization for user profile images.",
+      "type": "text/plain"
+    }
+  }
+}

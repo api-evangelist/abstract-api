@@ -1,0 +1,131 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Abstract API Avatars Exchange Rates API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Exchange Rates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Abstract API Get Live Exchange Rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://avatars.abstractapi.com/v1/live",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "abc123def456",
+                "type": "query",
+                "description": "Your unique API key for the Exchange Rates API."
+              },
+              {
+                "name": "base",
+                "value": "USD",
+                "type": "query",
+                "description": "Base currency ISO 4217 code."
+              },
+              {
+                "name": "target",
+                "value": "EUR,GBP,JPY",
+                "type": "query",
+                "description": "Target currency or comma-separated list of currencies. Returns all if omitted."
+              }
+            ]
+          },
+          "docs": "Get the latest exchange rates for one or more target currencies relative to a base currency."
+        },
+        {
+          "info": {
+            "name": "Abstract API Convert Currency",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://avatars.abstractapi.com/v1/convert",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "abc123def456",
+                "type": "query",
+                "description": "Your unique API key."
+              },
+              {
+                "name": "base",
+                "value": "USD",
+                "type": "query",
+                "description": "Source currency ISO 4217 code."
+              },
+              {
+                "name": "target",
+                "value": "EUR",
+                "type": "query",
+                "description": "Target currency ISO 4217 code."
+              },
+              {
+                "name": "base_amount",
+                "value": "100",
+                "type": "query",
+                "description": "Amount to convert."
+              }
+            ]
+          },
+          "docs": "Convert an amount from one currency to another using current exchange rates."
+        },
+        {
+          "info": {
+            "name": "Abstract API Get Historical Exchange Rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://avatars.abstractapi.com/v1/historical",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "abc123def456",
+                "type": "query",
+                "description": "Your unique API key."
+              },
+              {
+                "name": "base",
+                "value": "USD",
+                "type": "query",
+                "description": "Base currency ISO 4217 code."
+              },
+              {
+                "name": "target",
+                "value": "EUR,GBP",
+                "type": "query",
+                "description": "Target currency or comma-separated list."
+              },
+              {
+                "name": "date",
+                "value": "2026-01-01",
+                "type": "query",
+                "description": "Date for historical rates in YYYY-MM-DD format."
+              }
+            ]
+          },
+          "docs": "Retrieve historical exchange rates for a specific date."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

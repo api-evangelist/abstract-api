@@ -1,0 +1,106 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Abstract API Avatars Timezones API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Timezones",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Abstract API Get Current Time",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://avatars.abstractapi.com/v1/current_time",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "abc123def456",
+                "type": "query",
+                "description": "Your unique API key for the Timezone API."
+              },
+              {
+                "name": "location",
+                "value": "New York City",
+                "type": "query",
+                "description": "Location name (e.g., city, address). Use location, latitude+longitude, or ip_address."
+              },
+              {
+                "name": "latitude",
+                "value": "40.7128",
+                "type": "query",
+                "description": "Latitude coordinate. Used with longitude."
+              },
+              {
+                "name": "longitude",
+                "value": "-74.006",
+                "type": "query",
+                "description": "Longitude coordinate. Used with latitude."
+              },
+              {
+                "name": "ip_address",
+                "value": "8.8.8.8",
+                "type": "query",
+                "description": "IP address to determine timezone from."
+              }
+            ]
+          },
+          "docs": "Get the current time, date, and timezone for a location specified by name, coordinates, or IP address."
+        },
+        {
+          "info": {
+            "name": "Abstract API Convert Time Between Timezones",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://avatars.abstractapi.com/v1/convert_time",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "abc123def456",
+                "type": "query",
+                "description": "Your unique API key."
+              },
+              {
+                "name": "base_location",
+                "value": "London",
+                "type": "query",
+                "description": "Source location name or coordinates."
+              },
+              {
+                "name": "base_datetime",
+                "value": "2026-04-19 10:30:00",
+                "type": "query",
+                "description": "Date and time to convert (YYYY-MM-DD HH:MM:SS). Defaults to current time."
+              },
+              {
+                "name": "target_location",
+                "value": "Tokyo",
+                "type": "query",
+                "description": "Target location name or coordinates."
+              }
+            ]
+          },
+          "docs": "Convert time from one location to another, or convert to and from UTC."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

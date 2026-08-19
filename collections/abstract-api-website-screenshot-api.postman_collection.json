@@ -1,0 +1,349 @@
+{
+  "item": [
+    {
+      "id": "081b5f08-7cd2-4444-b40e-1e8533602aae",
+      "name": "Website Screenshot",
+      "description": {
+        "content": "Website screenshot capture operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7766932a-bad3-4ecb-90a9-1021b6e6c794",
+          "name": "Abstract API Capture Website Screenshot",
+          "request": {
+            "name": "Abstract API Capture Website Screenshot",
+            "description": {
+              "content": "Capture a screenshot of any website URL with configurable viewport, delay, and CSS injection options.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Your unique API key for the Website Screenshot API."
+                },
+                {
+                  "disabled": false,
+                  "key": "url",
+                  "value": "<uri>",
+                  "description": "(Required) The URL of the website to screenshot."
+                },
+                {
+                  "disabled": false,
+                  "key": "capture_full_page",
+                  "value": "<boolean>",
+                  "description": "Whether to capture the full scrollable page. Defaults to false."
+                },
+                {
+                  "disabled": false,
+                  "key": "width",
+                  "value": "<integer>",
+                  "description": "Viewport width in pixels. Defaults to 1280."
+                },
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<integer>",
+                  "description": "Viewport height in pixels. Defaults to 720."
+                },
+                {
+                  "disabled": false,
+                  "key": "delay",
+                  "value": "<integer>",
+                  "description": "Delay in milliseconds before taking the screenshot."
+                },
+                {
+                  "disabled": false,
+                  "key": "css_injection",
+                  "value": "<string>",
+                  "description": "CSS string to inject into the page before screenshotting."
+                },
+                {
+                  "disabled": false,
+                  "key": "export_format",
+                  "value": "<string>",
+                  "description": "Output format of the screenshot (jpeg or png). Defaults to jpeg."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "image/jpeg"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "67ee55e3-9f3f-47e5-a1e1-561c0a468196",
+              "name": "Screenshot image binary",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "url",
+                      "value": "https://www.example.com"
+                    },
+                    {
+                      "key": "capture_full_page",
+                      "value": "false"
+                    },
+                    {
+                      "key": "width",
+                      "value": "1280"
+                    },
+                    {
+                      "key": "height",
+                      "value": "720"
+                    },
+                    {
+                      "key": "delay",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "css_injection",
+                      "value": "body { background: white; }"
+                    },
+                    {
+                      "key": "export_format",
+                      "value": "jpeg"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "image/jpeg"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "image/jpeg"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0f708d9d-0532-4787-a40b-68136a6f6a70",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "url",
+                      "value": "https://www.example.com"
+                    },
+                    {
+                      "key": "capture_full_page",
+                      "value": "false"
+                    },
+                    {
+                      "key": "width",
+                      "value": "1280"
+                    },
+                    {
+                      "key": "height",
+                      "value": "720"
+                    },
+                    {
+                      "key": "delay",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "css_injection",
+                      "value": "body { background: white; }"
+                    },
+                    {
+                      "key": "export_format",
+                      "value": "jpeg"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The provided API key is invalid\",\n  \"error\": \"invalid_api_key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ed0477e0-2f9f-4d1a-a708-abe4cbf65e87",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "url",
+                      "value": "https://www.example.com"
+                    },
+                    {
+                      "key": "capture_full_page",
+                      "value": "false"
+                    },
+                    {
+                      "key": "width",
+                      "value": "1280"
+                    },
+                    {
+                      "key": "height",
+                      "value": "720"
+                    },
+                    {
+                      "key": "delay",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "css_injection",
+                      "value": "body { background: white; }"
+                    },
+                    {
+                      "key": "export_format",
+                      "value": "jpeg"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The provided API key is invalid\",\n  \"error\": \"invalid_api_key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://avatars.abstractapi.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "713171a6-4ab4-4ded-afd0-9327d1d9f95c",
+    "name": "Abstract API Avatars Website Screenshot API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Create highly customizable avatar images using a person's name or initials. Supports color, font, and size customization for user profile images.",
+      "type": "text/plain"
+    }
+  }
+}
