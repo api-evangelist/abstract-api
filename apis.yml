@@ -21,6 +21,23 @@ tags:
   - Avatars
   - Company Enrichment
   - Contacts
+  - Currency
+  - Email Validation
+  - Exchange Rates
+  - IBAN Validation
+  - Image Processing
+  - IP Geolocation
+  - IP Intelligence
+  - Phone Validation
+  - Public Holidays
+  - Screenshots
+  - Timezones
+  - VAT Validation
+  - Web Scraping
+tags_raw:
+  - Avatars
+  - Company Enrichment
+  - Contacts
   - Currencies
   - Email Validation
   - Exchange Rates
