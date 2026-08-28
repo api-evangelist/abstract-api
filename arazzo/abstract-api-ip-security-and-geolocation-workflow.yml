@@ -11,11 +11,11 @@ info:
     the flow reads and runs without opening the underlying OpenAPI descriptions.
   version: 1.0.0
 sourceDescriptions:
-- name: ipIntelligenceApi
-  url: ../openapi/abstract-api-ip-intelligence.yaml
-  type: openapi
 - name: ipGeolocationApi
-  url: ../openapi/abstract-api-ip-geolocation.yaml
+  url: ../openapi/abstract-api-ip-geolocation-api-openapi.yml
+  type: openapi
+- name: ipIntelligenceApi
+  url: ../openapi/abstract-api-ip-intelligence-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: ip-security-and-geolocation

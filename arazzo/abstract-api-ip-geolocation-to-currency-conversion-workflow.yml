@@ -11,11 +11,11 @@ info:
     underlying OpenAPI descriptions.
   version: 1.0.0
 sourceDescriptions:
-- name: ipGeolocationApi
-  url: ../openapi/abstract-api-ip-geolocation.yaml
-  type: openapi
 - name: exchangeRatesApi
-  url: ../openapi/abstract-api-exchange-rates.yaml
+  url: ../openapi/abstract-api-exchange-rates-api-openapi.yml
+  type: openapi
+- name: ipGeolocationApi
+  url: ../openapi/abstract-api-ip-geolocation-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: ip-geolocation-to-currency-conversion

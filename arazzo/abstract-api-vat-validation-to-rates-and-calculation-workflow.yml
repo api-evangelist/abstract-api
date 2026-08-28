@@ -12,7 +12,7 @@ info:
   version: 1.0.0
 sourceDescriptions:
 - name: vatValidationApi
-  url: ../openapi/abstract-api-vat-validation.yaml
+  url: ../openapi/abstract-api-vat-validation-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: vat-validation-to-rates-and-calculation

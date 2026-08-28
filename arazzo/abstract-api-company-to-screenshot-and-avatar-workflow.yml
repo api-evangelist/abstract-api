@@ -12,14 +12,14 @@ info:
     underlying OpenAPI descriptions.
   version: 1.0.0
 sourceDescriptions:
+- name: avatarsApi
+  url: ../openapi/abstract-api-avatars-api-openapi.yml
+  type: openapi
 - name: companyEnrichmentApi
-  url: ../openapi/abstract-api-company-enrichment.yaml
+  url: ../openapi/abstract-api-company-enrichment-api-openapi.yml
   type: openapi
 - name: websiteScreenshotApi
-  url: ../openapi/abstract-api-website-screenshot.yaml
-  type: openapi
-- name: avatarsApi
-  url: ../openapi/abstract-api-avatars.yaml
+  url: ../openapi/abstract-api-website-screenshot-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: company-to-screenshot-and-avatar

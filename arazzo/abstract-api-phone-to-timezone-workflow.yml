@@ -12,10 +12,10 @@ info:
   version: 1.0.0
 sourceDescriptions:
 - name: phoneIntelligenceApi
-  url: ../openapi/abstract-api-phone-intelligence.yaml
+  url: ../openapi/abstract-api-phone-intelligence-api-openapi.yml
   type: openapi
 - name: timezonesApi
-  url: ../openapi/abstract-api-timezones.yaml
+  url: ../openapi/abstract-api-timezones-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: phone-to-timezone

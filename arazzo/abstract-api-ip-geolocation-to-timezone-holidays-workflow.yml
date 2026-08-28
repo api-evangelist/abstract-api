@@ -12,13 +12,13 @@ info:
   version: 1.0.0
 sourceDescriptions:
 - name: ipGeolocationApi
-  url: ../openapi/abstract-api-ip-geolocation.yaml
-  type: openapi
-- name: timezonesApi
-  url: ../openapi/abstract-api-timezones.yaml
+  url: ../openapi/abstract-api-ip-geolocation-api-openapi.yml
   type: openapi
 - name: publicHolidaysApi
-  url: ../openapi/abstract-api-public-holidays.yaml
+  url: ../openapi/abstract-api-public-holidays-api-openapi.yml
+  type: openapi
+- name: timezonesApi
+  url: ../openapi/abstract-api-timezones-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: ip-geolocation-to-timezone-holidays

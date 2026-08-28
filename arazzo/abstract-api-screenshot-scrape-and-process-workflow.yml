@@ -13,14 +13,14 @@ info:
     underlying OpenAPI descriptions.
   version: 1.0.0
 sourceDescriptions:
-- name: websiteScreenshotApi
-  url: ../openapi/abstract-api-website-screenshot.yaml
+- name: imageProcessingApi
+  url: ../openapi/abstract-api-image-processing-api-openapi.yml
   type: openapi
 - name: webScrapingApi
-  url: ../openapi/abstract-api-web-scraping.yaml
+  url: ../openapi/abstract-api-web-scraping-api-openapi.yml
   type: openapi
-- name: imageProcessingApi
-  url: ../openapi/abstract-api-image-processing.yaml
+- name: websiteScreenshotApi
+  url: ../openapi/abstract-api-website-screenshot-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: screenshot-scrape-and-process

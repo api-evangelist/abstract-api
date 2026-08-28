@@ -12,11 +12,11 @@ info:
     so the flow reads and runs without opening the underlying OpenAPI descriptions.
   version: 1.0.0
 sourceDescriptions:
-- name: ibanValidationApi
-  url: ../openapi/abstract-api-iban-validation.yaml
-  type: openapi
 - name: companyEnrichmentApi
-  url: ../openapi/abstract-api-company-enrichment.yaml
+  url: ../openapi/abstract-api-company-enrichment-api-openapi.yml
+  type: openapi
+- name: ibanValidationApi
+  url: ../openapi/abstract-api-iban-validation-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: iban-and-company-verification

@@ -12,7 +12,7 @@ info:
   version: 1.0.0
 sourceDescriptions:
 - name: exchangeRatesApi
-  url: ../openapi/abstract-api-exchange-rates.yaml
+  url: ../openapi/abstract-api-exchange-rates-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: currency-live-and-convert

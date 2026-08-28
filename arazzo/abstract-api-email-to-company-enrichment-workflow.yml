@@ -11,11 +11,11 @@ info:
     read and executed without opening the underlying OpenAPI descriptions.
   version: 1.0.0
 sourceDescriptions:
-- name: emailReputationApi
-  url: ../openapi/abstract-api-email-reputation.yaml
-  type: openapi
 - name: companyEnrichmentApi
-  url: ../openapi/abstract-api-company-enrichment.yaml
+  url: ../openapi/abstract-api-company-enrichment-api-openapi.yml
+  type: openapi
+- name: emailReputationApi
+  url: ../openapi/abstract-api-email-reputation-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: email-to-company-enrichment
