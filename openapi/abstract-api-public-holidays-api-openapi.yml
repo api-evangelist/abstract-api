@@ -1,14 +1,14 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Abstract API Avatars Public Holidays API
-  description: Create highly customizable avatar images using a person's name or initials. Supports color, font, and size customization for user profile images.
+  title: Abstract Public Holidays API
+  description: Get public, local, religious, and other holidays for any country. Supports year and country filtering with comprehensive holiday metadata.
   version: 1.0.0
   contact:
     url: https://www.abstractapi.com/
   x-generated-from: documentation
 servers:
-- url: https://avatars.abstractapi.com/v1
-  description: Avatars API v1
+- url: https://holidays.abstractapi.com/v1
+  description: Public Holidays API v1
 security:
 - apiKey: []
 tags:
@@ -101,15 +101,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          example: The provided API key is invalid
-        error:
-          type: string
-          example: invalid_api_key
     Holiday:
       type: object
       description: A public holiday entry
@@ -169,6 +160,15 @@ components:
           type: string
           description: Day of the week
           example: Sunday
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: The provided API key is invalid
+        error:
+          type: string
+          example: invalid_api_key
   securitySchemes:
     apiKey:
       type: apiKey

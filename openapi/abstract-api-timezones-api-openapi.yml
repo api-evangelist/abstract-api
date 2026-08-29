@@ -1,14 +1,14 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Abstract API Avatars Timezones API
-  description: Create highly customizable avatar images using a person's name or initials. Supports color, font, and size customization for user profile images.
+  title: Abstract API - Timezone Timezones API
+  description: Find, convert, and manage time and timezone data across the world. Supports lookup by location or coordinates and returns local time, timezone abbreviation, UTC offset, and DST information.
   version: 1.0.0
   contact:
     url: https://www.abstractapi.com/
   x-generated-from: documentation
 servers:
-- url: https://avatars.abstractapi.com/v1
-  description: Avatars API v1
+- url: https://timezone.abstractapi.com/v1
+  description: Timezone API v1
 security:
 - apiKey: []
 tags:
@@ -171,6 +171,15 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: The provided API key is invalid
+        error:
+          type: string
+          example: invalid_api_key
     ConvertTimeResponse:
       type: object
       description: Time zone conversion result
@@ -257,15 +266,6 @@ components:
           format: double
           description: Longitude of the location
           example: -74.006
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          example: The provided API key is invalid
-        error:
-          type: string
-          example: invalid_api_key
   securitySchemes:
     apiKey:
       type: apiKey

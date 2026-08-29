@@ -1,14 +1,14 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Abstract API Avatars IBAN Validation API
-  description: Create highly customizable avatar images using a person's name or initials. Supports color, font, and size customization for user profile images.
+  title: Abstract IBAN Validation API
+  description: Determine the validity and details of International Bank Account Numbers (IBANs), including bank name, account type, and country code.
   version: 1.0.0
   contact:
     url: https://www.abstractapi.com/
   x-generated-from: documentation
 servers:
-- url: https://avatars.abstractapi.com/v1
-  description: Avatars API v1
+- url: https://ibanvalidation.abstractapi.com/v1
+  description: IBAN Validation API v1
 security:
 - apiKey: []
 tags:

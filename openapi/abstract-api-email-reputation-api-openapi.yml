@@ -1,14 +1,14 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Abstract API Avatars Email Reputation API
-  description: Create highly customizable avatar images using a person's name or initials. Supports color, font, and size customization for user profile images.
+  title: Abstract Email Reputation API
+  description: Validate email addresses for deliverability, detect disposable or risky domains, verify SMTP/MX records, and enrich email data with sender information, breach history, and risk scoring.
   version: 1.0.0
   contact:
     url: https://www.abstractapi.com/
   x-generated-from: documentation
 servers:
-- url: https://avatars.abstractapi.com/v1
-  description: Avatars API v1
+- url: https://emailreputation.abstractapi.com/v1
+  description: Email Reputation API v1
 security:
 - apiKey: []
 tags:
@@ -97,6 +97,42 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: Error response from the API
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+          example: The provided API key is invalid
+        error:
+          type: string
+          description: Error code identifier
+          example: invalid_api_key
+    SenderInfo:
+      type: object
+      description: Sender identity information
+      properties:
+        first_name:
+          type: string
+          description: Inferred first name of sender
+          example: Jane
+        last_name:
+          type: string
+          description: Inferred last name of sender
+          example: Smith
+        email_provider_name:
+          type: string
+          description: Name of the email provider
+          example: Google Workspace
+        organization_name:
+          type: string
+          description: Organization associated with the email
+          example: Example Corp
+        organization_type:
+          type: string
+          description: Type of organization
+          example: business
     DomainInfo:
       type: object
       description: Domain-level information
@@ -141,42 +177,74 @@ components:
           type: boolean
           description: Whether the TLD is associated with risky domains
           example: false
-    Deliverability:
+    RiskInfo:
       type: object
-      description: Email deliverability information
+      description: Risk assessment for the email
       properties:
-        status:
+        address_risk_status:
           type: string
-          description: Overall deliverability status
-          example: DELIVERABLE
+          description: Risk level of the specific email address
+          example: low
           enum:
-          - DELIVERABLE
-          - UNDELIVERABLE
-          - RISKY
-          - UNKNOWN
-        status_detail:
+          - low
+          - medium
+          - high
+          - critical
+        domain_risk_status:
           type: string
-          description: Detailed deliverability reason
-          example: smtp_valid
-        is_format_valid:
-          type: boolean
-          description: Whether the email format is valid
-          example: true
-        is_smtp_valid:
-          type: boolean
-          description: Whether the SMTP server responded positively
-          example: true
-        is_mx_valid:
-          type: boolean
-          description: Whether valid MX records exist for the domain
-          example: true
-        mx_records:
+          description: Risk level of the domain
+          example: low
+          enum:
+          - low
+          - medium
+          - high
+          - critical
+    BreachInfo:
+      type: object
+      description: Data breach history for the email
+      properties:
+        total_breaches:
+          type: integer
+          description: Total number of breaches the email appeared in
+          example: 0
+        date_first_breached:
+          type: string
+          format: date
+          description: Date of the earliest known breach
+          example: '2020-01-15'
+        date_last_breached:
+          type: string
+          format: date
+          description: Date of the most recent breach
+          example: '2023-06-01'
+        breached_domains:
           type: array
-          description: List of MX records for the domain
+          description: Domains where the email was breached
           items:
             type: string
           example:
-          - mx.example.com
+          - breached-site.com
+    EmailReputationResponse:
+      type: object
+      description: Email reputation and validation response
+      properties:
+        email:
+          type: string
+          format: email
+          description: The email address analyzed
+          example: test@example.com
+        deliverability:
+          $ref: '#/components/schemas/Deliverability'
+        quality:
+          $ref: '#/components/schemas/EmailQuality'
+        sender:
+          $ref: '#/components/schemas/SenderInfo'
+        domain:
+          $ref: '#/components/schemas/DomainInfo'
+        risk:
+          $ref: '#/components/schemas/RiskInfo'
+        breaches:
+          $ref: '#/components/schemas/BreachInfo'
     EmailQuality:
       type: object
       description: Email quality signals
@@ -222,112 +290,45 @@ components:
           type: integer
           description: Minimum estimated age of the email in days
           example: 365
-    RiskInfo:
+    Deliverability:
       type: object
-      description: Risk assessment for the email
+      description: Email deliverability information
       properties:
-        address_risk_status:
+        status:
           type: string
-          description: Risk level of the specific email address
-          example: low
+          description: Overall deliverability status
+          example: DELIVERABLE
           enum:
-          - low
-          - medium
-          - high
-          - critical
-        domain_risk_status:
+          - DELIVERABLE
+          - UNDELIVERABLE
+          - RISKY
+          - UNKNOWN
+        status_detail:
           type: string
-          description: Risk level of the domain
-          example: low
-          enum:
-          - low
-          - medium
-          - high
-          - critical
-    EmailReputationResponse:
-      type: object
-      description: Email reputation and validation response
-      properties:
-        email:
-          type: string
-          format: email
-          description: The email address analyzed
-          example: test@example.com
-        deliverability:
-          $ref: '#/components/schemas/Deliverability'
-        quality:
-          $ref: '#/components/schemas/EmailQuality'
-        sender:
-          $ref: '#/components/schemas/SenderInfo'
-        domain:
-          $ref: '#/components/schemas/DomainInfo'
-        risk:
-          $ref: '#/components/schemas/RiskInfo'
-        breaches:
-          $ref: '#/components/schemas/BreachInfo'
-    BreachInfo:
-      type: object
-      description: Data breach history for the email
-      properties:
-        total_breaches:
-          type: integer
-          description: Total number of breaches the email appeared in
-          example: 0
-        date_first_breached:
-          type: string
-          format: date
-          description: Date of the earliest known breach
-          example: '2020-01-15'
-        date_last_breached:
-          type: string
-          format: date
-          description: Date of the most recent breach
-          example: '2023-06-01'
-        breached_domains:
+          description: Detailed deliverability reason
+          example: smtp_valid
+        is_format_valid:
+          type: boolean
+          description: Whether the email format is valid
+          example: true
+        is_smtp_valid:
+          type: boolean
+          description: Whether the SMTP server responded positively
+          example: true
+        is_mx_valid:
+          type: boolean
+          description: Whether valid MX records exist for the domain
+          example: true
+        mx_records:
           type: array
-          description: Domains where the email was breached
+          description: List of MX records for the domain
           items:
             type: string
           example:
-          - breached-site.com
-    ErrorResponse:
-      type: object
-      description: Error response from the API
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
-          example: The provided API key is invalid
-        error:
-          type: string
-          description: Error code identifier
-          example: invalid_api_key
-    SenderInfo:
-      type: object
-      description: Sender identity information
-      properties:
-        first_name:
-          type: string
-          description: Inferred first name of sender
-          example: Jane
-        last_name:
-          type: string
-          description: Inferred last name of sender
-          example: Smith
-        email_provider_name:
-          type: string
-          description: Name of the email provider
-          example: Google Workspace
-        organization_name:
-          type: string
-          description: Organization associated with the email
-          example: Example Corp
-        organization_type:
-          type: string
-          description: Type of organization
-          example: business
+          - mx.example.com
   securitySchemes:
     apiKey:
       type: apiKey
       in: query
       name: api_key
+      description: Unique API key per Abstract API service

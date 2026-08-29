@@ -1,14 +1,14 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Abstract API Avatars IP Intelligence API
-  description: Create highly customizable avatar images using a person's name or initials. Supports color, font, and size customization for user profile images.
+  title: Abstract IP Intelligence API
+  description: Detect VPNs, proxies, Tor exit nodes, abuse potential, hosting services, relays, and mobile IPs. Also provides ASN, company, location, timezone, flag, and currency data for any IP address.
   version: 1.0.0
   contact:
     url: https://www.abstractapi.com/
   x-generated-from: documentation
 servers:
-- url: https://avatars.abstractapi.com/v1
-  description: Avatars API v1
+- url: https://ip-intelligence.abstractapi.com/v1
+  description: IP Intelligence API v1
 security:
 - apiKey: []
 tags:
@@ -121,6 +121,60 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: The provided API key is invalid
+        error:
+          type: string
+          example: invalid_api_key
+    IPIntelligenceResponse:
+      type: object
+      description: Full IP intelligence response
+      properties:
+        ip_address:
+          type: string
+          description: Analyzed IP address
+          example: 8.8.8.8
+        security:
+          $ref: '#/components/schemas/IPSecurityFlags'
+        asn:
+          $ref: '#/components/schemas/ASNInfo'
+        company:
+          $ref: '#/components/schemas/CompanyBasic'
+        domains:
+          type: array
+          description: Known domains associated with this IP
+          items:
+            type: string
+          example:
+          - dns.google
+        location:
+          $ref: '#/components/schemas/LocationInfo'
+        timezone:
+          $ref: '#/components/schemas/TimezoneInfo'
+        flag:
+          $ref: '#/components/schemas/FlagInfo'
+        currency:
+          $ref: '#/components/schemas/CurrencyInfo'
+    CompanyBasic:
+      type: object
+      description: Company information for the IP owner
+      properties:
+        name:
+          type: string
+          description: Company name
+          example: Google LLC
+        domain:
+          type: string
+          description: Company domain
+          example: google.com
+        type:
+          type: string
+          description: Company type
+          example: hosting
     IPSecurityFlags:
       type: object
       description: Security classification flags for the IP
@@ -153,6 +207,26 @@ components:
           type: boolean
           description: IP has been flagged for abuse
           example: false
+    ASNInfo:
+      type: object
+      description: Autonomous System Number information
+      properties:
+        asn:
+          type: string
+          description: ASN identifier
+          example: AS15169
+        name:
+          type: string
+          description: ASN organization name
+          example: Google LLC
+        domain:
+          type: string
+          description: Primary domain for the ASN
+          example: google.com
+        type:
+          type: string
+          description: Type of ASN (hosting, isp, business, etc.)
+          example: hosting
     FlagInfo:
       type: object
       properties:
@@ -170,6 +244,18 @@ components:
           type: string
           format: uri
           example: https://static.abstractapi.com/country-flags/US_flag.svg
+    CurrencyInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          example: US Dollar
+        iso_code:
+          type: string
+          example: USD
+        symbol:
+          type: string
+          example: $
     TimezoneInfo:
       type: object
       properties:
@@ -218,92 +304,6 @@ components:
           format: double
           description: Longitude
           example: -122.0838
-    CompanyBasic:
-      type: object
-      description: Company information for the IP owner
-      properties:
-        name:
-          type: string
-          description: Company name
-          example: Google LLC
-        domain:
-          type: string
-          description: Company domain
-          example: google.com
-        type:
-          type: string
-          description: Company type
-          example: hosting
-    IPIntelligenceResponse:
-      type: object
-      description: Full IP intelligence response
-      properties:
-        ip_address:
-          type: string
-          description: Analyzed IP address
-          example: 8.8.8.8
-        security:
-          $ref: '#/components/schemas/IPSecurityFlags'
-        asn:
-          $ref: '#/components/schemas/ASNInfo'
-        company:
-          $ref: '#/components/schemas/CompanyBasic'
-        domains:
-          type: array
-          description: Known domains associated with this IP
-          items:
-            type: string
-          example:
-          - dns.google
-        location:
-          $ref: '#/components/schemas/LocationInfo'
-        timezone:
-          $ref: '#/components/schemas/TimezoneInfo'
-        flag:
-          $ref: '#/components/schemas/FlagInfo'
-        currency:
-          $ref: '#/components/schemas/CurrencyInfo'
-    CurrencyInfo:
-      type: object
-      properties:
-        name:
-          type: string
-          example: US Dollar
-        iso_code:
-          type: string
-          example: USD
-        symbol:
-          type: string
-          example: $
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          example: The provided API key is invalid
-        error:
-          type: string
-          example: invalid_api_key
-    ASNInfo:
-      type: object
-      description: Autonomous System Number information
-      properties:
-        asn:
-          type: string
-          description: ASN identifier
-          example: AS15169
-        name:
-          type: string
-          description: ASN organization name
-          example: Google LLC
-        domain:
-          type: string
-          description: Primary domain for the ASN
-          example: google.com
-        type:
-          type: string
-          description: Type of ASN (hosting, isp, business, etc.)
-          example: hosting
   securitySchemes:
     apiKey:
       type: apiKey

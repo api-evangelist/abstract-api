@@ -1,14 +1,14 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Abstract API Avatars VAT Validation API
-  description: Create highly customizable avatar images using a person's name or initials. Supports color, font, and size customization for user profile images.
+  title: Abstract VAT Validation API
+  description: Validate VAT numbers, look up current VAT rates by country, and calculate VAT-inclusive or VAT-exclusive prices to stay compliant for domestic and cross-border sales.
   version: 1.0.0
   contact:
     url: https://www.abstractapi.com/
   x-generated-from: documentation
 servers:
-- url: https://avatars.abstractapi.com/v1
-  description: Avatars API v1
+- url: https://vat.abstractapi.com/v1
+  description: VAT Validation API v1
 security:
 - apiKey: []
 tags:
@@ -207,6 +207,38 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    VATRatesResponse:
+      type: object
+      properties:
+        country_code:
+          type: string
+          example: DE
+        country_name:
+          type: string
+          example: Germany
+        standard_rate:
+          type: number
+          description: Standard VAT rate percentage
+          example: 19
+        reduced_rates:
+          type: array
+          items:
+            type: number
+          description: Reduced VAT rate percentages
+          example:
+          - 7
+        super_reduced_rate:
+          type:
+          - number
+          - 'null'
+          description: Super reduced VAT rate if applicable
+          example: null
+        parking_rate:
+          type:
+          - number
+          - 'null'
+          description: Parking VAT rate if applicable
+          example: null
     ErrorResponse:
       type: object
       properties:
@@ -245,36 +277,6 @@ components:
         country_name:
           type: string
           example: Germany
-    VATRatesResponse:
-      type: object
-      properties:
-        country_code:
-          type: string
-          example: DE
-        country_name:
-          type: string
-          example: Germany
-        standard_rate:
-          type: number
-          description: Standard VAT rate percentage
-          example: 19
-        reduced_rates:
-          type: array
-          items:
-            type: number
-          description: Reduced VAT rate percentages
-          example:
-          - 7
-        super_reduced_rate:
-          type: number
-          nullable: true
-          description: Super reduced VAT rate if applicable
-          example: null
-        parking_rate:
-          type: number
-          nullable: true
-          description: Parking VAT rate if applicable
-          example: null
     VATValidationResponse:
       type: object
       properties:

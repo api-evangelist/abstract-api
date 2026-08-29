@@ -1,14 +1,14 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Abstract API Avatars Image Processing API
-  description: Create highly customizable avatar images using a person's name or initials. Supports color, font, and size customization for user profile images.
+  title: Abstract Image Processing API
+  description: Compress, convert, and optimize images by URL or direct upload. Supports format conversion, quality adjustment, and size reduction.
   version: 1.0.0
   contact:
     url: https://www.abstractapi.com/
   x-generated-from: documentation
 servers:
-- url: https://avatars.abstractapi.com/v1
-  description: Avatars API v1
+- url: https://images.abstractapi.com/v1
+  description: Image Processing API v1
 security:
 - apiKey: []
 tags:
@@ -100,15 +100,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          example: The provided API key is invalid
-        error:
-          type: string
-          example: invalid_api_key
     ImageProcessingResponse:
       type: object
       description: Image processing result
@@ -134,6 +125,15 @@ components:
           format: uri
           description: URL to download the processed image
           example: https://dl.abstractapi.com/processed/abc123.webp
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: The provided API key is invalid
+        error:
+          type: string
+          example: invalid_api_key
   securitySchemes:
     apiKey:
       type: apiKey

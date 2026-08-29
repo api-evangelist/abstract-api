@@ -1,14 +1,14 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Abstract API Avatars Phone Intelligence API
-  description: Create highly customizable avatar images using a person's name or initials. Supports color, font, and size customization for user profile images.
+  title: Abstract Phone Intelligence API
+  description: Identify carrier, line type, validity, location, and get deep insights including line status, VoIP detection, and risk scoring for any phone number globally.
   version: 1.0.0
   contact:
     url: https://www.abstractapi.com/
   x-generated-from: documentation
 servers:
-- url: https://avatars.abstractapi.com/v1
-  description: Avatars API v1
+- url: https://phoneintelligence.abstractapi.com/v1
+  description: Phone Intelligence API v1
 security:
 - apiKey: []
 tags:
@@ -90,15 +90,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          example: The provided API key is invalid
-        error:
-          type: string
-          example: invalid_api_key
     PhoneIntelligenceResponse:
       type: object
       description: Phone number intelligence response
@@ -141,6 +132,15 @@ components:
           type: integer
           description: Risk score from 0 (low risk) to 100 (high risk)
           example: 12
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: The provided API key is invalid
+        error:
+          type: string
+          example: invalid_api_key
     PhoneCountry:
       type: object
       properties:
