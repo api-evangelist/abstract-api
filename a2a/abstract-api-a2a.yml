@@ -1,0 +1,59 @@
+generated: '2026-08-29'
+method: probed
+source: https://docs.abstractapi.com/.well-known/agent-card.json
+discovery:
+  path: /.well-known/agent-card.json
+  canonical: true
+  host: docs.abstractapi.com
+  note: >-
+    Served from Abstract API's own documentation host. The same path 404s on
+    www.abstractapi.com (Webflow returns an "Invalid .well-known request" HTML
+    stub) and answers with the SPA shell on app.abstractapi.com, so
+    docs.abstractapi.com is the only host publishing a card.
+conformance:
+  spec: A2A 1.0.0
+  grade: conformant
+  protocol_version: '0.3'
+  preferred_transport: HTTP+JSON
+  hard_checks:
+    capabilities_is_object: true
+    protocol_version_present: true
+    skills_is_array: true
+  optional_fields_present:
+    - preferredTransport
+    - defaultInputModes
+    - defaultOutputModes
+    - provider
+    - documentationUrl
+  deviations:
+    - id: supported-interfaces-instead-of-additional-interfaces
+      detail: >-
+        The card declares `supportedInterfaces[]` rather than the A2A 1.0.0
+        `additionalInterfaces[]`. All three hard conformance checks still pass,
+        so the grade stands, but a strict 1.0.0 client will not read the
+        transport list.
+card:
+  name: Abstract API
+  url: https://docs.abstractapi.com/
+  version: '1.0.0'
+  protocolVersion: '0.3'
+  provider_organization: Abstract API
+  documentationUrl: https://docs.abstractapi.com/
+  capabilities:
+    streaming: false
+    pushNotifications: false
+  skills:
+    - id: abstractapi
+      name: Abstractapi
+      url: https://docs.abstractapi.com/.well-known/agent-skills/abstractapi/skill.md
+      saved_locally: skills/abstract-api-abstractapi.md
+x-evidence:
+  fetched: '2026-08-29'
+  url: https://docs.abstractapi.com/.well-known/agent-card.json
+  http_status: 200
+  content_type: application/json
+  bytes: 1034
+  body_shape: json-object
+related_surfaces:
+  mcp_endpoint: https://docs.abstractapi.com/mcp
+  llms_txt: https://docs.abstractapi.com/llms.txt

@@ -1,0 +1,267 @@
+openapi: 3.0.3
+info:
+  title: Abstract Web Scraping API
+  description: 'Extract the raw HTML source of any web page in a single request, with
+    optional JavaScript rendering, rotating proxies, and preloaded cookies. Authenticate
+    with your API key as the `api_key` query parameter, or as an `Authorization: Bearer
+    <key>` header. GET and POST (form-encoded or JSON) are both supported. The successful
+    response is the target page''s HTML returned as a string.'
+  version: 1.0.0
+  termsOfService: https://www.abstractapi.com/legal/legal
+  contact:
+    name: Abstract API
+    url: https://www.abstractapi.com/api/web-scraping-api
+  license:
+    name: Commercial — see Terms of Service
+    url: https://www.abstractapi.com/legal/legal
+externalDocs:
+  description: Official documentation
+  url: https://docs.abstractapi.com/api/scrape
+servers:
+- url: https://scrape.abstractapi.com/v1
+security:
+- ApiKeyQuery: []
+- BearerAuth: []
+paths:
+  /:
+    get:
+      operationId: getScrape
+      summary: Scrape the HTML of a web page
+      description: 'Fetch the raw HTML source of the target page. All communications
+        must be secured with TLS 1.2 or greater.'
+      parameters:
+      - name: url
+        in: query
+        required: true
+        description: 'The URL to extract the data from. Must include the full HTTP
+          protocol (http:// or https://). Any query parameters inside this URL should
+          be percent-encoded (for example, `&` becomes `%26`).'
+        schema:
+          type: string
+          format: uri
+        example: https://news.ycombinator.com
+      - name: render_js
+        in: query
+        required: false
+        description: 'If true, the request renders JavaScript on the target site via
+          a headless Google Chrome browser. Defaults to false.'
+        schema:
+          type: boolean
+          default: false
+        example: false
+      - name: use_proxy
+        in: query
+        required: false
+        description: If true, the request uses a different IP address on each request.
+          Defaults to false.
+        schema:
+          type: boolean
+          default: false
+        example: false
+      - name: cookie_jar
+        in: query
+        required: false
+        description: Preloaded cookies to send with the request. Each entry is a cookie
+          object.
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cookie'
+      responses:
+        '200':
+          description: The raw HTML source of the target page.
+          content:
+            text/html:
+              schema:
+                type: string
+                description: The full HTML content of the target page, returned as
+                  a string.
+              example: |
+                <html op="news"><head><meta name="referrer" content="origin"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" type="text/css" href="news.css?abc"><link rel="shortcut icon" href="favicon.ico"><title>Hacker News</title></head><body><center><table id="hnmain" border="0" cellpadding="0" cellspacing="0" width="85%" bgcolor="#f6f6ef"><tr><td bgcolor="#ff6600"><table border="0" cellpadding="0" cellspacing="0" width="100%" style="padding:2px"><tr><td style="width:18px;padding-right:4px"><a href="https://news.ycombinator.com"><img src="y18.svg" width="18" height="18" style="border:1px white solid;"></a></td><td style="line-height:12pt; height:10px;"><span class="pagetop"><b class="hnname"><a href="news">Hacker News</a></b></span></td></tr></table></td></tr></table></center></body></html>
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/QuotaReached'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    post:
+      operationId: postScrape
+      summary: Scrape the HTML of a web page
+      description: 'Same as the GET operation. The API key may be supplied in the request
+        body, as the `api_key` query parameter, or as an `Authorization: Bearer <key>`
+        header. The `cookie_jar` parameter (preloaded cookies) may also be supplied
+        in the request body. All communications must be secured with TLS 1.2 or greater.'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ScrapeRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScrapeRequest'
+      responses:
+        '200':
+          description: The raw HTML source of the target page.
+          content:
+            text/html:
+              schema:
+                type: string
+                description: The full HTML content of the target page, returned as
+                  a string.
+              example: |
+                <html op="news"><head><meta name="referrer" content="origin"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" type="text/css" href="news.css?abc"><link rel="shortcut icon" href="favicon.ico"><title>Hacker News</title></head><body><center><table id="hnmain" border="0" cellpadding="0" cellspacing="0" width="85%" bgcolor="#f6f6ef"><tr><td bgcolor="#ff6600"><table border="0" cellpadding="0" cellspacing="0" width="100%" style="padding:2px"><tr><td style="width:18px;padding-right:4px"><a href="https://news.ycombinator.com"><img src="y18.svg" width="18" height="18" style="border:1px white solid;"></a></td><td style="line-height:12pt; height:10px;"><span class="pagetop"><b class="hnname"><a href="news">Hacker News</a></b></span></td></tr></table></td></tr></table></center></body></html>
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/QuotaReached'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/ServerError'
+components:
+  securitySchemes:
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+      description: Your unique Web Scraping API key.
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Send your API key as a Bearer token; omit `api_key` from the query
+        string.
+  responses:
+    BadRequest:
+      description: Bad request — a required parameter is missing or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: A validation error occurred.
+              code: validation_error
+              details:
+                url:
+                - This is a required argument.
+    Unauthorized:
+      description: Unauthorized — missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Invalid API key provided.
+              code: unauthorized
+              details: null
+    QuotaReached:
+      description: Unprocessable — monthly quota reached or insufficient API credits.
+        The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: Too Many Requests — rate limit exceeded. The body follows the standard
+        error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ServerError:
+      description: Internal server error. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    ScrapeRequest:
+      type: object
+      required:
+      - url
+      properties:
+        url:
+          type: string
+          format: uri
+          description: 'The URL to extract the data from. Must include the full HTTP
+            protocol (http:// or https://). Any query parameters inside this URL should
+            be percent-encoded (for example, `&` becomes `%26`).'
+          example: https://news.ycombinator.com
+        render_js:
+          type: boolean
+          default: false
+          description: 'If true, the request renders JavaScript on the target site
+            via a headless Google Chrome browser. Defaults to false.'
+          example: false
+        use_proxy:
+          type: boolean
+          default: false
+          description: If true, the request uses a different IP address on each request.
+            Defaults to false.
+          example: false
+        cookie_jar:
+          type: array
+          description: Preloaded cookies to send with the request. Each entry is a
+            cookie object.
+          items:
+            $ref: '#/components/schemas/Cookie'
+        api_key:
+          type: string
+          description: 'Your API key. Optional here if supplied as the `api_key` query
+            parameter or an `Authorization: Bearer <key>` header.'
+    Cookie:
+      type: object
+      description: A single preloaded cookie.
+      properties:
+        name:
+          type: string
+          description: The cookie name.
+          example: session
+        value:
+          type: string
+          description: The cookie value.
+          example: abc123
+        domain:
+          type: string
+          description: The domain the cookie applies to.
+          example: news.ycombinator.com
+        path:
+          type: string
+          description: The path the cookie applies to.
+          example: /
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - message
+          - code
+          properties:
+            message:
+              type: string
+              description: Human-readable description of the error.
+              example: A validation error occurred.
+            code:
+              type: string
+              description: Machine-readable error code, e.g. validation_error or unauthorized.
+              example: validation_error
+            details:
+              type: object
+              nullable: true
+              description: Field-keyed validation messages for validation_error responses;
+                null for other error types.
+              additionalProperties:
+                type: array
+                items:
+                  type: string

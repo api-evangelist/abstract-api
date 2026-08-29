@@ -1,0 +1,108 @@
+generated: '2026-08-29'
+method: searched
+source: >-
+  https://www.abstractapi.com/api/ip-geolocation-api (pricing + footer),
+  https://www.abstractapi.com/legal/legal, https://www.abstractapi.com/legal/dpa,
+  https://docs.abstractapi.com/api/email-reputation.md, openapi/_original/*.openapi.yaml
+standards:
+  - id: openapi
+    conforms: true
+    version: 3.0.3
+    evidence: >-
+      13 provider-published definitions at https://github.com/abstractapi/openapi-specs,
+      archived verbatim at openapi/_original/. All parse as OpenAPI 3.0.3 with paths,
+      operationIds and securitySchemes.
+  - id: a2a
+    conforms: true
+    version: '0.3'
+    evidence: >-
+      Agent Card served at https://docs.abstractapi.com/.well-known/agent-card.json
+      (HTTP 200, 2026-08-29). Graded conformant against A2A 1.0.0 hard checks in
+      a2a/abstract-api-a2a.yml.
+  - id: mcp
+    conforms: true
+    evidence: >-
+      Streamable-HTTP MCP server at https://docs.abstractapi.com/mcp answered
+      tools/list anonymously with 3 tools and full inputSchemas (HTTP 200, 2026-08-29).
+  - id: oauth2
+    conforms: false
+    evidence: >-
+      No OAuth anywhere. /.well-known/oauth-authorization-server 404s on every real
+      host. Authentication is API key by query parameter or Bearer token, where the
+      "Bearer" token is the raw API key, not an OAuth access token.
+  - id: oidc
+    conforms: false
+    evidence: /.well-known/openid-configuration 404 on www, docs and every product host.
+  - id: rfc9457
+    conforms: false
+    evidence: >-
+      Errors are a vendor envelope { error: { message, code, details } } served as
+      application/json, not application/problem+json.
+  - id: rfc9116
+    conforms: false
+    evidence: No /.well-known/security.txt on any host probed 2026-08-29.
+  - id: rfc8594
+    conforms: false
+    evidence: No Sunset or Deprecation headers documented; no deprecation policy published.
+  - id: pagination
+    conforms: false
+    applicable: false
+    evidence: Single-subject lookup responses; no collection endpoints to paginate.
+  - id: idempotency
+    conforms: false
+    applicable: false
+    evidence: Read-only surface; no state-changing operation exists.
+  - id: json_api
+    conforms: false
+    evidence: Plain JSON object responses, no JSON:API document structure.
+domain_standards:
+  note: >-
+    Abstract's products sit in data validation / enrichment / IP intelligence — a
+    market with no ratified interchange standard of the kind the rubric rewards
+    (no SCIM URN, OData $metadata, OpenRTB, Sparkplug, ActivityPub, LTI/OneRoster,
+    OAI-PMH, HL7v2/X12/EDIFACT/ISO-20022 shape appears in any spec). Two adjacent
+    standards ARE referenced as SUBJECT MATTER rather than as the wire format:
+  references:
+    - standard: ISO 13616 (IBAN)
+      role: subject
+      conforms: false
+      evidence: >-
+        ibanvalidation.abstractapi.com validates IBANs and returns ISO 13616 country
+        and check-digit structure, but the request/response is Abstract's own JSON,
+        not an ISO message type.
+    - standard: EU VAT (VIES)
+      role: subject
+      conforms: false
+      evidence: >-
+        vat.abstractapi.com validates EU VAT numbers and returns rates; the wire
+        format is Abstract's own JSON, not a VIES SOAP envelope.
+  verdict: >-
+    No domain-standard signature in the contract. Reward-only check — recorded as
+    absent, not as a failure.
+compliance:
+  published: true
+  certifications:
+    - name: SOC 2
+      evidence: >-
+        Stated in the footer of www.abstractapi.com ("Compliance: SOC2 & GDPR") and as
+        a line item on the Enterprise tier of every product pricing table.
+      report_available: false
+      note: >-
+        No trust center, no report request flow, no auditor or report-type (Type I vs
+        Type II) named, and no attestation date. The claim is a marketing-page string,
+        not a verifiable artifact.
+    - name: GDPR
+      evidence: >-
+        Footer of www.abstractapi.com; a Data Processing Addendum is published at
+        https://www.abstractapi.com/legal/dpa (HTTP 200, 2026-08-29).
+      report_available: true
+  trust_center:
+    present: false
+    probed: >-
+      probe-security-programs.py returned vdp=none trust=none on 2026-08-29;
+      trust.abstractapi.com does not resolve.
+  vulnerability_disclosure:
+    present: false
+    evidence: >-
+      No security.txt, no /security page, and no HackerOne/Bugcrowd/Intigriti program
+      found for abstractapi.com.

@@ -1,0 +1,175 @@
+generated: '2026-08-29'
+method: searched
+source: >-
+  registry.npmjs.org, repo.packagist.org, pypi.org/pypi, and
+  https://github.com/orgs/abstractapi/repositories (probed 2026-08-29)
+summary:
+  official_count: 14
+  official_by_registry:
+    npm: 5
+    packagist: 4
+    github_source_only: 5
+  languages: [javascript, php, python]
+  registries: [npm, packagist, github]
+  newest_release: '2021-05-28'
+  finding: >-
+    Every first-party Abstract API client library was last published in 2021 —
+    just over five years before this probe. The libraries also cover only four of
+    Abstract's fifteen products (email validation, phone validation, IP geolocation,
+    exchange rates); nothing was ever shipped for IP Intelligence, Company
+    Enrichment, Email Reputation, VAT, IBAN, Holidays, Timezones, Avatars, Image
+    Processing, Web Scraping or Website Screenshot. The Python libraries were never
+    published to PyPI at all and exist only as GitHub repositories.
+packages:
+  - language: javascript
+    registry: npm
+    name: '@abstractapi/javascript-core'
+    url: https://www.npmjs.com/package/@abstractapi/javascript-core
+    install: npm install @abstractapi/javascript-core
+    official: true
+    license: MIT
+    version: 1.1.0
+    published: '2021-05-28'
+    repository: https://github.com/abstractapi/javascript-core
+    note: Shared logic used by the other JavaScript libraries.
+  - language: javascript
+    registry: npm
+    name: '@abstractapi/javascript-email-validation'
+    url: https://www.npmjs.com/package/@abstractapi/javascript-email-validation
+    install: npm install @abstractapi/javascript-email-validation
+    official: true
+    license: MIT
+    version: 1.0.1
+    published: '2021-05-28'
+    repository: https://github.com/abstractapi/javascript-email-validation
+  - language: javascript
+    registry: npm
+    name: '@abstractapi/javascript-phone-validation'
+    url: https://www.npmjs.com/package/@abstractapi/javascript-phone-validation
+    install: npm install @abstractapi/javascript-phone-validation
+    official: true
+    license: MIT
+    version: 1.0.1
+    published: '2021-05-28'
+    repository: https://github.com/abstractapi/javascript-phone-validation
+  - language: javascript
+    registry: npm
+    name: '@abstractapi/javascript-ip-geolocation'
+    url: https://www.npmjs.com/package/@abstractapi/javascript-ip-geolocation
+    install: npm install @abstractapi/javascript-ip-geolocation
+    official: true
+    license: MIT
+    version: 1.0.1
+    published: '2021-05-28'
+    repository: https://github.com/abstractapi/javascript-ip-geolocation
+  - language: javascript
+    registry: npm
+    name: '@abstractapi/javascript-exchange-rates'
+    url: https://www.npmjs.com/package/@abstractapi/javascript-exchange-rates
+    install: npm install @abstractapi/javascript-exchange-rates
+    official: true
+    license: MIT
+    version: 1.0.0
+    published: '2021-05-28'
+    repository: https://github.com/abstractapi/javascript-exchange-rates
+  - language: php
+    registry: packagist
+    name: abstractapi/php-email-validation
+    url: https://packagist.org/packages/abstractapi/php-email-validation
+    install: composer require abstractapi/php-email-validation
+    official: true
+    version: 1.0.0
+    published: '2021-04-15'
+    repository: https://github.com/abstractapi/php-email-validation
+  - language: php
+    registry: packagist
+    name: abstractapi/php-phone-validation
+    url: https://packagist.org/packages/abstractapi/php-phone-validation
+    install: composer require abstractapi/php-phone-validation
+    official: true
+    version: 1.0.0
+    published: '2021-04-09'
+    repository: https://github.com/abstractapi/php-phone-validation
+  - language: php
+    registry: packagist
+    name: abstractapi/php-ip-geolocation
+    url: https://packagist.org/packages/abstractapi/php-ip-geolocation
+    install: composer require abstractapi/php-ip-geolocation
+    official: true
+    version: 1.0.0
+    published: '2021-04-15'
+    repository: https://github.com/abstractapi/php-ip-geolocation
+  - language: php
+    registry: packagist
+    name: abstractapi/php-exchange-rates
+    url: https://packagist.org/packages/abstractapi/php-exchange-rates
+    install: composer require abstractapi/php-exchange-rates
+    official: true
+    version: 1.0.0
+    published: '2021-05-28'
+    repository: https://github.com/abstractapi/php-exchange-rates
+  - language: python
+    registry: github
+    name: abstractapi/python-core
+    url: https://github.com/abstractapi/python-core
+    install: null
+    official: true
+    version: null
+    published: null
+    note: >-
+      Checked 2026-08-29 — NOT on PyPI. pypi.org/pypi/abstractapi/json and
+      /abstract-api-python/json both 404; the PyPI project literally named
+      "python-core" belongs to an unrelated author (alexzander) and must not be
+      installed as Abstract's. The library is consumable only by cloning the repo,
+      which is why version/published are null rather than omitted. Default branch is
+      `master`, not `main`.
+  - language: python
+    registry: github
+    name: abstractapi/python-email-validation
+    url: https://github.com/abstractapi/python-email-validation
+    install: null
+    official: true
+    version: null
+    published: null
+    note: No PyPI distribution; GitHub source only (checked 2026-08-29).
+  - language: python
+    registry: github
+    name: abstractapi/python-phone-validation
+    url: https://github.com/abstractapi/python-phone-validation
+    install: null
+    official: true
+    version: null
+    published: null
+    note: No PyPI distribution; GitHub source only (checked 2026-08-29).
+  - language: python
+    registry: github
+    name: abstractapi/python-ip-geolocation
+    url: https://github.com/abstractapi/python-ip-geolocation
+    install: null
+    official: true
+    version: null
+    published: null
+    note: No PyPI distribution; GitHub source only (checked 2026-08-29).
+  - language: python
+    registry: github
+    name: abstractapi/python-exchange-rates
+    url: https://github.com/abstractapi/python-exchange-rates
+    install: null
+    official: true
+    version: null
+    published: null
+    note: No PyPI distribution; GitHub source only (checked 2026-08-29).
+third_party_observed:
+  - name: olsgreen/abstract-api
+    registry: packagist
+    official: false
+  - name: laravelcm/abstract-ip-geolocation
+    registry: packagist
+    official: false
+  - name: '@n8n-dev/n8n-nodes-abstractapi-geolocation'
+    registry: npm
+    official: false
+    published: '2026-06-13'
+    note: >-
+      The most recently maintained Abstract client on any registry is a
+      community-built n8n node, not a first-party library.

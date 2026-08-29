@@ -1,0 +1,80 @@
+generated: '2026-08-29'
+method: probed
+source: https://docs.abstractapi.com/mcp
+name: Abstract API Documentation MCP Server
+status: live
+deployment:
+  mode: remote
+  endpoint: https://docs.abstractapi.com/mcp
+  auth: none
+  verified: probed
+transport:
+  protocol: streamable-http
+  response_content_type: text/event-stream
+  accept_header: application/json, text/event-stream
+probe:
+  method: POST
+  body: '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+  http_status: 200
+  bytes: 5045
+  fetched: '2026-08-29'
+  anonymous: true
+  note: >-
+    tools/list answered anonymously — no OAuth challenge, no invalid_token. The
+    real inputSchema for every tool was returned and is saved verbatim to
+    abstract-api-mcp-tools.json.
+scope:
+  kind: documentation-retrieval
+  note: >-
+    This is a DOCUMENTATION MCP server (Mintlify-hosted, served from Abstract's
+    own docs host), not an API-operation server. Its tools read the Abstract docs
+    corpus; none of them call an Abstract product endpoint. An agent can use it to
+    learn how to call Abstract, but still has to make the HTTPS request itself.
+    Recorded as an honest description of what is shipped, not a downgrade.
+tools:
+  - name: search_abstract_api
+    title: Search documentation
+    inputs: [query]
+    read_only: true
+    description: >-
+      Semantic search across the Abstract API knowledge base, returning contextual
+      content with titles and direct documentation links.
+  - name: query_docs_filesystem_abstract_api
+    inputs: [command]
+    read_only: true
+    description: >-
+      Read-only shell-like query (rg/grep/find/tree/ls/cat/head/tail/jq...) against
+      a virtualized in-memory filesystem containing only the Abstract API docs
+      pages. Output truncated to 30KB per call.
+  - name: submit_feedback
+    inputs: [path, feedback]
+    read_only: false
+    description: Submit feedback about a documentation page.
+discovered_corpus:
+  probe: 'tools/call query_docs_filesystem_abstract_api {"command":"tree / -L 2"}'
+  http_status: 200
+  files: 14
+  paths:
+    - /api.mdx
+    - /api/avatars.mdx
+    - /api/company-enrichment.mdx
+    - /api/email-reputation.mdx
+    - /api/exchange-rates.mdx
+    - /api/holidays.mdx
+    - /api/iban-validation.mdx
+    - /api/images.mdx
+    - /api/ip-intelligence.mdx
+    - /api/phone-intelligence.mdx
+    - /api/scrape.mdx
+    - /api/screenshot.mdx
+    - /api/timezones.mdx
+    - /api/vat-validation.mdx
+  finding: >-
+    The docs filesystem contains NO OpenAPI documents (/openapi/spec.json is absent),
+    confirming the docs host does not serve a machine-readable contract. Abstract's
+    OpenAPI definitions are published separately at
+    https://github.com/abstractapi/openapi-specs.
+related:
+  agent_card: a2a/abstract-api-agent-card.json
+  llms_txt: llms/abstract-api-llms.txt
+  agent_skill: skills/abstract-api-abstractapi.md

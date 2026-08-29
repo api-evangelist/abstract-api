@@ -1,6 +1,5 @@
 aid: abstract-api
-url: >-
-  https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/apis.yml
+url: https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/apis.yml
 name: Abstract API
 type: Index
 deliveryModel:
@@ -30,57 +29,54 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/abstract-api.png
 tags:
-  - Avatars
-  - Company Enrichment
-  - Contacts
-  - Currency
-  - Email Validation
-  - Exchange Rates
-  - IBAN Validation
-  - Image Processing
-  - IP Geolocation
-  - IP Intelligence
-  - Phone Validation
-  - Public Holidays
-  - Screenshots
-  - Timezones
-  - VAT Validation
-  - Web Scraping
+- Avatars
+- Company Enrichment
+- Contacts
+- Currency
+- Email Validation
+- Exchange Rates
+- IBAN Validation
+- Image Processing
+- IP Geolocation
+- IP Intelligence
+- Phone Validation
+- Public Holidays
+- Screenshots
+- Timezones
+- VAT Validation
+- Web Scraping
 tags_raw:
-  - Avatars
-  - Company Enrichment
-  - Contacts
-  - Currencies
-  - Email Validation
-  - Exchange Rates
-  - IBAN Validation
-  - Image Processing
-  - IP Geolocation
-  - IP Intelligence
-  - Phone Validation
-  - Public Holidays
-  - Screenshots
-  - Timezones
-  - VAT Validation
-  - Web Scraping
-description: >-
-  Abstract API is a platform that offers a wide range of API services for
-  developers to easily integrate various functionalities into their applications.
-  Services include IP geolocation, IP intelligence, email validation, phone
-  validation, currency exchange, website screenshots, image processing, web
-  scraping, company enrichment, public holidays, timezone lookup, VAT
-  validation, IBAN validation, and user avatar generation. Abstract API provides
-  a seamless way for developers to access powerful features without having to
-  build them from scratch.
+- Avatars
+- Company Enrichment
+- Contacts
+- Currencies
+- Email Validation
+- Exchange Rates
+- IBAN Validation
+- Image Processing
+- IP Geolocation
+- IP Intelligence
+- Phone Validation
+- Public Holidays
+- Screenshots
+- Timezones
+- VAT Validation
+- Web Scraping
+description: Abstract API is a platform that offers a wide range of API services for developers to easily
+  integrate various functionalities into their applications. Services include IP geolocation, IP intelligence,
+  email validation, phone validation, currency exchange, website screenshots, image processing, web scraping,
+  company enrichment, public holidays, timezone lookup, VAT validation, IBAN validation, and user avatar
+  generation. Abstract API provides a seamless way for developers to access powerful features without
+  having to build them from scratch.
 created: '2025-02-24'
-modified: '2026-04-19'
+modified: '2026-08-29'
 specificationVersion: '0.23'
 apis:
 - aid: abstract-api:abstract-api-avatars-api
   name: Abstract API Avatars API
   description: User avatar generation operations
-  humanURL: https://www.abstractapi.com/api/email-verification-validation-api
-  baseURL: https://emailreputation.abstractapi.com/v1/
+  humanURL: https://www.abstractapi.com/api/user-avatar-api
+  baseURL: https://avatars.abstractapi.com/v1/
   tags:
   - Avatars
   properties:
@@ -162,11 +158,15 @@ apis:
     url: examples/web-scraping-web-scraping-response-example.json
   - type: Documentation
     url: https://docs.abstractapi.com/api/avatars.md
+  - type: Overlay
+    url: overlays/abstract-api-avatars-api-overlay.yaml
+  - type: APIReference
+    url: https://docs.abstractapi.com/api/avatars
 - aid: abstract-api:abstract-api-company-enrichment-api
   name: Abstract API Company Enrichment API
   description: Company data enrichment operations
-  humanURL: https://www.abstractapi.com/api/email-verification-validation-api
-  baseURL: https://emailreputation.abstractapi.com/v1/
+  humanURL: https://www.abstractapi.com/api/company-enrichment
+  baseURL: https://companyenrichment.abstractapi.com/v1/
   tags:
   - Company Enrichment
   properties:
@@ -248,10 +248,14 @@ apis:
     url: examples/web-scraping-web-scraping-response-example.json
   - type: Documentation
     url: https://docs.abstractapi.com/api/avatars.md
+  - type: Overlay
+    url: overlays/abstract-api-company-enrichment-api-overlay.yaml
+  - type: APIReference
+    url: https://docs.abstractapi.com/api/company-enrichment
 - aid: abstract-api:abstract-api-email-reputation-api
   name: Abstract API Email Reputation API
   description: Email validation and reputation operations
-  humanURL: https://www.abstractapi.com/api/email-verification-validation-api
+  humanURL: https://www.abstractapi.com/api/email-reputation-api
   baseURL: https://emailreputation.abstractapi.com/v1/
   tags:
   - Email Reputation
@@ -334,11 +338,15 @@ apis:
     url: examples/web-scraping-web-scraping-response-example.json
   - type: Documentation
     url: https://docs.abstractapi.com/api/avatars.md
+  - type: Overlay
+    url: overlays/abstract-api-email-reputation-api-overlay.yaml
+  - type: APIReference
+    url: https://docs.abstractapi.com/api/email-reputation
 - aid: abstract-api:abstract-api-exchange-rates-api
   name: Abstract API Exchange Rates API
   description: Currency exchange rate operations
-  humanURL: https://www.abstractapi.com/api/email-verification-validation-api
-  baseURL: https://emailreputation.abstractapi.com/v1/
+  humanURL: https://www.abstractapi.com/api/exchange-rate-api
+  baseURL: https://exchange-rates.abstractapi.com/v1/
   tags:
   - Exchange Rates
   properties:
@@ -420,11 +428,15 @@ apis:
     url: examples/web-scraping-web-scraping-response-example.json
   - type: Documentation
     url: https://docs.abstractapi.com/api/avatars.md
+  - type: Overlay
+    url: overlays/abstract-api-exchange-rates-api-overlay.yaml
+  - type: APIReference
+    url: https://docs.abstractapi.com/api/exchange-rates
 - aid: abstract-api:abstract-api-iban-validation-api
   name: Abstract API IBAN Validation API
   description: IBAN number validation operations
-  humanURL: https://www.abstractapi.com/api/email-verification-validation-api
-  baseURL: https://emailreputation.abstractapi.com/v1/
+  humanURL: https://www.abstractapi.com/api/iban-validation
+  baseURL: https://ibanvalidation.abstractapi.com/v1/
   tags:
   - IBAN Validation
   properties:
@@ -506,11 +518,15 @@ apis:
     url: examples/web-scraping-web-scraping-response-example.json
   - type: Documentation
     url: https://docs.abstractapi.com/api/avatars.md
+  - type: Overlay
+    url: overlays/abstract-api-iban-validation-api-overlay.yaml
+  - type: APIReference
+    url: https://docs.abstractapi.com/api/iban-validation
 - aid: abstract-api:abstract-api-image-processing-api
   name: Abstract API Image Processing API
   description: Image compression and optimization operations
-  humanURL: https://www.abstractapi.com/api/email-verification-validation-api
-  baseURL: https://emailreputation.abstractapi.com/v1/
+  humanURL: https://www.abstractapi.com/api/image-processing-optimization-api
+  baseURL: https://images.abstractapi.com/v1/
   tags:
   - Image Processing
   properties:
@@ -592,11 +608,15 @@ apis:
     url: examples/web-scraping-web-scraping-response-example.json
   - type: Documentation
     url: https://docs.abstractapi.com/api/avatars.md
+  - type: Overlay
+    url: overlays/abstract-api-image-processing-api-overlay.yaml
+  - type: APIReference
+    url: https://docs.abstractapi.com/api/images
 - aid: abstract-api:abstract-api-ip-geolocation-api
   name: Abstract API IP Geolocation API
   description: IP address geolocation operations
-  humanURL: https://www.abstractapi.com/api/email-verification-validation-api
-  baseURL: https://emailreputation.abstractapi.com/v1/
+  humanURL: https://www.abstractapi.com/api/ip-geolocation-api
+  baseURL: https://ipgeolocation.abstractapi.com/v1/
   tags:
   - IP Geolocation
   properties:
@@ -678,11 +698,15 @@ apis:
     url: examples/web-scraping-web-scraping-response-example.json
   - type: Documentation
     url: https://docs.abstractapi.com/api/avatars.md
+  - type: Overlay
+    url: overlays/abstract-api-ip-geolocation-api-overlay.yaml
+  - type: APIReference
+    url: https://www.abstractapi.com/api/ip-geolocation-api
 - aid: abstract-api:abstract-api-ip-intelligence-api
   name: Abstract API IP Intelligence API
   description: Advanced IP address intelligence and security operations
-  humanURL: https://www.abstractapi.com/api/email-verification-validation-api
-  baseURL: https://emailreputation.abstractapi.com/v1/
+  humanURL: https://www.abstractapi.com/api/ip-intelligence
+  baseURL: https://ip-intelligence.abstractapi.com/v1/
   tags:
   - IP Intelligence
   properties:
@@ -764,11 +788,15 @@ apis:
     url: examples/web-scraping-web-scraping-response-example.json
   - type: Documentation
     url: https://docs.abstractapi.com/api/avatars.md
+  - type: Overlay
+    url: overlays/abstract-api-ip-intelligence-api-overlay.yaml
+  - type: APIReference
+    url: https://docs.abstractapi.com/api/ip-intelligence
 - aid: abstract-api:abstract-api-phone-intelligence-api
   name: Abstract API Phone Intelligence API
   description: Phone number validation and intelligence
-  humanURL: https://www.abstractapi.com/api/email-verification-validation-api
-  baseURL: https://emailreputation.abstractapi.com/v1/
+  humanURL: https://www.abstractapi.com/api/phone-validation-api
+  baseURL: https://phoneintelligence.abstractapi.com/v1/
   tags:
   - Phone Intelligence
   properties:
@@ -850,11 +878,15 @@ apis:
     url: examples/web-scraping-web-scraping-response-example.json
   - type: Documentation
     url: https://docs.abstractapi.com/api/avatars.md
+  - type: Overlay
+    url: overlays/abstract-api-phone-intelligence-api-overlay.yaml
+  - type: APIReference
+    url: https://docs.abstractapi.com/api/phone-intelligence
 - aid: abstract-api:abstract-api-public-holidays-api
   name: Abstract API Public Holidays API
   description: Holiday lookup operations
-  humanURL: https://www.abstractapi.com/api/email-verification-validation-api
-  baseURL: https://emailreputation.abstractapi.com/v1/
+  humanURL: https://www.abstractapi.com/api/holidays-api
+  baseURL: https://holidays.abstractapi.com/v1/
   tags:
   - Public Holidays
   properties:
@@ -936,11 +968,15 @@ apis:
     url: examples/web-scraping-web-scraping-response-example.json
   - type: Documentation
     url: https://docs.abstractapi.com/api/avatars.md
+  - type: Overlay
+    url: overlays/abstract-api-public-holidays-api-overlay.yaml
+  - type: APIReference
+    url: https://docs.abstractapi.com/api/holidays
 - aid: abstract-api:abstract-api-timezones-api
   name: Abstract API Timezones API
   description: Timezone lookup and conversion operations
-  humanURL: https://www.abstractapi.com/api/email-verification-validation-api
-  baseURL: https://emailreputation.abstractapi.com/v1/
+  humanURL: https://www.abstractapi.com/api/time-date-timezone-api
+  baseURL: https://timezone.abstractapi.com/v1/
   tags:
   - Timezones
   properties:
@@ -1022,11 +1058,15 @@ apis:
     url: examples/web-scraping-web-scraping-response-example.json
   - type: Documentation
     url: https://docs.abstractapi.com/api/avatars.md
+  - type: Overlay
+    url: overlays/abstract-api-timezones-api-overlay.yaml
+  - type: APIReference
+    url: https://docs.abstractapi.com/api/timezones
 - aid: abstract-api:abstract-api-vat-validation-api
   name: Abstract API VAT Validation API
   description: VAT number validation and rate lookup
-  humanURL: https://www.abstractapi.com/api/email-verification-validation-api
-  baseURL: https://emailreputation.abstractapi.com/v1/
+  humanURL: https://www.abstractapi.com/api/vat-validation-rates-api
+  baseURL: https://vat.abstractapi.com/v1/
   tags:
   - VAT Validation
   properties:
@@ -1108,11 +1148,15 @@ apis:
     url: examples/web-scraping-web-scraping-response-example.json
   - type: Documentation
     url: https://docs.abstractapi.com/api/avatars.md
+  - type: Overlay
+    url: overlays/abstract-api-vat-validation-api-overlay.yaml
+  - type: APIReference
+    url: https://docs.abstractapi.com/api/vat-validation
 - aid: abstract-api:abstract-api-web-scraping-api
   name: Abstract API Web Scraping API
   description: Web content extraction operations
-  humanURL: https://www.abstractapi.com/api/email-verification-validation-api
-  baseURL: https://emailreputation.abstractapi.com/v1/
+  humanURL: https://www.abstractapi.com/api/web-scraping-api
+  baseURL: https://scrape.abstractapi.com/v1/
   tags:
   - Web Scraping
   properties:
@@ -1194,11 +1238,15 @@ apis:
     url: examples/web-scraping-web-scraping-response-example.json
   - type: Documentation
     url: https://docs.abstractapi.com/api/avatars.md
+  - type: Overlay
+    url: overlays/abstract-api-web-scraping-api-overlay.yaml
+  - type: APIReference
+    url: https://docs.abstractapi.com/api/scrape
 - aid: abstract-api:abstract-api-website-screenshot-api
   name: Abstract API Website Screenshot API
   description: Website screenshot capture operations
-  humanURL: https://www.abstractapi.com/api/email-verification-validation-api
-  baseURL: https://emailreputation.abstractapi.com/v1/
+  humanURL: https://www.abstractapi.com/api/website-screenshot-api
+  baseURL: https://screenshot.abstractapi.com/v1/
   tags:
   - Website Screenshot
   properties:
@@ -1280,138 +1328,231 @@ apis:
     url: examples/web-scraping-web-scraping-response-example.json
   - type: Documentation
     url: https://docs.abstractapi.com/api/avatars.md
+  - type: Overlay
+    url: overlays/abstract-api-website-screenshot-api-overlay.yaml
+  - type: APIReference
+    url: https://docs.abstractapi.com/api/screenshot
 common:
-  - type: AgenticAccess
-    url: agentic-access/abstract-api-agentic-access.yml
-  - type: DomainSecurity
-    url: security/abstract-api-domain-security.yml
-  - type: Authentication
-    url: authentication/abstract-api-authentication.yml
-  - type: PostmanWorkspace
-    url: https://www.postman.com/kinlaneapi/abstract-api/overview
-  - type: Arazzo
-    url: arazzo/abstract-api-company-to-screenshot-and-avatar-workflow.yml
-    name: Abstract API Company Enrichment to Screenshot and Avatar
-  - type: Arazzo
-    url: arazzo/abstract-api-currency-live-and-convert-workflow.yml
-    name: Abstract API Live Exchange Rate and Conversion
-  - type: Arazzo
-    url: arazzo/abstract-api-email-to-company-enrichment-workflow.yml
-    name: Abstract API Email to Company Enrichment
-  - type: Arazzo
-    url: arazzo/abstract-api-iban-and-company-verification-workflow.yml
-    name: Abstract API IBAN and Company Verification
-  - type: Arazzo
-    url: arazzo/abstract-api-ip-geolocation-to-currency-conversion-workflow.yml
-    name: Abstract API IP Geolocation to Currency Conversion
-  - type: Arazzo
-    url: arazzo/abstract-api-ip-geolocation-to-timezone-holidays-workflow.yml
-    name: Abstract API IP Geolocation to Timezone and Holidays
-  - type: Arazzo
-    url: arazzo/abstract-api-ip-security-and-geolocation-workflow.yml
-    name: Abstract API IP Security and Geolocation
-  - type: Arazzo
-    url: arazzo/abstract-api-phone-to-timezone-workflow.yml
-    name: Abstract API Phone Validation to Local Time
-  - type: Arazzo
-    url: arazzo/abstract-api-screenshot-scrape-and-process-workflow.yml
-    name: Abstract API Screenshot, Scrape, and Image Processing
-  - type: Arazzo
-    url: arazzo/abstract-api-vat-validation-to-rates-and-calculation-workflow.yml
-    name: Abstract API VAT Validation to Rates and Calculation
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/abstractapi
-  - type: Website
-    url: https://www.abstractapi.com/
-  - type: Portal
-    url: https://app.abstractapi.com/
-  - type: Signup
-    url: https://app.abstractapi.com/users/signup
-  - type: Login
-    url: https://app.abstractapi.com/users/login
+- type: AgenticAccess
+  url: agentic-access/abstract-api-agentic-access.yml
+- type: DomainSecurity
+  url: security/abstract-api-domain-security.yml
+- type: Authentication
+  url: authentication/abstract-api-authentication.yml
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/abstract-api/overview
+- type: Arazzo
+  url: arazzo/abstract-api-company-to-screenshot-and-avatar-workflow.yml
+  name: Abstract API Company Enrichment to Screenshot and Avatar
+- type: Arazzo
+  url: arazzo/abstract-api-currency-live-and-convert-workflow.yml
+  name: Abstract API Live Exchange Rate and Conversion
+- type: Arazzo
+  url: arazzo/abstract-api-email-to-company-enrichment-workflow.yml
+  name: Abstract API Email to Company Enrichment
+- type: Arazzo
+  url: arazzo/abstract-api-iban-and-company-verification-workflow.yml
+  name: Abstract API IBAN and Company Verification
+- type: Arazzo
+  url: arazzo/abstract-api-ip-geolocation-to-currency-conversion-workflow.yml
+  name: Abstract API IP Geolocation to Currency Conversion
+- type: Arazzo
+  url: arazzo/abstract-api-ip-geolocation-to-timezone-holidays-workflow.yml
+  name: Abstract API IP Geolocation to Timezone and Holidays
+- type: Arazzo
+  url: arazzo/abstract-api-ip-security-and-geolocation-workflow.yml
+  name: Abstract API IP Security and Geolocation
+- type: Arazzo
+  url: arazzo/abstract-api-phone-to-timezone-workflow.yml
+  name: Abstract API Phone Validation to Local Time
+- type: Arazzo
+  url: arazzo/abstract-api-screenshot-scrape-and-process-workflow.yml
+  name: Abstract API Screenshot, Scrape, and Image Processing
+- type: Arazzo
+  url: arazzo/abstract-api-vat-validation-to-rates-and-calculation-workflow.yml
+  name: Abstract API VAT Validation to Rates and Calculation
+- type: LinkedIn
+  url: https://www.linkedin.com/company/abstractapi
+- type: Website
+  url: https://www.abstractapi.com/
+- type: Portal
+  url: https://app.abstractapi.com/
+- type: SignUp
+  url: https://app.abstractapi.com/users/signup
+- type: Login
+  url: https://app.abstractapi.com/users/login
+- type: Documentation
+  url: https://docs.abstractapi.com/
+- type: GettingStarted
+  url: https://docs.abstractapi.com/
+- type: GitHubOrganization
+  url: https://github.com/abstractapi
+- type: Authentication
+  url: https://docs.abstractapi.com/
+  data:
+  - type: apiKey
+    in: query
+    name: api_key
+    description: Unique API key per service, passed as a query parameter or Bearer token
+- url: rules/abstract-api-spectral-rules.yml
+  type: SpectralRules
+- url: vocabulary/abstract-api-vocabulary.yaml
+  type: Vocabulary
+- type: Integrations
+  url: https://www.abstractapi.com/integrations
+- type: AgentCard
+  url: a2a/abstract-api-a2a.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: MCPServer
+  url: mcp/abstract-api-mcp.yml
+- type: ToolCrosswalk
+  url: mcp/abstract-api-tool-crosswalk.yml
+- type: LLMsTxt
+  url: llms/abstract-api-llms.txt
+- type: WellKnown
+  url: well-known/abstract-api-well-known.yml
+- type: Packages
+  url: packages/abstract-api-packages.yml
+- type: SDKs
+  url: packages/abstract-api-packages.yml
+- type: Conventions
+  url: conventions/abstract-api-conventions.yml
+- type: ErrorCatalog
+  url: errors/abstract-api-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/abstract-api-lifecycle.yml
+- type: StatusPage
+  url: https://status.abstractapi.com/
+- type: Conformance
+  url: conformance/abstract-api-conformance.yml
+- type: Compliance
+  url: conformance/abstract-api-conformance.yml
+- type: DataModel
+  url: data-model/abstract-api-data-model.yml
+- type: Plans
+  url: plans/abstract-api-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/abstract-api-rate-limits.yml
+- type: FinOps
+  url: finops/abstract-api-finops.yml
+- type: SourceCode
+  url: https://github.com/abstractapi/openapi-specs
+- type: APIReference
+  url: https://docs.abstractapi.com/api
+- type: Support
+  url: https://www.abstractapi.com/contact-us
+- type: Blog
+  url: https://www.abstractapi.com/guides
+- type: TermsOfService
+  url: https://www.abstractapi.com/legal/legal
+- type: PrivacyPolicy
+  url: https://www.abstractapi.com/legal/legal
+- type: Pricing
+  url: https://www.abstractapi.com/api/email-verification-validation-api
+integrations:
+- name: HubSpot + Phone Validation API
+- name: HubSpot + Email Validation API
+- name: HubSpot + IP Geolocation API
+- name: AWS + IP Geolocation API
+- name: AWS + Phone Validation API
+- name: Salesforce + Phone Validation API
+- name: Salesforce + Email Validation API
+- name: Salesforce + IP Geolocation API
+- name: Phone Number Lookup
+- name: VPN Detector
+- name: Proxy IP Checker
+- name: TOR Lookup
+- name: Disposable Email Checker
+- name: Domain Age Checker
+- name: DMARC Record Check
+- name: SPF Record Check
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+x-pointer-verification:
+  checked: '2026-08-29'
+  method: live GET with a browser User-Agent, body inspected for soft-404 markers
+  removed_dead:
   - type: Pricing
     url: https://www.abstractapi.com/pricing
+    status: 404
+    body: Webflow "Page Not Found"
   - type: Blog
     url: https://www.abstractapi.com/blog
-  - type: Documentation
-    url: https://docs.abstractapi.com/
-  - type: GettingStarted
-    url: https://docs.abstractapi.com/
-  - type: GitHubOrganization
-    url: https://github.com/abstractapi
+    status: 404
+    body: Webflow "Page Not Found"
   - type: TermsOfService
     url: https://www.abstractapi.com/legal/terms
+    status: 404
+    body: Webflow "Page Not Found"
   - type: PrivacyPolicy
     url: https://www.abstractapi.com/legal/privacy
-  - type: Authentication
-    url: https://docs.abstractapi.com/
-    data:
-    - type: apiKey
-      in: query
-      name: api_key
-      description: Unique API key per service, passed as a query parameter or Bearer token
-  - type: Features
-    data:
-    - name: API Key Authentication
-      description: Each API uses a unique API key passed as a query parameter or Bearer token header
-    - name: Free Tier
-      description: Each API offers a free tier with limited monthly requests and 1 request/second rate limit
-    - name: Simple REST API
-      description: All APIs follow a simple REST pattern with a single base URL and query parameters
-    - name: Global Coverage
-      description: Data covers global locations with 80+ currencies, 250,000+ cities, and worldwide phone/IP coverage
-    - name: JSON Responses
-      description: All API responses return structured JSON data with consistent error codes
-    - name: Modular Services
-      description: Each API is independently keyed and priced, allowing granular subscription management
-  - type: UseCases
-    data:
-    - name: Email List Cleaning
-      description: Validate and filter email lists to improve deliverability and reduce bounce rates
-    - name: Fraud Detection
-      description: Use IP intelligence, email reputation, and phone intelligence to detect and block fraudulent users
-    - name: User Onboarding Enrichment
-      description: Automatically enrich user profiles with geolocation, company, and contact data at signup
-    - name: Currency Conversion
-      description: Display localized pricing or perform currency conversions in e-commerce and fintech apps
-    - name: Compliance Automation
-      description: Validate VAT numbers and IBAN codes to automate financial compliance workflows
-    - name: Content Extraction
-      description: Use web scraping API to extract structured data from any website for data pipelines
-    - name: Dynamic User Avatars
-      description: Generate placeholder avatars for users without profile photos using the Avatars API
-  - type: Integrations
-    data:
-    - name: JavaScript
-      description: Official JavaScript SDK for Exchange Rates, Email Validation, IP Geolocation, and Phone Validation
-    - name: Python
-      description: Official Python SDK for Exchange Rates, Email Validation, IP Geolocation, and Phone Validation
-    - name: PHP
-      description: Official PHP SDK for Exchange Rates, Email Validation, IP Geolocation, and Phone Validation
-
-  - url: rules/abstract-api-spectral-rules.yml
-    type: SpectralRules
-  - url: vocabulary/abstract-api-vocabulary.yaml
-    type: Vocabulary
-  - type: Integrations
-    url: https://www.abstractapi.com/integrations
-integrations:
-  - name: HubSpot + Phone Validation API
-  - name: HubSpot + Email Validation API
-  - name: HubSpot + IP Geolocation API
-  - name: AWS + IP Geolocation API
-  - name: AWS + Phone Validation API
-  - name: Salesforce + Phone Validation API
-  - name: Salesforce + Email Validation API
-  - name: Salesforce + IP Geolocation API
-  - name: Phone Number Lookup
-  - name: VPN Detector
-  - name: Proxy IP Checker
-  - name: TOR Lookup
-  - name: Disposable Email Checker
-  - name: Domain Age Checker
-  - name: DMARC Record Check
-  - name: SPF Record Check
-maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+    status: 404
+    body: Webflow "Page Not Found"
+  removed_null_url:
+  - Features
+  - UseCases
+  - Integrations
+  replacements:
+  - type: Blog
+    url: https://www.abstractapi.com/guides
+    status: 200
+    note: The two posts already in blogs/ carry feed_url https://www.abstractapi.com/guides — the blog
+      moved and the old pointer was never updated.
+  - type: TermsOfService
+    url: https://www.abstractapi.com/legal/legal
+    status: 200
+    note: Abstract now serves terms and privacy from one combined legal page.
+  - type: PrivacyPolicy
+    url: https://www.abstractapi.com/legal/legal
+    status: 200
+  - type: Pricing
+    url: https://www.abstractapi.com/api/email-verification-validation-api
+    status: 200
+    note: No company-wide pricing page exists any more; the public tier table is embedded on each product
+      page and the site nav "PRICING" item now routes to a signup wall. See plans/abstract-api-plans-pricing.yml.
+  verified_live:
+  - url: https://www.abstractapi.com/
+    status: 200
+  - url: https://app.abstractapi.com/
+    status: 200
+  - url: https://app.abstractapi.com/users/signup
+    status: 200
+  - url: https://app.abstractapi.com/users/login
+    status: 200
+  - url: https://docs.abstractapi.com/
+    status: 200
+  - url: https://docs.abstractapi.com/api
+    status: 200
+  - url: https://github.com/abstractapi
+    status: 200
+  - url: https://github.com/abstractapi/openapi-specs
+    status: 200
+  - url: https://www.abstractapi.com/integrations
+    status: 200
+  - url: https://www.abstractapi.com/contact-us
+    status: 200
+  - url: https://www.abstractapi.com/legal/dpa
+    status: 200
+  - url: https://status.abstractapi.com/
+    status: 200
+  - url: https://www.linkedin.com/company/abstractapi
+    status: 200
+  - url: https://www.postman.com/kinlaneapi/abstract-api/overview
+    status: 200
+  - url: https://docs.abstractapi.com/.well-known/agent-card.json
+    status: 200
+  - url: https://docs.abstractapi.com/mcp
+    status: 200
+  - url: https://docs.abstractapi.com/llms.txt
+    status: 200
+  - url: https://www.abstractapi.com/api/<15 product pages>
+    status: 200
+  note: The Postman pointer is an API Evangelist workspace, not a provider-published collection; it is
+    left as PostmanWorkspace and is NOT claimed as a first-party Postman surface.
+x-enrichment:
+  date: '2026-08-29'
+  status: enriched
+  artifacts_added: 44
+  pass: local-v1

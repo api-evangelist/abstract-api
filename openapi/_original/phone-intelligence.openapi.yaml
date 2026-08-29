@@ -1,0 +1,472 @@
+openapi: 3.0.3
+info:
+  title: Abstract Phone Intelligence API
+  description: 'Validate and enrich a phone number with carrier, line type, location,
+    messaging, validation, registration, risk, and known data breach details in a
+    single request. Authenticate with your API key as the `api_key` query parameter,
+    or as an `Authorization: Bearer <key>` header. GET and POST (form-encoded or
+    JSON) are both supported.'
+  version: 1.0.0
+  termsOfService: https://www.abstractapi.com/legal/legal
+  contact:
+    name: Abstract API
+    url: https://www.abstractapi.com/api/phone-validation-api
+  license:
+    name: Commercial — see Terms of Service
+    url: https://www.abstractapi.com/legal/legal
+externalDocs:
+  description: Official documentation
+  url: https://docs.abstractapi.com/api/phone-intelligence
+servers:
+- url: https://phoneintelligence.abstractapi.com/v1
+security:
+- ApiKeyQuery: []
+- BearerAuth: []
+paths:
+  /:
+    get:
+      operationId: getPhoneIntelligence
+      summary: Validate and enrich a phone number
+      parameters:
+      - name: phone
+        in: query
+        required: true
+        description: The phone number to validate and verify.
+        schema:
+          type: string
+        example: '14159929960'
+      - name: country
+        in: query
+        required: false
+        description: The country's ISO 3166-1 alpha-2 code, used to indicate the phone
+          number's country of origin when the number is supplied without an international
+          dialing prefix.
+        schema:
+          type: string
+        example: US
+      responses:
+        '200':
+          description: Intelligence details for the phone number.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhoneIntelligence'
+              example:
+                phone_number: '14159929960'
+                phone_format:
+                  international: '+14159929960'
+                  national: (415) 992-9960
+                phone_carrier:
+                  name: T-Mobile
+                  line_type: mobile
+                  mcc: 310
+                  mnc: 160
+                phone_location:
+                  country_name: United States
+                  country_code: US
+                  country_prefix: '+1'
+                  region: California
+                  city: San Francisco
+                  timezone: America/Los_Angeles
+                phone_messaging:
+                  sms_domain: tmomail.net
+                  sms_email: 14159929960@tmomail.net
+                phone_validation:
+                  is_valid: true
+                  line_status: active
+                  is_voip: false
+                  minimum_age: 1888
+                phone_registration:
+                  name: Sergio Suarez
+                  type: consumer
+                phone_risk:
+                  risk_level: low
+                  is_disposable: false
+                  is_abuse_detected: false
+                phone_breaches:
+                  total_breaches: 1
+                  date_first_breached: '2018-07-23'
+                  date_last_breached: '2018-07-23'
+                  breached_domains:
+                  - domain: facebook.com
+                    breach_date: '2018-07-23'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/QuotaReached'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    post:
+      operationId: postPhoneIntelligence
+      summary: Validate and enrich a phone number
+      description: 'Same as the GET operation. The API key may be supplied in the request
+        body, as the `api_key` query parameter, or as an `Authorization: Bearer <key>`
+        header.'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PhoneIntelligenceRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PhoneIntelligenceRequest'
+      responses:
+        '200':
+          description: Intelligence details for the phone number.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhoneIntelligence'
+              example:
+                phone_number: '14159929960'
+                phone_format:
+                  international: '+14159929960'
+                  national: (415) 992-9960
+                phone_carrier:
+                  name: T-Mobile
+                  line_type: mobile
+                  mcc: 310
+                  mnc: 160
+                phone_location:
+                  country_name: United States
+                  country_code: US
+                  country_prefix: '+1'
+                  region: California
+                  city: San Francisco
+                  timezone: America/Los_Angeles
+                phone_messaging:
+                  sms_domain: tmomail.net
+                  sms_email: 14159929960@tmomail.net
+                phone_validation:
+                  is_valid: true
+                  line_status: active
+                  is_voip: false
+                  minimum_age: 1888
+                phone_registration:
+                  name: Sergio Suarez
+                  type: consumer
+                phone_risk:
+                  risk_level: low
+                  is_disposable: false
+                  is_abuse_detected: false
+                phone_breaches:
+                  total_breaches: 1
+                  date_first_breached: '2018-07-23'
+                  date_last_breached: '2018-07-23'
+                  breached_domains:
+                  - domain: facebook.com
+                    breach_date: '2018-07-23'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/QuotaReached'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/ServerError'
+components:
+  securitySchemes:
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+      description: Your unique Phone Intelligence API key.
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Send your API key as a Bearer token; omit `api_key` from the query
+        string.
+  responses:
+    BadRequest:
+      description: Bad request — a required parameter is missing or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: A validation error occurred.
+              code: validation_error
+              details:
+                phone:
+                - This is a required argument.
+    Unauthorized:
+      description: Unauthorized — missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Invalid API key provided.
+              code: unauthorized
+              details: null
+    QuotaReached:
+      description: Unprocessable — monthly quota reached or insufficient API credits.
+        The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: Too Many Requests — rate limit exceeded. The body follows the standard
+        error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ServerError:
+      description: Internal server error. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    PhoneIntelligenceRequest:
+      type: object
+      required:
+      - phone
+      properties:
+        phone:
+          type: string
+          description: The phone number to validate and verify.
+          example: '14159929960'
+        country:
+          type: string
+          description: The country's ISO 3166-1 alpha-2 code, used to indicate the
+            phone number's country of origin when the number is supplied without an
+            international dialing prefix.
+          example: US
+        api_key:
+          type: string
+          description: 'Your API key. Optional here if supplied as the `api_key` query
+            parameter or an `Authorization: Bearer <key>` header.'
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - message
+          - code
+          properties:
+            message:
+              type: string
+              description: Human-readable description of the error.
+              example: A validation error occurred.
+            code:
+              type: string
+              description: Machine-readable error code, e.g. validation_error or unauthorized.
+              example: validation_error
+            details:
+              type: object
+              nullable: true
+              description: Field-keyed validation messages for validation_error responses;
+                null for other error types.
+              additionalProperties:
+                type: array
+                items:
+                  type: string
+    PhoneIntelligence:
+      type: object
+      properties:
+        phone_number:
+          type: string
+          description: The phone number that was submitted, echoed back.
+          example: '14159929960'
+        phone_format:
+          type: object
+          nullable: true
+          properties:
+            international:
+              type: string
+              nullable: true
+              description: The phone number in E.164 international format.
+              example: '+14159929960'
+            national:
+              type: string
+              nullable: true
+              description: The phone number in national format.
+              example: (415) 992-9960
+        phone_carrier:
+          type: object
+          nullable: true
+          properties:
+            name:
+              type: string
+              nullable: true
+              description: The name of the carrier that operates the number.
+              example: T-Mobile
+            line_type:
+              type: string
+              nullable: true
+              description: 'The line type. Documented values include: mobile, landline,
+                voip, toll_free, personal, pager, unknown. This list may not be exhaustive.'
+              example: mobile
+            mcc:
+              type: integer
+              nullable: true
+              description: Mobile Country Code; null for non-mobile or unknown lines.
+              example: 310
+            mnc:
+              type: integer
+              nullable: true
+              description: Mobile Network Code; null for non-mobile or unknown lines.
+              example: 160
+        phone_location:
+          type: object
+          nullable: true
+          properties:
+            country_name:
+              type: string
+              nullable: true
+              description: The country the number is registered in.
+              example: United States
+            country_code:
+              type: string
+              nullable: true
+              description: The ISO 3166-1 alpha-2 country code.
+              example: US
+            country_prefix:
+              type: string
+              nullable: true
+              description: The international dialing prefix for the country.
+              example: '+1'
+            region:
+              type: string
+              nullable: true
+              description: The region or state associated with the number.
+              example: California
+            city:
+              type: string
+              nullable: true
+              description: The city associated with the number.
+              example: San Francisco
+            timezone:
+              type: string
+              nullable: true
+              description: The IANA timezone associated with the number.
+              example: America/Los_Angeles
+        phone_messaging:
+          type: object
+          nullable: true
+          properties:
+            sms_domain:
+              type: string
+              nullable: true
+              description: The carrier's SMS email-to-text gateway domain.
+              example: tmomail.net
+            sms_email:
+              type: string
+              nullable: true
+              description: The full email-to-SMS address for the number.
+              example: 14159929960@tmomail.net
+        phone_validation:
+          type: object
+          nullable: true
+          properties:
+            is_valid:
+              type: boolean
+              nullable: true
+              description: Whether the phone number is valid.
+              example: true
+            line_status:
+              type: string
+              nullable: true
+              description: 'The line status. Documented values include: active, inactive.
+                This list may not be exhaustive.'
+              example: active
+            is_voip:
+              type: boolean
+              nullable: true
+              description: Whether the number is a VoIP line.
+              example: false
+            minimum_age:
+              type: integer
+              nullable: true
+              description: Estimated minimum age of the number in days; null when unknown.
+              example: 1888
+        phone_registration:
+          type: object
+          nullable: true
+          properties:
+            name:
+              type: string
+              nullable: true
+              description: The name the number is registered to.
+              example: Sergio Suarez
+            type:
+              type: string
+              nullable: true
+              description: 'The registration type, e.g. consumer or business.'
+              example: consumer
+        phone_risk:
+          type: object
+          nullable: true
+          properties:
+            risk_level:
+              type: string
+              nullable: true
+              description: 'The overall risk level. Documented values include: low,
+                medium, high. This list may not be exhaustive.'
+              example: low
+            is_disposable:
+              type: boolean
+              nullable: true
+              description: Whether the number is a disposable or temporary number.
+              example: false
+            is_abuse_detected:
+              type: boolean
+              nullable: true
+              description: Whether the number has been associated with abuse.
+              example: false
+        phone_breaches:
+          type: object
+          nullable: true
+          properties:
+            total_breaches:
+              type: integer
+              nullable: true
+              description: The total number of known data breaches involving the number.
+              example: 1
+            date_first_breached:
+              type: string
+              format: date
+              nullable: true
+              description: The date of the earliest known breach (YYYY-MM-DD); null
+                when there are no known breaches.
+              example: '2018-07-23'
+            date_last_breached:
+              type: string
+              format: date
+              nullable: true
+              description: The date of the most recent known breach (YYYY-MM-DD);
+                null when there are no known breaches.
+              example: '2018-07-23'
+            breached_domains:
+              type: array
+              nullable: true
+              description: The domains where the number was found in a breach.
+              items:
+                type: object
+                properties:
+                  domain:
+                    type: string
+                    nullable: true
+                    description: The domain associated with the breach.
+                    example: facebook.com
+                  breach_date:
+                    type: string
+                    format: date
+                    nullable: true
+                    description: The date of the breach (YYYY-MM-DD).
+                    example: '2018-07-23'

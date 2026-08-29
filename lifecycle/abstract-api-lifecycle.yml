@@ -1,0 +1,54 @@
+generated: '2026-08-29'
+method: searched
+source: >-
+  https://status.abstractapi.com/, https://www.abstractapi.com/legal/legal,
+  https://docs.abstractapi.com/llms.txt, openapi/_original/*.openapi.yaml
+versioning:
+  style: uri-path
+  current: v1
+  exceptions:
+    - product: Company Enrichment
+      version: v2
+  policy_published: false
+  note: >-
+    Versions appear only as a path segment on each product host. No public policy
+    states how a new major version is announced or how long v1 keeps serving once a
+    v2 exists — Company Enrichment already moved to /v2 with no published notice
+    that this pipeline could find.
+deprecation:
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  deprecated_operations: []
+  note: >-
+    No deprecation policy, no RFC 8594 Sunset/Deprecation headers, and no operation
+    in any of the 13 provider-published specs carries `deprecated: true`. Searched
+    the docs corpus (14 pages via the docs MCP filesystem) and the legal page; there
+    is no deprecation or end-of-life statement.
+status_page:
+  present: true
+  url: https://status.abstractapi.com/
+  http_status: 200
+  provider: third-party status page
+  history: https://status.abstractapi.com/history
+  advertised_from: 'https://www.abstractapi.com/ footer — "Status: All systems normal"'
+  verified: '2026-08-29'
+sla:
+  published: false
+  marketing_claim: '99.9% uptime (stated on product marketing pages)'
+  contractual: >-
+    An "Enhanced SLA & support" line item appears only on the Enterprise tier of every
+    product pricing table. No SLA document is public; the standard terms at
+    /legal/legal do not state an uptime commitment.
+changelog:
+  present: false
+  note: >-
+    No dated changelog or release-notes page was found on www.abstractapi.com,
+    docs.abstractapi.com, or in the docs MCP filesystem (14 pages, none a changelog).
+    The provider's openapi-specs repository carries git history but publishes no
+    releases.
+support:
+  contact: https://www.abstractapi.com/contact-us
+  email: team@abstractapi.com
+  data_correction: https://www.abstractapi.com/data-correction

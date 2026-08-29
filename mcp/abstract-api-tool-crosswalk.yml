@@ -1,0 +1,133 @@
+generated: '2026-08-29'
+method: derived
+source: mcp/abstract-api-mcp.yml (probed tools/list) + openapi/*.yml
+note: 'Abstract API ships BOTH a live MCP server and OpenAPI definitions, but they do not overlap at all.
+  The MCP server at https://docs.abstractapi.com/mcp is a Mintlify documentation-retrieval server: its
+  three tools read the docs corpus and none of them invokes an Abstract product endpoint. Every REST operation
+  is therefore rest_only, and every MCP tool is mcp_only. This is the honest crosswalk, not a mapping
+  failure — confidence is high precisely because the divergence is total.'
+surfaces:
+  openapi:
+    files: 14
+    gated: false
+    provider_published: https://github.com/abstractapi/openapi-specs
+    archived_verbatim: openapi/_original/
+  graphql:
+    present: false
+  mcp:
+    url: https://docs.abstractapi.com/mcp
+    gated: false
+    probed: '2026-08-29'
+    http_status: 200
+crosswalk: []
+mcp_only:
+- tool: search_abstract_api
+  reason: documentation search; no public REST operation backs it
+- tool: query_docs_filesystem_abstract_api
+  reason: read-only virtual filesystem over docs pages; no REST equivalent
+- tool: submit_feedback
+  reason: docs feedback capture; not part of any Abstract product API
+rest_only:
+- operationId: generateAvatar
+  method: GET
+  path: /
+  spec: abstract-api-avatars-api-openapi.yml
+  reason: no MCP tool exposes this operation
+- operationId: getCompanyEnrichment
+  method: GET
+  path: /
+  spec: abstract-api-company-enrichment-api-openapi.yml
+  reason: no MCP tool exposes this operation
+- operationId: getEmailReputation
+  method: GET
+  path: /
+  spec: abstract-api-email-reputation-api-openapi.yml
+  reason: no MCP tool exposes this operation
+- operationId: getLiveExchangeRates
+  method: GET
+  path: /live
+  spec: abstract-api-exchange-rates-api-openapi.yml
+  reason: no MCP tool exposes this operation
+- operationId: convertCurrency
+  method: GET
+  path: /convert
+  spec: abstract-api-exchange-rates-api-openapi.yml
+  reason: no MCP tool exposes this operation
+- operationId: getHistoricalExchangeRates
+  method: GET
+  path: /historical
+  spec: abstract-api-exchange-rates-api-openapi.yml
+  reason: no MCP tool exposes this operation
+- operationId: validateIBAN
+  method: GET
+  path: /
+  spec: abstract-api-iban-validation-api-openapi.yml
+  reason: no MCP tool exposes this operation
+- operationId: processImageByURL
+  method: GET
+  path: /url
+  spec: abstract-api-image-processing-api-openapi.yml
+  reason: no MCP tool exposes this operation
+- operationId: getIPGeolocation
+  method: GET
+  path: /
+  spec: abstract-api-ip-geolocation-api-openapi.yml
+  reason: no MCP tool exposes this operation
+- operationId: getIPIntelligence
+  method: GET
+  path: /
+  spec: abstract-api-ip-intelligence-api-openapi.yml
+  reason: no MCP tool exposes this operation
+- operationId: getPhoneIntelligence
+  method: GET
+  path: /
+  spec: abstract-api-phone-intelligence-api-openapi.yml
+  reason: no MCP tool exposes this operation
+- operationId: getPublicHolidays
+  method: GET
+  path: /
+  spec: abstract-api-public-holidays-api-openapi.yml
+  reason: no MCP tool exposes this operation
+- operationId: getCurrentTime
+  method: GET
+  path: /current_time
+  spec: abstract-api-timezones-api-openapi.yml
+  reason: no MCP tool exposes this operation
+- operationId: convertTime
+  method: GET
+  path: /convert_time
+  spec: abstract-api-timezones-api-openapi.yml
+  reason: no MCP tool exposes this operation
+- operationId: validateVATNumber
+  method: GET
+  path: /validate
+  spec: abstract-api-vat-validation-api-openapi.yml
+  reason: no MCP tool exposes this operation
+- operationId: getVATRates
+  method: GET
+  path: /rates
+  spec: abstract-api-vat-validation-api-openapi.yml
+  reason: no MCP tool exposes this operation
+- operationId: calculateVAT
+  method: GET
+  path: /calculate
+  spec: abstract-api-vat-validation-api-openapi.yml
+  reason: no MCP tool exposes this operation
+- operationId: scrapeWebPage
+  method: GET
+  path: /
+  spec: abstract-api-web-scraping-api-openapi.yml
+  reason: no MCP tool exposes this operation
+- operationId: captureWebsiteScreenshot
+  method: GET
+  path: /
+  spec: abstract-api-website-screenshot-api-openapi.yml
+  reason: no MCP tool exposes this operation
+coverage:
+  mcp_tools: 3
+  mcp_tools_bound_to_rest: 0
+  rest_operations: 19
+  rest_operations_with_tool: 0
+  binding_rate: 0.0
+  interpretation: An agent holding only the MCP server can read Abstract's documentation but cannot call
+    a single Abstract API through it. All product access is plain HTTPS + API key.

@@ -1,0 +1,380 @@
+openapi: 3.0.3
+info:
+  title: Abstract Email Reputation API
+  description: 'Check an email address''s deliverability, quality, sender, domain,
+    risk, and known data breaches in a single request. Authenticate with your API key
+    as the `api_key` query parameter, or as an `Authorization: Bearer <key>` header.
+    GET and POST (form-encoded or JSON) are both supported.'
+  version: 1.0.0
+  termsOfService: https://www.abstractapi.com/legal/legal
+  contact:
+    name: Abstract API
+    url: https://www.abstractapi.com/api/email-reputation-api
+  license:
+    name: Commercial — see Terms of Service
+    url: https://www.abstractapi.com/legal/legal
+externalDocs:
+  description: Official documentation
+  url: https://docs.abstractapi.com/api/email-reputation
+servers:
+- url: https://emailreputation.abstractapi.com/v1
+security:
+- ApiKeyQuery: []
+- BearerAuth: []
+paths:
+  /:
+    get:
+      operationId: getEmailReputation
+      summary: Get the reputation of an email address
+      parameters:
+      - name: email
+        in: query
+        required: true
+        description: The email address to check.
+        schema:
+          type: string
+          format: email
+        example: johnsmith@gmail.com
+      responses:
+        '200':
+          description: Reputation details for the email address.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailReputation'
+              example:
+                email_address: benjamin.richard@abstractapi.com
+                email_deliverability:
+                  status: deliverable
+                  status_detail: valid_email
+                  is_format_valid: true
+                  is_smtp_valid: true
+                  is_mx_valid: true
+                  mx_records:
+                  - gmail-smtp-in.l.google.com
+                  - alt3.gmail-smtp-in.l.google.com
+                  - alt4.gmail-smtp-in.l.google.com
+                  - alt1.gmail-smtp-in.l.google.com
+                  - alt2.gmail-smtp-in.l.google.com
+                email_quality:
+                  score: 0.8
+                  is_free_email: false
+                  is_username_suspicious: false
+                  is_disposable: false
+                  is_catchall: true
+                  is_subaddress: false
+                  is_role: false
+                  is_dmarc_enforced: true
+                  is_spf_strict: true
+                  minimum_age: 1418
+                email_sender:
+                  first_name: Benjamin
+                  last_name: Richard
+                  email_provider_name: Google
+                  organization_name: Abstract API
+                  organization_type: commercial
+                email_domain:
+                  domain: abstractapi.com
+                  domain_age: 1418
+                  is_live_site: true
+                  registrar: NAMECHEAP INC
+                  registrar_url: https://namecheap.com
+                  date_registered: '2020-05-13'
+                  date_last_renewed: '2024-04-13'
+                  date_expires: '2025-05-13'
+                  is_risky_tld: false
+                email_risk:
+                  address_risk_status: low
+                  domain_risk_status: low
+                email_breaches:
+                  total_breaches: 2
+                  date_first_breached: '2018-07-23T14:30:00Z'
+                  date_last_breached: '2019-05-24T14:30:00Z'
+                  breached_domains:
+                  - domain: apollo.io
+                    date_breached: '2018-07-23T14:30:00Z'
+                  - domain: canva.com
+                    date_breached: '2019-05-24T14:30:00Z'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/QuotaReached'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    post:
+      operationId: postEmailReputation
+      summary: Get the reputation of an email address
+      description: 'Same as the GET operation. The API key may be supplied in the request
+        body, as the `api_key` query parameter, or as an `Authorization: Bearer <key>`
+        header.'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReputationRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReputationRequest'
+      responses:
+        '200':
+          description: Reputation details for the email address.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailReputation'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/QuotaReached'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/ServerError'
+components:
+  securitySchemes:
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+      description: Your unique Email Reputation API key.
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Send your API key as a Bearer token; omit `api_key` from the query
+        string.
+  responses:
+    BadRequest:
+      description: Bad request — a required parameter is missing or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: A validation error occurred.
+              code: validation_error
+              details:
+                email:
+                - This is a required argument.
+    Unauthorized:
+      description: Unauthorized — missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Invalid API key provided.
+              code: unauthorized
+              details: null
+    QuotaReached:
+      description: Unprocessable — monthly quota reached or insufficient API credits.
+        The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: Too Many Requests — rate limit exceeded. The body follows the standard
+        error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ServerError:
+      description: Internal server error. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    ReputationRequest:
+      type: object
+      required:
+      - email
+      properties:
+        email:
+          type: string
+          format: email
+          description: The email address to check.
+          example: johnsmith@gmail.com
+        api_key:
+          type: string
+          description: 'Your API key. Optional here if supplied as the `api_key` query
+            parameter or an `Authorization: Bearer <key>` header.'
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - message
+          - code
+          properties:
+            message:
+              type: string
+              description: Human-readable description of the error.
+              example: A validation error occurred.
+            code:
+              type: string
+              description: Machine-readable error code, e.g. validation_error or unauthorized.
+              example: validation_error
+            details:
+              type: object
+              nullable: true
+              description: Field-keyed validation messages for validation_error responses;
+                null for other error types.
+              additionalProperties:
+                type: array
+                items:
+                  type: string
+    EmailReputation:
+      type: object
+      properties:
+        email_address:
+          type: string
+          format: email
+        email_deliverability:
+          type: object
+          properties:
+            status:
+              type: string
+              description: Overall deliverability
+              example: deliverable
+            status_detail:
+              type: string
+              example: valid_email
+            is_format_valid:
+              type: boolean
+            is_smtp_valid:
+              type: boolean
+            is_mx_valid:
+              type: boolean
+            mx_records:
+              type: array
+              items:
+                type: string
+        email_quality:
+          type: object
+          properties:
+            score:
+              type: number
+              description: 0-1 quality score
+              example: 0.8
+            is_free_email:
+              type: boolean
+            is_username_suspicious:
+              type: boolean
+            is_disposable:
+              type: boolean
+            is_catchall:
+              type: boolean
+              nullable: true
+              description: Null when catch-all status cannot be determined.
+            is_subaddress:
+              type: boolean
+            is_role:
+              type: boolean
+            is_dmarc_enforced:
+              type: boolean
+              nullable: true
+              description: Null when DMARC status cannot be determined.
+            is_spf_strict:
+              type: boolean
+              nullable: true
+              description: Null when SPF status cannot be determined.
+            minimum_age:
+              type: integer
+              nullable: true
+              description: Estimated min age of the address in days; null when unknown.
+        email_sender:
+          type: object
+          properties:
+            first_name:
+              type: string
+              nullable: true
+            last_name:
+              type: string
+              nullable: true
+            email_provider_name:
+              type: string
+              nullable: true
+            organization_name:
+              type: string
+              nullable: true
+            organization_type:
+              type: string
+              nullable: true
+        email_domain:
+          type: object
+          properties:
+            domain:
+              type: string
+            domain_age:
+              type: integer
+            is_live_site:
+              type: boolean
+            registrar:
+              type: string
+              nullable: true
+            registrar_url:
+              type: string
+              nullable: true
+            date_registered:
+              type: string
+              format: date
+              nullable: true
+              description: YYYY-MM-DD
+            date_last_renewed:
+              type: string
+              format: date
+              nullable: true
+              description: YYYY-MM-DD
+            date_expires:
+              type: string
+              format: date
+              nullable: true
+              description: YYYY-MM-DD
+            is_risky_tld:
+              type: boolean
+        email_risk:
+          type: object
+          properties:
+            address_risk_status:
+              type: string
+              example: low
+            domain_risk_status:
+              type: string
+              example: low
+        email_breaches:
+          type: object
+          properties:
+            total_breaches:
+              type: integer
+            date_first_breached:
+              type: string
+              nullable: true
+              format: date-time
+            date_last_breached:
+              type: string
+              nullable: true
+              format: date-time
+            breached_domains:
+              type: array
+              items:
+                type: object
+                properties:
+                  domain:
+                    type: string
+                  date_breached:
+                    type: string
+                    format: date-time

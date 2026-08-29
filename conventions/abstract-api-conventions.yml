@@ -1,0 +1,137 @@
+generated: '2026-08-29'
+method: searched
+source: >-
+  https://docs.abstractapi.com/api/email-reputation.md,
+  https://docs.abstractapi.com/.well-known/agent-skills/abstractapi/skill.md,
+  https://github.com/abstractapi/openapi-specs (archived at openapi/_original/)
+summary: >-
+  Abstract API is a portfolio of small, single-purpose, read-only lookup APIs. Each
+  product is a separate host, a separate API key and a separate plan. There is no
+  shared account-level API, no write surface, no pagination, and no long-running
+  work — which makes several of the cross-cutting conventions below legitimately
+  not-applicable rather than missing.
+auth:
+  style: api-key
+  methods:
+    - name: query parameter
+      example: 'GET https://emailreputation.abstractapi.com/v1/?api_key=KEY&email=...'
+      note: Simplest; puts the key in URLs and server logs.
+    - name: bearer header
+      example: 'Authorization: Bearer KEY'
+      note: Provider-recommended for production. Omit api_key from the query string when used.
+    - name: form-encoded POST
+      example: 'POST body: api_key=KEY&email=...'
+    - name: json POST
+      example: 'POST body {"email":"..."} with Authorization: Bearer KEY'
+      gotcha: >-
+        Content-Type must be application/json or the body is parsed as form data and
+        the parameter is not detected.
+  key_scope: per-product
+  gotcha: >-
+    Keys are NOT interchangeable across products. An Email Reputation key returns 401
+    against Phone Intelligence. This is the single most common integration error and
+    the provider's own skill lists it first.
+  docs: https://docs.abstractapi.com/api/email-reputation
+  artifact: authentication/abstract-api-authentication.yml
+idempotency:
+  supported: false
+  applicable: na
+  header: null
+  note: >-
+    All published operations are GET (and a POST alias that performs the same
+    lookup). Nothing creates, mutates or deletes state, so there is no idempotency
+    key surface and no need for one. Recorded as `na`, not as a gap.
+pagination:
+  supported: false
+  applicable: na
+  note: >-
+    Every endpoint answers with a single object about a single subject (one email,
+    one phone number, one IP, one domain, one IBAN, one VAT number). Public Holidays
+    returns a bounded array for a country/year and is not paginated.
+field_selection:
+  supported: true
+  style: comma-separated allowlist
+  parameter: fields
+  example: '?fields=country,city'
+  note: >-
+    Documented on IP Intelligence; support on other products is per-product and not
+    universally documented.
+metadata:
+  supported: false
+  note: No customer-supplied metadata is echoed on any response.
+request_id_tracing:
+  supported: false
+  header: null
+  note: >-
+    No X-Request-Id / correlation identifier is documented or returned. An agent that
+    hits a 500 has no reference to quote to support.
+versioning:
+  style: uri-path
+  current:
+    default: v1
+    exceptions:
+      - product: Company Enrichment
+        version: v2
+        source: https://github.com/abstractapi/openapi-specs/blob/main/company-enrichment.openapi.yaml
+  note: >-
+    The version is baked into each product host path (…abstractapi.com/v1/). There is
+    no version header, no date-pinning, and no published policy for how long a prior
+    version is served.
+error_envelope:
+  format: vendor-json
+  rfc9457: false
+  shape:
+    error:
+      message: string
+      code: string
+      details: object
+  note: >-
+    The provider's own OpenAPI repo states a common `{ "error": { message, code,
+    details } }` envelope across every spec. Not application/problem+json.
+  artifact: errors/abstract-api-problem-types.yml
+rate_limit_signaling:
+  headers_published: false
+  status_on_exhaustion: 429
+  status_on_quota_exhaustion: 422
+  note: >-
+    Abstract publishes the numeric limits (per second, per month) but documents NO
+    response headers — no X-RateLimit-*, no RateLimit-*, no Retry-After. An agent
+    cannot read remaining budget from a response; it can only observe a 429 or a 422
+    after the fact. This is the sharpest agent-readiness gap in the account.
+  artifact: rate-limits/abstract-api-rate-limits.yml
+billing_semantics:
+  metered_on: request
+  note: >-
+    Charged per request, not per successful response — a malformed email or an
+    unresolvable IP still consumes a credit. Stated by the provider in its own agent
+    skill under "Common gotchas".
+reversibility:
+  applicable: na
+  grade: na
+  write_surface: false
+  reversal_operations: []
+  note: >-
+    Abstract publishes no write surface. Every operation across all fifteen products
+    is a read-only lookup — no resource is created, updated or destroyed, so there is
+    nothing to cancel, refund, void, reverse, undo, roll back or restore, and no
+    reversal window to state. `na` is the correct grade here and it should leave the
+    denominator rather than score zero. The only account-level irreversible action a
+    caller can take is spending metered credits, which the provider explicitly says
+    are consumed on failed lookups too; that is a billing consequence, not an API
+    operation, and Abstract documents no self-service credit reversal.
+  evidence:
+    - source: openapi/_original/*.openapi.yaml
+      detail: >-
+        13 provider-published specs, 26 operations, zero PUT/PATCH/DELETE. Every POST
+        is a body-carrying alias of the same GET lookup.
+    - source: https://docs.abstractapi.com/llms.txt
+      detail: 14 documented pages, all lookup/validation/enrichment products.
+dry_run_mode:
+  applicable: na
+  note: Read-only surface; a rehearsal mode has no meaning.
+cross_links:
+  authentication: authentication/abstract-api-authentication.yml
+  errors: errors/abstract-api-problem-types.yml
+  lifecycle: lifecycle/abstract-api-lifecycle.yml
+  rate_limits: rate-limits/abstract-api-rate-limits.yml
+  plans: plans/abstract-api-plans-pricing.yml

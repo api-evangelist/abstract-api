@@ -1,0 +1,496 @@
+openapi: 3.0.3
+info:
+  title: Abstract IP Intelligence API
+  description: 'Analyze an IPv4 or IPv6 address for security signals (VPN, proxy,
+    Tor, hosting, relay, mobile, abuse), ASN and company enrichment, geolocation,
+    timezone, country flag, and currency in a single request. The IP may be supplied
+    explicitly or auto-detected from the request origin. Authenticate with your API
+    key as the `api_key` query parameter, or as an `Authorization: Bearer <key>`
+    header. GET and POST (form-encoded or JSON) are both supported.'
+  version: 1.0.0
+  termsOfService: https://www.abstractapi.com/legal/legal
+  contact:
+    name: Abstract API
+    url: https://www.abstractapi.com/api/ip-intelligence
+  license:
+    name: Commercial — see Terms of Service
+    url: https://www.abstractapi.com/legal/legal
+externalDocs:
+  description: Official documentation
+  url: https://docs.abstractapi.com/api/ip-intelligence
+servers:
+- url: https://ip-intelligence.abstractapi.com/v1
+security:
+- ApiKeyQuery: []
+- BearerAuth: []
+paths:
+  /:
+    get:
+      operationId: getIpIntelligence
+      summary: Analyze an IP address
+      description: 'Returns security, ASN, company, domain, location, timezone, flag,
+        and currency intelligence for an IP address. If `ip_address` is omitted, the
+        IP is detected from the request origin.'
+      parameters:
+      - name: ip_address
+        in: query
+        required: false
+        description: The IP address to analyze. Both IPv4 and IPv6 addresses are
+          supported. If omitted, the IP is detected from the request origin.
+        schema:
+          type: string
+        example: 166.171.248.255
+      - name: fields
+        in: query
+        required: false
+        description: Comma-separated list of top-level response keys to return (for
+          example `location,security`). When provided, only the requested top-level
+          sections are included in the response.
+        schema:
+          type: string
+        example: location,security
+      responses:
+        '200':
+          description: IP intelligence details for the address.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IpIntelligence'
+              example:
+                ip_address: 185.197.192.65
+                security:
+                  is_vpn: false
+                  is_proxy: true
+                  is_tor: false
+                  is_hosting: false
+                  is_relay: false
+                  is_mobile: false
+                  is_abuse: false
+                asn:
+                  asn: 136787
+                  name: PacketHub S.A.
+                  domain: packethub.tech
+                  type: isp
+                company:
+                  name: PacketHub S.A.
+                  domain: packethub.tech
+                  type: isp
+                domains:
+                  domains: []
+                location:
+                  city: Miami
+                  city_geoname_id: 4164138
+                  region: Florida
+                  region_iso_code: FL
+                  region_geoname_id: 4155751
+                  postal_code: '33197'
+                  country: United States
+                  country_code: US
+                  country_geoname_id: 6252001
+                  is_country_eu: false
+                  continent: North America
+                  continent_code: NA
+                  continent_geoname_id: 6255149
+                  longitude: -80.1946
+                  latitude: 25.7689
+                timezone:
+                  name: America/New_York
+                  abbreviation: EST
+                  utc_offset: -5
+                  local_time: '12:07:51'
+                  is_dst: false
+                flag:
+                  emoji: 🇺🇸
+                  unicode: U+1F1FA U+1F1F8
+                  png: https://static.abstractapi.com/country-flags/US_flag.png
+                  svg: https://static.abstractapi.com/country-flags/US_flag.svg
+                currency:
+                  name: US Dollar
+                  code: USD
+                  symbol: $
+        '204':
+          description: No content — no location data is available for the IP address.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/QuotaReached'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    post:
+      operationId: postIpIntelligence
+      summary: Analyze an IP address
+      description: 'Same as the GET operation. The API key may be supplied in the
+        request body, as the `api_key` query parameter, or as an `Authorization: Bearer
+        <key>` header.'
+      requestBody:
+        required: false
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/IpIntelligenceRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IpIntelligenceRequest'
+      responses:
+        '200':
+          description: IP intelligence details for the address.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IpIntelligence'
+        '204':
+          description: No content — no location data is available for the IP address.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/QuotaReached'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/ServerError'
+components:
+  securitySchemes:
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+      description: Your unique IP Intelligence API key.
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Send your API key as a Bearer token; omit `api_key` from the query
+        string.
+  responses:
+    BadRequest:
+      description: Bad request — a required parameter is missing or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: A validation error occurred.
+              code: validation_error
+              details:
+                ip_address:
+                - This is not a valid IP address.
+    Unauthorized:
+      description: Unauthorized — missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Invalid API key provided.
+              code: unauthorized
+              details: null
+    QuotaReached:
+      description: Unprocessable — monthly quota reached or insufficient API credits.
+        The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: Too Many Requests — rate limit exceeded. The body follows the standard
+        error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ServerError:
+      description: Internal server error. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    IpIntelligenceRequest:
+      type: object
+      properties:
+        ip_address:
+          type: string
+          description: The IP address to analyze. Both IPv4 and IPv6 addresses are
+            supported. If omitted, the IP is detected from the request origin.
+          example: 166.171.248.255
+        fields:
+          type: string
+          description: Comma-separated list of top-level response keys to return (for
+            example `location,security`). When provided, only the requested top-level
+            sections are included in the response.
+          example: location,security
+        api_key:
+          type: string
+          description: 'Your API key. Optional here if supplied as the `api_key` query
+            parameter or an `Authorization: Bearer <key>` header.'
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - message
+          - code
+          properties:
+            message:
+              type: string
+              description: Human-readable description of the error.
+              example: A validation error occurred.
+            code:
+              type: string
+              description: Machine-readable error code, e.g. validation_error or unauthorized.
+              example: validation_error
+            details:
+              type: object
+              nullable: true
+              description: Field-keyed validation messages for validation_error responses;
+                null for other error types.
+              additionalProperties:
+                type: array
+                items:
+                  type: string
+    IpIntelligence:
+      type: object
+      required:
+      - ip_address
+      properties:
+        ip_address:
+          type: string
+          description: The IP address that was analyzed (echoed input or detected origin).
+          example: 185.197.192.65
+        security:
+          type: object
+          nullable: true
+          description: Security and threat signals for the IP address.
+          properties:
+            is_vpn:
+              type: boolean
+              nullable: true
+              description: Whether the IP is associated with a VPN service.
+            is_proxy:
+              type: boolean
+              nullable: true
+              description: Whether the IP is associated with a proxy.
+            is_tor:
+              type: boolean
+              nullable: true
+              description: Whether the IP is a known Tor exit node.
+            is_hosting:
+              type: boolean
+              nullable: true
+              description: Whether the IP belongs to a hosting or data-center provider.
+            is_relay:
+              type: boolean
+              nullable: true
+              description: Whether the IP is an anonymizing relay (for example iCloud Private Relay).
+            is_mobile:
+              type: boolean
+              nullable: true
+              description: Whether the IP belongs to a mobile carrier network.
+            is_abuse:
+              type: boolean
+              nullable: true
+              description: Whether the IP appears on abuse or threat lists.
+        asn:
+          type: object
+          nullable: true
+          description: Autonomous System Number details for the IP address.
+          properties:
+            asn:
+              type: integer
+              nullable: true
+              description: The Autonomous System Number.
+              example: 136787
+            name:
+              type: string
+              nullable: true
+              description: The name of the autonomous system.
+            domain:
+              type: string
+              nullable: true
+              description: The domain associated with the autonomous system.
+            type:
+              type: string
+              nullable: true
+              description: The type of the autonomous system (for example isp, hosting, business).
+        company:
+          type: object
+          nullable: true
+          description: Company or organization details associated with the IP address.
+          properties:
+            name:
+              type: string
+              nullable: true
+              description: The company or organization name.
+            domain:
+              type: string
+              nullable: true
+              description: The company domain.
+            type:
+              type: string
+              nullable: true
+              description: The company type (for example isp, hosting, business).
+        domains:
+          type: object
+          nullable: true
+          description: Domains hosted on or associated with the IP address.
+          properties:
+            domains:
+              type: array
+              nullable: true
+              description: List of domains associated with the IP address.
+              items:
+                type: string
+        location:
+          type: object
+          nullable: true
+          description: Geolocation details for the IP address.
+          properties:
+            city:
+              type: string
+              nullable: true
+              description: The city name.
+            city_geoname_id:
+              type: integer
+              nullable: true
+              description: The GeoNames identifier for the city.
+            region:
+              type: string
+              nullable: true
+              description: The region, state, or province name.
+            region_iso_code:
+              type: string
+              nullable: true
+              description: The ISO code for the region.
+              example: FL
+            region_geoname_id:
+              type: integer
+              nullable: true
+              description: The GeoNames identifier for the region.
+            postal_code:
+              type: string
+              nullable: true
+              description: The postal or ZIP code.
+            country:
+              type: string
+              nullable: true
+              description: The country name.
+            country_code:
+              type: string
+              nullable: true
+              description: The two-letter ISO country code.
+              example: US
+            country_geoname_id:
+              type: integer
+              nullable: true
+              description: The GeoNames identifier for the country.
+            is_country_eu:
+              type: boolean
+              nullable: true
+              description: Whether the country is a member of the European Union.
+            continent:
+              type: string
+              nullable: true
+              description: The continent name.
+            continent_code:
+              type: string
+              nullable: true
+              description: The two-letter continent code.
+              example: NA
+            continent_geoname_id:
+              type: integer
+              nullable: true
+              description: The GeoNames identifier for the continent.
+            longitude:
+              type: number
+              format: float
+              nullable: true
+              description: The longitude of the IP location.
+              example: -80.1946
+            latitude:
+              type: number
+              format: float
+              nullable: true
+              description: The latitude of the IP location.
+              example: 25.7689
+        timezone:
+          type: object
+          nullable: true
+          description: Timezone details for the IP location.
+          properties:
+            name:
+              type: string
+              nullable: true
+              description: The IANA timezone name.
+              example: America/New_York
+            abbreviation:
+              type: string
+              nullable: true
+              description: The timezone abbreviation.
+              example: EST
+            utc_offset:
+              type: integer
+              nullable: true
+              description: The UTC offset for the timezone, in hours (for example -5).
+              example: -5
+            local_time:
+              type: string
+              nullable: true
+              description: The current local time at the IP location (clock time, for example "12:07:51").
+              example: '12:07:51'
+            is_dst:
+              type: boolean
+              nullable: true
+              description: Whether daylight saving time is currently in effect.
+        flag:
+          type: object
+          nullable: true
+          description: Country flag representations for the IP location.
+          properties:
+            emoji:
+              type: string
+              nullable: true
+              description: The country flag as an emoji.
+            unicode:
+              type: string
+              nullable: true
+              description: The Unicode code points for the flag emoji.
+            png:
+              type: string
+              format: uri
+              nullable: true
+              description: URL to a PNG image of the country flag.
+            svg:
+              type: string
+              format: uri
+              nullable: true
+              description: URL to an SVG image of the country flag.
+        currency:
+          type: object
+          nullable: true
+          description: Currency details for the IP location's country.
+          properties:
+            name:
+              type: string
+              nullable: true
+              description: The currency name.
+              example: US Dollar
+            code:
+              type: string
+              nullable: true
+              description: The three-letter ISO 4217 currency code.
+              example: USD
+            symbol:
+              type: string
+              nullable: true
+              description: The currency symbol.
+              example: $

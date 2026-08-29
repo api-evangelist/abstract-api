@@ -1,0 +1,51 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements — Abstract IP Intelligence API
+  version: 1.0.0
+extends: abstract-api-ip-intelligence-api-openapi.yml
+x-generated: '2026-08-29'
+x-method: generated
+x-source: apis.yml + repo artifacts; provider surfaces probed 2026-08-29
+actions:
+- target: $.info
+  update:
+    x-provider-openapi: https://github.com/abstractapi/openapi-specs
+    x-provider-openapi-archived: openapi/_original/
+    x-agent-card: https://docs.abstractapi.com/.well-known/agent-card.json
+    x-mcp-server: https://docs.abstractapi.com/mcp
+    x-agent-skill: https://docs.abstractapi.com/.well-known/agent-skills/abstractapi/skill.md
+    x-status-page: https://status.abstractapi.com/
+- target: $.info
+  update:
+    x-api-evangelist:
+      error-catalog: errors/abstract-api-problem-types.yml
+      conventions: conventions/abstract-api-conventions.yml
+      authentication: authentication/abstract-api-authentication.yml
+      rate-limits: rate-limits/abstract-api-rate-limits.yml
+      plans: plans/abstract-api-plans-pricing.yml
+      lifecycle: lifecycle/abstract-api-lifecycle.yml
+      conformance: conformance/abstract-api-conformance.yml
+      data-model: data-model/abstract-api-data-model.yml
+- target: $.paths.*.*
+  update:
+    x-rate-limit:
+      scope: api-key
+      requests_per_second: 3
+      note: 3 req/s on paid tiers and on the email products free tier; 1 req/s on the IP Geolocation free
+        tier. No rate-limit response headers are published.
+    x-idempotent: true
+    x-reversibility:
+      applicable: na
+      reason: read-only lookup; nothing to reverse
+    x-metered:
+      charged_on: request
+      note: failed lookups consume quota
+- target: $.components.securitySchemes.apiKey
+  update:
+    x-alternate-auth:
+      scheme: http
+      type: bearer
+      description: 'The same API key may be sent as Authorization: Bearer <key> instead of the api_key
+        query parameter. Documented by the provider and declared in its own OpenAPI definitions; absent
+        from this refined document.'
+    x-key-scope: per-product — a key issued for one Abstract API returns 401 against another

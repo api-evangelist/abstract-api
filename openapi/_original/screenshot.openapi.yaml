@@ -1,0 +1,307 @@
+openapi: 3.0.3
+info:
+  title: Abstract Website Screenshot API
+  description: 'Capture a screenshot image of any public web page from its URL in a
+    single request. Control the viewport size, full-page capture, render delay, custom
+    CSS, user agent, and output format (JPEG or PNG). On success the API returns the
+    raw image bytes. Authenticate with your API key as the `api_key` query parameter,
+    or as an `Authorization: Bearer <key>` header. GET and POST (form-encoded or JSON)
+    are both supported.'
+  version: 1.0.0
+  termsOfService: https://www.abstractapi.com/legal/legal
+  contact:
+    name: Abstract API
+    url: https://www.abstractapi.com/api/website-screenshot-api
+  license:
+    name: Commercial — see Terms of Service
+    url: https://www.abstractapi.com/legal/legal
+externalDocs:
+  description: Official documentation
+  url: https://docs.abstractapi.com/api/screenshot
+servers:
+- url: https://screenshot.abstractapi.com/v1
+security:
+- ApiKeyQuery: []
+- BearerAuth: []
+paths:
+  /:
+    get:
+      operationId: getScreenshot
+      summary: Capture a screenshot of a web page
+      description: 'Capture a screenshot of the page at the supplied URL and return
+        the raw image bytes. The image format is controlled by `export_format` (JPEG
+        by default). The API key may be supplied as the `api_key` query parameter or
+        as an `Authorization: Bearer <key>` header.'
+      parameters:
+      - name: url
+        in: query
+        required: true
+        description: The URL to capture a screenshot of. Must include the full HTTP/HTTPS
+          protocol.
+        schema:
+          type: string
+          format: uri
+        example: https://www.google.com
+      - name: capture_full_page
+        in: query
+        required: false
+        description: If true the request captures the entire height and width of the
+          page. Defaults to true.
+        schema:
+          type: boolean
+          default: true
+        example: true
+      - name: width
+        in: query
+        required: false
+        description: The width in pixels of the viewport used to capture the image.
+        schema:
+          type: integer
+        example: 1920
+      - name: height
+        in: query
+        required: false
+        description: The height in pixels of the viewport used to capture the image.
+        schema:
+          type: integer
+        example: 1080
+      - name: delay
+        in: query
+        required: false
+        description: The time in seconds to wait between loading the page and taking
+          the screenshot.
+        schema:
+          type: integer
+        example: 2
+      - name: css_injection
+        in: query
+        required: false
+        description: A CSS string to inject into the website before capturing the image.
+        schema:
+          type: string
+        example: 'body { background-color: white; }'
+      - name: user_agent
+        in: query
+        required: false
+        description: The User Agent to use when capturing the screenshot.
+        schema:
+          type: string
+        example: Mozilla/5.0 (Windows NT 10.0; Win64; x64)
+      - name: export_format
+        in: query
+        required: false
+        description: The image format to use for the screenshot. Defaults to jpeg.
+        schema:
+          type: string
+          enum:
+          - jpeg
+          - png
+          default: jpeg
+        example: png
+      responses:
+        '200':
+          description: The captured screenshot, returned as raw image bytes. The Content-Type
+            is image/jpeg or image/png depending on `export_format`.
+          content:
+            image/jpeg:
+              schema:
+                type: string
+                format: binary
+            image/png:
+              schema:
+                type: string
+                format: binary
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/QuotaReached'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    post:
+      operationId: postScreenshot
+      summary: Capture a screenshot of a web page
+      description: 'Same as the GET operation. The API key may be supplied in the request
+        body, as the `api_key` query parameter, or as an `Authorization: Bearer <key>`
+        header.'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ScreenshotRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScreenshotRequest'
+      responses:
+        '200':
+          description: The captured screenshot, returned as raw image bytes. The Content-Type
+            is image/jpeg or image/png depending on `export_format`.
+          content:
+            image/jpeg:
+              schema:
+                type: string
+                format: binary
+            image/png:
+              schema:
+                type: string
+                format: binary
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/QuotaReached'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/ServerError'
+components:
+  securitySchemes:
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+      description: Your unique Website Screenshot API key.
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Send your API key as a Bearer token; omit `api_key` from the query
+        string.
+  responses:
+    BadRequest:
+      description: Bad request — a required parameter is missing or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: A validation error occurred.
+              code: validation_error
+              details:
+                url:
+                - This is a required argument.
+    Unauthorized:
+      description: Unauthorized — missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Invalid API key provided.
+              code: unauthorized
+              details: null
+    QuotaReached:
+      description: Unprocessable — monthly quota reached or insufficient API credits.
+        The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: Too Many Requests — rate limit exceeded. The body follows the standard
+        error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ServerError:
+      description: Internal server error. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    ScreenshotRequest:
+      type: object
+      required:
+      - url
+      properties:
+        url:
+          type: string
+          format: uri
+          description: The URL to capture a screenshot of. Must include the full HTTP/HTTPS
+            protocol.
+          example: https://www.google.com
+        capture_full_page:
+          type: boolean
+          default: true
+          description: If true the request captures the entire height and width of the
+            page. Defaults to true.
+        width:
+          type: integer
+          description: The width in pixels of the viewport used to capture the image.
+          example: 1920
+        height:
+          type: integer
+          description: The height in pixels of the viewport used to capture the image.
+          example: 1080
+        delay:
+          type: integer
+          description: The time in seconds to wait between loading the page and taking
+            the screenshot.
+          example: 2
+        css_injection:
+          type: string
+          description: A CSS string to inject into the website before capturing the image.
+          example: 'body { background-color: white; }'
+        user_agent:
+          type: string
+          description: The User Agent to use when capturing the screenshot.
+          example: Mozilla/5.0 (Windows NT 10.0; Win64; x64)
+        export_format:
+          type: string
+          enum:
+          - jpeg
+          - png
+          default: jpeg
+          description: The image format to use for the screenshot. Defaults to jpeg.
+          example: png
+        api_key:
+          type: string
+          description: 'Your API key. Optional here if supplied as the `api_key` query
+            parameter or an `Authorization: Bearer <key>` header.'
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - message
+          - code
+          properties:
+            message:
+              type: string
+              description: Human-readable description of the error.
+              example: A validation error occurred.
+            code:
+              type: string
+              description: Machine-readable error code, e.g. validation_error or unauthorized.
+              example: validation_error
+            details:
+              type: object
+              nullable: true
+              description: Field-keyed validation messages for validation_error responses;
+                null for other error types.
+              additionalProperties:
+                type: array
+                items:
+                  type: string
+x-openItems:
+- The exact error `code`/`message` strings for 422 (quota), 429 (rate limit) and
+  500 (server error) are unconfirmed; only the error envelope shape is modeled, not
+  the literal strings, which need verification against production.
+- Nullability of response fields is moot here because the 200 response is raw image
+  bytes (no JSON fields), but the success Content-Type set (image/jpeg, image/png)
+  and any other formats or headers returned in production need confirmation.
+- CORS support is unknown.
+- The marketing page lists GIF output and raw-HTML input, which the API docs do NOT
+  document; confirm with the backend whether `export_format=gif` and an HTML/raw-input
+  parameter exist before adding them.

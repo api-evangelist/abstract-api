@@ -1,0 +1,631 @@
+generated: '2026-08-29'
+method: derived
+source: openapi/_original/*.openapi.yaml (13 provider-published OpenAPI 3.0.3 definitions)
+note: Abstract API has no shared data core. Each product is an independent, self-contained lookup that
+  returns one composite object about one subject; there are no cross-product identifiers, no resource
+  URIs, and no foreign keys between products. The 'entity graph' below is therefore a set of thirteen
+  disconnected trees, one per product — the honest shape of this API, and the reason no ERD render exists
+  in subway/.
+id_prefixes:
+  present: false
+  detail: No product mints or returns an opaque resource identifier. The subject of every lookup is the
+    natural key supplied by the caller (an email address, a phone number, an IP address, a domain, an
+    IBAN, a VAT number, a country code, a currency code, a URL).
+entity_count: 52
+relationship_count: 7
+entities:
+- name: AvatarRequest
+  product: avatars
+  spec: openapi/_original/avatars.openapi.yaml
+  server: https://avatars.abstractapi.com/v1
+  properties:
+  - name
+  - image_size
+  - image_format
+  - font_size
+  - char_limit
+  - background_color
+  - font_color
+  - is_rounded
+  - is_uppercase
+  - is_italic
+  - is_bold
+  - api_key
+  property_count: 12
+- name: Error
+  product: avatars
+  spec: openapi/_original/avatars.openapi.yaml
+  server: https://avatars.abstractapi.com/v1
+  properties:
+  - error
+  property_count: 1
+- name: EnrichmentRequest
+  product: company-enrichment
+  spec: openapi/_original/company-enrichment.openapi.yaml
+  server: https://companyenrichment.abstractapi.com/v2
+  properties:
+  - domain
+  - fields
+  - api_key
+  property_count: 3
+- name: Error
+  product: company-enrichment
+  spec: openapi/_original/company-enrichment.openapi.yaml
+  server: https://companyenrichment.abstractapi.com/v2
+  properties:
+  - error
+  property_count: 1
+- name: CompanyEnrichment
+  product: company-enrichment
+  spec: openapi/_original/company-enrichment.openapi.yaml
+  server: https://companyenrichment.abstractapi.com/v2
+  properties:
+  - domain
+  - company_name
+  - description
+  - logo
+  - year_founded
+  - street_address
+  - city
+  - state
+  - country
+  - country_iso_code
+  - postal_code
+  - latitude
+  - longitude
+  - sic_code
+  - naics_code
+  - industry
+  - employee_count
+  - employee_range
+  - annual_revenue
+  - revenue_range
+  - phone_numbers
+  - email_addresses
+  - type
+  - ticker
+  - exchange
+  - global_ranking
+  - tags
+  - technologies
+  - linkedin_url
+  - facebook_url
+  - twitter_url
+  - instagram_url
+  - crunchbase_url
+  property_count: 33
+- name: ReputationRequest
+  product: email-reputation
+  spec: openapi/_original/email-reputation.openapi.yaml
+  server: https://emailreputation.abstractapi.com/v1
+  properties:
+  - email
+  - api_key
+  property_count: 2
+- name: Error
+  product: email-reputation
+  spec: openapi/_original/email-reputation.openapi.yaml
+  server: https://emailreputation.abstractapi.com/v1
+  properties:
+  - error
+  property_count: 1
+- name: EmailReputation
+  product: email-reputation
+  spec: openapi/_original/email-reputation.openapi.yaml
+  server: https://emailreputation.abstractapi.com/v1
+  properties:
+  - email_address
+  - email_deliverability
+  - email_quality
+  - email_sender
+  - email_domain
+  - email_risk
+  - email_breaches
+  property_count: 7
+- name: LiveRequest
+  product: exchange-rates
+  spec: openapi/_original/exchange-rates.openapi.yaml
+  server: https://exchange-rates.abstractapi.com/v1
+  properties:
+  - base
+  - target
+  - api_key
+  property_count: 3
+- name: ConvertRequest
+  product: exchange-rates
+  spec: openapi/_original/exchange-rates.openapi.yaml
+  server: https://exchange-rates.abstractapi.com/v1
+  properties:
+  - base
+  - target
+  - date
+  - base_amount
+  - api_key
+  property_count: 5
+- name: HistoricalRequest
+  product: exchange-rates
+  spec: openapi/_original/exchange-rates.openapi.yaml
+  server: https://exchange-rates.abstractapi.com/v1
+  properties:
+  - base
+  - date
+  - target
+  - api_key
+  property_count: 4
+- name: Error
+  product: exchange-rates
+  spec: openapi/_original/exchange-rates.openapi.yaml
+  server: https://exchange-rates.abstractapi.com/v1
+  properties:
+  - error
+  property_count: 1
+- name: LiveRates
+  product: exchange-rates
+  spec: openapi/_original/exchange-rates.openapi.yaml
+  server: https://exchange-rates.abstractapi.com/v1
+  properties:
+  - base
+  - last_updated
+  - exchange_rates
+  property_count: 3
+- name: Conversion
+  product: exchange-rates
+  spec: openapi/_original/exchange-rates.openapi.yaml
+  server: https://exchange-rates.abstractapi.com/v1
+  properties:
+  - base
+  - target
+  - base_amount
+  - converted_amount
+  - exchange_rate
+  - date
+  - last_updated
+  property_count: 7
+- name: HistoricalRates
+  product: exchange-rates
+  spec: openapi/_original/exchange-rates.openapi.yaml
+  server: https://exchange-rates.abstractapi.com/v1
+  properties:
+  - base
+  - date
+  - exchange_rates
+  property_count: 3
+- name: HolidaysRequest
+  product: holidays
+  spec: openapi/_original/holidays.openapi.yaml
+  server: https://holidays.abstractapi.com/v1
+  properties:
+  - country
+  - year
+  - month
+  - day
+  - api_key
+  property_count: 5
+- name: Error
+  product: holidays
+  spec: openapi/_original/holidays.openapi.yaml
+  server: https://holidays.abstractapi.com/v1
+  properties:
+  - error
+  property_count: 1
+- name: HolidayList
+  product: holidays
+  spec: openapi/_original/holidays.openapi.yaml
+  server: https://holidays.abstractapi.com/v1
+  properties: []
+  property_count: 0
+- name: Holiday
+  product: holidays
+  spec: openapi/_original/holidays.openapi.yaml
+  server: https://holidays.abstractapi.com/v1
+  properties:
+  - name
+  - name_local
+  - language
+  - description
+  - country
+  - location
+  - type
+  - date
+  - date_year
+  - date_month
+  - date_day
+  - week_day
+  property_count: 12
+- name: IbanValidationRequest
+  product: iban-validation
+  spec: openapi/_original/iban-validation.openapi.yaml
+  server: https://ibanvalidation.abstractapi.com/v1
+  properties:
+  - iban
+  - api_key
+  property_count: 2
+- name: Error
+  product: iban-validation
+  spec: openapi/_original/iban-validation.openapi.yaml
+  server: https://ibanvalidation.abstractapi.com/v1
+  properties:
+  - error
+  property_count: 1
+- name: IbanValidation
+  product: iban-validation
+  spec: openapi/_original/iban-validation.openapi.yaml
+  server: https://ibanvalidation.abstractapi.com/v1
+  properties:
+  - iban
+  - is_valid
+  property_count: 2
+- name: UrlRequest
+  product: images
+  spec: openapi/_original/images.openapi.yaml
+  server: https://images.abstractapi.com/v1
+  properties:
+  - url
+  - lossy
+  - quality
+  - resize
+  - api_key
+  property_count: 5
+- name: UploadRequest
+  product: images
+  spec: openapi/_original/images.openapi.yaml
+  server: https://images.abstractapi.com/v1
+  properties:
+  - lossy
+  - quality
+  - resize
+  - api_key
+  property_count: 4
+- name: UploadMultipartRequest
+  product: images
+  spec: openapi/_original/images.openapi.yaml
+  server: https://images.abstractapi.com/v1
+  properties:
+  - image
+  - data
+  property_count: 2
+- name: ResizeOptions
+  product: images
+  spec: openapi/_original/images.openapi.yaml
+  server: https://images.abstractapi.com/v1
+  properties:
+  - strategy
+  - width
+  - height
+  - size
+  - scale
+  - crop_mode
+  - x
+  - y
+  - background
+  property_count: 9
+- name: ImageResult
+  product: images
+  spec: openapi/_original/images.openapi.yaml
+  server: https://images.abstractapi.com/v1
+  properties:
+  - original_size
+  - original_height
+  - original_width
+  - final_size
+  - bytes_saved
+  - final_height
+  - final_width
+  - url
+  property_count: 8
+- name: Error
+  product: images
+  spec: openapi/_original/images.openapi.yaml
+  server: https://images.abstractapi.com/v1
+  properties:
+  - error
+  property_count: 1
+- name: IpIntelligenceRequest
+  product: ip-intelligence
+  spec: openapi/_original/ip-intelligence.openapi.yaml
+  server: https://ip-intelligence.abstractapi.com/v1
+  properties:
+  - ip_address
+  - fields
+  - api_key
+  property_count: 3
+- name: Error
+  product: ip-intelligence
+  spec: openapi/_original/ip-intelligence.openapi.yaml
+  server: https://ip-intelligence.abstractapi.com/v1
+  properties:
+  - error
+  property_count: 1
+- name: IpIntelligence
+  product: ip-intelligence
+  spec: openapi/_original/ip-intelligence.openapi.yaml
+  server: https://ip-intelligence.abstractapi.com/v1
+  properties:
+  - ip_address
+  - security
+  - asn
+  - company
+  - domains
+  - location
+  - timezone
+  - flag
+  - currency
+  property_count: 9
+- name: PhoneIntelligenceRequest
+  product: phone-intelligence
+  spec: openapi/_original/phone-intelligence.openapi.yaml
+  server: https://phoneintelligence.abstractapi.com/v1
+  properties:
+  - phone
+  - country
+  - api_key
+  property_count: 3
+- name: Error
+  product: phone-intelligence
+  spec: openapi/_original/phone-intelligence.openapi.yaml
+  server: https://phoneintelligence.abstractapi.com/v1
+  properties:
+  - error
+  property_count: 1
+- name: PhoneIntelligence
+  product: phone-intelligence
+  spec: openapi/_original/phone-intelligence.openapi.yaml
+  server: https://phoneintelligence.abstractapi.com/v1
+  properties:
+  - phone_number
+  - phone_format
+  - phone_carrier
+  - phone_location
+  - phone_messaging
+  - phone_validation
+  - phone_registration
+  - phone_risk
+  - phone_breaches
+  property_count: 9
+- name: ScrapeRequest
+  product: scrape
+  spec: openapi/_original/scrape.openapi.yaml
+  server: https://scrape.abstractapi.com/v1
+  properties:
+  - url
+  - render_js
+  - use_proxy
+  - cookie_jar
+  - api_key
+  property_count: 5
+- name: Cookie
+  product: scrape
+  spec: openapi/_original/scrape.openapi.yaml
+  server: https://scrape.abstractapi.com/v1
+  properties:
+  - name
+  - value
+  - domain
+  - path
+  property_count: 4
+- name: Error
+  product: scrape
+  spec: openapi/_original/scrape.openapi.yaml
+  server: https://scrape.abstractapi.com/v1
+  properties:
+  - error
+  property_count: 1
+- name: ScreenshotRequest
+  product: screenshot
+  spec: openapi/_original/screenshot.openapi.yaml
+  server: https://screenshot.abstractapi.com/v1
+  properties:
+  - url
+  - capture_full_page
+  - width
+  - height
+  - delay
+  - css_injection
+  - user_agent
+  - export_format
+  - api_key
+  property_count: 9
+- name: Error
+  product: screenshot
+  spec: openapi/_original/screenshot.openapi.yaml
+  server: https://screenshot.abstractapi.com/v1
+  properties:
+  - error
+  property_count: 1
+- name: CurrentTimeRequest
+  product: timezones
+  spec: openapi/_original/timezones.openapi.yaml
+  server: https://timezone.abstractapi.com/v1
+  properties:
+  - location
+  - api_key
+  property_count: 2
+- name: ConvertTimeRequest
+  product: timezones
+  spec: openapi/_original/timezones.openapi.yaml
+  server: https://timezone.abstractapi.com/v1
+  properties:
+  - base_location
+  - target_location
+  - base_datetime
+  - api_key
+  property_count: 4
+- name: Error
+  product: timezones
+  spec: openapi/_original/timezones.openapi.yaml
+  server: https://timezone.abstractapi.com/v1
+  properties:
+  - error
+  property_count: 1
+- name: TimeLocation
+  product: timezones
+  spec: openapi/_original/timezones.openapi.yaml
+  server: https://timezone.abstractapi.com/v1
+  properties:
+  - datetime
+  - timezone_name
+  - timezone_location
+  - timezone_abbreviation
+  - gmt_offset
+  - is_dst
+  - requested_location
+  - latitude
+  - longitude
+  property_count: 9
+- name: CurrentTime
+  product: timezones
+  spec: openapi/_original/timezones.openapi.yaml
+  server: https://timezone.abstractapi.com/v1
+  properties: []
+  property_count: 0
+- name: ConvertTime
+  product: timezones
+  spec: openapi/_original/timezones.openapi.yaml
+  server: https://timezone.abstractapi.com/v1
+  properties:
+  - base_location
+  - target_location
+  property_count: 2
+- name: ValidateRequest
+  product: vat-validation
+  spec: openapi/_original/vat-validation.openapi.yaml
+  server: https://vat.abstractapi.com/v1
+  properties:
+  - vat_number
+  - api_key
+  property_count: 2
+- name: CalculateRequest
+  product: vat-validation
+  spec: openapi/_original/vat-validation.openapi.yaml
+  server: https://vat.abstractapi.com/v1
+  properties:
+  - amount
+  - country_code
+  - is_vat_incl
+  - vat_category
+  - api_key
+  property_count: 5
+- name: CategoriesRequest
+  product: vat-validation
+  spec: openapi/_original/vat-validation.openapi.yaml
+  server: https://vat.abstractapi.com/v1
+  properties:
+  - country_code
+  - api_key
+  property_count: 2
+- name: Error
+  product: vat-validation
+  spec: openapi/_original/vat-validation.openapi.yaml
+  server: https://vat.abstractapi.com/v1
+  properties:
+  - error
+  property_count: 1
+- name: VatValidation
+  product: vat-validation
+  spec: openapi/_original/vat-validation.openapi.yaml
+  server: https://vat.abstractapi.com/v1
+  properties:
+  - vat_number
+  - valid
+  - company
+  - country
+  property_count: 4
+- name: VatCalculation
+  product: vat-validation
+  spec: openapi/_original/vat-validation.openapi.yaml
+  server: https://vat.abstractapi.com/v1
+  properties:
+  - amount_excluding_vat
+  - amount_including_vat
+  - vat_amount
+  - vat_category
+  - vat_rate
+  - country
+  property_count: 6
+- name: VatCategory
+  product: vat-validation
+  spec: openapi/_original/vat-validation.openapi.yaml
+  server: https://vat.abstractapi.com/v1
+  properties:
+  - country_code
+  - rate
+  - category
+  - description
+  property_count: 4
+relationships:
+- from: HolidayList
+  to: Holiday
+  via: null
+  type: has_one
+  product: holidays
+- from: UrlRequest
+  to: ResizeOptions
+  via: resize
+  type: has_one
+  product: images
+- from: UploadRequest
+  to: ResizeOptions
+  via: resize
+  type: has_one
+  product: images
+- from: ScrapeRequest
+  to: Cookie
+  via: cookie_jar
+  type: has_one
+  product: scrape
+- from: CurrentTime
+  to: TimeLocation
+  via: null
+  type: has_one
+  product: timezones
+- from: ConvertTime
+  to: TimeLocation
+  via: base_location
+  type: has_one
+  product: timezones
+- from: ConvertTime
+  to: TimeLocation
+  via: target_location
+  type: has_one
+  product: timezones
+cross_product_relationships: []
+natural_keys:
+- product: email-reputation
+  key: email
+  type: RFC 5322 address
+- product: phone-intelligence
+  key: phone
+  type: E.164 number
+- product: ip-intelligence
+  key: ip_address
+  type: IPv4/IPv6 literal
+- product: company-enrichment
+  key: domain
+  type: bare domain
+- product: iban-validation
+  key: iban
+  type: ISO 13616 IBAN
+- product: vat-validation
+  key: vat_number
+  type: EU VAT number
+- product: exchange-rates
+  key: base
+  type: ISO 4217 currency code
+- product: holidays
+  key: country
+  type: ISO 3166-1 alpha-2
+- product: timezones
+  key: location
+  type: free-text place or lat/long
+- product: avatars
+  key: name
+  type: free text
+- product: images
+  key: url
+  type: absolute URL
+- product: scrape
+  key: url
+  type: absolute URL
+- product: screenshot
+  key: url
+  type: absolute URL

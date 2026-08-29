@@ -1,0 +1,124 @@
+generated: '2026-08-29'
+method: probed
+source: live GET probes of every apis.yml host and every OpenAPI servers[] host
+fetched: '2026-08-29'
+hit_count: 1
+hosts:
+  - host: https://docs.abstractapi.com
+    documents:
+      - path: /.well-known/agent-card.json
+        status: 200
+        file: ../a2a/abstract-api-agent-card.json
+        content_type: application/json
+        note: >-
+          Real A2A Agent Card (JSON object, 1034 bytes). Saved verbatim under a2a/
+          rather than duplicated here; graded in a2a/abstract-api-a2a.yml.
+      - path: /.well-known/agent-skills/abstractapi/skill.md
+        status: 200
+        file: ../skills/abstract-api-abstractapi.md
+        content_type: text/markdown
+        note: >-
+          Provider-published Agent Skill, linked from the agent card's skills[].url.
+          Not an RFC 8615 registered name, but served under /.well-known/ and a real
+          document.
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+  - host: https://www.abstractapi.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+    note: >-
+      Webflow-hosted marketing site. Every /.well-known/* path returns HTTP 404 with
+      an 88-byte "Invalid .well-known request" HTML stub — a genuine negative, not a
+      catch-all.
+  - host: https://app.abstractapi.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 200
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 200
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        file: null
+    soft_404_control:
+      probe: https://app.abstractapi.com/.well-known/oauth-authorization-server
+      status: 200
+      bytes: 2948
+      content_type: text/html
+      body: '<!doctype html><html lang="en" class="h-full">...'
+      verdict: catch-all
+      note: >-
+        app.abstractapi.com is a single-page application whose router answers 200 with
+        the same 2948-byte HTML shell for arbitrary paths. The three 200s above are
+        the SPA shell, NOT documents. file: is null on every one and none of them
+        counts toward a WellKnown claim for this host.
+  - host: https://emailreputation.abstractapi.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+  - host: https://exchange-rates.abstractapi.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+summary:
+  security_txt: false
+  api_catalog: false
+  openid_configuration: false
+  oauth_authorization_server: false
+  agent_card: true
+  note: >-
+    No RFC 9116 security.txt anywhere on the estate, and no OAuth/OIDC discovery
+    (correctly — Abstract is API-key only). The one real /.well-known document is the
+    A2A agent card on the docs host.

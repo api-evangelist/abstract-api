@@ -1,32 +1,90 @@
-generated: '2026-07-11'
-method: derived
-source: openapi/abstract-api-avatars.yaml, openapi/abstract-api-company-enrichment.yaml, openapi/abstract-api-email-reputation.yaml,
-  openapi/abstract-api-exchange-rates.yaml, openapi/abstract-api-iban-validation.yaml, openapi/abstract-api-image-processing.yaml,
-  openapi/abstract-api-ip-geolocation.yaml, openapi/abstract-api-ip-intelligence.yaml, openapi/abstract-api-phone-intelligence.yaml,
-  openapi/abstract-api-public-holidays.yaml, openapi/abstract-api-timezones.yaml, openapi/abstract-api-vat-validation.yaml
-  ...
+generated: '2026-08-29'
+method: searched
+source: https://docs.abstractapi.com/api/email-reputation.md (Authentication Methods), https://docs.abstractapi.com/.well-known/agent-skills/abstractapi/skill.md,
+  openapi/_original/*.openapi.yaml (provider-published), plus the derived securityScheme scan of openapi/*.yml
 summary:
   types:
   - apiKey
+  - http
   api_key_in:
   - query
+  - header
+  note: 'The refined openapi/*.yml declare only the api_key QUERY parameter. The provider documents a
+    second, equivalent method the refined specs omit: the same key sent as Authorization: Bearer <key>.
+    The provider-published definitions at openapi/_original/ declare both. Captured here so the auth profile
+    is not a version behind the provider.'
 schemes:
 - name: apiKey
   type: apiKey
   in: query
   parameter: api_key
   sources:
-  - openapi/abstract-api-avatars.yaml
-  - openapi/abstract-api-company-enrichment.yaml
-  - openapi/abstract-api-email-reputation.yaml
-  - openapi/abstract-api-exchange-rates.yaml
-  - openapi/abstract-api-iban-validation.yaml
-  - openapi/abstract-api-image-processing.yaml
-  - openapi/abstract-api-ip-geolocation.yaml
-  - openapi/abstract-api-ip-intelligence.yaml
-  - openapi/abstract-api-phone-intelligence.yaml
-  - openapi/abstract-api-public-holidays.yaml
-  - openapi/abstract-api-timezones.yaml
-  - openapi/abstract-api-vat-validation.yaml
-  - openapi/abstract-api-web-scraping.yaml
-  - openapi/abstract-api-website-screenshot.yaml
+  - openapi/abstract-api-avatars-api-openapi.yml
+  - openapi/abstract-api-company-enrichment-api-openapi.yml
+  - openapi/abstract-api-email-reputation-api-openapi.yml
+  - openapi/abstract-api-exchange-rates-api-openapi.yml
+  - openapi/abstract-api-iban-validation-api-openapi.yml
+  - openapi/abstract-api-image-processing-api-openapi.yml
+  - openapi/abstract-api-ip-geolocation-api-openapi.yml
+  - openapi/abstract-api-ip-intelligence-api-openapi.yml
+  - openapi/abstract-api-phone-intelligence-api-openapi.yml
+  - openapi/abstract-api-public-holidays-api-openapi.yml
+  - openapi/abstract-api-timezones-api-openapi.yml
+  - openapi/abstract-api-vat-validation-api-openapi.yml
+  - openapi/abstract-api-web-scraping-api-openapi.yml
+  - openapi/abstract-api-website-screenshot-api-openapi.yml
+docs: https://docs.abstractapi.com/api/email-reputation
+methods:
+- name: api-key-query
+  type: apiKey
+  in: query
+  parameter: api_key
+  example: GET https://emailreputation.abstractapi.com/v1/?api_key=KEY&email=user@example.com
+  provider_guidance: Simplest; the provider warns it exposes the key in URLs and server logs.
+- name: bearer-token
+  type: http
+  scheme: bearer
+  in: header
+  parameter: Authorization
+  example: 'Authorization: Bearer KEY'
+  provider_guidance: Recommended for production. When used, omit api_key from the query string.
+  gotcha: Must be "Bearer KEY" — not a bare key and not "ApiKey KEY".
+- name: form-post
+  type: apiKey
+  in: formData
+  parameter: api_key
+  example: 'POST body: api_key=KEY&email=user@example.com'
+- name: json-post
+  type: http
+  scheme: bearer
+  in: header
+  parameter: Authorization
+  example: 'POST {"email":"user@example.com"} with Authorization: Bearer KEY'
+  gotcha: 'Content-Type: application/json is required or the body is read as form data and the parameter
+    is not detected.'
+key_management:
+  scope: per-product
+  note: Every Abstract product issues its own key. A key from one product returns 401 against another.
+    Keys are created and rotated in the dashboard at https://app.abstractapi.com/.
+  rotation_policy_published: false
+  expiry: none documented
+  domain_whitelisting:
+    available: true
+    tiers: Starter and above
+    note: Listed as a plan feature on every product pricing table.
+oauth:
+  supported: false
+  note: No OAuth or OIDC. /.well-known/oauth-authorization-server and /.well-known/openid-configuration
+    404 on every host probed 2026-08-29. No scopes/ artifact is emitted, correctly.
+mtls:
+  supported: false
+unauthenticated_surface:
+  present: false
+  note: Every product endpoint requires a key; an unauthenticated call returns 400 or 401.
+failure_modes:
+- status: 401
+  cause: missing key, wrong key, or a key issued for a different Abstract product
+- status: 422
+  cause: valid key, plan quota exhausted
+- status: 429
+  cause: valid key, per-second ceiling exceeded

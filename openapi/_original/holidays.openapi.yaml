@@ -1,0 +1,331 @@
+openapi: 3.0.3
+info:
+  title: Abstract Public Holidays API
+  description: 'Look up public, national, religious, observance, and other holidays
+    for 190+ countries and 3,500+ regions in a single request. Provide a country
+    code and an optional date, and the API returns the matching holidays with their
+    names, types, locations, and dates. Authenticate with your API key as the `api_key`
+    query parameter, or as an `Authorization: Bearer <key>` header. GET and POST
+    (form-encoded or JSON) are both supported.'
+  version: 1.0.0
+  termsOfService: https://www.abstractapi.com/legal/legal
+  contact:
+    name: Abstract API
+    url: https://www.abstractapi.com/api/holidays-api
+  license:
+    name: Commercial — see Terms of Service
+    url: https://www.abstractapi.com/legal/legal
+externalDocs:
+  description: Official documentation
+  url: https://docs.abstractapi.com/api/holidays
+servers:
+- url: https://holidays.abstractapi.com/v1
+security:
+- ApiKeyQuery: []
+- BearerAuth: []
+paths:
+  /:
+    get:
+      operationId: getHolidays
+      summary: Get public holidays for a country and date
+      description: 'Returns the holidays that fall on the requested date (or for the
+        requested year/month) in the given country. On free plans `year`, `month`,
+        and `day` are required; on paid plans they are optional and default to the
+        current date. A valid request with no matching holidays returns 200 with an
+        empty array.'
+      parameters:
+      - name: country
+        in: query
+        required: true
+        description: The country's two-letter ISO 3166-1 alpha-2 code.
+        schema:
+          type: string
+          minLength: 2
+          maxLength: 2
+        example: SG
+      - name: year
+        in: query
+        required: false
+        description: The year to look up. Optional on paid plans (defaults to the
+          current year) and required on free plans.
+        schema:
+          type: string
+        example: '2023'
+      - name: month
+        in: query
+        required: false
+        description: The month to look up, in the range 1-12 (1 = January). Optional
+          on paid plans (defaults to the current month) and required on free plans.
+        schema:
+          type: string
+        example: '01'
+      - name: day
+        in: query
+        required: false
+        description: The day of the month to look up, in the range 1-31. Optional
+          on paid plans (defaults to the current day) and required on free plans.
+          Requires `month` and `year` when specified.
+        schema:
+          type: string
+        example: '01'
+      responses:
+        '200':
+          description: An array of holidays matching the request. Empty when no holidays
+            match.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HolidayList'
+              example:
+              - name: New Year's Day
+                name_local: ''
+                language: ''
+                description: ''
+                country: SG
+                location: Singapore
+                type: National
+                date: 01/01/2023
+                date_year: '2023'
+                date_month: '01'
+                date_day: '01'
+                week_day: Sunday
+              - name: Chinese Lunar New Year's Day
+                name_local: ''
+                language: ''
+                description: ''
+                country: SG
+                location: Singapore
+                type: National
+                date: 01/23/2023
+                date_year: '2023'
+                date_month: '01'
+                date_day: '23'
+                week_day: Monday
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/QuotaReached'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    post:
+      operationId: postHolidays
+      summary: Get public holidays for a country and date
+      description: 'Same as the GET operation. The API key may be supplied in the
+        request body, as the `api_key` query parameter, or as an `Authorization: Bearer
+        <key>` header.'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/HolidaysRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HolidaysRequest'
+      responses:
+        '200':
+          description: An array of holidays matching the request. Empty when no holidays
+            match.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HolidayList'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/QuotaReached'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/ServerError'
+components:
+  securitySchemes:
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+      description: Your unique Public Holidays API key.
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Send your API key as a Bearer token; omit `api_key` from the query
+        string.
+  responses:
+    BadRequest:
+      description: Bad request — a required parameter is missing or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: A validation error occurred.
+              code: validation_error
+              details:
+                country:
+                - This is a required argument.
+    Unauthorized:
+      description: Unauthorized — missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Invalid API key provided.
+              code: unauthorized
+              details: null
+    QuotaReached:
+      description: Unprocessable — monthly quota reached or insufficient API credits.
+        The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: Too Many Requests — rate limit exceeded (free plans are limited
+        to one request per second). The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ServerError:
+      description: Internal server error. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    HolidaysRequest:
+      type: object
+      required:
+      - country
+      properties:
+        country:
+          type: string
+          minLength: 2
+          maxLength: 2
+          description: The country's two-letter ISO 3166-1 alpha-2 code.
+          example: SG
+        year:
+          type: string
+          description: The year to look up. Optional on paid plans (defaults to the
+            current year) and required on free plans.
+          example: '2023'
+        month:
+          type: string
+          description: The month to look up, in the range 1-12 (1 = January). Optional
+            on paid plans (defaults to the current month) and required on free plans.
+          example: '01'
+        day:
+          type: string
+          description: The day of the month to look up, in the range 1-31. Optional
+            on paid plans (defaults to the current day) and required on free plans.
+            Requires `month` and `year` when specified.
+          example: '01'
+        api_key:
+          type: string
+          description: 'Your API key. Optional here if supplied as the `api_key` query
+            parameter or an `Authorization: Bearer <key>` header.'
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - message
+          - code
+          properties:
+            message:
+              type: string
+              description: Human-readable description of the error.
+              example: A validation error occurred.
+            code:
+              type: string
+              description: Machine-readable error code, e.g. validation_error or unauthorized.
+              example: validation_error
+            details:
+              type: object
+              nullable: true
+              description: Field-keyed validation messages for validation_error responses;
+                null for other error types.
+              additionalProperties:
+                type: array
+                items:
+                  type: string
+    HolidayList:
+      type: array
+      description: An array of holidays matching the request. Empty when no holidays
+        match.
+      items:
+        $ref: '#/components/schemas/Holiday'
+    Holiday:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The holiday's name in English.
+          example: New Year's Day
+        name_local:
+          type: string
+          nullable: true
+          description: The holiday's name in the local language. May be an empty string
+            or null when not available.
+          example: ''
+        language:
+          type: string
+          nullable: true
+          description: The language of `name_local`. May be an empty string or null
+            when not available.
+          example: ''
+        description:
+          type: string
+          nullable: true
+          description: A short description of the holiday. May be an empty string
+            or null when not available.
+          example: ''
+        country:
+          type: string
+          description: The two-letter ISO 3166-1 alpha-2 country code echoed from
+            the request.
+          example: SG
+        location:
+          type: string
+          nullable: true
+          description: The specific location or region the holiday applies to. May
+            be null when not available.
+          example: Singapore
+        type:
+          type: string
+          nullable: true
+          description: The holiday type, e.g. National or Observance.
+          example: National
+        date:
+          type: string
+          description: The holiday date in MM/DD/YYYY format.
+          example: 01/01/2023
+        date_year:
+          type: string
+          description: The year component of the date.
+          example: '2023'
+        date_month:
+          type: string
+          description: The month component of the date.
+          example: '01'
+        date_day:
+          type: string
+          description: The day component of the date.
+          example: '01'
+        week_day:
+          type: string
+          nullable: true
+          description: The day of the week the holiday falls on, e.g. Monday.
+          example: Sunday

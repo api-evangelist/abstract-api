@@ -1,0 +1,71 @@
+generated: '2026-08-29'
+method: searched
+source: >-
+  https://docs.abstractapi.com/api/email-reputation.md (Response and error codes),
+  https://docs.abstractapi.com/.well-known/agent-skills/abstractapi/skill.md,
+  openapi/_original/*.openapi.yaml
+format: vendor-json
+rfc9457: false
+content_type: application/json
+envelope:
+  shape: '{ "error": { "message": string, "code": string, "details": object } }'
+  source: >-
+    https://github.com/abstractapi/openapi-specs README — "a common { "error":
+    { message, code, details } } error envelope" shared by every published spec.
+  caveat: >-
+    The upstream README states the exact 422/429/500 error strings are "assumed
+    generously and pending production confirmation" for every product except Email
+    Reputation, which is the only spec verified against production.
+problem_types:
+  - status: 200
+    title: OK
+    detail: Request succeeded.
+  - status: 204
+    title: No Content
+    detail: >-
+      Success with no data — e.g. an IP that resolves to no location. A 204 is a
+      billable success, not an error.
+    remediation: Treat as a valid empty result; do not retry.
+  - status: 400
+    title: Bad request
+    detail: The request was malformed, or a required parameter was missing or invalid.
+    remediation: >-
+      Validate the primary parameter before sending (email format, IP literal, bare
+      domain without scheme, E.164 phone number).
+  - status: 401
+    title: Unauthorized
+    detail: The API key is missing, incorrect, or belongs to a different Abstract product.
+    remediation: >-
+      Confirm the key was issued for THIS product. Keys are not shared across
+      Abstract's APIs. Check `Authorization: Bearer KEY` form, not bare `Authorization: KEY`.
+  - status: 422
+    title: Quota reached
+    detail: The request was aborted due to insufficient API credits.
+    remediation: >-
+      Monthly plan quota is exhausted. Upgrade the plan or wait for the reset. Note
+      credits are consumed by failed lookups too.
+    retryable: false
+  - status: 429
+    title: Too many requests
+    detail: >-
+      The per-second request ceiling for the plan was exceeded (1 req/s on some free
+      tiers, 3 req/s on others and on paid tiers below Enterprise).
+    remediation: >-
+      Back off and re-send. No Retry-After header is published, so a client must
+      choose its own backoff.
+    retryable: true
+  - status: 500
+    title: Internal server error
+    detail: The request could not be completed due to a server-side error.
+    remediation: Retry with backoff. No request identifier is returned to quote to support.
+    retryable: true
+  - status: 503
+    title: Service unavailable
+    detail: The service is temporarily down.
+    remediation: Retry with backoff; check https://status.abstractapi.com/.
+    retryable: true
+gaps:
+  - No RFC 9457 application/problem+json representation.
+  - No stable machine-readable error code registry — `error.code` values are not enumerated anywhere public.
+  - No Retry-After header on 429, and no rate-limit headers at all.
+  - No request/correlation identifier on 5xx.

@@ -4,10 +4,12 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Abstract API
 providerId: abstract-api
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
+modified: '2026-08-29'
+generated: '2026-08-29'
+method: searched
+source: >-
+  https://www.abstractapi.com/api/email-verification-validation-api#pricing,
+  https://www.abstractapi.com/api/ip-geolocation-api#pricing
 reconciled: true
 tags:
   - Data Validation
@@ -15,156 +17,147 @@ tags:
   - Phone Validation
   - Geolocation
   - Enrichment
-description: Abstract API is a portfolio of small per-product utility APIs (Email Reputation, Phone Intelligence,
-  IP Intelligence, Company Enrichment, etc.) each priced as Free / Starter / Standard / Professional /
-  Enterprise tiers with monthly request quotas. Free tier is 100 req/month at 3 req/sec; paid tiers scale
-  monthly request volume from 5,000 to 150,000+ with the same 3 req/sec ceiling. 10% discount on annual
-  billing.
-sources:
-  - https://www.abstractapi.com/api/email-verification-validation-api
-  - https://docs.abstractapi.com/
+plan_count: 5
+pricing_page:
+  canonical_url: null
+  finding: >-
+    Abstract has NO company-wide pricing page any more. https://www.abstractapi.com/pricing
+    returns HTTP 404 (a Webflow "Page Not Found" body) as of 2026-08-29, and the
+    "PRICING" item in the product-page navigation now links to
+    https://app.abstractapi.com/users/signup?target=/api/<product>/pricing/select — i.e.
+    the tier selector sits behind account creation. The public pricing tables that remain
+    are embedded per product, in a "Simple and transparent pricing" section on each
+    /api/<product> marketing page.
+  probed:
+    - url: https://www.abstractapi.com/pricing
+      status: 404
+    - url: https://www.abstractapi.com/api/email-verification-validation-api
+      status: 200
+    - url: https://www.abstractapi.com/api/ip-geolocation-api
+      status: 200
+structure:
+  model: per-product
+  note: >-
+    Each of Abstract's fifteen APIs is bought separately with its own key, its own
+    quota and its own bill. The five tier NAMES and the three paid price points are
+    shared across products; the included quota and the free-tier rate ceiling are NOT.
+  billing_periods: [monthly, annual]
+  annual_discount: '10%'
+  currency: USD
 plans:
   - id: abstract-api-free
     name: Free
     type: freemium
-    description: 100 requests/month at 3 req/sec; per-product free tier.
+    price: '0.00'
+    currency: USD
+    billing_period: month
     entries:
-      - label: Monthly request quota
-        name: free_quota
-        type: quota
+      - label: Included requests (Email Validation / Email Reputation)
         metric: request
         limit: 100
         timeFrame: month
-        geo: global
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Rate ceiling
-        name: free_rate
-        type: tiered
+        source: https://www.abstractapi.com/api/email-verification-validation-api
+      - label: Included requests (IP Geolocation)
+        metric: request
+        limit: 1000
+        timeFrame: month
+        source: https://www.abstractapi.com/api/ip-geolocation-api
+      - label: Rate ceiling (Email Validation / Email Reputation)
         metric: requests_per_second
         limit: 3
-        timeFrame: second
-        geo: global
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-    elements:
-      - name: Basic deliverability / validation checks
-      - name: 3 req/sec rate ceiling
-      - name: Public documentation and community support
+      - label: Rate ceiling (IP Geolocation)
+        metric: requests_per_second
+        limit: 1
+    features:
+      - full API response
+    note: >-
+      The free tier is the clearest example of per-product variance: 100 requests at
+      3 req/s on Email Validation versus 1,000 requests at 1 req/s on IP Geolocation.
+      A single "Abstract free tier" number does not exist.
   - id: abstract-api-starter
     name: Starter
-    type: subscription
-    description: Entry paid tier; from $17/month with monthly request volume from 5,000 up to 150,000
-      depending on selected sub-tier.
+    type: paid
+    price: '17.00'
+    currency: USD
+    billing_period: month
     entries:
-      - label: Plan minimum monthly
-        name: starter_monthly
-        type: flat
-        metric: month
-        limit: 1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '17.00'
-        userMultiplied: false
-      - label: Monthly request volume (selectable)
-        name: starter_requests
-        type: tiered
+      - label: Included requests (Email Validation, annual billing)
         metric: request
-        limit: 150000
+        limit: 60000
+        timeFrame: year
+      - label: Included requests (IP Geolocation, monthly billing)
+        metric: request
+        limit: 5000
         timeFrame: month
-        geo: global
-        unit: 1
-        price: see plan picker (5,000 to 150,000 req/mo)
-        userMultiplied: false
-    elements:
-      - name: Email deliverability validation
-      - name: Domain whitelisting
-      - name: Bulk CSV upload
-      - name: 3 req/sec rate ceiling
-      - name: 10% off with annual billing
+      - label: Rate ceiling
+        metric: requests_per_second
+        limit: 3
+    features:
+      - Domain whitelisting
+      - Bulk CSV upload (email products)
+      - full API response
+    overage:
+      model: tier-upgrade
+      note: >-
+        No per-unit overage price is published. Higher volume is bought by moving the
+        plan's volume slider (Email Validation offers 60k / 180k / 360k / 600k /
+        1.8M requests per year; IP Geolocation offers 200k / 500k / 1M / 1.5M / 3.5M
+        requests per month). The prices attached to each slider step are not shown
+        before signup.
   - id: abstract-api-standard
     name: Standard
-    type: subscription
-    description: Standard tier with sender details and domain enrichment; from $37/month.
+    type: paid
+    price: '37.00'
+    currency: USD
+    billing_period: month
     entries:
-      - label: Plan minimum monthly
-        name: standard_monthly
-        type: flat
-        metric: month
-        limit: 1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '37.00'
-        userMultiplied: false
-      - label: Monthly request volume (selectable)
-        name: standard_requests
-        type: tiered
-        metric: request
-        limit: 150000
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: see plan picker (5,000 to 150,000 req/mo)
-        userMultiplied: false
-    elements:
-      - name: Everything in Starter
-      - name: Sender details
-      - name: Domain enrichment
+      - label: Rate ceiling
+        metric: requests_per_second
+        limit: 3
+    features:
+      - Domain whitelisting
+      - Bulk CSV upload (email products)
+      - Additional response fields over Starter
+      - full API response
   - id: abstract-api-professional
     name: Professional
-    type: subscription
-    description: Most popular tier; from $39/month. Adds quality scores, risk assessment, breach monitoring.
+    type: paid
+    price: '39.00'
+    currency: USD
+    billing_period: month
+    most_popular: true
     entries:
-      - label: Plan minimum monthly
-        name: pro_monthly
-        type: flat
-        metric: month
-        limit: 1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '39.00'
-        userMultiplied: false
-      - label: Monthly request volume (selectable)
-        name: pro_requests
-        type: tiered
-        metric: request
-        limit: 150000
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: see plan picker (5,000 to 150,000 req/mo)
-        userMultiplied: false
-    elements:
-      - name: Everything in Standard
-      - name: Quality scores
-      - name: Risk assessment
-      - name: Breach monitoring
+      - label: Rate ceiling
+        metric: requests_per_second
+        limit: 3
+    features:
+      - Full response field set for the product
+      - Domain whitelisting
+      - Bulk CSV upload (email products)
   - id: abstract-api-enterprise
     name: Enterprise
-    type: enterprise
-    description: Custom-priced tier with flexible volumes, SLA, and commercial license.
+    type: custom
+    price: null
+    currency: USD
+    billing_period: null
+    contact: https://www.abstractapi.com/contact-us
     entries:
-      - label: Custom contract
-        name: enterprise_contract
-        type: subscription
-        metric: contract
-        limit: -1
-        timeFrame: year
-        geo: global
-        unit: 1
-        price: custom
-        userMultiplied: false
-    elements:
-      - name: Flexible request volume
-      - name: Commercial license
-      - name: SOC 2 / GDPR compliance documentation
-      - name: Dedicated account manager
-      - name: Enhanced SLA
-maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+      - label: Requests
+        metric: request
+        limit: null
+        note: Flexible requests / month, negotiated.
+      - label: Rate ceiling
+        metric: requests_per_second
+        limit: null
+        note: Flexible requests / second, negotiated.
+    features:
+      - Commercial license
+      - SOC 2 & GDPR
+      - Enhanced SLA & support
+      - Dedicated account manager
+      - Domain whitelisting
+gaps:
+  - No machine-readable pricing or catalog endpoint.
+  - Volume-slider prices above the entry price point are not visible before signup.
+  - No published per-unit overage rate on any tier.
+  - The former /pricing page is a hard 404 and is still linked from third-party listings.

@@ -1,0 +1,386 @@
+openapi: 3.0.3
+info:
+  title: Abstract Timezone API
+  description: 'Look up the current time, date, and timezone for any location, and
+    convert a time and date between two locations. A location may be given as a
+    place name, latitude/longitude coordinates, or an IP address. Authenticate with
+    your API key as the `api_key` query parameter, or as an `Authorization: Bearer
+    <key>` header. GET and POST (form-encoded or JSON) are both supported.'
+  version: 1.0.0
+  termsOfService: https://www.abstractapi.com/legal/legal
+  contact:
+    name: Abstract API
+    url: https://www.abstractapi.com/api/time-date-timezone-api
+  license:
+    name: Commercial — see Terms of Service
+    url: https://www.abstractapi.com/legal/legal
+externalDocs:
+  description: Official documentation
+  url: https://docs.abstractapi.com/api/timezones
+servers:
+- url: https://timezone.abstractapi.com/v1
+security:
+- ApiKeyQuery: []
+- BearerAuth: []
+paths:
+  /current_time:
+    get:
+      operationId: getCurrentTime
+      summary: Get the current time and timezone for a location
+      parameters:
+      - name: location
+        in: query
+        required: true
+        description: The location to look up. Accepts a place name, latitude/longitude
+          coordinates, or an IP address.
+        schema:
+          type: string
+        example: Oxford, United Kingdom
+      responses:
+        '200':
+          description: Current time, date, and timezone details for the location.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CurrentTime'
+              example:
+                datetime: '2023-06-21 19:40:49'
+                timezone_name: British Summer Time
+                timezone_location: Europe/London
+                timezone_abbreviation: BST
+                gmt_offset: 1
+                is_dst: true
+                requested_location: Oxford,United Kingdom
+                latitude: 51.7520131
+                longitude: -1.2578499
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/QuotaReached'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    post:
+      operationId: postCurrentTime
+      summary: Get the current time and timezone for a location
+      description: 'Same as the GET operation. The API key may be supplied in the
+        request body, as the `api_key` query parameter, or as an `Authorization:
+        Bearer <key>` header.'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CurrentTimeRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CurrentTimeRequest'
+      responses:
+        '200':
+          description: Current time, date, and timezone details for the location.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CurrentTime'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/QuotaReached'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /convert_time:
+    get:
+      operationId: getConvertTime
+      summary: Convert a time and date between two locations
+      description: Converts the time and date of a base location to the time and date
+        of a target location. By default the current time is converted; supply
+        `base_datetime` to convert a specific past or future time.
+      parameters:
+      - name: base_location
+        in: query
+        required: true
+        description: The location the supplied time belongs to. Accepts a place name,
+          latitude/longitude coordinates, or an IP address.
+        schema:
+          type: string
+        example: Los Angeles, CA
+      - name: target_location
+        in: query
+        required: true
+        description: The location to convert the time into. Accepts a place name,
+          latitude/longitude coordinates, or an IP address.
+        schema:
+          type: string
+        example: Oxford, United Kingdom
+      - name: base_datetime
+        in: query
+        required: false
+        description: The date and time to convert, in `YYYY-MM-DD HH:MM:SS` format.
+          Defaults to the current time at the base location when omitted.
+        schema:
+          type: string
+        example: '2020-05-01 07:00:00'
+      responses:
+        '200':
+          description: The supplied time expressed in both the base and target locations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConvertTime'
+              example:
+                base_location:
+                  datetime: '2020-05-01 07:00:00'
+                  timezone_name: PDT
+                  timezone_location: America/Los_Angeles
+                  timezone_abbreviation: Pacific Daylight Time
+                  gmt_offset: -7
+                  is_dst: true
+                  requested_location: Los Angeles,CA
+                  latitude: 34.0536909
+                  longitude: -118.242766
+                target_location:
+                  datetime: '2020-05-01 15:00:00'
+                  timezone_name: BST
+                  timezone_location: Europe/London
+                  timezone_abbreviation: British Summer Time
+                  gmt_offset: 1
+                  is_dst: true
+                  requested_location: Oxford,United Kingdom
+                  latitude: 51.7520131
+                  longitude: -1.2578499
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/QuotaReached'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    post:
+      operationId: postConvertTime
+      summary: Convert a time and date between two locations
+      description: 'Same as the GET operation. The API key may be supplied in the
+        request body, as the `api_key` query parameter, or as an `Authorization:
+        Bearer <key>` header.'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ConvertTimeRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConvertTimeRequest'
+      responses:
+        '200':
+          description: The supplied time expressed in both the base and target locations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConvertTime'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/QuotaReached'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/ServerError'
+components:
+  securitySchemes:
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+      description: Your unique Timezone API key.
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Send your API key as a Bearer token; omit `api_key` from the query
+        string.
+  responses:
+    BadRequest:
+      description: Bad request — a required parameter is missing or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: A validation error occurred.
+              code: validation_error
+              details:
+                location:
+                - This is a required argument.
+    Unauthorized:
+      description: Unauthorized — missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Invalid API key provided.
+              code: unauthorized
+              details: null
+    QuotaReached:
+      description: Unprocessable — monthly quota reached or insufficient API credits.
+        The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: Too Many Requests — rate limit exceeded. The body follows the standard
+        error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ServerError:
+      description: Internal server error. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    CurrentTimeRequest:
+      type: object
+      required:
+      - location
+      properties:
+        location:
+          type: string
+          description: The location to look up. Accepts a place name, latitude/longitude
+            coordinates, or an IP address.
+          example: Oxford, United Kingdom
+        api_key:
+          type: string
+          description: 'Your API key. Optional here if supplied as the `api_key` query
+            parameter or an `Authorization: Bearer <key>` header.'
+    ConvertTimeRequest:
+      type: object
+      required:
+      - base_location
+      - target_location
+      properties:
+        base_location:
+          type: string
+          description: The location the supplied time belongs to. Accepts a place
+            name, latitude/longitude coordinates, or an IP address.
+          example: Los Angeles, CA
+        target_location:
+          type: string
+          description: The location to convert the time into. Accepts a place name,
+            latitude/longitude coordinates, or an IP address.
+          example: Oxford, United Kingdom
+        base_datetime:
+          type: string
+          description: The date and time to convert, in `YYYY-MM-DD HH:MM:SS` format.
+            Defaults to the current time at the base location when omitted.
+          example: '2020-05-01 07:00:00'
+        api_key:
+          type: string
+          description: 'Your API key. Optional here if supplied as the `api_key` query
+            parameter or an `Authorization: Bearer <key>` header.'
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - message
+          - code
+          properties:
+            message:
+              type: string
+              description: Human-readable description of the error.
+              example: A validation error occurred.
+            code:
+              type: string
+              description: Machine-readable error code, e.g. validation_error or unauthorized.
+              example: validation_error
+            details:
+              type: object
+              nullable: true
+              description: Field-keyed validation messages for validation_error responses;
+                null for other error types.
+              additionalProperties:
+                type: array
+                items:
+                  type: string
+    TimeLocation:
+      type: object
+      description: Time, date, and timezone details for a single resolved location.
+      properties:
+        datetime:
+          type: string
+          nullable: true
+          description: Date and time at the location, in `YYYY-MM-DD HH:MM:SS` format.
+          example: '2023-06-21 19:40:49'
+        timezone_name:
+          type: string
+          nullable: true
+          description: Name of the timezone, drawn from the IANA Time Zone Database.
+          example: British Summer Time
+        timezone_location:
+          type: string
+          nullable: true
+          description: IANA Time Zone Database location identifier.
+          example: Europe/London
+        timezone_abbreviation:
+          type: string
+          nullable: true
+          description: Timezone abbreviation, drawn from the IANA Time Zone Database.
+          example: BST
+        gmt_offset:
+          type: integer
+          nullable: true
+          description: Offset from Greenwich Mean Time, in hours.
+          example: 1
+        is_dst:
+          type: boolean
+          nullable: true
+          description: Whether Daylight Saving Time is in effect at the location.
+          example: true
+        requested_location:
+          type: string
+          description: The location string echoed back from the request.
+          example: Oxford,United Kingdom
+        latitude:
+          type: number
+          format: float
+          nullable: true
+          description: Decimal latitude of the resolved location.
+          example: 51.7520131
+        longitude:
+          type: number
+          format: float
+          nullable: true
+          description: Decimal longitude of the resolved location.
+          example: -1.2578499
+    CurrentTime:
+      allOf:
+      - $ref: '#/components/schemas/TimeLocation'
+      description: Current time, date, and timezone details for the requested location.
+    ConvertTime:
+      type: object
+      description: The supplied time expressed in both the base and target locations.
+      properties:
+        base_location:
+          $ref: '#/components/schemas/TimeLocation'
+        target_location:
+          $ref: '#/components/schemas/TimeLocation'

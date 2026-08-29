@@ -4,68 +4,90 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Abstract API
 providerId: abstract-api
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
+modified: '2026-08-29'
+generated: '2026-08-29'
+method: searched
+source: >-
+  https://docs.abstractapi.com/api/email-reputation (Response and error codes),
+  https://docs.abstractapi.com/.well-known/agent-skills/abstractapi/skill.md,
+  https://www.abstractapi.com/api/email-verification-validation-api#pricing,
+  https://www.abstractapi.com/api/ip-geolocation-api#pricing
 reconciled: true
 tags:
   - Data Validation
   - Geolocation
   - Email Verification
   - Rate Limiting
-description: Abstract API enforces a per-API-key rate ceiling of 3 requests per second across the Free,
-  Starter, Standard, and Professional tiers. Monthly request quotas are set per plan and per selected
-  volume sub-tier. Enterprise plans negotiate higher rates. Limits are scoped per API key per product.
-sources:
-  - https://www.abstractapi.com/api/email-verification-validation-api
-  - https://docs.abstractapi.com/
+description: >-
+  Abstract enforces a per-API-key ceiling measured in requests per SECOND, plus a
+  plan quota measured per month or per year. Both are scoped to one product's key —
+  there is no account-level pooled limit. Exhausting the per-second ceiling returns
+  429; exhausting the plan quota returns 422.
+limit_count: 5
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
+  quotaExceeded: 422
+  note: >-
+    422 for quota and 429 for rate is unusual and worth coding for explicitly — many
+    APIs use 429 for both. Abstract's own docs table and its published agent skill
+    agree on the split.
+response_headers:
+  published: false
+  x_ratelimit: false
+  ratelimit_rfc9239: false
+  retry_after: false
+  finding: >-
+    Abstract publishes NO rate-limit response headers of any kind. There is no
+    X-RateLimit-Limit/Remaining/Reset, no RFC-draft RateLimit-*, and no Retry-After on
+    429. A caller cannot read its remaining budget or a server-suggested backoff from
+    any response; the only runtime signal is the status code after the limit is already
+    hit. Confirmed by reading the docs error table, the provider's own agent skill, and
+    all 13 provider-published OpenAPI definitions — none declares a rate-limit header.
 limits:
-  - name: Free / Starter / Standard / Professional rate
+  - name: Free tier rate ceiling — Email Validation / Email Reputation
     scope: api-key
     metric: requests_per_second
     limit: 3
     timeFrame: second
-    notes: Same 3 req/sec ceiling applies on Free and all paid tiers below Enterprise.
-  - name: Free monthly quota
+    source: https://www.abstractapi.com/api/email-verification-validation-api
+  - name: Free tier rate ceiling — IP Geolocation
     scope: api-key
-    metric: requests_per_month
-    limit: 100
+    metric: requests_per_second
+    limit: 1
+    timeFrame: second
+    source: https://www.abstractapi.com/api/ip-geolocation-api
+    note: >-
+      The provider's own agent skill states "free plans: 1 req/sec" as a global rule.
+      It is not global — it is the IP Geolocation figure. Email products allow 3 req/s
+      on free.
+  - name: Paid tier rate ceiling (Starter / Standard / Professional)
+    scope: api-key
+    metric: requests_per_second
+    limit: 3
+    timeFrame: second
+    note: The same 3 req/s applies on every paid tier below Enterprise, across products.
+  - name: Enterprise rate ceiling
+    scope: api-key
+    metric: requests_per_second
+    limit: null
+    timeFrame: second
+    note: '"Flexible requests / second" — negotiated, not published.'
+  - name: Plan quota
+    scope: api-key
+    metric: request
+    limit: null
     timeFrame: month
-  - name: Starter monthly quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 150000
-    timeFrame: month
-    notes: Customer selects a volume sub-tier between 5,000 and 150,000 req/month at signup.
-  - name: Standard monthly quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 150000
-    timeFrame: month
-    notes: Same volume picker as Starter; price differs by feature set.
-  - name: Professional monthly quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 150000
-    timeFrame: month
-  - name: Enterprise rate / quota
-    scope: api-key
-    metric: varies
-    limit: flexible — negotiated rate ceiling and monthly volume
-policies:
-  - name: Per-product key
-    description: Each Abstract API product (Email Reputation, Phone Intelligence, IP Intelligence, Company
-      Enrichment, etc.) issues its own API key; quotas and rate limits are enforced separately per product.
-  - name: Quota reset
-    description: Monthly request counters reset on the billing-cycle anniversary.
-  - name: Throttle response
-    description: Exceeding 3 req/sec returns HTTP 429; clients should back off and retry rather than burst.
-  - name: Annual discount
-    description: 10% discount available on annual billing; quotas remain monthly.
-maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+    note: >-
+      Per-product and per-tier; see plans/abstract-api-plans-pricing.yml. Free is 100
+      (email) or 1,000 (IP geolocation) per month. Metered per REQUEST, not per
+      successful response — a failed lookup still consumes quota.
+scope_model:
+  pooled: false
+  note: >-
+    Limits are per product key. Fifteen products means fifteen independent budgets;
+    saturating one does not throttle another.
+gaps:
+  - No rate-limit response headers.
+  - No Retry-After on 429.
+  - Free-tier rate ceiling differs per product and is only discoverable on each product's pricing table.
+  - No documented burst allowance.

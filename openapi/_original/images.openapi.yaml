@@ -1,0 +1,557 @@
+openapi: 3.0.3
+info:
+  title: Abstract Image Processing API
+  description: 'Compress, convert, resize, and crop images programmatically in a single
+    request. Submit an image either by a hosted URL (the `/url` endpoint) or by uploading
+    the file directly (the `/upload` endpoint); the API returns the original and final
+    dimensions, the bytes saved, and a short-lived download URL for the processed image.
+    Authenticate with your API key as the `api_key` query parameter, or as an
+    `Authorization: Bearer <key>` header. GET and POST (form-encoded, JSON, or for
+    `/upload` multipart) are supported.'
+  version: 1.0.0
+  termsOfService: https://www.abstractapi.com/legal/legal
+  contact:
+    name: Abstract API
+    url: https://www.abstractapi.com/api/image-processing-optimization-api
+  license:
+    name: Commercial — see Terms of Service
+    url: https://www.abstractapi.com/legal/legal
+externalDocs:
+  description: Official documentation
+  url: https://docs.abstractapi.com/api/images
+servers:
+- url: https://images.abstractapi.com/v1
+security:
+- ApiKeyQuery: []
+- BearerAuth: []
+x-openItems:
+- The exact code/message strings for the 422, 429, and 500 responses are unconfirmed.
+  The standard error envelope shape is modeled, but the literal `code`/`message`
+  values were not verified against production.
+- Nullability of the numeric response fields (original_size, original_height,
+  original_width, final_size, bytes_saved, final_height, final_width) is assumed
+  generously per convention G and needs production confirmation.
+- CORS support is unknown and was not verified.
+- Whether the `/url` and `/upload` endpoints truly accept GET is assumed. The docs
+  only show POST/--data style requests for `/url` and POST multipart for `/upload`;
+  GET operations are modeled per convention D but are unverified against the
+  documented examples.
+- The GET-side `resize` encoding for `/url` (passing the resize options as a
+  JSON-encoded query value) is assumed and unverified; the docs only show resize
+  supplied via the POST body.
+- The free-plan rate limit (commonly described as 1 request per second) is
+  unconfirmed against the docs/backend and is therefore not asserted in the 429
+  response description.
+- The processed-image download URL retention ('available for 1 day') needs
+  confirmation against the docs/backend.
+paths:
+  /url:
+    get:
+      operationId: getImageFromUrl
+      summary: Process an image provided by URL
+      description: 'Compress, convert, and optionally resize an image hosted at a public
+        URL. Resize options must be supplied via the POST operation or as a JSON-encoded
+        `resize` query value.'
+      parameters:
+      - name: url
+        in: query
+        required: true
+        description: The URL of the image you would like to edit. Cannot be more than
+          32 MB in size.
+        schema:
+          type: string
+          format: uri
+        example: https://s3.amazonaws.com/static.abstractapi.com/test-images/dog.jpg
+      - name: lossy
+        in: query
+        required: false
+        description: If true, perform lossy compression, reducing size significantly
+          with a small drop in quality. If false, size is reduced only slightly (10–20%
+          at most) with no quality loss. Defaults to false.
+        schema:
+          type: boolean
+        example: true
+      - name: quality
+        in: query
+        required: false
+        description: Integer between 0 and 100 setting the quality level for lossy
+          compression. Determined intelligently when omitted. A quality above 95 is
+          generally useless and may produce a file larger than the input; below 25
+          the result is usually too low in quality to use.
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100
+        example: 80
+      responses:
+        '200':
+          description: Details of the processed image and a download URL.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageResult'
+              example:
+                original_size: 205559
+                original_height: 430
+                original_width: 1142
+                final_size: 181512
+                bytes_saved: 24047
+                final_height: 430
+                final_width: 1142
+                url: https://abstractapi-images.s3.amazonaws.com/e6c6ea1f8bfd46be9ed357b9ce4240ff_dog.jpg
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/QuotaReached'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    post:
+      operationId: postImageFromUrl
+      summary: Process an image provided by URL
+      description: 'Same as the GET operation, but accepts the full options object
+        (including `resize`) in the request body. The API key may be supplied in the
+        request body, as the `api_key` query parameter, or as an `Authorization: Bearer
+        <key>` header.'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UrlRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UrlRequest'
+            example:
+              api_key: YOUR_UNIQUE_API_KEY
+              url: https://s3.amazonaws.com/static.abstractapi.com/test-images/dog.jpg
+              lossy: true
+      responses:
+        '200':
+          description: Details of the processed image and a download URL.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageResult'
+              example:
+                original_size: 205559
+                original_height: 430
+                original_width: 1142
+                final_size: 181512
+                bytes_saved: 24047
+                final_height: 430
+                final_width: 1142
+                url: https://abstractapi-images.s3.amazonaws.com/e6c6ea1f8bfd46be9ed357b9ce4240ff_dog.jpg
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/QuotaReached'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /upload:
+    get:
+      operationId: getImageUploadOptions
+      summary: Process an uploaded image (options via query)
+      description: 'The `/upload` endpoint processes an image submitted as a file.
+        Because a GET request cannot carry a file body, use the POST operation with
+        a multipart `image` part to submit the file. This GET operation accepts the
+        same optional processing parameters and authentication.'
+      parameters:
+      - name: lossy
+        in: query
+        required: false
+        description: If true, perform lossy compression, reducing size significantly
+          with a small drop in quality. If false, size is reduced only slightly (10–20%
+          at most) with no quality loss. Defaults to false.
+        schema:
+          type: boolean
+        example: true
+      - name: quality
+        in: query
+        required: false
+        description: Integer between 0 and 100 setting the quality level for lossy
+          compression. Determined intelligently when omitted.
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 100
+        example: 80
+      responses:
+        '200':
+          description: Details of the processed image and a download URL.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageResult'
+              example:
+                original_size: 205559
+                original_height: 430
+                original_width: 1142
+                final_size: 181512
+                bytes_saved: 24047
+                final_height: 430
+                final_width: 1142
+                url: https://abstractapi-images.s3.amazonaws.com/e6c6ea1f8bfd46be9ed357b9ce4240ff_dog.jpg
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/QuotaReached'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    post:
+      operationId: postImageUpload
+      summary: Process an uploaded image
+      description: 'Upload an image file directly to be compressed, converted, and
+        optionally resized. The documented request is `multipart/form-data` with a
+        `data` part holding a JSON options object (including `api_key`) and an `image`
+        part holding the file. The `application/x-www-form-urlencoded` and
+        `application/json` bodies are also accepted for non-file options. The API key
+        may be supplied in the body, as the `api_key` query parameter, or as an
+        `Authorization: Bearer <key>` header.'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UploadMultipartRequest'
+            encoding:
+              data:
+                contentType: application/json
+              image:
+                contentType: image/jpeg, image/png, image/webp, image/gif
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UploadRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UploadRequest'
+            example:
+              api_key: YOUR_UNIQUE_API_KEY
+              lossy: true
+      responses:
+        '200':
+          description: Details of the processed image and a download URL.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageResult'
+              example:
+                original_size: 205559
+                original_height: 430
+                original_width: 1142
+                final_size: 181512
+                bytes_saved: 24047
+                final_height: 430
+                final_width: 1142
+                url: https://abstractapi-images.s3.amazonaws.com/e6c6ea1f8bfd46be9ed357b9ce4240ff_dog.jpg
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/QuotaReached'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/ServerError'
+components:
+  securitySchemes:
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+      description: Your unique Image Processing API key.
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Send your API key as a Bearer token; omit `api_key` from the query
+        string.
+  responses:
+    BadRequest:
+      description: Bad request — a required parameter is missing or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: A validation error occurred.
+              code: validation_error
+              details:
+                url:
+                - This is a required argument.
+    Unauthorized:
+      description: Unauthorized — missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Invalid API key provided.
+              code: unauthorized
+              details: null
+    QuotaReached:
+      description: Unprocessable — monthly quota reached or insufficient API credits.
+        The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: Too Many Requests — rate limit exceeded. The body follows the standard
+        error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ServerError:
+      description: Internal server error. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    UrlRequest:
+      type: object
+      required:
+      - url
+      properties:
+        url:
+          type: string
+          format: uri
+          description: The URL of the image you would like to edit. Cannot be more
+            than 32 MB in size.
+          example: https://s3.amazonaws.com/static.abstractapi.com/test-images/dog.jpg
+        lossy:
+          type: boolean
+          description: If true, perform lossy compression, reducing size significantly
+            with a small drop in quality. If false, size is reduced only slightly (10–20%
+            at most) with no quality loss. Defaults to false.
+          example: true
+        quality:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: Integer between 0 and 100 setting the quality level for lossy
+            compression. Determined intelligently when omitted.
+          example: 80
+        resize:
+          $ref: '#/components/schemas/ResizeOptions'
+        api_key:
+          type: string
+          description: 'Your API key. Optional here if supplied as the `api_key` query
+            parameter or an `Authorization: Bearer <key>` header.'
+    UploadRequest:
+      type: object
+      properties:
+        lossy:
+          type: boolean
+          description: If true, perform lossy compression, reducing size significantly
+            with a small drop in quality. If false, size is reduced only slightly (10–20%
+            at most) with no quality loss. Defaults to false.
+          example: true
+        quality:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: Integer between 0 and 100 setting the quality level for lossy
+            compression. Determined intelligently when omitted.
+          example: 80
+        resize:
+          $ref: '#/components/schemas/ResizeOptions'
+        api_key:
+          type: string
+          description: 'Your API key. Optional here if supplied as the `api_key` query
+            parameter or an `Authorization: Bearer <key>` header.'
+    UploadMultipartRequest:
+      type: object
+      required:
+      - image
+      properties:
+        image:
+          type: string
+          format: binary
+          description: The image file to process, submitted as a multipart part.
+        data:
+          type: string
+          description: 'A JSON-encoded options object holding `api_key` and any optional
+            processing options (`lossy`, `quality`, `resize`), e.g.
+            {"api_key": "YOUR_UNIQUE_API_KEY", "lossy": true}.'
+          example: '{"api_key": "YOUR_UNIQUE_API_KEY", "lossy": true}'
+    ResizeOptions:
+      type: object
+      description: 'Optional resize configuration. Supply a strategy plus the
+        dimensions it needs. If omitted, the image is only compressed.'
+      properties:
+        strategy:
+          type: string
+          description: 'The resizing strategy. `exact`: resize to exact width and
+            height (aspect ratio not maintained). `portrait`: set exact height, adjust
+            width to aspect ratio. `landscape`: set exact width, adjust height to aspect
+            ratio. `auto`: choose portrait or landscape by aspect ratio. `fit`: crop
+            and resize to fit the desired width and height. `crop`: crop to the exact
+            size specified. `square`: crop by the shorter dimension to a square, then
+            resize. `fill`: resize to fit the bounds while preserving aspect ratio,
+            filling unused space with a background color.'
+          enum:
+          - exact
+          - portrait
+          - landscape
+          - auto
+          - fit
+          - crop
+          - square
+          - fill
+          example: exact
+        width:
+          type: integer
+          description: Target width in pixels. Used by the exact, landscape, auto,
+            fit, crop, and fill strategies.
+          example: 100
+        height:
+          type: integer
+          description: Target height in pixels. Used by the exact, portrait, auto,
+            fit, crop, and fill strategies.
+          example: 75
+        size:
+          type: integer
+          description: Target side length in pixels for the square strategy.
+          example: 100
+        scale:
+          type: integer
+          description: For the crop and fit strategies, a percentage by which to scale
+            the cropped image.
+          example: 50
+        crop_mode:
+          type: string
+          description: 'For the crop and fit strategies, the gravity (direction) of
+            the crop. Accepts a compass/edge value: n or t (top), nw or tl (top left),
+            ne or tr (top right), w or l (left), c (center, the default), e or r (right),
+            se or br (bottom right), sw or bl (bottom left), s or b (bottom). An invalid
+            value falls back to center.'
+          enum:
+          - 'n'
+          - t
+          - nw
+          - tl
+          - ne
+          - tr
+          - w
+          - l
+          - c
+          - e
+          - r
+          - se
+          - br
+          - sw
+          - bl
+          - s
+          - b
+          example: c
+        x:
+          type: integer
+          description: For a custom crop region, the x coordinate (in pixels) of the
+            top-left corner of the rectangle to extract.
+          example: 0
+        'y':
+          type: integer
+          description: For a custom crop region, the y coordinate (in pixels) of the
+            top-left corner of the rectangle to extract.
+          example: 0
+        background:
+          type: string
+          description: 'For the fill strategy, the color used to fill unused portions
+            of the bounds. HEX (#f60 or #ff6600) or RGB (rgb(255, 0, 0)) notation.
+            Defaults to white.'
+          example: rgb(91, 126, 156)
+    ImageResult:
+      type: object
+      properties:
+        original_size:
+          type: integer
+          nullable: true
+          description: The original size of the provided image, in bytes. Null when
+            the value is unavailable for an unreadable or edge-case input.
+          example: 205559
+        original_height:
+          type: integer
+          nullable: true
+          description: The original height of the provided image, in pixels. Null when
+            the value is unavailable for an unreadable or edge-case input.
+          example: 430
+        original_width:
+          type: integer
+          nullable: true
+          description: The original width of the provided image, in pixels. Null when
+            the value is unavailable for an unreadable or edge-case input.
+          example: 1142
+        final_size:
+          type: integer
+          nullable: true
+          description: The final size of the processed image, in bytes. Null when the
+            value is unavailable.
+          example: 181512
+        bytes_saved:
+          type: integer
+          nullable: true
+          description: The number of bytes saved by optimizing the image. May be
+            negative or null when the processed image is not smaller than the input.
+          example: 24047
+        final_height:
+          type: integer
+          nullable: true
+          description: The final height of the processed image, in pixels. Null when
+            no resize was applied or the value is unavailable.
+          example: 430
+        final_width:
+          type: integer
+          nullable: true
+          description: The final width of the processed image, in pixels. Null when
+            no resize was applied or the value is unavailable.
+          example: 1142
+        url:
+          type: string
+          format: uri
+          description: The URL of the processed image hosted by Abstract. Images are
+            available for 1 day.
+          example: https://abstractapi-images.s3.amazonaws.com/e6c6ea1f8bfd46be9ed357b9ce4240ff_dog.jpg
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - message
+          - code
+          properties:
+            message:
+              type: string
+              description: Human-readable description of the error.
+              example: A validation error occurred.
+            code:
+              type: string
+              description: Machine-readable error code, e.g. validation_error or unauthorized.
+              example: validation_error
+            details:
+              type: object
+              nullable: true
+              description: Field-keyed validation messages for validation_error responses;
+                null for other error types.
+              additionalProperties:
+                type: array
+                items:
+                  type: string

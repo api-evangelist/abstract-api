@@ -1,0 +1,62 @@
+generated: '2026-08-29'
+method: searched
+source: https://docs.abstractapi.com/.well-known/agent-skills/abstractapi/skill.md
+note: >-
+  Abstract API publishes its own packaged Agent Skill and advertises it from the
+  A2A agent card at https://docs.abstractapi.com/.well-known/agent-card.json.
+  The file below is the provider's document saved VERBATIM — API Evangelist has
+  authored no skills for this provider, because the provider ships one.
+skills:
+  - file: abstract-api-abstractapi.md
+    name: Abstractapi
+    id: abstractapi
+    method: searched
+    source: https://docs.abstractapi.com/.well-known/agent-skills/abstractapi/skill.md
+    http_status: 200
+    content_type: text/markdown
+    bytes: 11430
+    fetched: '2026-08-29'
+    authored_by: provider
+    generator: mintlify (metadata.mintlify-proj = abstractapi)
+    covers:
+      - email reputation / validation
+      - phone intelligence
+      - ip intelligence
+      - company enrichment
+      - avatars, images, scrape, screenshot
+      - exchange rates, holidays, timezones
+      - iban + vat validation
+    grounding:
+      operations_named: false
+      note: >-
+        The skill is written against base URLs and query parameters rather than
+        operationIds; it predates (or ignores) the provider's own OpenAPI repo at
+        github.com/abstractapi/openapi-specs.
+    defects_observed:
+      - id: nxdomain-base-urls
+        severity: high
+        detail: >-
+          Four of the twelve base URLs in the skill's "API Base URLs and Endpoints"
+          table do not resolve. Probed 2026-08-29: exchangerates.abstractapi.com,
+          vatvalidation.abstractapi.com, timezoneapi.abstractapi.com and
+          scrapeapi.abstractapi.com all return NXDOMAIN. The working hosts, per the
+          provider's own OpenAPI repo, are exchange-rates., vat., timezone. and
+          scrape..abstractapi.com. An agent following this skill verbatim cannot
+          call four of Abstract's products.
+        evidence:
+          - host: exchangerates.abstractapi.com
+            dns: NXDOMAIN
+          - host: vatvalidation.abstractapi.com
+            dns: NXDOMAIN
+          - host: timezoneapi.abstractapi.com
+            dns: NXDOMAIN
+          - host: scrapeapi.abstractapi.com
+            dns: NXDOMAIN
+      - id: rate-limit-disagreement
+        severity: low
+        detail: >-
+          The skill states free plans are limited to 1 request/second. The
+          published pricing table on the Email Validation product page states
+          3 requests/second on its free tier, while the IP Geolocation product
+          page states 1 request/second. The free-tier rate is per product, not
+          global, and the skill states it as global.
