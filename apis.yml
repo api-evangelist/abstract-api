@@ -1248,6 +1248,8 @@ apis:
   humanURL: https://www.abstractapi.com/api/website-screenshot-api
   baseURL: https://screenshot.abstractapi.com/v1/
   tags:
+  - website screenshot
+  tags_raw:
   - Website Screenshot
   properties:
   - type: OpenAPI

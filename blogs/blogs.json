@@ -2,11 +2,22 @@
   "repo": "abstract-api",
   "feeds": [
     {
+      "source": "https://www.abstractapi.com/contact-us",
+      "feed_url": "https://www.abstractapi.com/contact-us",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    },
+    {
       "source": "https://www.abstractapi.com/pricing",
+      "error": "HTTPError"
+    },
+    {
+      "source": "https://www.abstractapi.com/legal/privacy",
       "error": "HTTPError"
     }
   ],
   "post_count": 2,
-  "fetched": "2026-08-22T20:20:02Z",
+  "fetched": "2026-08-30T22:33:40Z",
   "agent_pulled": "2026-07-04"
 }

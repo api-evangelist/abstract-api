@@ -1,23 +1,21 @@
 ---
 kin_checks:
   slug: abstract-api
-  schema_version: 0.15.1
-  scored_at: '2026-08-28'
-  run_ts: 2026-08-28T221322
+  schema_version: 0.16.0
+  scored_at: '2026-08-29'
+  run_ts: 2026-08-29T230545
   note: Actionable checks only (missed + partial). earned/na are every other check
-    in rubric/scoring-0.15.1.yml; counts below let you verify that.
+    in rubric/scoring-0.16.0.yml; counts below let you verify that.
   counts:
     total: 130
-    earned: 27
-    partial: 29
-    missed: 47
+    earned: 44
+    partial: 30
+    missed: 29
     na: 27
   checks:
   - id: maintainer_present
     status: missed
   - id: well_known_published
-    status: missed
-  - id: llms_txt_published
     status: missed
   - id: apis_json_self_hosted
     status: missed
@@ -39,14 +37,13 @@ kin_checks:
     status: missed
   - id: domain_standard_conformance
     status: missed
-  - id: conformance_declared
-    status: missed
   - id: overlay_published
     status: missed
   - id: change_log_present
     status: missed
   - id: status_page_present
     status: missed
+    detail: pointer liveness 0.0
   - id: deprecation_policy
     status: missed
   - id: security_disclosure
@@ -55,33 +52,11 @@ kin_checks:
     status: missed
   - id: roadmap_present
     status: missed
-  - id: api_reference_present
-    status: missed
-  - id: sdk_count_1
-    status: missed
   - id: sdk_count_3
     status: missed
   - id: cli_present
     status: missed
   - id: console_or_sandbox
-    status: missed
-  - id: agent_skill_present
-    status: missed
-  - id: support_channel
-    status: missed
-  - id: blog_present
-    status: missed
-    detail: pointer liveness 0.0
-  - id: pricing_link
-    status: missed
-    detail: pointer liveness 0.0
-  - id: terms_of_service
-    status: missed
-    detail: pointer liveness 0.0
-  - id: privacy_policy
-    status: missed
-    detail: pointer liveness 0.0
-  - id: compliance_published
     status: missed
   - id: trust_center
     status: missed
@@ -89,25 +64,9 @@ kin_checks:
     status: missed
   - id: reg_vulnerability_disclosure
     status: missed
-  - id: reg_terms_of_service
-    status: missed
-    detail: pointer liveness 0.0
-  - id: reg_privacy_policy
-    status: missed
-    detail: pointer liveness 0.0
-  - id: reg_compliance_published
-    status: missed
-  - id: mcp_server
-    status: missed
   - id: event_surface_described
     status: missed
-  - id: agent_skills
-    status: missed
-  - id: well_known_catalog
-    status: missed
   - id: consent_identity
-    status: missed
-  - id: agent_card
     status: missed
   - id: delegated_identity
     status: missed
@@ -215,6 +174,10 @@ kin_checks:
     status: partial
     earned: 2.5
     detail: 'authorship: derived'
+  - id: mcp_server
+    status: partial
+    earned: 4.8
+    detail: 'grade: documented'
   - id: auth_clarity
     status: partial
     earned: 3.5
