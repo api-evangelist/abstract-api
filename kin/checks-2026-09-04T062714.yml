@@ -1,17 +1,17 @@
 ---
 kin_checks:
   slug: abstract-api
-  schema_version: 0.17.2
-  scored_at: '2026-09-01'
-  run_ts: 2026-09-01T063623
+  schema_version: 0.18.2
+  scored_at: '2026-09-04'
+  run_ts: 2026-09-04T062714
   note: Actionable checks only (missed + partial). earned/na are every other check
-    in rubric/scoring-0.17.2.yml; counts below let you verify that.
+    in rubric/scoring-0.18.2.yml; counts below let you verify that.
   counts:
-    total: 130
-    earned: 43
-    partial: 30
+    total: 132
+    earned: 47
+    partial: 26
     missed: 30
-    na: 27
+    na: 29
   checks:
   - id: maintainer_present
     status: missed
@@ -152,22 +152,10 @@ kin_checks:
   - id: balanced_severities
     status: partial
     earned: 0.75
-  - id: rate_limits_documented
-    status: partial
-    earned: 2.0
-  - id: rate_limits_rich
-    status: partial
-    earned: 1.0
   - id: github_org_present
     status: partial
     earned: 1.0
     detail: pointer liveness 0.5
-  - id: plans_present
-    status: partial
-    earned: 2.0
-  - id: plans_multiple
-    status: partial
-    earned: 1.0
   - id: sign_up_present
     status: partial
     earned: 2.5
