@@ -10,7 +10,10 @@
     },
     {
       "source": "https://www.abstractapi.com/pricing",
-      "error": "HTTPError"
+      "feed_url": "https://www.abstractapi.com/pricing",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     },
     {
       "source": "https://www.abstractapi.com/legal/privacy",
@@ -18,7 +21,7 @@
     }
   ],
   "post_count": 2,
-  "fetched": "2026-08-30T22:33:40Z",
+  "fetched": "2026-09-06T19:17:18Z",
   "agent_pulled": "2026-07-04",
   "feed_nature": "undetermined",
   "feed_nature_basis": null,
