@@ -1454,6 +1454,8 @@ common:
   url: https://www.abstractapi.com/legal/legal
 - type: Pricing
   url: https://www.abstractapi.com/api/email-verification-validation-api
+- type: Contact
+  url: mailto:team@abstractapi.com
 integrations:
 - name: HubSpot + Phone Validation API
 - name: HubSpot + Email Validation API
