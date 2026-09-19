@@ -30,6 +30,10 @@ accessModel:
   generated: '2026-09-03'
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/abstract-api.png
+x-docs-platform: mintlify
+x-docs-platform-confidence: medium
+x-docs-platform-checked: 2026-09-17
+x-docs-hosting: vercel
 tags:
 - Avatars
 - Company Enrichment
@@ -44,7 +48,7 @@ tags:
 - Phone Validation
 - Public Holidays
 - Screenshots
-- Timezones
+- Timezone
 - VAT Validation
 - Web Scraping
 tags_raw:
@@ -1179,6 +1183,8 @@ apis:
   humanURL: https://www.abstractapi.com/api/user-avatar-api
   baseURL: https://avatars.abstractapi.com/v1/
   tags:
+  - URLs
+  tags_raw:
   - Url
   properties:
   - type: OpenAPI
