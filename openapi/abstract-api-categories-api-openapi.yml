@@ -1,0 +1,226 @@
+openapi: 3.2.0
+info:
+  title: Abstract VAT Validation Categories API
+  description: 'Validate a VAT number and retrieve the registered company details, calculate VAT-compliant prices for a given amount and country, and look up the latest VAT rates and reduced-rate categories for a country. Authenticate with your API key as the `api_key` query parameter, or as an `Authorization: Bearer ` header. GET and POST (form-encoded or JSON) are both supported.'
+  version: 1.0.0
+  termsOfService: https://www.abstractapi.com/legal/legal
+  contact:
+    name: Abstract API
+    url: https://www.abstractapi.com/api/vat-validation-rates-api
+  license:
+    name: Commercial — see Terms of Service
+    url: https://www.abstractapi.com/legal/legal
+servers:
+- url: https://vat.abstractapi.com/v1
+security:
+- ApiKeyQuery: []
+- BearerAuth: []
+tags:
+- name: Categories
+paths:
+  /categories:
+    get:
+      operationId: getVatCategories
+      summary: List VAT rates and categories for a country
+      description: Returns the latest VAT rates for a specific country, including the standard rate and any reduced-rate categories.
+      parameters:
+      - name: country_code
+        in: query
+        required: true
+        description: The two-letter ISO 3166-1 alpha-2 code of the country in which the transaction takes place.
+        schema:
+          type: string
+        example: DE
+      responses:
+        '200':
+          description: An array of VAT rate categories for the specified country.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VatCategory'
+              example:
+              - country_code: DE
+                rate: '0.070'
+                category: water
+                description: Supply of water. No reduced rate for bottled water...
+              - country_code: DE
+                rate: '0.070'
+                category: foodstuffs
+                description: Foodstuffs (including beverages but excluding alcoholic beverages) for human...
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/QuotaReached'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      tags:
+      - Categories
+    post:
+      operationId: postVatCategories
+      summary: List VAT rates and categories for a country
+      description: 'Same as the GET operation. The API key may be supplied in the request body, as the `api_key` query parameter, or as an `Authorization: Bearer ` header.'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CategoriesRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoriesRequest'
+      responses:
+        '200':
+          description: An array of VAT rate categories for the specified country.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VatCategory'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/QuotaReached'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      tags:
+      - Categories
+components:
+  responses:
+    Unauthorized:
+      description: Unauthorized — missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Invalid API key provided.
+              code: unauthorized
+              details: null
+    ServerError:
+      description: Internal server error. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request — a required parameter is missing or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: A validation error occurred.
+              code: validation_error
+              details:
+                vat_number:
+                - This is a required argument.
+    TooManyRequests:
+      description: Too Many Requests — rate limit exceeded (free plans are limited to 1 request per second). The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    QuotaReached:
+      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    VatCategory:
+      type: object
+      properties:
+        country_code:
+          type: string
+          description: The two-letter ISO 3166-1 alpha-2 code of the country.
+          example: DE
+        rate:
+          type:
+          - string
+          - 'null'
+          description: The VAT rate for this category, expressed as a decimal fraction.
+          example: '0.070'
+        category:
+          type:
+          - string
+          - 'null'
+          description: The name of the category.
+          example: water
+        description:
+          type:
+          - string
+          - 'null'
+          description: A description of the category; may be an empty string or null.
+          example: Supply of water. No reduced rate for bottled water...
+    CategoriesRequest:
+      type: object
+      required:
+      - country_code
+      properties:
+        country_code:
+          type: string
+          description: The two-letter ISO 3166-1 alpha-2 code of the country in which the transaction takes place.
+          example: DE
+        api_key:
+          type: string
+          description: 'Your API key. Optional here if supplied as the `api_key` query parameter or an `Authorization: Bearer <key>` header.'
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - message
+          - code
+          properties:
+            message:
+              type: string
+              description: Human-readable description of the error.
+              example: A validation error occurred.
+            code:
+              type: string
+              description: Machine-readable error code, e.g. validation_error or unauthorized.
+              example: validation_error
+            details:
+              type:
+              - object
+              - 'null'
+              description: Field-keyed validation messages for validation_error responses; null for other error types.
+              additionalProperties:
+                type: array
+                items:
+                  type: string
+  securitySchemes:
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+      description: Your unique VAT Validation API key.
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Send your API key as a Bearer token; omit `api_key` from the query string.
+externalDocs:
+  description: Official documentation
+  url: https://docs.abstractapi.com/api/vat-validation
+x-openItems:
+- The exact code and message strings for the 422 (quota reached / insufficient credits), 429 (rate limit) and 500 (server error) responses are unconfirmed. The error envelope shape is modeled from the documented 400/401 examples, but the literal code and message values for these statuses are not verified against production.
+- Which response fields can truly return null is assumed generously per the nullability convention and needs production confirmation. Specifically, this spec marks VatCalculation.amount_excluding_vat, amount_including_vat, vat_amount and vat_rate as nullable, and VatCategory.rate and category as nullable; these assumptions need backend confirmation.
+- Whether VatValidation.company and VatValidation.country can be null on a valid VAT lookup (and which of their sub-fields can be null) is assumed and needs production confirmation.
+- The calculate and categories docs label the monetary/rate fields (amount_excluding_vat, amount_including_vat, vat_amount, vat_rate, and VatCategory.rate) as Float, but the documented JSON examples return them as quoted strings (e.g. '175.00', '0.190', '0.070'). They are modeled as type:string to match the actual wire format; the Float-vs-string discrepancy needs backend confirmation.
+- CORS support is unknown and needs confirmation.

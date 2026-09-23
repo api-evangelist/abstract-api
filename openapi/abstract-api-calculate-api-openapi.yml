@@ -1,0 +1,280 @@
+openapi: 3.2.0
+info:
+  title: Abstract VAT Validation Calculate API
+  description: 'Validate a VAT number and retrieve the registered company details, calculate VAT-compliant prices for a given amount and country, and look up the latest VAT rates and reduced-rate categories for a country. Authenticate with your API key as the `api_key` query parameter, or as an `Authorization: Bearer ` header. GET and POST (form-encoded or JSON) are both supported.'
+  version: 1.0.0
+  termsOfService: https://www.abstractapi.com/legal/legal
+  contact:
+    name: Abstract API
+    url: https://www.abstractapi.com/api/vat-validation-rates-api
+  license:
+    name: Commercial — see Terms of Service
+    url: https://www.abstractapi.com/legal/legal
+servers:
+- url: https://vat.abstractapi.com/v1
+security:
+- ApiKeyQuery: []
+- BearerAuth: []
+tags:
+- name: Calculate
+paths:
+  /calculate:
+    get:
+      operationId: getCalculateVat
+      summary: Calculate VAT for an amount
+      description: Determines VAT-compliant prices for a given value, country, and purchase type.
+      parameters:
+      - name: amount
+        in: query
+        required: true
+        description: The amount that you would like to get the VAT amount for or from.
+        schema:
+          type: string
+        example: '175'
+      - name: country_code
+        in: query
+        required: true
+        description: The two-letter ISO 3166-1 alpha-2 code of the country in which the transaction takes place.
+        schema:
+          type: string
+        example: DE
+      - name: is_vat_incl
+        in: query
+        required: false
+        description: Set to true if the amount already includes VAT and you would like to perform the reverse calculation. Defaults to false.
+        schema:
+          type: boolean
+        example: false
+      - name: vat_category
+        in: query
+        required: false
+        description: The category of goods or services, used when a country offers a reduced VAT rate for certain categories.
+        schema:
+          type: string
+        example: standard
+      responses:
+        '200':
+          description: The calculated VAT-inclusive and VAT-exclusive amounts.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VatCalculation'
+              example:
+                amount_excluding_vat: '175.00'
+                amount_including_vat: '208.25'
+                vat_amount: '33.25'
+                vat_category: standard
+                vat_rate: '0.190'
+                country:
+                  code: DE
+                  name: Germany
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/QuotaReached'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      tags:
+      - Calculate
+    post:
+      operationId: postCalculateVat
+      summary: Calculate VAT for an amount
+      description: 'Same as the GET operation. The API key may be supplied in the request body, as the `api_key` query parameter, or as an `Authorization: Bearer ` header.'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CalculateRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CalculateRequest'
+      responses:
+        '200':
+          description: The calculated VAT-inclusive and VAT-exclusive amounts.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VatCalculation'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/QuotaReached'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      tags:
+      - Calculate
+components:
+  responses:
+    Unauthorized:
+      description: Unauthorized — missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Invalid API key provided.
+              code: unauthorized
+              details: null
+    ServerError:
+      description: Internal server error. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request — a required parameter is missing or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: A validation error occurred.
+              code: validation_error
+              details:
+                vat_number:
+                - This is a required argument.
+    TooManyRequests:
+      description: Too Many Requests — rate limit exceeded (free plans are limited to 1 request per second). The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    QuotaReached:
+      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    CalculateRequest:
+      type: object
+      required:
+      - amount
+      - country_code
+      properties:
+        amount:
+          type: string
+          description: The amount that you would like to get the VAT amount for or from.
+          example: '175'
+        country_code:
+          type: string
+          description: The two-letter ISO 3166-1 alpha-2 code of the country in which the transaction takes place.
+          example: DE
+        is_vat_incl:
+          type: boolean
+          description: Set to true if the amount already includes VAT and you would like to perform the reverse calculation. Defaults to false.
+          example: false
+        vat_category:
+          type: string
+          description: The category of goods or services, used when a country offers a reduced VAT rate for certain categories.
+          example: standard
+        api_key:
+          type: string
+          description: 'Your API key. Optional here if supplied as the `api_key` query parameter or an `Authorization: Bearer <key>` header.'
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - message
+          - code
+          properties:
+            message:
+              type: string
+              description: Human-readable description of the error.
+              example: A validation error occurred.
+            code:
+              type: string
+              description: Machine-readable error code, e.g. validation_error or unauthorized.
+              example: validation_error
+            details:
+              type:
+              - object
+              - 'null'
+              description: Field-keyed validation messages for validation_error responses; null for other error types.
+              additionalProperties:
+                type: array
+                items:
+                  type: string
+    VatCalculation:
+      type: object
+      properties:
+        amount_excluding_vat:
+          type:
+          - string
+          - 'null'
+          description: The transaction amount before VAT.
+          example: '175.00'
+        amount_including_vat:
+          type:
+          - string
+          - 'null'
+          description: The transaction amount with VAT included.
+          example: '208.25'
+        vat_amount:
+          type:
+          - string
+          - 'null'
+          description: The VAT portion of the amount.
+          example: '33.25'
+        vat_category:
+          type:
+          - string
+          - 'null'
+          description: The category of goods or services used for the calculation; null when no specific category applies.
+          example: standard
+        vat_rate:
+          type:
+          - string
+          - 'null'
+          description: The VAT rate applied, expressed as a decimal fraction.
+          example: '0.190'
+        country:
+          type:
+          - object
+          - 'null'
+          description: The country in which the transaction takes place.
+          properties:
+            code:
+              type:
+              - string
+              - 'null'
+              description: The two-letter ISO 3166-1 alpha-2 code of the country.
+            name:
+              type:
+              - string
+              - 'null'
+              description: The name of the country.
+  securitySchemes:
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+      description: Your unique VAT Validation API key.
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Send your API key as a Bearer token; omit `api_key` from the query string.
+externalDocs:
+  description: Official documentation
+  url: https://docs.abstractapi.com/api/vat-validation
+x-openItems:
+- The exact code and message strings for the 422 (quota reached / insufficient credits), 429 (rate limit) and 500 (server error) responses are unconfirmed. The error envelope shape is modeled from the documented 400/401 examples, but the literal code and message values for these statuses are not verified against production.
+- Which response fields can truly return null is assumed generously per the nullability convention and needs production confirmation. Specifically, this spec marks VatCalculation.amount_excluding_vat, amount_including_vat, vat_amount and vat_rate as nullable, and VatCategory.rate and category as nullable; these assumptions need backend confirmation.
+- Whether VatValidation.company and VatValidation.country can be null on a valid VAT lookup (and which of their sub-fields can be null) is assumed and needs production confirmation.
+- The calculate and categories docs label the monetary/rate fields (amount_excluding_vat, amount_including_vat, vat_amount, vat_rate, and VatCategory.rate) as Float, but the documented JSON examples return them as quoted strings (e.g. '175.00', '0.190', '0.070'). They are modeled as type:string to match the actual wire format; the Float-vs-string discrepancy needs backend confirmation.
+- CORS support is unknown and needs confirmation.

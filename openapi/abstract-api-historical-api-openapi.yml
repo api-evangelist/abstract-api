@@ -1,0 +1,241 @@
+openapi: 3.2.0
+info:
+  title: Abstract Exchange Rates Historical API
+  description: 'Get live, convert, and historical foreign-exchange and cryptocurrency rates for 80+ fiat and cryptocurrency rates (fiat uses ISO 4217 codes) in a single request. Authenticate with your API key as the `api_key` query parameter, or as an `Authorization: Bearer ` header. GET and POST (form-encoded or JSON) are both supported.'
+  version: 1.0.0
+  termsOfService: https://www.abstractapi.com/legal/legal
+  contact:
+    name: Abstract API
+    url: https://www.abstractapi.com/api/exchange-rate-api
+  license:
+    name: Commercial — see Terms of Service
+    url: https://www.abstractapi.com/legal/legal
+servers:
+- url: https://exchange-rates.abstractapi.com/v1
+security:
+- ApiKeyQuery: []
+- BearerAuth: []
+tags:
+- name: Historical
+paths:
+  /historical:
+    get:
+      operationId: getHistoricalExchangeRates
+      summary: Get exchange rates for a base currency on a past date
+      description: Functions like the live endpoint but requires a date. Returns the exchange rates for the requested base currency on the given historical date. This endpoint is currently in closed beta.
+      parameters:
+      - name: base
+        in: query
+        required: true
+        description: The base currency to get the historical exchange rate(s) for. Uses the ISO 4217 currency standard.
+        schema:
+          type: string
+        example: USD
+      - name: date
+        in: query
+        required: true
+        description: The historical date to get rates from, in YYYY-MM-DD format.
+        schema:
+          type: string
+          format: date
+        example: '2024-01-01'
+      - name: target
+        in: query
+        required: false
+        description: The target currency or currencies to get the exchange rate of versus the base currency. Multiple targets may be supplied as a comma-separated list. If omitted, rates for all supported currencies are returned.
+        schema:
+          type: string
+        example: EUR,CAD,AUD
+      responses:
+        '200':
+          description: The exchange rates for the requested base currency on the given date.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HistoricalRates'
+              example:
+                base: USD
+                date: '2024-01-01'
+                exchange_rates:
+                  EUR: 0.912742
+                  JPY: 142.095655
+                  GBP: 0.790845
+                  CAD: 1.329409
+                  AUD: 1.473804
+                  CHF: 0.849306
+                  CNY: 7.143483
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/QuotaReached'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      tags:
+      - Historical
+    post:
+      operationId: postHistoricalExchangeRates
+      summary: Get exchange rates for a base currency on a past date
+      description: 'Same as the GET operation. The API key may be supplied in the request body, as the `api_key` query parameter, or as an `Authorization: Bearer ` header. This endpoint is currently in closed beta.'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/HistoricalRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HistoricalRequest'
+      responses:
+        '200':
+          description: The exchange rates for the requested base currency on the given date.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HistoricalRates'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/QuotaReached'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      tags:
+      - Historical
+components:
+  responses:
+    Unauthorized:
+      description: Unauthorized — missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Invalid API key provided.
+              code: unauthorized
+              details: null
+    ServerError:
+      description: Internal server error. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request — a required parameter is missing or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: A validation error occurred.
+              code: validation_error
+              details:
+                base:
+                - This is a required argument.
+    TooManyRequests:
+      description: Too Many Requests — rate limit exceeded. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    QuotaReached:
+      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - message
+          - code
+          properties:
+            message:
+              type: string
+              description: Human-readable description of the error.
+              example: A validation error occurred.
+            code:
+              type: string
+              description: Machine-readable error code, e.g. validation_error or unauthorized.
+              example: validation_error
+            details:
+              type:
+              - object
+              - 'null'
+              description: Field-keyed validation messages for validation_error responses; null for other error types.
+              additionalProperties:
+                type: array
+                items:
+                  type: string
+    HistoricalRequest:
+      type: object
+      required:
+      - base
+      - date
+      properties:
+        base:
+          type: string
+          description: The base currency to get the historical exchange rate(s) for. Uses the ISO 4217 currency standard.
+          example: USD
+        date:
+          type: string
+          format: date
+          description: The historical date to get rates from, in YYYY-MM-DD format.
+          example: '2024-01-01'
+        target:
+          type: string
+          description: The target currency or currencies versus the base currency, as a comma-separated list. If omitted, all supported currencies are returned.
+          example: EUR,CAD,AUD
+        api_key:
+          type: string
+          description: 'Your API key. Optional here if supplied as the `api_key` query parameter or an `Authorization: Bearer <key>` header.'
+    HistoricalRates:
+      type: object
+      properties:
+        base:
+          type: string
+          description: The base currency the rates are quoted against (echoes the request).
+          example: USD
+        date:
+          type: string
+          format: date
+          description: The historical date the rates are for (echoes the request), in YYYY-MM-DD format.
+          example: '2024-01-01'
+        exchange_rates:
+          type: object
+          description: Map of ISO 4217 currency code to its exchange rate versus the base currency on the requested date.
+          additionalProperties:
+            type:
+            - number
+            - 'null'
+          example:
+            EUR: 0.912742
+            GBP: 0.790845
+            CAD: 1.329409
+  securitySchemes:
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+      description: Your unique Exchange Rates API key.
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Send your API key as a Bearer token; omit `api_key` from the query string.
+externalDocs:
+  description: Official documentation
+  url: https://docs.abstractapi.com/api/exchange-rates

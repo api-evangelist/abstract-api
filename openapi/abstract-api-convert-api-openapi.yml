@@ -1,0 +1,269 @@
+openapi: 3.2.0
+info:
+  title: Abstract Exchange Rates Convert API
+  description: 'Get live, convert, and historical foreign-exchange and cryptocurrency rates for 80+ fiat and cryptocurrency rates (fiat uses ISO 4217 codes) in a single request. Authenticate with your API key as the `api_key` query parameter, or as an `Authorization: Bearer ` header. GET and POST (form-encoded or JSON) are both supported.'
+  version: 1.0.0
+  termsOfService: https://www.abstractapi.com/legal/legal
+  contact:
+    name: Abstract API
+    url: https://www.abstractapi.com/api/exchange-rate-api
+  license:
+    name: Commercial — see Terms of Service
+    url: https://www.abstractapi.com/legal/legal
+servers:
+- url: https://exchange-rates.abstractapi.com/v1
+security:
+- ApiKeyQuery: []
+- BearerAuth: []
+tags:
+- name: Convert
+paths:
+  /convert:
+    get:
+      operationId: getConvertExchangeRate
+      summary: Convert an amount from one currency to another
+      parameters:
+      - name: base
+        in: query
+        required: true
+        description: The base (source) currency to convert from. Uses the ISO 4217 currency standard.
+        schema:
+          type: string
+        example: USD
+      - name: target
+        in: query
+        required: true
+        description: The target (destination) currency to convert to. Uses the ISO 4217 currency standard. A single target is accepted.
+        schema:
+          type: string
+        example: EUR
+      - name: date
+        in: query
+        required: false
+        description: The historical date to get the conversion rate from, in YYYY-MM-DD format. If omitted, the most recent rate is used.
+        schema:
+          type: string
+          format: date
+        example: '2024-01-01'
+      - name: base_amount
+        in: query
+        required: false
+        description: The amount of the base currency to convert to the target currency. Defaults to 1 when omitted.
+        schema:
+          type: number
+          format: float
+        example: 100
+      responses:
+        '200':
+          description: The converted amount and the exchange rate used.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conversion'
+              example:
+                base: USD
+                target: EUR
+                base_amount: 1
+                converted_amount: 0.923361
+                exchange_rate: 0.923361
+                last_updated: 1716297300
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/QuotaReached'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      tags:
+      - Convert
+    post:
+      operationId: postConvertExchangeRate
+      summary: Convert an amount from one currency to another
+      description: 'Same as the GET operation. The API key may be supplied in the request body, as the `api_key` query parameter, or as an `Authorization: Bearer ` header.'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ConvertRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConvertRequest'
+      responses:
+        '200':
+          description: The converted amount and the exchange rate used.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conversion'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/QuotaReached'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      tags:
+      - Convert
+components:
+  schemas:
+    Conversion:
+      type: object
+      properties:
+        base:
+          type: string
+          description: The base (source) currency (echoes the request).
+          example: USD
+        target:
+          type: string
+          description: The target (destination) currency (echoes the request).
+          example: EUR
+        base_amount:
+          type: number
+          format: float
+          description: The amount of the base currency that was converted.
+          example: 1
+        converted_amount:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: The resulting amount in the target currency; null when it cannot be computed.
+          example: 0.923361
+        exchange_rate:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: The exchange rate used for the conversion; null when unavailable.
+          example: 0.923361
+        date:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: The date the rates were pulled from (present when a date was requested); echoes the request.
+          example: '2024-01-01'
+        last_updated:
+          type:
+          - integer
+          - 'null'
+          description: Unix timestamp (seconds) of when the rate was last updated; null when unavailable.
+          example: 1716297300
+    ConvertRequest:
+      type: object
+      required:
+      - base
+      - target
+      properties:
+        base:
+          type: string
+          description: The base (source) currency to convert from. Uses the ISO 4217 currency standard.
+          example: USD
+        target:
+          type: string
+          description: The target (destination) currency to convert to. Uses the ISO 4217 currency standard. A single target is accepted.
+          example: EUR
+        date:
+          type: string
+          format: date
+          description: The historical date to get the conversion rate from, in YYYY-MM-DD format. If omitted, the most recent rate is used.
+          example: '2024-01-01'
+        base_amount:
+          type: number
+          format: float
+          description: The amount of the base currency to convert to the target currency. Defaults to 1 when omitted.
+          example: 100
+        api_key:
+          type: string
+          description: 'Your API key. Optional here if supplied as the `api_key` query parameter or an `Authorization: Bearer <key>` header.'
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - message
+          - code
+          properties:
+            message:
+              type: string
+              description: Human-readable description of the error.
+              example: A validation error occurred.
+            code:
+              type: string
+              description: Machine-readable error code, e.g. validation_error or unauthorized.
+              example: validation_error
+            details:
+              type:
+              - object
+              - 'null'
+              description: Field-keyed validation messages for validation_error responses; null for other error types.
+              additionalProperties:
+                type: array
+                items:
+                  type: string
+  responses:
+    Unauthorized:
+      description: Unauthorized — missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Invalid API key provided.
+              code: unauthorized
+              details: null
+    ServerError:
+      description: Internal server error. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request — a required parameter is missing or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: A validation error occurred.
+              code: validation_error
+              details:
+                base:
+                - This is a required argument.
+    TooManyRequests:
+      description: Too Many Requests — rate limit exceeded. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    QuotaReached:
+      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+      description: Your unique Exchange Rates API key.
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Send your API key as a Bearer token; omit `api_key` from the query string.
+externalDocs:
+  description: Official documentation
+  url: https://docs.abstractapi.com/api/exchange-rates

@@ -1,0 +1,228 @@
+openapi: 3.2.0
+info:
+  title: Abstract Exchange Rates Live API
+  description: 'Get live, convert, and historical foreign-exchange and cryptocurrency rates for 80+ fiat and cryptocurrency rates (fiat uses ISO 4217 codes) in a single request. Authenticate with your API key as the `api_key` query parameter, or as an `Authorization: Bearer ` header. GET and POST (form-encoded or JSON) are both supported.'
+  version: 1.0.0
+  termsOfService: https://www.abstractapi.com/legal/legal
+  contact:
+    name: Abstract API
+    url: https://www.abstractapi.com/api/exchange-rate-api
+  license:
+    name: Commercial — see Terms of Service
+    url: https://www.abstractapi.com/legal/legal
+servers:
+- url: https://exchange-rates.abstractapi.com/v1
+security:
+- ApiKeyQuery: []
+- BearerAuth: []
+tags:
+- name: Live
+paths:
+  /live:
+    get:
+      operationId: getLiveExchangeRates
+      summary: Get the most recent exchange rates for a base currency
+      parameters:
+      - name: base
+        in: query
+        required: true
+        description: The base currency to get the latest exchange rate(s) for. Uses the ISO 4217 currency standard.
+        schema:
+          type: string
+        example: USD
+      - name: target
+        in: query
+        required: false
+        description: The target currency or currencies to get the exchange rate of versus the base currency. Multiple targets may be supplied as a comma-separated list. If omitted, rates for all supported currencies are returned.
+        schema:
+          type: string
+        example: EUR,CAD,AUD
+      responses:
+        '200':
+          description: The most recent exchange rates for the requested base currency.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LiveRates'
+              example:
+                base: USD
+                last_updated: 1716297300
+                exchange_rates:
+                  EUR: 0.923361
+                  JPY: 156.54663
+                  GBP: 0.78638
+                  CAD: 1.367498
+                  AUD: 1.50397
+                  BTC: 2.3e-05
+                  ETH: 0.000392
+                  DOGE: 12.544233
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/QuotaReached'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      tags:
+      - Live
+    post:
+      operationId: postLiveExchangeRates
+      summary: Get the most recent exchange rates for a base currency
+      description: 'Same as the GET operation. The API key may be supplied in the request body, as the `api_key` query parameter, or as an `Authorization: Bearer ` header.'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/LiveRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LiveRequest'
+      responses:
+        '200':
+          description: The most recent exchange rates for the requested base currency.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LiveRates'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/QuotaReached'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/ServerError'
+      tags:
+      - Live
+components:
+  responses:
+    Unauthorized:
+      description: Unauthorized — missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Invalid API key provided.
+              code: unauthorized
+              details: null
+    ServerError:
+      description: Internal server error. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request — a required parameter is missing or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: A validation error occurred.
+              code: validation_error
+              details:
+                base:
+                - This is a required argument.
+    TooManyRequests:
+      description: Too Many Requests — rate limit exceeded. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    QuotaReached:
+      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    LiveRequest:
+      type: object
+      required:
+      - base
+      properties:
+        base:
+          type: string
+          description: The base currency to get the latest exchange rate(s) for. Uses the ISO 4217 currency standard.
+          example: USD
+        target:
+          type: string
+          description: The target currency or currencies versus the base currency, as a comma-separated list. If omitted, all supported currencies are returned.
+          example: EUR,CAD,AUD
+        api_key:
+          type: string
+          description: 'Your API key. Optional here if supplied as the `api_key` query parameter or an `Authorization: Bearer <key>` header.'
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - message
+          - code
+          properties:
+            message:
+              type: string
+              description: Human-readable description of the error.
+              example: A validation error occurred.
+            code:
+              type: string
+              description: Machine-readable error code, e.g. validation_error or unauthorized.
+              example: validation_error
+            details:
+              type:
+              - object
+              - 'null'
+              description: Field-keyed validation messages for validation_error responses; null for other error types.
+              additionalProperties:
+                type: array
+                items:
+                  type: string
+    LiveRates:
+      type: object
+      properties:
+        base:
+          type: string
+          description: The base currency the rates are quoted against (echoes the request).
+          example: USD
+        last_updated:
+          type:
+          - integer
+          - 'null'
+          description: Unix timestamp (seconds) of when the rates were last updated; null when unavailable.
+          example: 1716297300
+        exchange_rates:
+          type: object
+          description: Map of ISO 4217 currency code to its exchange rate versus the base currency.
+          additionalProperties:
+            type:
+            - number
+            - 'null'
+          example:
+            EUR: 0.923361
+            GBP: 0.78638
+            BTC: 2.3e-05
+  securitySchemes:
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+      description: Your unique Exchange Rates API key.
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Send your API key as a Bearer token; omit `api_key` from the query string.
+externalDocs:
+  description: Official documentation
+  url: https://docs.abstractapi.com/api/exchange-rates
