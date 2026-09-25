@@ -46,71 +46,71 @@ artifacts:
     method: searched
     evidence: declared in the artifact
   collections/abstract-api-avatars-api.opencollection.json:
-    method: derived
-    evidence: openapi/abstract-api-avatars-api
+    method: unknown
+    evidence: no authorship recorded
   collections/abstract-api-avatars-api.postman_collection.json:
-    method: derived
-    evidence: openapi/abstract-api-avatars-api
+    method: unknown
+    evidence: no authorship recorded
   collections/abstract-api-company-enrichment-api.opencollection.json:
-    method: derived
-    evidence: openapi/abstract-api-company-enrichment-api
+    method: unknown
+    evidence: no authorship recorded
   collections/abstract-api-company-enrichment-api.postman_collection.json:
-    method: derived
-    evidence: openapi/abstract-api-company-enrichment-api
+    method: unknown
+    evidence: no authorship recorded
   collections/abstract-api-email-reputation-api.opencollection.json:
-    method: derived
-    evidence: openapi/abstract-api-email-reputation-api
+    method: unknown
+    evidence: no authorship recorded
   collections/abstract-api-email-reputation-api.postman_collection.json:
-    method: derived
-    evidence: openapi/abstract-api-email-reputation-api
+    method: unknown
+    evidence: no authorship recorded
   collections/abstract-api-exchange-rates-api.opencollection.json:
-    method: derived
-    evidence: openapi/abstract-api-exchange-rates-api
+    method: unknown
+    evidence: no authorship recorded
   collections/abstract-api-exchange-rates-api.postman_collection.json:
-    method: derived
-    evidence: openapi/abstract-api-exchange-rates-api
+    method: unknown
+    evidence: no authorship recorded
   collections/abstract-api-iban-validation-api.opencollection.json:
-    method: derived
-    evidence: openapi/abstract-api-iban-validation-api
+    method: unknown
+    evidence: no authorship recorded
   collections/abstract-api-iban-validation-api.postman_collection.json:
-    method: derived
-    evidence: openapi/abstract-api-iban-validation-api
+    method: unknown
+    evidence: no authorship recorded
   collections/abstract-api-image-processing-api.opencollection.json:
-    method: derived
-    evidence: openapi/abstract-api-image-processing-api
+    method: unknown
+    evidence: no authorship recorded
   collections/abstract-api-image-processing-api.postman_collection.json:
-    method: derived
-    evidence: openapi/abstract-api-image-processing-api
+    method: unknown
+    evidence: no authorship recorded
   collections/abstract-api-ip-geolocation-api.opencollection.json:
-    method: derived
-    evidence: openapi/abstract-api-ip-geolocation-api
+    method: unknown
+    evidence: no authorship recorded
   collections/abstract-api-ip-geolocation-api.postman_collection.json:
-    method: derived
-    evidence: openapi/abstract-api-ip-geolocation-api
+    method: unknown
+    evidence: no authorship recorded
   collections/abstract-api-ip-intelligence-api.opencollection.json:
-    method: derived
-    evidence: openapi/abstract-api-ip-intelligence-api
+    method: unknown
+    evidence: no authorship recorded
   collections/abstract-api-ip-intelligence-api.postman_collection.json:
-    method: derived
-    evidence: openapi/abstract-api-ip-intelligence-api
+    method: unknown
+    evidence: no authorship recorded
   collections/abstract-api-phone-intelligence-api.opencollection.json:
-    method: derived
-    evidence: openapi/abstract-api-phone-intelligence-api
+    method: unknown
+    evidence: no authorship recorded
   collections/abstract-api-phone-intelligence-api.postman_collection.json:
-    method: derived
-    evidence: openapi/abstract-api-phone-intelligence-api
+    method: unknown
+    evidence: no authorship recorded
   collections/abstract-api-public-holidays-api.opencollection.json:
-    method: derived
-    evidence: openapi/abstract-api-public-holidays-api
+    method: unknown
+    evidence: no authorship recorded
   collections/abstract-api-public-holidays-api.postman_collection.json:
-    method: derived
-    evidence: openapi/abstract-api-public-holidays-api
+    method: unknown
+    evidence: no authorship recorded
   collections/abstract-api-timezones-api.opencollection.json:
-    method: derived
-    evidence: openapi/abstract-api-timezones-api
+    method: unknown
+    evidence: no authorship recorded
   collections/abstract-api-timezones-api.postman_collection.json:
-    method: derived
-    evidence: openapi/abstract-api-timezones-api
+    method: unknown
+    evidence: no authorship recorded
   collections/abstract-api-vat-validation-api.opencollection.json:
     method: derived
     evidence: openapi/abstract-api-vat-validation-api
@@ -118,17 +118,17 @@ artifacts:
     method: derived
     evidence: openapi/abstract-api-vat-validation-api
   collections/abstract-api-web-scraping-api.opencollection.json:
-    method: derived
-    evidence: openapi/abstract-api-web-scraping-api
+    method: unknown
+    evidence: no authorship recorded
   collections/abstract-api-web-scraping-api.postman_collection.json:
-    method: derived
-    evidence: openapi/abstract-api-web-scraping-api
+    method: unknown
+    evidence: no authorship recorded
   collections/abstract-api-website-screenshot-api.opencollection.json:
-    method: derived
-    evidence: openapi/abstract-api-website-screenshot-api
+    method: unknown
+    evidence: no authorship recorded
   collections/abstract-api-website-screenshot-api.postman_collection.json:
-    method: derived
-    evidence: openapi/abstract-api-website-screenshot-api
+    method: unknown
+    evidence: no authorship recorded
   conformance/abstract-api-conformance.yml:
     method: searched
     evidence: declared in the artifact
@@ -300,6 +300,9 @@ artifacts:
   finops/abstract-api-finops.yml:
     method: generated
     evidence: declared in the artifact
+  front-door-ai/2026-09-17.yml:
+    method: unknown
+    evidence: no authorship recorded
   json-ld/abstract-api-company-enrichment-context.jsonld:
     method: unknown
     evidence: no authorship recorded
@@ -651,55 +654,7 @@ artifacts:
   json-structure/web-scraping-web-scraping-response-structure.json:
     method: unknown
     evidence: no authorship recorded
-  kin/checks-2026-09-05T072335.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-06T210741.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-07T135032.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-10T093022.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-10T111628.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-11T211707.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-12T193225.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-17T064519.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-19T080027.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-19T082702.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-19T114122.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-20T165047.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-20T191845.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-20T205517.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-21T110057.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-24T064859.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-24T171257.yml:
+  kin/checks-2026-09-24T161608.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-08-25T125852.yml:
@@ -786,6 +741,123 @@ artifacts:
   kin/score-2026-09-05T072335.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-05T144739.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-05T195450.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-05T211839.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-06T011047.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-06T211804.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-06T224210.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-07T200636.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-07T213054.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-08T214843.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-08T232836.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-10T204815.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-10T222408.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-12T062655.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-12T080032.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-12T204651.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-12T221936.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-13T214537.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-14T064754.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-14T210656.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-14T225847.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-15T211329.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-15T230249.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-16T210549.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-16T225339.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-17T211151.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-17T233623.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-18T205255.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-18T231945.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-19T165737.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-19T193153.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-20T205903.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-20T232958.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-21T211425.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-21T233935.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-22T213221.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-23T000603.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-24T064009.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-24T090406.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-24T161608.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
   lifecycle/abstract-api-lifecycle.yml:
     method: searched
     evidence: declared in the artifact
@@ -803,91 +875,100 @@ artifacts:
     evidence: declared in the artifact
   openapi/_original/PROVENANCE.md:
     method: harvested
-    evidence: fetched from the provider as-is; byte-identical to the source
+    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
+      to the provider's source is unverified
   openapi/_original/UPSTREAM-README.md:
     method: harvested
-    evidence: fetched from the provider as-is; byte-identical to the source
+    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
+      to the provider's source is unverified
   openapi/_original/avatars.openapi.yaml:
     method: harvested
-    evidence: fetched from the provider as-is; byte-identical to the source
+    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
+      to the provider's source is unverified
   openapi/_original/company-enrichment.openapi.yaml:
     method: harvested
-    evidence: fetched from the provider as-is; byte-identical to the source
+    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
+      to the provider's source is unverified
   openapi/_original/email-reputation.openapi.yaml:
     method: harvested
-    evidence: fetched from the provider as-is; byte-identical to the source
+    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
+      to the provider's source is unverified
   openapi/_original/exchange-rates.openapi.yaml:
     method: harvested
-    evidence: fetched from the provider as-is; byte-identical to the source
+    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
+      to the provider's source is unverified
   openapi/_original/holidays.openapi.yaml:
     method: harvested
-    evidence: fetched from the provider as-is; byte-identical to the source
+    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
+      to the provider's source is unverified
   openapi/_original/iban-validation.openapi.yaml:
     method: harvested
-    evidence: fetched from the provider as-is; byte-identical to the source
+    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
+      to the provider's source is unverified
   openapi/_original/images.openapi.yaml:
     method: harvested
-    evidence: fetched from the provider as-is; byte-identical to the source
+    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
+      to the provider's source is unverified
   openapi/_original/ip-intelligence.openapi.yaml:
     method: harvested
-    evidence: fetched from the provider as-is; byte-identical to the source
+    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
+      to the provider's source is unverified
   openapi/_original/phone-intelligence.openapi.yaml:
     method: harvested
-    evidence: fetched from the provider as-is; byte-identical to the source
+    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
+      to the provider's source is unverified
   openapi/_original/scrape.openapi.yaml:
     method: harvested
-    evidence: fetched from the provider as-is; byte-identical to the source
+    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
+      to the provider's source is unverified
   openapi/_original/screenshot.openapi.yaml:
     method: harvested
-    evidence: fetched from the provider as-is; byte-identical to the source
+    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
+      to the provider's source is unverified
   openapi/_original/timezones.openapi.yaml:
     method: harvested
-    evidence: fetched from the provider as-is; byte-identical to the source
+    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
+      to the provider's source is unverified
   openapi/_original/vat-validation.openapi.yaml:
-    method: harvested
-    evidence: fetched from the provider as-is; byte-identical to the source
-  openapi/abstract-api-avatars-api-openapi.yml:
+    method: derived
+    evidence: 'the document itself says it was modelled, not published by the provider: "modeled from
+      the"'
+  openapi/abstract-api-abstract-avatars-api-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/abstract-api-company-enrichment-api-openapi.yml:
+  openapi/abstract-api-calculate-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/abstract-api-email-reputation-api-openapi.yml:
+  openapi/abstract-api-categories-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/abstract-api-exchange-rates-api-openapi.yml:
+  openapi/abstract-api-convert-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/abstract-api-iban-validation-api-openapi.yml:
+  openapi/abstract-api-convert-time-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/abstract-api-image-processing-api-openapi.yml:
+  openapi/abstract-api-current-time-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/abstract-api-ip-geolocation-api-openapi.yml:
+  openapi/abstract-api-historical-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/abstract-api-ip-intelligence-api-openapi.yml:
+  openapi/abstract-api-live-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/abstract-api-phone-intelligence-api-openapi.yml:
+  openapi/abstract-api-upload-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/abstract-api-public-holidays-api-openapi.yml:
+  openapi/abstract-api-url-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/abstract-api-timezones-api-openapi.yml:
+  openapi/abstract-api-validate-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/abstract-api-vat-validation-api-openapi.yml:
     method: unknown
     evidence: no authorship recorded
-  openapi/abstract-api-web-scraping-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/abstract-api-website-screenshot-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   overlays/abstract-api-avatars-api-overlay.yaml:
     method: generated
     evidence: declared in the artifact
@@ -937,47 +1018,47 @@ artifacts:
     method: searched
     evidence: declared in the artifact
   postman/abstract-api-avatars.postman_collection.json:
-    method: derived
-    evidence: openapi/abstract-api-avatars
+    method: unknown
+    evidence: no authorship recorded
   postman/abstract-api-company-enrichment.postman_collection.json:
-    method: derived
-    evidence: openapi/abstract-api-company-enrichment
+    method: unknown
+    evidence: no authorship recorded
   postman/abstract-api-email-reputation.postman_collection.json:
-    method: derived
-    evidence: openapi/abstract-api-email-reputation
+    method: unknown
+    evidence: no authorship recorded
   postman/abstract-api-exchange-rates.postman_collection.json:
-    method: derived
-    evidence: openapi/abstract-api-exchange-rates
+    method: unknown
+    evidence: no authorship recorded
   postman/abstract-api-iban-validation.postman_collection.json:
-    method: derived
-    evidence: openapi/abstract-api-iban-validation
+    method: unknown
+    evidence: no authorship recorded
   postman/abstract-api-image-processing.postman_collection.json:
-    method: derived
-    evidence: openapi/abstract-api-image-processing
+    method: unknown
+    evidence: no authorship recorded
   postman/abstract-api-ip-geolocation.postman_collection.json:
-    method: derived
-    evidence: openapi/abstract-api-ip-geolocation
+    method: unknown
+    evidence: no authorship recorded
   postman/abstract-api-ip-intelligence.postman_collection.json:
-    method: derived
-    evidence: openapi/abstract-api-ip-intelligence
+    method: unknown
+    evidence: no authorship recorded
   postman/abstract-api-phone-intelligence.postman_collection.json:
-    method: derived
-    evidence: openapi/abstract-api-phone-intelligence
+    method: unknown
+    evidence: no authorship recorded
   postman/abstract-api-public-holidays.postman_collection.json:
-    method: derived
-    evidence: openapi/abstract-api-public-holidays
+    method: unknown
+    evidence: no authorship recorded
   postman/abstract-api-timezones.postman_collection.json:
-    method: derived
-    evidence: openapi/abstract-api-timezones
+    method: unknown
+    evidence: no authorship recorded
   postman/abstract-api-vat-validation.postman_collection.json:
     method: derived
     evidence: openapi/abstract-api-vat-validation
   postman/abstract-api-web-scraping.postman_collection.json:
-    method: derived
-    evidence: openapi/abstract-api-web-scraping
+    method: unknown
+    evidence: no authorship recorded
   postman/abstract-api-website-screenshot.postman_collection.json:
-    method: derived
-    evidence: openapi/abstract-api-website-screenshot
+    method: unknown
+    evidence: no authorship recorded
   rate-limits/abstract-api-rate-limits.yml:
     method: searched
     evidence: declared in the artifact
