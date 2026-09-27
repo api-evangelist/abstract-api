@@ -207,38 +207,35 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    VATRatesResponse:
+    VATCalculateResponse:
       type: object
       properties:
+        amount_excl_vat:
+          type: number
+          description: Amount excluding VAT
+          example: 100
+        vat_amount:
+          type: number
+          description: VAT amount
+          example: 19
+        amount_incl_vat:
+          type: number
+          description: Amount including VAT
+          example: 119
+        vat_category:
+          type: string
+          description: VAT category used
+          example: standard
+        vat_rate:
+          type: number
+          description: VAT rate applied
+          example: 19
         country_code:
           type: string
           example: DE
         country_name:
           type: string
           example: Germany
-        standard_rate:
-          type: number
-          description: Standard VAT rate percentage
-          example: 19
-        reduced_rates:
-          type: array
-          items:
-            type: number
-          description: Reduced VAT rate percentages
-          example:
-          - 7
-        super_reduced_rate:
-          type:
-          - number
-          - 'null'
-          description: Super reduced VAT rate if applicable
-          example: null
-        parking_rate:
-          type:
-          - number
-          - 'null'
-          description: Parking VAT rate if applicable
-          example: null
     VATValidationResponse:
       type: object
       properties:
@@ -272,6 +269,38 @@ components:
               type: string
               description: Country name
               example: United Kingdom
+    VATRatesResponse:
+      type: object
+      properties:
+        country_code:
+          type: string
+          example: DE
+        country_name:
+          type: string
+          example: Germany
+        standard_rate:
+          type: number
+          description: Standard VAT rate percentage
+          example: 19
+        reduced_rates:
+          type: array
+          items:
+            type: number
+          description: Reduced VAT rate percentages
+          example:
+          - 7
+        super_reduced_rate:
+          type:
+          - number
+          - 'null'
+          description: Super reduced VAT rate if applicable
+          example: null
+        parking_rate:
+          type:
+          - number
+          - 'null'
+          description: Parking VAT rate if applicable
+          example: null
     ErrorResponse:
       type: object
       properties:
@@ -281,35 +310,6 @@ components:
         error:
           type: string
           example: invalid_api_key
-    VATCalculateResponse:
-      type: object
-      properties:
-        amount_excl_vat:
-          type: number
-          description: Amount excluding VAT
-          example: 100
-        vat_amount:
-          type: number
-          description: VAT amount
-          example: 19
-        amount_incl_vat:
-          type: number
-          description: Amount including VAT
-          example: 119
-        vat_category:
-          type: string
-          description: VAT category used
-          example: standard
-        vat_rate:
-          type: number
-          description: VAT rate applied
-          example: 19
-        country_code:
-          type: string
-          example: DE
-        country_name:
-          type: string
-          example: Germany
   securitySchemes:
     apiKey:
       type: apiKey

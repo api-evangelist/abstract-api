@@ -118,71 +118,15 @@ paths:
       tags:
       - Convert Time
 components:
-  responses:
-    Unauthorized:
-      description: Unauthorized — missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: Invalid API key provided.
-              code: unauthorized
-              details: null
-    ServerError:
-      description: Internal server error. The body follows the standard error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request — a required parameter is missing or failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: A validation error occurred.
-              code: validation_error
-              details:
-                location:
-                - This is a required argument.
-    TooManyRequests:
-      description: Too Many Requests — rate limit exceeded. The body follows the standard error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    QuotaReached:
-      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    ConvertTimeRequest:
+    ConvertTime:
       type: object
-      required:
-      - base_location
-      - target_location
+      description: The supplied time expressed in both the base and target locations.
       properties:
         base_location:
-          type: string
-          description: The location the supplied time belongs to. Accepts a place name, latitude/longitude coordinates, or an IP address.
-          example: Los Angeles, CA
+          $ref: '#/components/schemas/TimeLocation'
         target_location:
-          type: string
-          description: The location to convert the time into. Accepts a place name, latitude/longitude coordinates, or an IP address.
-          example: Oxford, United Kingdom
-        base_datetime:
-          type: string
-          description: The date and time to convert, in `YYYY-MM-DD HH:MM:SS` format. Defaults to the current time at the base location when omitted.
-          example: '2020-05-01 07:00:00'
-        api_key:
-          type: string
-          description: 'Your API key. Optional here if supplied as the `api_key` query parameter or an `Authorization: Bearer <key>` header.'
+          $ref: '#/components/schemas/TimeLocation'
     Error:
       type: object
       required:
@@ -211,14 +155,6 @@ components:
                 type: array
                 items:
                   type: string
-    ConvertTime:
-      type: object
-      description: The supplied time expressed in both the base and target locations.
-      properties:
-        base_location:
-          $ref: '#/components/schemas/TimeLocation'
-        target_location:
-          $ref: '#/components/schemas/TimeLocation'
     TimeLocation:
       type: object
       description: Time, date, and timezone details for a single resolved location.
@@ -277,6 +213,70 @@ components:
           format: float
           description: Decimal longitude of the resolved location.
           example: -1.2578499
+    ConvertTimeRequest:
+      type: object
+      required:
+      - base_location
+      - target_location
+      properties:
+        base_location:
+          type: string
+          description: The location the supplied time belongs to. Accepts a place name, latitude/longitude coordinates, or an IP address.
+          example: Los Angeles, CA
+        target_location:
+          type: string
+          description: The location to convert the time into. Accepts a place name, latitude/longitude coordinates, or an IP address.
+          example: Oxford, United Kingdom
+        base_datetime:
+          type: string
+          description: The date and time to convert, in `YYYY-MM-DD HH:MM:SS` format. Defaults to the current time at the base location when omitted.
+          example: '2020-05-01 07:00:00'
+        api_key:
+          type: string
+          description: 'Your API key. Optional here if supplied as the `api_key` query parameter or an `Authorization: Bearer <key>` header.'
+  responses:
+    QuotaReached:
+      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: Too Many Requests — rate limit exceeded. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request — a required parameter is missing or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: A validation error occurred.
+              code: validation_error
+              details:
+                location:
+                - This is a required argument.
+    ServerError:
+      description: Internal server error. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized — missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Invalid API key provided.
+              code: unauthorized
+              details: null
   securitySchemes:
     ApiKeyQuery:
       type: apiKey

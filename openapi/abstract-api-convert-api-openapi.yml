@@ -112,6 +112,49 @@ paths:
       tags:
       - Convert
 components:
+  responses:
+    QuotaReached:
+      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: Too Many Requests — rate limit exceeded. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request — a required parameter is missing or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: A validation error occurred.
+              code: validation_error
+              details:
+                base:
+                - This is a required argument.
+    ServerError:
+      description: Internal server error. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized — missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Invalid API key provided.
+              code: unauthorized
+              details: null
   schemas:
     Conversion:
       type: object
@@ -156,33 +199,6 @@ components:
           - 'null'
           description: Unix timestamp (seconds) of when the rate was last updated; null when unavailable.
           example: 1716297300
-    ConvertRequest:
-      type: object
-      required:
-      - base
-      - target
-      properties:
-        base:
-          type: string
-          description: The base (source) currency to convert from. Uses the ISO 4217 currency standard.
-          example: USD
-        target:
-          type: string
-          description: The target (destination) currency to convert to. Uses the ISO 4217 currency standard. A single target is accepted.
-          example: EUR
-        date:
-          type: string
-          format: date
-          description: The historical date to get the conversion rate from, in YYYY-MM-DD format. If omitted, the most recent rate is used.
-          example: '2024-01-01'
-        base_amount:
-          type: number
-          format: float
-          description: The amount of the base currency to convert to the target currency. Defaults to 1 when omitted.
-          example: 100
-        api_key:
-          type: string
-          description: 'Your API key. Optional here if supplied as the `api_key` query parameter or an `Authorization: Bearer <key>` header.'
     Error:
       type: object
       required:
@@ -211,49 +227,33 @@ components:
                 type: array
                 items:
                   type: string
-  responses:
-    Unauthorized:
-      description: Unauthorized — missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: Invalid API key provided.
-              code: unauthorized
-              details: null
-    ServerError:
-      description: Internal server error. The body follows the standard error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request — a required parameter is missing or failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: A validation error occurred.
-              code: validation_error
-              details:
-                base:
-                - This is a required argument.
-    TooManyRequests:
-      description: Too Many Requests — rate limit exceeded. The body follows the standard error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    QuotaReached:
-      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    ConvertRequest:
+      type: object
+      required:
+      - base
+      - target
+      properties:
+        base:
+          type: string
+          description: The base (source) currency to convert from. Uses the ISO 4217 currency standard.
+          example: USD
+        target:
+          type: string
+          description: The target (destination) currency to convert to. Uses the ISO 4217 currency standard. A single target is accepted.
+          example: EUR
+        date:
+          type: string
+          format: date
+          description: The historical date to get the conversion rate from, in YYYY-MM-DD format. If omitted, the most recent rate is used.
+          example: '2024-01-01'
+        base_amount:
+          type: number
+          format: float
+          description: The amount of the base currency to convert to the target currency. Defaults to 1 when omitted.
+          example: 100
+        api_key:
+          type: string
+          description: 'Your API key. Optional here if supplied as the `api_key` query parameter or an `Authorization: Bearer <key>` header.'
   securitySchemes:
     ApiKeyQuery:
       type: apiKey

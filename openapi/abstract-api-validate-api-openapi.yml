@@ -93,19 +93,14 @@ paths:
       - Validate
 components:
   responses:
-    Unauthorized:
-      description: Unauthorized — missing or invalid API key.
+    QuotaReached:
+      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: Invalid API key provided.
-              code: unauthorized
-              details: null
-    ServerError:
-      description: Internal server error. The body follows the standard error envelope.
+    TooManyRequests:
+      description: Too Many Requests — rate limit exceeded (free plans are limited to 1 request per second). The body follows the standard error envelope.
       content:
         application/json:
           schema:
@@ -123,19 +118,36 @@ components:
               details:
                 vat_number:
                 - This is a required argument.
-    TooManyRequests:
-      description: Too Many Requests — rate limit exceeded (free plans are limited to 1 request per second). The body follows the standard error envelope.
+    ServerError:
+      description: Internal server error. The body follows the standard error envelope.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    QuotaReached:
-      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
+    Unauthorized:
+      description: Unauthorized — missing or invalid API key.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Invalid API key provided.
+              code: unauthorized
+              details: null
   schemas:
+    ValidateRequest:
+      type: object
+      required:
+      - vat_number
+      properties:
+        vat_number:
+          type: string
+          description: The VAT number to validate.
+          example: SE556656688001
+        api_key:
+          type: string
+          description: 'Your API key. Optional here if supplied as the `api_key` query parameter or an `Authorization: Bearer <key>` header.'
     VatValidation:
       type: object
       properties:
@@ -179,18 +191,6 @@ components:
               - string
               - 'null'
               description: The name of the country.
-    ValidateRequest:
-      type: object
-      required:
-      - vat_number
-      properties:
-        vat_number:
-          type: string
-          description: The VAT number to validate.
-          example: SE556656688001
-        api_key:
-          type: string
-          description: 'Your API key. Optional here if supplied as the `api_key` query parameter or an `Authorization: Bearer <key>` header.'
     Error:
       type: object
       required:

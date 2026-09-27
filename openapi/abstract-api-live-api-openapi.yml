@@ -102,19 +102,14 @@ paths:
       - Live
 components:
   responses:
-    Unauthorized:
-      description: Unauthorized — missing or invalid API key.
+    QuotaReached:
+      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: Invalid API key provided.
-              code: unauthorized
-              details: null
-    ServerError:
-      description: Internal server error. The body follows the standard error envelope.
+    TooManyRequests:
+      description: Too Many Requests — rate limit exceeded. The body follows the standard error envelope.
       content:
         application/json:
           schema:
@@ -132,35 +127,24 @@ components:
               details:
                 base:
                 - This is a required argument.
-    TooManyRequests:
-      description: Too Many Requests — rate limit exceeded. The body follows the standard error envelope.
+    ServerError:
+      description: Internal server error. The body follows the standard error envelope.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    QuotaReached:
-      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
+    Unauthorized:
+      description: Unauthorized — missing or invalid API key.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Invalid API key provided.
+              code: unauthorized
+              details: null
   schemas:
-    LiveRequest:
-      type: object
-      required:
-      - base
-      properties:
-        base:
-          type: string
-          description: The base currency to get the latest exchange rate(s) for. Uses the ISO 4217 currency standard.
-          example: USD
-        target:
-          type: string
-          description: The target currency or currencies versus the base currency, as a comma-separated list. If omitted, all supported currencies are returned.
-          example: EUR,CAD,AUD
-        api_key:
-          type: string
-          description: 'Your API key. Optional here if supplied as the `api_key` query parameter or an `Authorization: Bearer <key>` header.'
     Error:
       type: object
       required:
@@ -213,6 +197,22 @@ components:
             EUR: 0.923361
             GBP: 0.78638
             BTC: 2.3e-05
+    LiveRequest:
+      type: object
+      required:
+      - base
+      properties:
+        base:
+          type: string
+          description: The base currency to get the latest exchange rate(s) for. Uses the ISO 4217 currency standard.
+          example: USD
+        target:
+          type: string
+          description: The target currency or currencies versus the base currency, as a comma-separated list. If omitted, all supported currencies are returned.
+          example: EUR,CAD,AUD
+        api_key:
+          type: string
+          description: 'Your API key. Optional here if supplied as the `api_key` query parameter or an `Authorization: Bearer <key>` header.'
   securitySchemes:
     ApiKeyQuery:
       type: apiKey

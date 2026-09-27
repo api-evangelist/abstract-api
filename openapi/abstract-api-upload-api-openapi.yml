@@ -122,19 +122,14 @@ paths:
       - Upload
 components:
   responses:
-    Unauthorized:
-      description: Unauthorized — missing or invalid API key.
+    QuotaReached:
+      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: Invalid API key provided.
-              code: unauthorized
-              details: null
-    ServerError:
-      description: Internal server error. The body follows the standard error envelope.
+    TooManyRequests:
+      description: Too Many Requests — rate limit exceeded. The body follows the standard error envelope.
       content:
         application/json:
           schema:
@@ -152,50 +147,24 @@ components:
               details:
                 url:
                 - This is a required argument.
-    TooManyRequests:
-      description: Too Many Requests — rate limit exceeded. The body follows the standard error envelope.
+    ServerError:
+      description: Internal server error. The body follows the standard error envelope.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    QuotaReached:
-      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
+    Unauthorized:
+      description: Unauthorized — missing or invalid API key.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Invalid API key provided.
+              code: unauthorized
+              details: null
   schemas:
-    UploadRequest:
-      type: object
-      properties:
-        lossy:
-          type: boolean
-          description: If true, perform lossy compression, reducing size significantly with a small drop in quality. If false, size is reduced only slightly (10–20% at most) with no quality loss. Defaults to false.
-          example: true
-        quality:
-          type: integer
-          minimum: 0
-          maximum: 100
-          description: Integer between 0 and 100 setting the quality level for lossy compression. Determined intelligently when omitted.
-          example: 80
-        resize:
-          $ref: '#/components/schemas/ResizeOptions'
-        api_key:
-          type: string
-          description: 'Your API key. Optional here if supplied as the `api_key` query parameter or an `Authorization: Bearer <key>` header.'
-    UploadMultipartRequest:
-      type: object
-      required:
-      - image
-      properties:
-        image:
-          type: string
-          format: binary
-          description: The image file to process, submitted as a multipart part.
-        data:
-          type: string
-          description: 'A JSON-encoded options object holding `api_key` and any optional processing options (`lossy`, `quality`, `resize`), e.g. {"api_key": "YOUR_UNIQUE_API_KEY", "lossy": true}.'
-          example: '{"api_key": "YOUR_UNIQUE_API_KEY", "lossy": true}'
     Error:
       type: object
       required:
@@ -224,6 +193,56 @@ components:
                 type: array
                 items:
                   type: string
+    ImageResult:
+      type: object
+      properties:
+        original_size:
+          type:
+          - integer
+          - 'null'
+          description: The original size of the provided image, in bytes. Null when the value is unavailable for an unreadable or edge-case input.
+          example: 205559
+        original_height:
+          type:
+          - integer
+          - 'null'
+          description: The original height of the provided image, in pixels. Null when the value is unavailable for an unreadable or edge-case input.
+          example: 430
+        original_width:
+          type:
+          - integer
+          - 'null'
+          description: The original width of the provided image, in pixels. Null when the value is unavailable for an unreadable or edge-case input.
+          example: 1142
+        final_size:
+          type:
+          - integer
+          - 'null'
+          description: The final size of the processed image, in bytes. Null when the value is unavailable.
+          example: 181512
+        bytes_saved:
+          type:
+          - integer
+          - 'null'
+          description: The number of bytes saved by optimizing the image. May be negative or null when the processed image is not smaller than the input.
+          example: 24047
+        final_height:
+          type:
+          - integer
+          - 'null'
+          description: The final height of the processed image, in pixels. Null when no resize was applied or the value is unavailable.
+          example: 430
+        final_width:
+          type:
+          - integer
+          - 'null'
+          description: The final width of the processed image, in pixels. Null when no resize was applied or the value is unavailable.
+          example: 1142
+        url:
+          type: string
+          format: uri
+          description: The URL of the processed image hosted by Abstract. Images are available for 1 day.
+          example: https://abstractapi-images.s3.amazonaws.com/e6c6ea1f8bfd46be9ed357b9ce4240ff_dog.jpg
     ResizeOptions:
       type: object
       description: Optional resize configuration. Supply a strategy plus the dimensions it needs. If omitted, the image is only compressed.
@@ -291,56 +310,37 @@ components:
           type: string
           description: 'For the fill strategy, the color used to fill unused portions of the bounds. HEX (#f60 or #ff6600) or RGB (rgb(255, 0, 0)) notation. Defaults to white.'
           example: rgb(91, 126, 156)
-    ImageResult:
+    UploadMultipartRequest:
+      type: object
+      required:
+      - image
+      properties:
+        image:
+          type: string
+          format: binary
+          description: The image file to process, submitted as a multipart part.
+        data:
+          type: string
+          description: 'A JSON-encoded options object holding `api_key` and any optional processing options (`lossy`, `quality`, `resize`), e.g. {"api_key": "YOUR_UNIQUE_API_KEY", "lossy": true}.'
+          example: '{"api_key": "YOUR_UNIQUE_API_KEY", "lossy": true}'
+    UploadRequest:
       type: object
       properties:
-        original_size:
-          type:
-          - integer
-          - 'null'
-          description: The original size of the provided image, in bytes. Null when the value is unavailable for an unreadable or edge-case input.
-          example: 205559
-        original_height:
-          type:
-          - integer
-          - 'null'
-          description: The original height of the provided image, in pixels. Null when the value is unavailable for an unreadable or edge-case input.
-          example: 430
-        original_width:
-          type:
-          - integer
-          - 'null'
-          description: The original width of the provided image, in pixels. Null when the value is unavailable for an unreadable or edge-case input.
-          example: 1142
-        final_size:
-          type:
-          - integer
-          - 'null'
-          description: The final size of the processed image, in bytes. Null when the value is unavailable.
-          example: 181512
-        bytes_saved:
-          type:
-          - integer
-          - 'null'
-          description: The number of bytes saved by optimizing the image. May be negative or null when the processed image is not smaller than the input.
-          example: 24047
-        final_height:
-          type:
-          - integer
-          - 'null'
-          description: The final height of the processed image, in pixels. Null when no resize was applied or the value is unavailable.
-          example: 430
-        final_width:
-          type:
-          - integer
-          - 'null'
-          description: The final width of the processed image, in pixels. Null when no resize was applied or the value is unavailable.
-          example: 1142
-        url:
+        lossy:
+          type: boolean
+          description: If true, perform lossy compression, reducing size significantly with a small drop in quality. If false, size is reduced only slightly (10–20% at most) with no quality loss. Defaults to false.
+          example: true
+        quality:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: Integer between 0 and 100 setting the quality level for lossy compression. Determined intelligently when omitted.
+          example: 80
+        resize:
+          $ref: '#/components/schemas/ResizeOptions'
+        api_key:
           type: string
-          format: uri
-          description: The URL of the processed image hosted by Abstract. Images are available for 1 day.
-          example: https://abstractapi-images.s3.amazonaws.com/e6c6ea1f8bfd46be9ed357b9ce4240ff_dog.jpg
+          description: 'Your API key. Optional here if supplied as the `api_key` query parameter or an `Authorization: Bearer <key>` header.'
   securitySchemes:
     ApiKeyQuery:
       type: apiKey

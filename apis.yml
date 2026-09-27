@@ -4,15 +4,19 @@ name: Abstract API
 type: Index
 deliveryModel:
   model: saas
-  open_source: false
+  license_evidence:
+    not_product:
+    - abstractapi/openapi-specs
+  open_source: unknown
   commercial: true
   callable_host: true
   label: Hosted service · you call their endpoint
-  confidence: high
+  confidence: low
   source:
   - openapi
   - pricing
-  generated: '2026-08-28'
+  - repository-not-product
+  generated: '2026-09-25'
   method: derived
 accessModel:
   pricing: freemium
@@ -39,7 +43,7 @@ tags:
 - Company Enrichment
 - Contacts
 - Currency
-- Email Validation
+- Email Verification
 - Exchange Rates
 - IBAN Validation
 - Image Processing
@@ -51,6 +55,7 @@ tags:
 - Timezone
 - VAT Validation
 - Web Scraping
+- A2A
 tags_raw:
 - Avatars
 - Company Enrichment
@@ -68,6 +73,7 @@ tags_raw:
 - Timezones
 - VAT Validation
 - Web Scraping
+- A2A
 description: Abstract API is a platform that offers a wide range of API services for developers to easily
   integrate various functionalities into their applications. Services include IP geolocation, IP intelligence,
   email validation, phone validation, currency exchange, website screenshots, image processing, web scraping,
@@ -1655,3 +1661,10 @@ x-enrichment:
   status: enriched
   artifacts_added: 44
   pass: local-v1
+x-a2a:
+  verified: true
+  probed: '2026-09-26'
+  url: "https://docs.abstractapi.com/.well-known/agent-card.json"
+  grade: "conformant"
+  protocol_version: "0.3"
+  control: 404
