@@ -119,14 +119,6 @@ paths:
       - Convert Time
 components:
   schemas:
-    ConvertTime:
-      type: object
-      description: The supplied time expressed in both the base and target locations.
-      properties:
-        base_location:
-          $ref: '#/components/schemas/TimeLocation'
-        target_location:
-          $ref: '#/components/schemas/TimeLocation'
     Error:
       type: object
       required:
@@ -234,15 +226,23 @@ components:
         api_key:
           type: string
           description: 'Your API key. Optional here if supplied as the `api_key` query parameter or an `Authorization: Bearer <key>` header.'
+    ConvertTime:
+      type: object
+      description: The supplied time expressed in both the base and target locations.
+      properties:
+        base_location:
+          $ref: '#/components/schemas/TimeLocation'
+        target_location:
+          $ref: '#/components/schemas/TimeLocation'
   responses:
-    QuotaReached:
-      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
+    ServerError:
+      description: Internal server error. The body follows the standard error envelope.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    TooManyRequests:
-      description: Too Many Requests — rate limit exceeded. The body follows the standard error envelope.
+    QuotaReached:
+      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
       content:
         application/json:
           schema:
@@ -260,8 +260,8 @@ components:
               details:
                 location:
                 - This is a required argument.
-    ServerError:
-      description: Internal server error. The body follows the standard error envelope.
+    TooManyRequests:
+      description: Too Many Requests — rate limit exceeded. The body follows the standard error envelope.
       content:
         application/json:
           schema:

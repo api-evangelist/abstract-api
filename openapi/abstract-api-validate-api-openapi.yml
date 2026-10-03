@@ -92,49 +92,6 @@ paths:
       tags:
       - Validate
 components:
-  responses:
-    QuotaReached:
-      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    TooManyRequests:
-      description: Too Many Requests — rate limit exceeded (free plans are limited to 1 request per second). The body follows the standard error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request — a required parameter is missing or failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: A validation error occurred.
-              code: validation_error
-              details:
-                vat_number:
-                - This is a required argument.
-    ServerError:
-      description: Internal server error. The body follows the standard error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized — missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: Invalid API key provided.
-              code: unauthorized
-              details: null
   schemas:
     ValidateRequest:
       type: object
@@ -148,6 +105,34 @@ components:
         api_key:
           type: string
           description: 'Your API key. Optional here if supplied as the `api_key` query parameter or an `Authorization: Bearer <key>` header.'
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - message
+          - code
+          properties:
+            message:
+              type: string
+              description: Human-readable description of the error.
+              example: A validation error occurred.
+            code:
+              type: string
+              description: Machine-readable error code, e.g. validation_error or unauthorized.
+              example: validation_error
+            details:
+              type:
+              - object
+              - 'null'
+              description: Field-keyed validation messages for validation_error responses; null for other error types.
+              additionalProperties:
+                type: array
+                items:
+                  type: string
     VatValidation:
       type: object
       properties:
@@ -191,34 +176,49 @@ components:
               - string
               - 'null'
               description: The name of the country.
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          type: object
-          required:
-          - message
-          - code
-          properties:
-            message:
-              type: string
-              description: Human-readable description of the error.
-              example: A validation error occurred.
-            code:
-              type: string
-              description: Machine-readable error code, e.g. validation_error or unauthorized.
-              example: validation_error
-            details:
-              type:
-              - object
-              - 'null'
-              description: Field-keyed validation messages for validation_error responses; null for other error types.
-              additionalProperties:
-                type: array
-                items:
-                  type: string
+  responses:
+    ServerError:
+      description: Internal server error. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    QuotaReached:
+      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request — a required parameter is missing or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: A validation error occurred.
+              code: validation_error
+              details:
+                vat_number:
+                - This is a required argument.
+    TooManyRequests:
+      description: Too Many Requests — rate limit exceeded (free plans are limited to 1 request per second). The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized — missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Invalid API key provided.
+              code: unauthorized
+              details: null
   securitySchemes:
     ApiKeyQuery:
       type: apiKey

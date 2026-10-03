@@ -121,49 +121,6 @@ paths:
       tags:
       - Upload
 components:
-  responses:
-    QuotaReached:
-      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    TooManyRequests:
-      description: Too Many Requests — rate limit exceeded. The body follows the standard error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request — a required parameter is missing or failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: A validation error occurred.
-              code: validation_error
-              details:
-                url:
-                - This is a required argument.
-    ServerError:
-      description: Internal server error. The body follows the standard error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized — missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: Invalid API key provided.
-              code: unauthorized
-              details: null
   schemas:
     Error:
       type: object
@@ -193,6 +150,24 @@ components:
                 type: array
                 items:
                   type: string
+    UploadRequest:
+      type: object
+      properties:
+        lossy:
+          type: boolean
+          description: If true, perform lossy compression, reducing size significantly with a small drop in quality. If false, size is reduced only slightly (10–20% at most) with no quality loss. Defaults to false.
+          example: true
+        quality:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: Integer between 0 and 100 setting the quality level for lossy compression. Determined intelligently when omitted.
+          example: 80
+        resize:
+          $ref: '#/components/schemas/ResizeOptions'
+        api_key:
+          type: string
+          description: 'Your API key. Optional here if supplied as the `api_key` query parameter or an `Authorization: Bearer <key>` header.'
     ImageResult:
       type: object
       properties:
@@ -323,24 +298,49 @@ components:
           type: string
           description: 'A JSON-encoded options object holding `api_key` and any optional processing options (`lossy`, `quality`, `resize`), e.g. {"api_key": "YOUR_UNIQUE_API_KEY", "lossy": true}.'
           example: '{"api_key": "YOUR_UNIQUE_API_KEY", "lossy": true}'
-    UploadRequest:
-      type: object
-      properties:
-        lossy:
-          type: boolean
-          description: If true, perform lossy compression, reducing size significantly with a small drop in quality. If false, size is reduced only slightly (10–20% at most) with no quality loss. Defaults to false.
-          example: true
-        quality:
-          type: integer
-          minimum: 0
-          maximum: 100
-          description: Integer between 0 and 100 setting the quality level for lossy compression. Determined intelligently when omitted.
-          example: 80
-        resize:
-          $ref: '#/components/schemas/ResizeOptions'
-        api_key:
-          type: string
-          description: 'Your API key. Optional here if supplied as the `api_key` query parameter or an `Authorization: Bearer <key>` header.'
+  responses:
+    ServerError:
+      description: Internal server error. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    QuotaReached:
+      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request — a required parameter is missing or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: A validation error occurred.
+              code: validation_error
+              details:
+                url:
+                - This is a required argument.
+    TooManyRequests:
+      description: Too Many Requests — rate limit exceeded. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized — missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Invalid API key provided.
+              code: unauthorized
+              details: null
   securitySchemes:
     ApiKeyQuery:
       type: apiKey

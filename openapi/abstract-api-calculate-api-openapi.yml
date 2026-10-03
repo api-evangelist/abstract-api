@@ -113,49 +113,6 @@ paths:
       tags:
       - Calculate
 components:
-  responses:
-    QuotaReached:
-      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    TooManyRequests:
-      description: Too Many Requests — rate limit exceeded (free plans are limited to 1 request per second). The body follows the standard error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request — a required parameter is missing or failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: A validation error occurred.
-              code: validation_error
-              details:
-                vat_number:
-                - This is a required argument.
-    ServerError:
-      description: Internal server error. The body follows the standard error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized — missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: Invalid API key provided.
-              code: unauthorized
-              details: null
   schemas:
     VatCalculation:
       type: object
@@ -206,6 +163,31 @@ components:
               - string
               - 'null'
               description: The name of the country.
+    CalculateRequest:
+      type: object
+      required:
+      - amount
+      - country_code
+      properties:
+        amount:
+          type: string
+          description: The amount that you would like to get the VAT amount for or from.
+          example: '175'
+        country_code:
+          type: string
+          description: The two-letter ISO 3166-1 alpha-2 code of the country in which the transaction takes place.
+          example: DE
+        is_vat_incl:
+          type: boolean
+          description: Set to true if the amount already includes VAT and you would like to perform the reverse calculation. Defaults to false.
+          example: false
+        vat_category:
+          type: string
+          description: The category of goods or services, used when a country offers a reduced VAT rate for certain categories.
+          example: standard
+        api_key:
+          type: string
+          description: 'Your API key. Optional here if supplied as the `api_key` query parameter or an `Authorization: Bearer <key>` header.'
     Error:
       type: object
       required:
@@ -234,31 +216,49 @@ components:
                 type: array
                 items:
                   type: string
-    CalculateRequest:
-      type: object
-      required:
-      - amount
-      - country_code
-      properties:
-        amount:
-          type: string
-          description: The amount that you would like to get the VAT amount for or from.
-          example: '175'
-        country_code:
-          type: string
-          description: The two-letter ISO 3166-1 alpha-2 code of the country in which the transaction takes place.
-          example: DE
-        is_vat_incl:
-          type: boolean
-          description: Set to true if the amount already includes VAT and you would like to perform the reverse calculation. Defaults to false.
-          example: false
-        vat_category:
-          type: string
-          description: The category of goods or services, used when a country offers a reduced VAT rate for certain categories.
-          example: standard
-        api_key:
-          type: string
-          description: 'Your API key. Optional here if supplied as the `api_key` query parameter or an `Authorization: Bearer <key>` header.'
+  responses:
+    ServerError:
+      description: Internal server error. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    QuotaReached:
+      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request — a required parameter is missing or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: A validation error occurred.
+              code: validation_error
+              details:
+                vat_number:
+                - This is a required argument.
+    TooManyRequests:
+      description: Too Many Requests — rate limit exceeded (free plans are limited to 1 request per second). The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized — missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Invalid API key provided.
+              code: unauthorized
+              details: null
   securitySchemes:
     ApiKeyQuery:
       type: apiKey

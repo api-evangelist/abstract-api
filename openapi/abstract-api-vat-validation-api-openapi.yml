@@ -207,6 +207,47 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    VATRatesResponse:
+      type: object
+      properties:
+        country_code:
+          type: string
+          example: DE
+        country_name:
+          type: string
+          example: Germany
+        standard_rate:
+          type: number
+          description: Standard VAT rate percentage
+          example: 19
+        reduced_rates:
+          type: array
+          items:
+            type: number
+          description: Reduced VAT rate percentages
+          example:
+          - 7
+        super_reduced_rate:
+          type:
+          - number
+          - 'null'
+          description: Super reduced VAT rate if applicable
+          example: null
+        parking_rate:
+          type:
+          - number
+          - 'null'
+          description: Parking VAT rate if applicable
+          example: null
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: The provided API key is invalid
+        error:
+          type: string
+          example: invalid_api_key
     VATCalculateResponse:
       type: object
       properties:
@@ -269,47 +310,6 @@ components:
               type: string
               description: Country name
               example: United Kingdom
-    VATRatesResponse:
-      type: object
-      properties:
-        country_code:
-          type: string
-          example: DE
-        country_name:
-          type: string
-          example: Germany
-        standard_rate:
-          type: number
-          description: Standard VAT rate percentage
-          example: 19
-        reduced_rates:
-          type: array
-          items:
-            type: number
-          description: Reduced VAT rate percentages
-          example:
-          - 7
-        super_reduced_rate:
-          type:
-          - number
-          - 'null'
-          description: Super reduced VAT rate if applicable
-          example: null
-        parking_rate:
-          type:
-          - number
-          - 'null'
-          description: Parking VAT rate if applicable
-          example: null
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          example: The provided API key is invalid
-        error:
-          type: string
-          example: invalid_api_key
   securitySchemes:
     apiKey:
       type: apiKey
