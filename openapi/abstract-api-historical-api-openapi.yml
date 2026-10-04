@@ -109,7 +109,72 @@ paths:
       tags:
       - Historical
 components:
+  responses:
+    TooManyRequests:
+      description: Too Many Requests — rate limit exceeded. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized — missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Invalid API key provided.
+              code: unauthorized
+              details: null
+    BadRequest:
+      description: Bad request — a required parameter is missing or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: A validation error occurred.
+              code: validation_error
+              details:
+                base:
+                - This is a required argument.
+    QuotaReached:
+      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ServerError:
+      description: Internal server error. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    HistoricalRequest:
+      type: object
+      required:
+      - base
+      - date
+      properties:
+        base:
+          type: string
+          description: The base currency to get the historical exchange rate(s) for. Uses the ISO 4217 currency standard.
+          example: USD
+        date:
+          type: string
+          format: date
+          description: The historical date to get rates from, in YYYY-MM-DD format.
+          example: '2024-01-01'
+        target:
+          type: string
+          description: The target currency or currencies versus the base currency, as a comma-separated list. If omitted, all supported currencies are returned.
+          example: EUR,CAD,AUD
+        api_key:
+          type: string
+          description: 'Your API key. Optional here if supplied as the `api_key` query parameter or an `Authorization: Bearer <key>` header.'
     Error:
       type: object
       required:
@@ -161,71 +226,6 @@ components:
             EUR: 0.912742
             GBP: 0.790845
             CAD: 1.329409
-    HistoricalRequest:
-      type: object
-      required:
-      - base
-      - date
-      properties:
-        base:
-          type: string
-          description: The base currency to get the historical exchange rate(s) for. Uses the ISO 4217 currency standard.
-          example: USD
-        date:
-          type: string
-          format: date
-          description: The historical date to get rates from, in YYYY-MM-DD format.
-          example: '2024-01-01'
-        target:
-          type: string
-          description: The target currency or currencies versus the base currency, as a comma-separated list. If omitted, all supported currencies are returned.
-          example: EUR,CAD,AUD
-        api_key:
-          type: string
-          description: 'Your API key. Optional here if supplied as the `api_key` query parameter or an `Authorization: Bearer <key>` header.'
-  responses:
-    ServerError:
-      description: Internal server error. The body follows the standard error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    QuotaReached:
-      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request — a required parameter is missing or failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: A validation error occurred.
-              code: validation_error
-              details:
-                base:
-                - This is a required argument.
-    TooManyRequests:
-      description: Too Many Requests — rate limit exceeded. The body follows the standard error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized — missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: Invalid API key provided.
-              code: unauthorized
-              details: null
   securitySchemes:
     ApiKeyQuery:
       type: apiKey

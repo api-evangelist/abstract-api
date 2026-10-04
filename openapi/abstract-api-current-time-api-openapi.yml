@@ -92,11 +92,50 @@ paths:
       tags:
       - Current Time
 components:
+  responses:
+    TooManyRequests:
+      description: Too Many Requests — rate limit exceeded. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized — missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Invalid API key provided.
+              code: unauthorized
+              details: null
+    BadRequest:
+      description: Bad request — a required parameter is missing or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: A validation error occurred.
+              code: validation_error
+              details:
+                location:
+                - This is a required argument.
+    QuotaReached:
+      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ServerError:
+      description: Internal server error. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    CurrentTime:
-      allOf:
-      - $ref: '#/components/schemas/TimeLocation'
-      description: Current time, date, and timezone details for the requested location.
     Error:
       type: object
       required:
@@ -125,6 +164,22 @@ components:
                 type: array
                 items:
                   type: string
+    CurrentTime:
+      allOf:
+      - $ref: '#/components/schemas/TimeLocation'
+      description: Current time, date, and timezone details for the requested location.
+    CurrentTimeRequest:
+      type: object
+      required:
+      - location
+      properties:
+        location:
+          type: string
+          description: The location to look up. Accepts a place name, latitude/longitude coordinates, or an IP address.
+          example: Oxford, United Kingdom
+        api_key:
+          type: string
+          description: 'Your API key. Optional here if supplied as the `api_key` query parameter or an `Authorization: Bearer <key>` header.'
     TimeLocation:
       type: object
       description: Time, date, and timezone details for a single resolved location.
@@ -183,61 +238,6 @@ components:
           format: float
           description: Decimal longitude of the resolved location.
           example: -1.2578499
-    CurrentTimeRequest:
-      type: object
-      required:
-      - location
-      properties:
-        location:
-          type: string
-          description: The location to look up. Accepts a place name, latitude/longitude coordinates, or an IP address.
-          example: Oxford, United Kingdom
-        api_key:
-          type: string
-          description: 'Your API key. Optional here if supplied as the `api_key` query parameter or an `Authorization: Bearer <key>` header.'
-  responses:
-    ServerError:
-      description: Internal server error. The body follows the standard error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    QuotaReached:
-      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request — a required parameter is missing or failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: A validation error occurred.
-              code: validation_error
-              details:
-                location:
-                - This is a required argument.
-    TooManyRequests:
-      description: Too Many Requests — rate limit exceeded. The body follows the standard error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized — missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: Invalid API key provided.
-              code: unauthorized
-              details: null
   securitySchemes:
     ApiKeyQuery:
       type: apiKey

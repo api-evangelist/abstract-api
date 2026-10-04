@@ -118,6 +118,49 @@ paths:
       tags:
       - Convert Time
 components:
+  responses:
+    TooManyRequests:
+      description: Too Many Requests — rate limit exceeded. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized — missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Invalid API key provided.
+              code: unauthorized
+              details: null
+    QuotaReached:
+      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request — a required parameter is missing or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: A validation error occurred.
+              code: validation_error
+              details:
+                location:
+                - This is a required argument.
+    ServerError:
+      description: Internal server error. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Error:
       type: object
@@ -147,6 +190,14 @@ components:
                 type: array
                 items:
                   type: string
+    ConvertTime:
+      type: object
+      description: The supplied time expressed in both the base and target locations.
+      properties:
+        base_location:
+          $ref: '#/components/schemas/TimeLocation'
+        target_location:
+          $ref: '#/components/schemas/TimeLocation'
     TimeLocation:
       type: object
       description: Time, date, and timezone details for a single resolved location.
@@ -226,57 +277,6 @@ components:
         api_key:
           type: string
           description: 'Your API key. Optional here if supplied as the `api_key` query parameter or an `Authorization: Bearer <key>` header.'
-    ConvertTime:
-      type: object
-      description: The supplied time expressed in both the base and target locations.
-      properties:
-        base_location:
-          $ref: '#/components/schemas/TimeLocation'
-        target_location:
-          $ref: '#/components/schemas/TimeLocation'
-  responses:
-    ServerError:
-      description: Internal server error. The body follows the standard error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    QuotaReached:
-      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request — a required parameter is missing or failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: A validation error occurred.
-              code: validation_error
-              details:
-                location:
-                - This is a required argument.
-    TooManyRequests:
-      description: Too Many Requests — rate limit exceeded. The body follows the standard error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized — missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: Invalid API key provided.
-              code: unauthorized
-              details: null
   securitySchemes:
     ApiKeyQuery:
       type: apiKey

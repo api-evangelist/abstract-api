@@ -102,6 +102,30 @@ paths:
       - Live
 components:
   schemas:
+    LiveRates:
+      type: object
+      properties:
+        base:
+          type: string
+          description: The base currency the rates are quoted against (echoes the request).
+          example: USD
+        last_updated:
+          type:
+          - integer
+          - 'null'
+          description: Unix timestamp (seconds) of when the rates were last updated; null when unavailable.
+          example: 1716297300
+        exchange_rates:
+          type: object
+          description: Map of ISO 4217 currency code to its exchange rate versus the base currency.
+          additionalProperties:
+            type:
+            - number
+            - 'null'
+          example:
+            EUR: 0.923361
+            GBP: 0.78638
+            BTC: 2.3e-05
     LiveRequest:
       type: object
       required:
@@ -146,56 +170,7 @@ components:
                 type: array
                 items:
                   type: string
-    LiveRates:
-      type: object
-      properties:
-        base:
-          type: string
-          description: The base currency the rates are quoted against (echoes the request).
-          example: USD
-        last_updated:
-          type:
-          - integer
-          - 'null'
-          description: Unix timestamp (seconds) of when the rates were last updated; null when unavailable.
-          example: 1716297300
-        exchange_rates:
-          type: object
-          description: Map of ISO 4217 currency code to its exchange rate versus the base currency.
-          additionalProperties:
-            type:
-            - number
-            - 'null'
-          example:
-            EUR: 0.923361
-            GBP: 0.78638
-            BTC: 2.3e-05
   responses:
-    ServerError:
-      description: Internal server error. The body follows the standard error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    QuotaReached:
-      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request — a required parameter is missing or failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: A validation error occurred.
-              code: validation_error
-              details:
-                base:
-                - This is a required argument.
     TooManyRequests:
       description: Too Many Requests — rate limit exceeded. The body follows the standard error envelope.
       content:
@@ -213,6 +188,31 @@ components:
               message: Invalid API key provided.
               code: unauthorized
               details: null
+    BadRequest:
+      description: Bad request — a required parameter is missing or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: A validation error occurred.
+              code: validation_error
+              details:
+                base:
+                - This is a required argument.
+    QuotaReached:
+      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ServerError:
+      description: Internal server error. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     ApiKeyQuery:
       type: apiKey
