@@ -1,0 +1,12 @@
+{
+ "url": "https://raw.githubusercontent.com/abstractapi/openapi-specs/HEAD/images.openapi.yaml",
+ "requested_url": "https://raw.githubusercontent.com/abstractapi/openapi-specs/HEAD/images.openapi.yaml",
+ "status": 200,
+ "content_type": "text/plain; charset=utf-8",
+ "bytes": 21490,
+ "sha256": "4a744146a4b84561ecb2fd399854a256ea22a8eb0c8cde4ce7e977ef8c43e8db",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the archived file is byte-identical to what the provider serves."
+}

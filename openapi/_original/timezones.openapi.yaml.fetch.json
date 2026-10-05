@@ -1,0 +1,12 @@
+{
+ "url": "https://raw.githubusercontent.com/abstractapi/openapi-specs/HEAD/timezones.openapi.yaml",
+ "requested_url": "https://raw.githubusercontent.com/abstractapi/openapi-specs/HEAD/timezones.openapi.yaml",
+ "status": 200,
+ "content_type": "text/plain; charset=utf-8",
+ "bytes": 13918,
+ "sha256": "4b95808e9e96fd839b992ece3e132375237f5763cbd0d233dcdda87c78b19e41",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the archived file is byte-identical to what the provider serves."
+}

@@ -1,0 +1,12 @@
+{
+ "url": "https://raw.githubusercontent.com/abstractapi/openapi-specs/HEAD/exchange-rates.openapi.yaml",
+ "requested_url": "https://raw.githubusercontent.com/abstractapi/openapi-specs/HEAD/exchange-rates.openapi.yaml",
+ "status": 200,
+ "content_type": "text/plain; charset=utf-8",
+ "bytes": 18928,
+ "sha256": "d03a7fc3e454a298708283dff3cb87303e9ab8798367b30cd799c670e4d04706",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the archived file is byte-identical to what the provider serves."
+}
