@@ -161,3 +161,54 @@ gaps:
   - Volume-slider prices above the entry price point are not visible before signup.
   - No published per-unit overage rate on any tier.
   - The former /pricing page is a hard 404 and is still linked from third-party listings.
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  - negotiated
+  units:
+  - rate
+  - request
+  plans:
+  - name: Free
+    access: freemium
+    model: free
+    model_how: derived
+    units:
+    - rate
+    - request
+    periods:
+    - month
+  - name: Starter
+    access: paid
+    model: free
+    model_how: derived
+    units:
+    - rate
+    - request
+    periods:
+    - month
+    - year
+  - name: Standard
+    access: paid
+    model: free
+    model_how: derived
+    units:
+    - rate
+    periods: []
+  - name: Professional
+    access: paid
+    model: free
+    model_how: derived
+    units:
+    - rate
+    periods: []
+  - name: Enterprise
+    access: negotiated
+    model: negotiated
+    model_how: stated
+    units:
+    - rate
+    - request
+    periods: []
