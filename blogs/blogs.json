@@ -2,6 +2,17 @@
   "repo": "abstract-api",
   "feeds": [
     {
+      "source": "https://www.abstractapi.com/blog",
+      "error": "HTTPError"
+    },
+    {
+      "source": "https://www.abstractapi.com/guides",
+      "feed_url": "https://www.abstractapi.com/guides",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    },
+    {
       "source": "https://www.abstractapi.com/contact-us",
       "feed_url": "https://www.abstractapi.com/contact-us",
       "title": "",
@@ -14,14 +25,10 @@
       "title": "",
       "saved": 0,
       "method": "none"
-    },
-    {
-      "source": "https://www.abstractapi.com/legal/privacy",
-      "error": "HTTPError"
     }
   ],
   "post_count": 2,
-  "fetched": "2026-10-03T12:30:02Z",
+  "fetched": "2026-10-10T13:15:00Z",
   "agent_pulled": "2026-07-04",
   "feed_nature": "undetermined",
   "feed_nature_basis": null,
