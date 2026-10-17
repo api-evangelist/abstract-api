@@ -93,6 +93,31 @@ paths:
       - Validate
 components:
   responses:
+    BadRequest:
+      description: Bad request — a required parameter is missing or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: A validation error occurred.
+              code: validation_error
+              details:
+                vat_number:
+                - This is a required argument.
+    ServerError:
+      description: Internal server error. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    QuotaReached:
+      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     TooManyRequests:
       description: Too Many Requests — rate limit exceeded (free plans are limited to 1 request per second). The body follows the standard error envelope.
       content:
@@ -110,60 +135,7 @@ components:
               message: Invalid API key provided.
               code: unauthorized
               details: null
-    BadRequest:
-      description: Bad request — a required parameter is missing or failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: A validation error occurred.
-              code: validation_error
-              details:
-                vat_number:
-                - This is a required argument.
-    QuotaReached:
-      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    ServerError:
-      description: Internal server error. The body follows the standard error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          type: object
-          required:
-          - message
-          - code
-          properties:
-            message:
-              type: string
-              description: Human-readable description of the error.
-              example: A validation error occurred.
-            code:
-              type: string
-              description: Machine-readable error code, e.g. validation_error or unauthorized.
-              example: validation_error
-            details:
-              type:
-              - object
-              - 'null'
-              description: Field-keyed validation messages for validation_error responses; null for other error types.
-              additionalProperties:
-                type: array
-                items:
-                  type: string
     ValidateRequest:
       type: object
       required:
@@ -219,6 +191,34 @@ components:
               - string
               - 'null'
               description: The name of the country.
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - message
+          - code
+          properties:
+            message:
+              type: string
+              description: Human-readable description of the error.
+              example: A validation error occurred.
+            code:
+              type: string
+              description: Machine-readable error code, e.g. validation_error or unauthorized.
+              example: validation_error
+            details:
+              type:
+              - object
+              - 'null'
+              description: Field-keyed validation messages for validation_error responses; null for other error types.
+              additionalProperties:
+                type: array
+                items:
+                  type: string
   securitySchemes:
     ApiKeyQuery:
       type: apiKey

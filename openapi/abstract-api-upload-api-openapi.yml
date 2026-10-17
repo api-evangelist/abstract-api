@@ -121,78 +121,20 @@ paths:
       tags:
       - Upload
 components:
-  responses:
-    TooManyRequests:
-      description: Too Many Requests — rate limit exceeded. The body follows the standard error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized — missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: Invalid API key provided.
-              code: unauthorized
-              details: null
-    BadRequest:
-      description: Bad request — a required parameter is missing or failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: A validation error occurred.
-              code: validation_error
-              details:
-                url:
-                - This is a required argument.
-    QuotaReached:
-      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    ServerError:
-      description: Internal server error. The body follows the standard error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
+    UploadMultipartRequest:
       type: object
       required:
-      - error
+      - image
       properties:
-        error:
-          type: object
-          required:
-          - message
-          - code
-          properties:
-            message:
-              type: string
-              description: Human-readable description of the error.
-              example: A validation error occurred.
-            code:
-              type: string
-              description: Machine-readable error code, e.g. validation_error or unauthorized.
-              example: validation_error
-            details:
-              type:
-              - object
-              - 'null'
-              description: Field-keyed validation messages for validation_error responses; null for other error types.
-              additionalProperties:
-                type: array
-                items:
-                  type: string
+        image:
+          type: string
+          format: binary
+          description: The image file to process, submitted as a multipart part.
+        data:
+          type: string
+          description: 'A JSON-encoded options object holding `api_key` and any optional processing options (`lossy`, `quality`, `resize`), e.g. {"api_key": "YOUR_UNIQUE_API_KEY", "lossy": true}.'
+          example: '{"api_key": "YOUR_UNIQUE_API_KEY", "lossy": true}'
     ResizeOptions:
       type: object
       description: Optional resize configuration. Supply a strategy plus the dimensions it needs. If omitted, the image is only compressed.
@@ -260,19 +202,6 @@ components:
           type: string
           description: 'For the fill strategy, the color used to fill unused portions of the bounds. HEX (#f60 or #ff6600) or RGB (rgb(255, 0, 0)) notation. Defaults to white.'
           example: rgb(91, 126, 156)
-    UploadMultipartRequest:
-      type: object
-      required:
-      - image
-      properties:
-        image:
-          type: string
-          format: binary
-          description: The image file to process, submitted as a multipart part.
-        data:
-          type: string
-          description: 'A JSON-encoded options object holding `api_key` and any optional processing options (`lossy`, `quality`, `resize`), e.g. {"api_key": "YOUR_UNIQUE_API_KEY", "lossy": true}.'
-          example: '{"api_key": "YOUR_UNIQUE_API_KEY", "lossy": true}'
     UploadRequest:
       type: object
       properties:
@@ -291,6 +220,34 @@ components:
         api_key:
           type: string
           description: 'Your API key. Optional here if supplied as the `api_key` query parameter or an `Authorization: Bearer <key>` header.'
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - message
+          - code
+          properties:
+            message:
+              type: string
+              description: Human-readable description of the error.
+              example: A validation error occurred.
+            code:
+              type: string
+              description: Machine-readable error code, e.g. validation_error or unauthorized.
+              example: validation_error
+            details:
+              type:
+              - object
+              - 'null'
+              description: Field-keyed validation messages for validation_error responses; null for other error types.
+              additionalProperties:
+                type: array
+                items:
+                  type: string
     ImageResult:
       type: object
       properties:
@@ -341,6 +298,49 @@ components:
           format: uri
           description: The URL of the processed image hosted by Abstract. Images are available for 1 day.
           example: https://abstractapi-images.s3.amazonaws.com/e6c6ea1f8bfd46be9ed357b9ce4240ff_dog.jpg
+  responses:
+    BadRequest:
+      description: Bad request — a required parameter is missing or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: A validation error occurred.
+              code: validation_error
+              details:
+                url:
+                - This is a required argument.
+    ServerError:
+      description: Internal server error. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    QuotaReached:
+      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: Too Many Requests — rate limit exceeded. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized — missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: Invalid API key provided.
+              code: unauthorized
+              details: null
   securitySchemes:
     ApiKeyQuery:
       type: apiKey

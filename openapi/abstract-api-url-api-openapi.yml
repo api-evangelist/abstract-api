@@ -123,6 +123,31 @@ paths:
       - Url
 components:
   responses:
+    BadRequest:
+      description: Bad request — a required parameter is missing or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: A validation error occurred.
+              code: validation_error
+              details:
+                url:
+                - This is a required argument.
+    ServerError:
+      description: Internal server error. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    QuotaReached:
+      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     TooManyRequests:
       description: Too Many Requests — rate limit exceeded. The body follows the standard error envelope.
       content:
@@ -140,60 +165,32 @@ components:
               message: Invalid API key provided.
               code: unauthorized
               details: null
-    BadRequest:
-      description: Bad request — a required parameter is missing or failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: A validation error occurred.
-              code: validation_error
-              details:
-                url:
-                - This is a required argument.
-    QuotaReached:
-      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    ServerError:
-      description: Internal server error. The body follows the standard error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
+    UrlRequest:
       type: object
       required:
-      - error
+      - url
       properties:
-        error:
-          type: object
-          required:
-          - message
-          - code
-          properties:
-            message:
-              type: string
-              description: Human-readable description of the error.
-              example: A validation error occurred.
-            code:
-              type: string
-              description: Machine-readable error code, e.g. validation_error or unauthorized.
-              example: validation_error
-            details:
-              type:
-              - object
-              - 'null'
-              description: Field-keyed validation messages for validation_error responses; null for other error types.
-              additionalProperties:
-                type: array
-                items:
-                  type: string
+        url:
+          type: string
+          format: uri
+          description: The URL of the image you would like to edit. Cannot be more than 32 MB in size.
+          example: https://s3.amazonaws.com/static.abstractapi.com/test-images/dog.jpg
+        lossy:
+          type: boolean
+          description: If true, perform lossy compression, reducing size significantly with a small drop in quality. If false, size is reduced only slightly (10–20% at most) with no quality loss. Defaults to false.
+          example: true
+        quality:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: Integer between 0 and 100 setting the quality level for lossy compression. Determined intelligently when omitted.
+          example: 80
+        resize:
+          $ref: '#/components/schemas/ResizeOptions'
+        api_key:
+          type: string
+          description: 'Your API key. Optional here if supplied as the `api_key` query parameter or an `Authorization: Bearer <key>` header.'
     ResizeOptions:
       type: object
       description: Optional resize configuration. Supply a strategy plus the dimensions it needs. If omitted, the image is only compressed.
@@ -261,31 +258,34 @@ components:
           type: string
           description: 'For the fill strategy, the color used to fill unused portions of the bounds. HEX (#f60 or #ff6600) or RGB (rgb(255, 0, 0)) notation. Defaults to white.'
           example: rgb(91, 126, 156)
-    UrlRequest:
+    Error:
       type: object
       required:
-      - url
+      - error
       properties:
-        url:
-          type: string
-          format: uri
-          description: The URL of the image you would like to edit. Cannot be more than 32 MB in size.
-          example: https://s3.amazonaws.com/static.abstractapi.com/test-images/dog.jpg
-        lossy:
-          type: boolean
-          description: If true, perform lossy compression, reducing size significantly with a small drop in quality. If false, size is reduced only slightly (10–20% at most) with no quality loss. Defaults to false.
-          example: true
-        quality:
-          type: integer
-          minimum: 0
-          maximum: 100
-          description: Integer between 0 and 100 setting the quality level for lossy compression. Determined intelligently when omitted.
-          example: 80
-        resize:
-          $ref: '#/components/schemas/ResizeOptions'
-        api_key:
-          type: string
-          description: 'Your API key. Optional here if supplied as the `api_key` query parameter or an `Authorization: Bearer <key>` header.'
+        error:
+          type: object
+          required:
+          - message
+          - code
+          properties:
+            message:
+              type: string
+              description: Human-readable description of the error.
+              example: A validation error occurred.
+            code:
+              type: string
+              description: Machine-readable error code, e.g. validation_error or unauthorized.
+              example: validation_error
+            details:
+              type:
+              - object
+              - 'null'
+              description: Field-keyed validation messages for validation_error responses; null for other error types.
+              additionalProperties:
+                type: array
+                items:
+                  type: string
     ImageResult:
       type: object
       properties:

@@ -97,8 +97,27 @@ paths:
       - Categories
 components:
   responses:
-    TooManyRequests:
-      description: Too Many Requests — rate limit exceeded (free plans are limited to 1 request per second). The body follows the standard error envelope.
+    BadRequest:
+      description: Bad request — a required parameter is missing or failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              message: A validation error occurred.
+              code: validation_error
+              details:
+                vat_number:
+                - This is a required argument.
+    ServerError:
+      description: Internal server error. The body follows the standard error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    QuotaReached:
+      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
       content:
         application/json:
           schema:
@@ -114,32 +133,50 @@ components:
               message: Invalid API key provided.
               code: unauthorized
               details: null
-    BadRequest:
-      description: Bad request — a required parameter is missing or failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            error:
-              message: A validation error occurred.
-              code: validation_error
-              details:
-                vat_number:
-                - This is a required argument.
-    QuotaReached:
-      description: Unprocessable — monthly quota reached or insufficient API credits. The body follows the standard error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    ServerError:
-      description: Internal server error. The body follows the standard error envelope.
+    TooManyRequests:
+      description: Too Many Requests — rate limit exceeded (free plans are limited to 1 request per second). The body follows the standard error envelope.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
+    CategoriesRequest:
+      type: object
+      required:
+      - country_code
+      properties:
+        country_code:
+          type: string
+          description: The two-letter ISO 3166-1 alpha-2 code of the country in which the transaction takes place.
+          example: DE
+        api_key:
+          type: string
+          description: 'Your API key. Optional here if supplied as the `api_key` query parameter or an `Authorization: Bearer <key>` header.'
+    VatCategory:
+      type: object
+      properties:
+        country_code:
+          type: string
+          description: The two-letter ISO 3166-1 alpha-2 code of the country.
+          example: DE
+        rate:
+          type:
+          - string
+          - 'null'
+          description: The VAT rate for this category, expressed as a decimal fraction.
+          example: '0.070'
+        category:
+          type:
+          - string
+          - 'null'
+          description: The name of the category.
+          example: water
+        description:
+          type:
+          - string
+          - 'null'
+          description: A description of the category; may be an empty string or null.
+          example: Supply of water. No reduced rate for bottled water...
     Error:
       type: object
       required:
@@ -168,43 +205,6 @@ components:
                 type: array
                 items:
                   type: string
-    VatCategory:
-      type: object
-      properties:
-        country_code:
-          type: string
-          description: The two-letter ISO 3166-1 alpha-2 code of the country.
-          example: DE
-        rate:
-          type:
-          - string
-          - 'null'
-          description: The VAT rate for this category, expressed as a decimal fraction.
-          example: '0.070'
-        category:
-          type:
-          - string
-          - 'null'
-          description: The name of the category.
-          example: water
-        description:
-          type:
-          - string
-          - 'null'
-          description: A description of the category; may be an empty string or null.
-          example: Supply of water. No reduced rate for bottled water...
-    CategoriesRequest:
-      type: object
-      required:
-      - country_code
-      properties:
-        country_code:
-          type: string
-          description: The two-letter ISO 3166-1 alpha-2 code of the country in which the transaction takes place.
-          example: DE
-        api_key:
-          type: string
-          description: 'Your API key. Optional here if supplied as the `api_key` query parameter or an `Authorization: Bearer <key>` header.'
   securitySchemes:
     ApiKeyQuery:
       type: apiKey
