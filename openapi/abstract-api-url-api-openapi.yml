@@ -357,3 +357,9 @@ x-openItems:
 - The GET-side `resize` encoding for `/url` (passing the resize options as a JSON-encoded query value) is assumed and unverified; the docs only show resize supplied via the POST body.
 - The free-plan rate limit (commonly described as 1 request per second) is unconfirmed against the docs/backend and is therefore not asserted in the 429 response description.
 - The processed-image download URL retention ('available for 1 day') needs confirmation against the docs/backend.
+x-provenance:
+  method: harvested
+  publisher: Abstract API
+  source: https://raw.githubusercontent.com/abstractapi/openapi-specs/HEAD/images.openapi.yaml
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)

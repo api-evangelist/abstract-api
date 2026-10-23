@@ -336,3 +336,9 @@ components:
 externalDocs:
   description: Official documentation
   url: https://docs.abstractapi.com/api/avatars
+x-provenance:
+  method: harvested
+  publisher: Abstract API
+  source: https://raw.githubusercontent.com/abstractapi/openapi-specs/HEAD/avatars.openapi.yaml
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)

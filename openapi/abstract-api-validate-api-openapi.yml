@@ -238,3 +238,9 @@ x-openItems:
 - Whether VatValidation.company and VatValidation.country can be null on a valid VAT lookup (and which of their sub-fields can be null) is assumed and needs production confirmation.
 - The calculate and categories docs label the monetary/rate fields (amount_excluding_vat, amount_including_vat, vat_amount, vat_rate, and VatCategory.rate) as Float, but the documented JSON examples return them as quoted strings (e.g. '175.00', '0.190', '0.070'). They are modeled as type:string to match the actual wire format; the Float-vs-string discrepancy needs backend confirmation.
 - CORS support is unknown and needs confirmation.
+x-provenance:
+  method: harvested
+  publisher: Abstract API
+  source: https://raw.githubusercontent.com/abstractapi/openapi-specs/HEAD/vat-validation.openapi.yaml
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
