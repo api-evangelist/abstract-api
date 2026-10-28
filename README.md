@@ -1,4 +1,4 @@
-# Abstract API (abstract-api)
+# Abstract API
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,481 +66,325 @@
 
 Abstract API is a platform that offers a wide range of API services for developers to easily integrate various functionalities into their applications. Services include IP geolocation, IP intelligence, email validation, phone validation, currency exchange, website screenshots, image processing, web scraping, company enrichment, public holidays, timezone lookup, VAT validation, IBAN validation, and user avatar generation. Abstract API provides a seamless way for developers to access powerful features without having to build them from scratch.
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/abstract-api/refs/heads/main/apis.yml)
-
-**Run:** [Capabilities Using Naftiko](https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=company-api-evangelist&utm_content=repo)
-
-## Tags:
-
- - Avatars, Company Enrichment, Contacts, Currencies, Email Validation, Exchange Rates, IBAN Validation, Image Processing, IP Geolocation, IP Intelligence, Phone Validation, Public Holidays, Screenshots, Timezones, VAT Validation, Web Scraping
-
-## Timestamps
-
-- **Created:** 2025-02-24
-- **Modified:** 2026-04-19
-
-## APIs
-
-### Email Reputation API
-Validate email addresses for deliverability, detect disposable or risky domains, verify SMTP/MX records, and enrich email data with sender information, breach history, and risk scoring.
-
-**Human URL:** [https://www.abstractapi.com/api/email-verification-validation-api](https://www.abstractapi.com/api/email-verification-validation-api)
-
-#### Tags:
-
- - Email Validation, Email Reputation, Fraud Detection
-
-#### Properties
-
-- [Documentation](https://docs.abstractapi.com/api/email-reputation.md)
-- [OpenAPI](openapi/abstract-api-email-reputation.yaml)
-- [JSONSchema](json-schema/email-reputation-breach-info-schema.json)
-- [Example](examples/email-reputation-breach-info-example.json)
-
-### Phone Intelligence API
-Identify carrier, line type, validity, location, and get deep insights including line status, VoIP detection, and risk scoring for any phone number globally.
-
-**Human URL:** [https://www.abstractapi.com/api/phone-validation-api](https://www.abstractapi.com/api/phone-validation-api)
-
-#### Tags:
-
- - Phone Validation, Phone Intelligence, Fraud Detection
-
-#### Properties
-
-- [Documentation](https://docs.abstractapi.com/api/phone-intelligence.md)
-- [OpenAPI](openapi/abstract-api-phone-intelligence.yaml)
-- [JSONSchema](json-schema/phone-intelligence-phone-country-schema.json)
-- [Example](examples/phone-intelligence-phone-country-example.json)
-
-### IP Geolocation API
-Geolocate any IPv4 or IPv6 address to country, region, city, coordinates, timezone, currency, and flag data covering 4 billion+ IP addresses across 250,000+ cities worldwide.
-
-**Human URL:** [https://www.abstractapi.com/api/ip-geolocation-api](https://www.abstractapi.com/api/ip-geolocation-api)
-
-#### Tags:
-
- - IP Geolocation, IP Addresses, Geolocation
-
-#### Properties
-
-- [Documentation](https://www.abstractapi.com/api/ip-geolocation-api)
-- [OpenAPI](openapi/abstract-api-ip-geolocation.yaml)
-- [JSONSchema](json-schema/ip-geolocation-currency-info-schema.json)
-- [Example](examples/ip-geolocation-currency-info-example.json)
-
-### IP Intelligence API
-Detect VPNs, proxies, Tor exit nodes, abuse potential, hosting services, relays, and mobile IPs. Also provides ASN, company, location, timezone, flag, and currency data for any IP address.
-
-**Human URL:** [https://www.abstractapi.com/api/ip-intelligence](https://www.abstractapi.com/api/ip-intelligence)
-
-#### Tags:
-
- - IP Intelligence, IP Addresses, Security, Fraud Detection
-
-#### Properties
-
-- [Documentation](https://docs.abstractapi.com/api/ip-intelligence.md)
-- [OpenAPI](openapi/abstract-api-ip-intelligence.yaml)
-- [JSONSchema](json-schema/ip-intelligence-asn-info-schema.json)
-- [Example](examples/ip-intelligence-asn-info-example.json)
-
-### Company Enrichment API
-Retrieve comprehensive details about businesses using their domain or email address, including name, logo, headcount, location, industry, and more.
-
-**Human URL:** [https://www.abstractapi.com/api/company-enrichment](https://www.abstractapi.com/api/company-enrichment)
-
-#### Tags:
-
- - Company Enrichment, Business Data, Data Enrichment
-
-#### Properties
-
-- [Documentation](https://docs.abstractapi.com/api/company-enrichment.md)
-- [OpenAPI](openapi/abstract-api-company-enrichment.yaml)
-- [JSONSchema](json-schema/company-enrichment-company-enrichment-response-schema.json)
-- [Example](examples/company-enrichment-company-enrichment-response-example.json)
-
-### Exchange Rates API
-Look up the latest exchange rates for 80+ currencies, convert between currencies, and retrieve historical exchange rate data using ISO 4217 currency codes.
-
-**Human URL:** [https://www.abstractapi.com/api/exchange-rate-api](https://www.abstractapi.com/api/exchange-rate-api)
-
-#### Tags:
-
- - Currencies, Exchange Rates, Finance
-
-#### Properties
-
-- [Documentation](https://docs.abstractapi.com/api/exchange-rates.md)
-- [OpenAPI](openapi/abstract-api-exchange-rates.yaml)
-- [JSONSchema](json-schema/exchange-rates-convert-response-schema.json)
-- [Example](examples/exchange-rates-convert-response-example.json)
-
-### Public Holidays API
-Get public, local, religious, and other holidays for any country. Supports year and country filtering with comprehensive holiday metadata.
-
-**Human URL:** [https://www.abstractapi.com/api/holidays-api](https://www.abstractapi.com/api/holidays-api)
-
-#### Tags:
-
- - Public Holidays, Calendar, Global Data
-
-#### Properties
-
-- [Documentation](https://docs.abstractapi.com/api/holidays.md)
-- [OpenAPI](openapi/abstract-api-public-holidays.yaml)
-- [JSONSchema](json-schema/public-holidays-holiday-schema.json)
-- [Example](examples/public-holidays-holiday-example.json)
-
-### Timezone API
-Find, convert, and manage time and timezone data across the world. Supports lookup by location or coordinates and returns local time, timezone abbreviation, UTC offset, and DST information.
-
-**Human URL:** [https://www.abstractapi.com/api/time-date-timezone-api](https://www.abstractapi.com/api/time-date-timezone-api)
-
-#### Tags:
-
- - Timezones, Time, Date, Calendar
-
-#### Properties
-
-- [Documentation](https://docs.abstractapi.com/api/timezones.md)
-- [OpenAPI](openapi/abstract-api-timezones.yaml)
-- [JSONSchema](json-schema/timezones-convert-time-response-schema.json)
-- [Example](examples/timezones-convert-time-response-example.json)
-
-### VAT Validation API
-Validate VAT numbers, look up current VAT rates by country, and calculate VAT-inclusive or VAT-exclusive prices to stay compliant for domestic and cross-border sales.
-
-**Human URL:** [https://www.abstractapi.com/api/vat-validation-rates-api](https://www.abstractapi.com/api/vat-validation-rates-api)
-
-#### Tags:
-
- - VAT Validation, Finance, Compliance, Tax
-
-#### Properties
-
-- [Documentation](https://docs.abstractapi.com/api/vat-validation.md)
-- [OpenAPI](openapi/abstract-api-vat-validation.yaml)
-- [JSONSchema](json-schema/vat-validation-vat-calculate-response-schema.json)
-- [Example](examples/vat-validation-vat-calculate-response-example.json)
-
-### IBAN Validation API
-Determine the validity and details of International Bank Account Numbers (IBANs), including bank name, account type, and country code.
-
-**Human URL:** [https://www.abstractapi.com/api/iban-validation](https://www.abstractapi.com/api/iban-validation)
-
-#### Tags:
-
- - IBAN Validation, Finance, Banking
-
-#### Properties
-
-- [Documentation](https://docs.abstractapi.com/api/iban-validation.md)
-- [OpenAPI](openapi/abstract-api-iban-validation.yaml)
-- [JSONSchema](json-schema/iban-validation-iban-validation-response-schema.json)
-- [Example](examples/iban-validation-iban-validation-response-example.json)
-
-### Website Screenshot API
-Capture high-quality screenshots of any website with optional customizations including CSS injection, delay settings, and viewport configuration.
-
-**Human URL:** [https://www.abstractapi.com/api/website-screenshot-api](https://www.abstractapi.com/api/website-screenshot-api)
-
-#### Tags:
-
- - Screenshots, Web Capture, Images
-
-#### Properties
-
-- [Documentation](https://docs.abstractapi.com/api/screenshot.md)
-- [OpenAPI](openapi/abstract-api-website-screenshot.yaml)
-
-### Image Processing API
-Compress, convert, and optimize images by URL or direct upload. Supports format conversion, quality adjustment, and size reduction.
-
-**Human URL:** [https://www.abstractapi.com/api/image-processing-optimization-api](https://www.abstractapi.com/api/image-processing-optimization-api)
-
-#### Tags:
-
- - Image Processing, Images, Optimization
-
-#### Properties
-
-- [Documentation](https://docs.abstractapi.com/api/images.md)
-- [OpenAPI](openapi/abstract-api-image-processing.yaml)
-- [JSONSchema](json-schema/image-processing-image-processing-response-schema.json)
-- [Example](examples/image-processing-image-processing-response-example.json)
-
-### Web Scraping API
-Extract data from any website by providing the target URL. Handles JavaScript rendering and returns the full HTML content of any web page.
-
-**Human URL:** [https://www.abstractapi.com/api/web-scraping-api](https://www.abstractapi.com/api/web-scraping-api)
-
-#### Tags:
-
- - Web Scraping, Data Extraction, HTML
-
-#### Properties
-
-- [Documentation](https://docs.abstractapi.com/api/scrape.md)
-- [OpenAPI](openapi/abstract-api-web-scraping.yaml)
-- [JSONSchema](json-schema/web-scraping-web-scraping-response-schema.json)
-- [Example](examples/web-scraping-web-scraping-response-example.json)
-
-### Avatars API
-Create highly customizable avatar images using a person's name or initials. Supports color, font, and size customization for user profile images.
-
-**Human URL:** [https://www.abstractapi.com/api/user-avatar-api](https://www.abstractapi.com/api/user-avatar-api)
-
-#### Tags:
-
- - Avatars, Images, User Interface
-
-#### Properties
-
-- [Documentation](https://docs.abstractapi.com/api/avatars.md)
-- [OpenAPI](openapi/abstract-api-avatars.yaml)
-
-## Common Properties
+**Areas:** Avatars · Company Enrichment · Contacts · Currency · Email Verification · Exchange Rates · IBAN Validation · Image Processing · IP Geolocation · IP Intelligence · Phone Validation · Public Holidays
+
+## Abstract API on APIs.io
+
+Everything profiled for Abstract API is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/abstract-api/](https://apis.io/providers/abstract-api/)** — or go straight to one of the APIs or properties below.
+
+### APIs (12)
+
+- [Abstract API VAT Validation API](https://apis.io/apis/abstract-api/abstract-api-vat-validation-api/) — VAT number validation and rate lookup
+- [Abstract API Abstract Avatars API](https://apis.io/apis/abstract-api/abstract-api-abstract-avatars-api-api/) — The Abstract Avatars API API from Abstract API — 1 operation(s) for abstract avatars api.
+- [Abstract API Calculate API](https://apis.io/apis/abstract-api/abstract-api-calculate-api/) — The Calculate API from Abstract API — 1 operation(s) for calculate.
+- [Abstract API Categories API](https://apis.io/apis/abstract-api/abstract-api-categories-api/) — The Categories API from Abstract API — 1 operation(s) for categories.
+- [Abstract API Convert API](https://apis.io/apis/abstract-api/abstract-api-convert-api/) — The Convert API from Abstract API — 1 operation(s) for convert.
+- [Abstract API Convert Time API](https://apis.io/apis/abstract-api/abstract-api-convert-time-api/) — The Convert Time API from Abstract API — 1 operation(s) for convert time.
+- [Abstract API Current Time API](https://apis.io/apis/abstract-api/abstract-api-current-time-api/) — The Current Time API from Abstract API — 1 operation(s) for current time.
+- [Abstract API Historical API](https://apis.io/apis/abstract-api/abstract-api-historical-api/) — The Historical API from Abstract API — 1 operation(s) for historical.
+- [Abstract API Live API](https://apis.io/apis/abstract-api/abstract-api-live-api/) — The Live API from Abstract API — 1 operation(s) for live.
+- [Abstract API Upload API](https://apis.io/apis/abstract-api/abstract-api-upload-api/) — The Upload API from Abstract API — 1 operation(s) for upload.
+- [Abstract API URL API](https://apis.io/apis/abstract-api/abstract-api-url-api/) — The Url API from Abstract API — 1 operation(s) for url.
+- [Abstract API Validate API](https://apis.io/apis/abstract-api/abstract-api-validate-api/) — The Validate API from Abstract API — 1 operation(s) for validate.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Arazzo workflows (10)
+
+Multi-step workflows that chain operations into a business task.
+
+- [Abstract API Company Enrichment to Screenshot and Avatar](https://apis.io/arazzos/abstract-api/abstract-api-company-to-screenshot-and-avatar-workflow/)
+- [Abstract API Live Exchange Rate and Conversion](https://apis.io/arazzos/abstract-api/abstract-api-currency-live-and-convert-workflow/)
+- [Abstract API Email to Company Enrichment](https://apis.io/arazzos/abstract-api/abstract-api-email-to-company-enrichment-workflow/)
+- [Abstract API IBAN and Company Verification](https://apis.io/arazzos/abstract-api/abstract-api-iban-and-company-verification-workflow/)
+- [Abstract API IP Geolocation to Currency Conversion](https://apis.io/arazzos/abstract-api/abstract-api-ip-geolocation-to-currency-conversion-workflow/)
+- [Abstract API IP Geolocation to Timezone and Holidays](https://apis.io/arazzos/abstract-api/abstract-api-ip-geolocation-to-timezone-holidays-workflow/)
+- [Abstract API IP Security and Geolocation](https://apis.io/arazzos/abstract-api/abstract-api-ip-security-and-geolocation-workflow/)
+- [Abstract API Phone Validation to Local Time](https://apis.io/arazzos/abstract-api/abstract-api-phone-to-timezone-workflow/)
+- [Abstract API Screenshot, Scrape, and Image Processing](https://apis.io/arazzos/abstract-api/abstract-api-screenshot-scrape-and-process-workflow/)
+- [Abstract API VAT Validation to Rates and Calculation](https://apis.io/arazzos/abstract-api/abstract-api-vat-validation-to-rates-and-calculation-workflow/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [Abstract API Documentation MCP Server](https://apis.io/servers/abstract-api/abstract-api-documentation-mcp-server/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Abstract Api Agentic Access](https://apis.io/agentic-access/abstract-api/abstract-api-agentic-access/)
+
+#### JSON Schema (68)
+
+The data models the API reads and writes.
+
+- [ASNInfo](https://apis.io/schemas/abstract-api/abstract-api-asninfo/)
+- [BreachInfo](https://apis.io/schemas/abstract-api/abstract-api-breachinfo/)
+- [CompanyBasic](https://apis.io/schemas/abstract-api/abstract-api-companybasic/)
+- [CompanyEnrichmentResponse](https://apis.io/schemas/abstract-api/abstract-api-companyenrichmentresponse/)
+- [ConvertResponse](https://apis.io/schemas/abstract-api/abstract-api-convertresponse/)
+- [ConvertTimeResponse](https://apis.io/schemas/abstract-api/abstract-api-converttimeresponse/)
+- [CurrencyInfo](https://apis.io/schemas/abstract-api/abstract-api-currencyinfo/)
+- [CurrentTimeResponse](https://apis.io/schemas/abstract-api/abstract-api-currenttimeresponse/)
+- [Deliverability](https://apis.io/schemas/abstract-api/abstract-api-deliverability/)
+- [DomainInfo](https://apis.io/schemas/abstract-api/abstract-api-domaininfo/)
+- [EmailQuality](https://apis.io/schemas/abstract-api/abstract-api-emailquality/)
+- [EmailReputationResponse](https://apis.io/schemas/abstract-api/abstract-api-emailreputationresponse/)
+- [ErrorResponse](https://apis.io/schemas/abstract-api/abstract-api-errorresponse/)
+- [FlagInfo](https://apis.io/schemas/abstract-api/abstract-api-flaginfo/)
+- [HistoricalRatesResponse](https://apis.io/schemas/abstract-api/abstract-api-historicalratesresponse/)
+- [Holiday](https://apis.io/schemas/abstract-api/abstract-api-holiday/)
+- [IBANValidationResponse](https://apis.io/schemas/abstract-api/abstract-api-ibanvalidationresponse/)
+- [ImageProcessingResponse](https://apis.io/schemas/abstract-api/abstract-api-imageprocessingresponse/)
+- [IPGeolocationResponse](https://apis.io/schemas/abstract-api/abstract-api-ipgeolocationresponse/)
+- [IPIntelligenceResponse](https://apis.io/schemas/abstract-api/abstract-api-ipintelligenceresponse/)
+- [IPSecurityFlags](https://apis.io/schemas/abstract-api/abstract-api-ipsecurityflags/)
+- [LiveRatesResponse](https://apis.io/schemas/abstract-api/abstract-api-liveratesresponse/)
+- [LocationInfo](https://apis.io/schemas/abstract-api/abstract-api-locationinfo/)
+- [PhoneCountry](https://apis.io/schemas/abstract-api/abstract-api-phonecountry/)
+- [PhoneIntelligenceResponse](https://apis.io/schemas/abstract-api/abstract-api-phoneintelligenceresponse/)
+- …and 43 more published on APIs.io
+
+#### JSON Structure (36)
+
+Data models expressed in JSON Structure.
+
+- [Abstract Api Structure](https://apis.io/json-structure/abstract-api/abstract-api-structure/)
+- [Company Enrichment Company Enrichment Response Structure](https://apis.io/json-structure/abstract-api/company-enrichment-company-enrichment-response-structure/)
+- [Email Reputation Breach Info Structure](https://apis.io/json-structure/abstract-api/email-reputation-breach-info-structure/)
+- [Email Reputation Deliverability Structure](https://apis.io/json-structure/abstract-api/email-reputation-deliverability-structure/)
+- [Email Reputation Domain Info Structure](https://apis.io/json-structure/abstract-api/email-reputation-domain-info-structure/)
+- [Email Reputation Email Quality Structure](https://apis.io/json-structure/abstract-api/email-reputation-email-quality-structure/)
+- [Email Reputation Email Reputation Response Structure](https://apis.io/json-structure/abstract-api/email-reputation-email-reputation-response-structure/)
+- [Email Reputation Risk Info Structure](https://apis.io/json-structure/abstract-api/email-reputation-risk-info-structure/)
+- [Email Reputation Sender Info Structure](https://apis.io/json-structure/abstract-api/email-reputation-sender-info-structure/)
+- [Exchange Rates Convert Response Structure](https://apis.io/json-structure/abstract-api/exchange-rates-convert-response-structure/)
+- [Exchange Rates Historical Rates Response Structure](https://apis.io/json-structure/abstract-api/exchange-rates-historical-rates-response-structure/)
+- [Exchange Rates Live Rates Response Structure](https://apis.io/json-structure/abstract-api/exchange-rates-live-rates-response-structure/)
+- [Iban Validation Iban Validation Response Structure](https://apis.io/json-structure/abstract-api/iban-validation-iban-validation-response-structure/)
+- [Image Processing Image Processing Response Structure](https://apis.io/json-structure/abstract-api/image-processing-image-processing-response-structure/)
+- [Ip Geolocation Currency Info Structure](https://apis.io/json-structure/abstract-api/ip-geolocation-currency-info-structure/)
+- [Ip Geolocation Flag Info Structure](https://apis.io/json-structure/abstract-api/ip-geolocation-flag-info-structure/)
+- [Ip Geolocation Ip Geolocation Response Structure](https://apis.io/json-structure/abstract-api/ip-geolocation-ip-geolocation-response-structure/)
+- [Ip Geolocation Security Info Structure](https://apis.io/json-structure/abstract-api/ip-geolocation-security-info-structure/)
+- [Ip Geolocation Timezone Info Structure](https://apis.io/json-structure/abstract-api/ip-geolocation-timezone-info-structure/)
+- [Ip Intelligence Asn Info Structure](https://apis.io/json-structure/abstract-api/ip-intelligence-asn-info-structure/)
+- [Ip Intelligence Company Basic Structure](https://apis.io/json-structure/abstract-api/ip-intelligence-company-basic-structure/)
+- [Ip Intelligence Currency Info Structure](https://apis.io/json-structure/abstract-api/ip-intelligence-currency-info-structure/)
+- [Ip Intelligence Flag Info Structure](https://apis.io/json-structure/abstract-api/ip-intelligence-flag-info-structure/)
+- [Ip Intelligence Ip Intelligence Response Structure](https://apis.io/json-structure/abstract-api/ip-intelligence-ip-intelligence-response-structure/)
+- [Ip Intelligence Ip Security Flags Structure](https://apis.io/json-structure/abstract-api/ip-intelligence-ip-security-flags-structure/)
+- …and 11 more published on APIs.io
+
+#### JSON-LD (13)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Abstract Api Company Enrichment Context](https://apis.io/jsonld/abstract-api/abstract-api-company-enrichment-context/)
+- [Abstract Api Email Reputation Context](https://apis.io/jsonld/abstract-api/abstract-api-email-reputation-context/)
+- [Abstract Api Exchange Rates Context](https://apis.io/jsonld/abstract-api/abstract-api-exchange-rates-context/)
+- [Abstract Api Iban Validation Context](https://apis.io/jsonld/abstract-api/abstract-api-iban-validation-context/)
+- [Abstract Api Image Processing Context](https://apis.io/jsonld/abstract-api/abstract-api-image-processing-context/)
+- [Abstract Api Ip Geolocation Context](https://apis.io/jsonld/abstract-api/abstract-api-ip-geolocation-context/)
+- [Abstract Api Ip Intelligence Context](https://apis.io/jsonld/abstract-api/abstract-api-ip-intelligence-context/)
+- [Abstract Api Phone Intelligence Context](https://apis.io/jsonld/abstract-api/abstract-api-phone-intelligence-context/)
+- [Abstract Api Public Holidays Context](https://apis.io/jsonld/abstract-api/abstract-api-public-holidays-context/)
+- [Abstract Api Timezones Convert Context](https://apis.io/jsonld/abstract-api/abstract-api-timezones-convert-context/)
+- [Abstract Api Timezones Current Context](https://apis.io/jsonld/abstract-api/abstract-api-timezones-current-context/)
+- [Abstract Api Vat Validation Context](https://apis.io/jsonld/abstract-api/abstract-api-vat-validation-context/)
+- [Abstract Api Web Scraping Context](https://apis.io/jsonld/abstract-api/abstract-api-web-scraping-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Abstract Api Vocabulary](https://apis.io/vocabularies/abstract-api/abstract-api-vocabulary/)
+
+#### Examples (52)
+
+Example requests and responses.
+
+- [Abstract Api Calculatevat Example](https://apis.io/examples/abstract-api/abstract-api-calculatevat-example/)
+- [Abstract Api Convertcurrency Example](https://apis.io/examples/abstract-api/abstract-api-convertcurrency-example/)
+- [Abstract Api Converttime Example](https://apis.io/examples/abstract-api/abstract-api-converttime-example/)
+- [Abstract Api Getcompanyenrichment Example](https://apis.io/examples/abstract-api/abstract-api-getcompanyenrichment-example/)
+- [Abstract Api Getcurrenttime Example](https://apis.io/examples/abstract-api/abstract-api-getcurrenttime-example/)
+- [Abstract Api Getemailreputation Example](https://apis.io/examples/abstract-api/abstract-api-getemailreputation-example/)
+- [Abstract Api Gethistoricalexchangerates Example](https://apis.io/examples/abstract-api/abstract-api-gethistoricalexchangerates-example/)
+- [Abstract Api Getipgeolocation Example](https://apis.io/examples/abstract-api/abstract-api-getipgeolocation-example/)
+- [Abstract Api Getipintelligence Example](https://apis.io/examples/abstract-api/abstract-api-getipintelligence-example/)
+- [Abstract Api Getliveexchangerates Example](https://apis.io/examples/abstract-api/abstract-api-getliveexchangerates-example/)
+- [Abstract Api Getphoneintelligence Example](https://apis.io/examples/abstract-api/abstract-api-getphoneintelligence-example/)
+- [Abstract Api Getpublicholidays Example](https://apis.io/examples/abstract-api/abstract-api-getpublicholidays-example/)
+- [Abstract Api Getvatrates Example](https://apis.io/examples/abstract-api/abstract-api-getvatrates-example/)
+- [Abstract Api Processimagebyurl Example](https://apis.io/examples/abstract-api/abstract-api-processimagebyurl-example/)
+- [Abstract Api Scrapewebpage Example](https://apis.io/examples/abstract-api/abstract-api-scrapewebpage-example/)
+- [Abstract Api Validateiban Example](https://apis.io/examples/abstract-api/abstract-api-validateiban-example/)
+- [Abstract Api Validatevatnumber Example](https://apis.io/examples/abstract-api/abstract-api-validatevatnumber-example/)
+- [Company Enrichment Company Enrichment Response Example](https://apis.io/examples/abstract-api/company-enrichment-company-enrichment-response-example/)
+- [Email Reputation Breach Info Example](https://apis.io/examples/abstract-api/email-reputation-breach-info-example/)
+- [Email Reputation Deliverability Example](https://apis.io/examples/abstract-api/email-reputation-deliverability-example/)
+- [Email Reputation Domain Info Example](https://apis.io/examples/abstract-api/email-reputation-domain-info-example/)
+- [Email Reputation Email Quality Example](https://apis.io/examples/abstract-api/email-reputation-email-quality-example/)
+- [Email Reputation Email Reputation Response Example](https://apis.io/examples/abstract-api/email-reputation-email-reputation-response-example/)
+- [Email Reputation Risk Info Example](https://apis.io/examples/abstract-api/email-reputation-risk-info-example/)
+- [Email Reputation Sender Info Example](https://apis.io/examples/abstract-api/email-reputation-sender-info-example/)
+- …and 27 more published on APIs.io
+
+#### Collections (28)
+
+Postman and Open Collection request collections.
+
+- [Abstract API Avatars API](https://apis.io/collections/abstract-api/open-abstract-api-avatars-api/)
+- [Abstract API Avatars Company Enrichment API](https://apis.io/collections/abstract-api/open-abstract-api-company-enrichment-api/)
+- [Abstract API Avatars Email Reputation API](https://apis.io/collections/abstract-api/open-abstract-api-email-reputation-api/)
+- [Abstract API Avatars Exchange Rates API](https://apis.io/collections/abstract-api/open-abstract-api-exchange-rates-api/)
+- [Abstract API Avatars IBAN Validation API](https://apis.io/collections/abstract-api/open-abstract-api-iban-validation-api/)
+- [Abstract API Avatars Image Processing API](https://apis.io/collections/abstract-api/open-abstract-api-image-processing-api/)
+- [Abstract API Avatars IP Geolocation API](https://apis.io/collections/abstract-api/open-abstract-api-ip-geolocation-api/)
+- [Abstract API Avatars IP Intelligence API](https://apis.io/collections/abstract-api/open-abstract-api-ip-intelligence-api/)
+- [Abstract API Avatars Phone Intelligence API](https://apis.io/collections/abstract-api/open-abstract-api-phone-intelligence-api/)
+- [Abstract API Avatars Public Holidays API](https://apis.io/collections/abstract-api/open-abstract-api-public-holidays-api/)
+- [Abstract API Avatars Timezones API](https://apis.io/collections/abstract-api/open-abstract-api-timezones-api/)
+- [Abstract API Avatars VAT Validation API](https://apis.io/collections/abstract-api/open-abstract-api-vat-validation-api/)
+- [Abstract API Avatars Web Scraping API](https://apis.io/collections/abstract-api/open-abstract-api-web-scraping-api/)
+- [Abstract API Avatars Website Screenshot API](https://apis.io/collections/abstract-api/open-abstract-api-website-screenshot-api/)
+- [Abstract API - Avatars API](https://apis.io/collections/abstract-api/postman-abstract-api-avatars/)
+- [Abstract API - Company Enrichment API](https://apis.io/collections/abstract-api/postman-abstract-api-company-enrichment/)
+- [Abstract API - Email Reputation API](https://apis.io/collections/abstract-api/postman-abstract-api-email-reputation/)
+- [Abstract API - Exchange Rates API](https://apis.io/collections/abstract-api/postman-abstract-api-exchange-rates/)
+- [Abstract API - IBAN Validation API](https://apis.io/collections/abstract-api/postman-abstract-api-iban-validation/)
+- [Abstract API - Image Processing API](https://apis.io/collections/abstract-api/postman-abstract-api-image-processing/)
+- [Abstract API - IP Geolocation API](https://apis.io/collections/abstract-api/postman-abstract-api-ip-geolocation/)
+- [Abstract API - IP Intelligence API](https://apis.io/collections/abstract-api/postman-abstract-api-ip-intelligence/)
+- [Abstract API - Phone Intelligence API](https://apis.io/collections/abstract-api/postman-abstract-api-phone-intelligence/)
+- [Abstract API - Public Holidays API](https://apis.io/collections/abstract-api/postman-abstract-api-public-holidays/)
+- [Abstract API - Timezone API](https://apis.io/collections/abstract-api/postman-abstract-api-timezones/)
+- …and 3 more published on APIs.io
+
+#### Overlays (14)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Abstract Api Avatars Api Overlay](https://apis.io/overlays/abstract-api/abstract-api-avatars-api-overlay/)
+- [Abstract Api Company Enrichment Api Overlay](https://apis.io/overlays/abstract-api/abstract-api-company-enrichment-api-overlay/)
+- [Abstract Api Email Reputation Api Overlay](https://apis.io/overlays/abstract-api/abstract-api-email-reputation-api-overlay/)
+- [Abstract Api Exchange Rates Api Overlay](https://apis.io/overlays/abstract-api/abstract-api-exchange-rates-api-overlay/)
+- [Abstract Api Iban Validation Api Overlay](https://apis.io/overlays/abstract-api/abstract-api-iban-validation-api-overlay/)
+- [Abstract Api Image Processing Api Overlay](https://apis.io/overlays/abstract-api/abstract-api-image-processing-api-overlay/)
+- [Abstract Api Ip Geolocation Api Overlay](https://apis.io/overlays/abstract-api/abstract-api-ip-geolocation-api-overlay/)
+- [Abstract Api Ip Intelligence Api Overlay](https://apis.io/overlays/abstract-api/abstract-api-ip-intelligence-api-overlay/)
+- [Abstract Api Phone Intelligence Api Overlay](https://apis.io/overlays/abstract-api/abstract-api-phone-intelligence-api-overlay/)
+- [Abstract Api Public Holidays Api Overlay](https://apis.io/overlays/abstract-api/abstract-api-public-holidays-api-overlay/)
+- [Abstract Api Timezones Api Overlay](https://apis.io/overlays/abstract-api/abstract-api-timezones-api-overlay/)
+- [Abstract Api Vat Validation Api Overlay](https://apis.io/overlays/abstract-api/abstract-api-vat-validation-api-overlay/)
+- [Abstract Api Web Scraping Api Overlay](https://apis.io/overlays/abstract-api/abstract-api-web-scraping-api-overlay/)
+- [Abstract Api Website Screenshot Api Overlay](https://apis.io/overlays/abstract-api/abstract-api-website-screenshot-api-overlay/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Abstract API — jsonschema rules](https://apis.io/rules/abstract-api/abstract-api-jsonschema-spectral-rules/)
+- [Abstract API API Rules](https://apis.io/rules/abstract-api/abstract-api-spectral-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Abstract Api Authentication](https://apis.io/security/abstract-api/abstract-api-authentication/)
+- [Abstract Api Domain Security](https://apis.io/security/abstract-api/abstract-api-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Abstract Api Plans Pricing](https://apis.io/plans/abstract-api/abstract-api-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Abstract Api Rate Limits](https://apis.io/rate-limits/abstract-api/abstract-api-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Abstract Api Finops](https://apis.io/finops/abstract-api/abstract-api-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.abstractapi.com/)
-- [Portal](https://app.abstractapi.com/)
-- [SignUp](https://app.abstractapi.com/users/signup)
-- [Login](https://app.abstractapi.com/users/login)
-- [Pricing](https://www.abstractapi.com/pricing)
-- [Blog](https://www.abstractapi.com/blog)
 - [Documentation](https://docs.abstractapi.com/)
-- [GettingStarted](https://docs.abstractapi.com/)
-- [GitHubOrganization](https://github.com/abstractapi)
-- [TermsOfService](https://www.abstractapi.com/legal/terms)
-- [PrivacyPolicy](https://www.abstractapi.com/legal/privacy)
-- [SpectralRules](rules/abstract-api-spectral-rules.yml)
-- [NaftikoCapability](capabilities/fraud-detection.yaml)
-- [NaftikoCapability](capabilities/data-enrichment.yaml)
-- [NaftikoCapability](capabilities/financial-compliance.yaml)
-- [Vocabulary](vocabulary/abstract-api-vocabulary.yaml)
+- [Getting started](https://docs.abstractapi.com/)
+- [API reference](https://docs.abstractapi.com/api)
+- [Pricing](https://www.abstractapi.com/api/email-verification-validation-api)
+- [Sign up](https://app.abstractapi.com/users/signup)
+- [Support](https://www.abstractapi.com/contact-us)
+- [Blog](https://www.abstractapi.com/guides)
+- [Terms of service](https://www.abstractapi.com/legal/legal)
+- [Privacy policy](https://www.abstractapi.com/legal/legal)
+- [GitHub](https://github.com/abstractapi)
+- [Status](https://status.abstractapi.com/)
 
-## Features
+## API Evangelist rating
 
-| Name | Description |
-|------|-------------|
-| API Key Authentication | Each API uses a unique API key passed as a query parameter or Bearer token header |
-| Free Tier | Each API offers a free tier with limited monthly requests and 1 request/second rate limit |
-| Simple REST API | All APIs follow a simple REST pattern with a single base URL and query parameters |
-| Global Coverage | Data covers global locations with 80+ currencies, 250,000+ cities, and worldwide phone/IP coverage |
-| JSON Responses | All API responses return structured JSON data with consistent error codes |
-| Modular Services | Each API is independently keyed and priced, allowing granular subscription management |
+**Kin Score 61.7** — strong · rubric 0.25.0 · scored 2026-10-23
 
-## Use Cases
+| Facet | Score |
+|---|---|
+| Discoverability | 80.0 |
+| Contract quality | 45.0 |
+| Contract governance | 45.5 |
+| Operational transparency | 42.1 |
+| Developer ergonomics | 72.6 |
+| Access clarity | 77.6 |
 
-| Name | Description |
-|------|-------------|
-| Email List Cleaning | Validate and filter email lists to improve deliverability and reduce bounce rates |
-| Fraud Detection | Use IP intelligence, email reputation, and phone intelligence to detect and block fraudulent users |
-| User Onboarding Enrichment | Automatically enrich user profiles with geolocation, company, and contact data at signup |
-| Currency Conversion | Display localized pricing or perform currency conversions in e-commerce and fintech apps |
-| Compliance Automation | Validate VAT numbers and IBAN codes to automate financial compliance workflows |
-| Content Extraction | Use web scraping API to extract structured data from any website for data pipelines |
-| Dynamic User Avatars | Generate placeholder avatars for users without profile photos using the Avatars API |
+**Agent readiness 37.1** — agent-ready
 
-## Integrations
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | platform (partial credit) |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | yes |
+| Well Known Catalog | yes |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | — |
 
-| Name | Description |
-|------|-------------|
-| JavaScript | Official JavaScript SDK for Exchange Rates, Email Validation, IP Geolocation, and Phone Validation |
-| Python | Official Python SDK for Exchange Rates, Email Validation, IP Geolocation, and Phone Validation |
-| PHP | Official PHP SDK for Exchange Rates, Email Validation, IP Geolocation, and Phone Validation |
+**Regulatory alignment 29.4** — Horizontal (data, software, accessibility, platform)
 
-## Artifacts
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/abstract-api/](https://apis.io/providers/abstract-api/).
 
-Machine-readable API specifications organized by format.
+## How this profile is made
 
-### OpenAPI
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
 
-- [Abstract Api Avatars](openapi/abstract-api-avatars.yaml)
-- [Abstract Api Company Enrichment](openapi/abstract-api-company-enrichment.yaml)
-- [Abstract Api Email Reputation](openapi/abstract-api-email-reputation.yaml)
-- [Abstract Api Exchange Rates](openapi/abstract-api-exchange-rates.yaml)
-- [Abstract Api Iban Validation](openapi/abstract-api-iban-validation.yaml)
-- [Abstract Api Image Processing](openapi/abstract-api-image-processing.yaml)
-- [Abstract Api Ip Geolocation](openapi/abstract-api-ip-geolocation.yaml)
-- [Abstract Api Ip Intelligence](openapi/abstract-api-ip-intelligence.yaml)
-- [Abstract Api Phone Intelligence](openapi/abstract-api-phone-intelligence.yaml)
-- [Abstract Api Public Holidays](openapi/abstract-api-public-holidays.yaml)
-- [Abstract Api Timezones](openapi/abstract-api-timezones.yaml)
-- [Abstract Api Vat Validation](openapi/abstract-api-vat-validation.yaml)
-- [Abstract Api Web Scraping](openapi/abstract-api-web-scraping.yaml)
-- [Abstract Api Website Screenshot](openapi/abstract-api-website-screenshot.yaml)
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Abstract API: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
 
-### JSON Schema
+## Open an issue
 
-- [Company Enrichment Company Enrichment Response](json-schema/company-enrichment-company-enrichment-response-schema.json)
-- [Email Reputation Breach Info](json-schema/email-reputation-breach-info-schema.json)
-- [Email Reputation Deliverability](json-schema/email-reputation-deliverability-schema.json)
-- [Email Reputation Domain Info](json-schema/email-reputation-domain-info-schema.json)
-- [Email Reputation Email Quality](json-schema/email-reputation-email-quality-schema.json)
-- [Email Reputation Email Reputation Response](json-schema/email-reputation-email-reputation-response-schema.json)
-- [Email Reputation Risk Info](json-schema/email-reputation-risk-info-schema.json)
-- [Email Reputation Sender Info](json-schema/email-reputation-sender-info-schema.json)
-- [Exchange Rates Convert Response](json-schema/exchange-rates-convert-response-schema.json)
-- [Exchange Rates Historical Rates Response](json-schema/exchange-rates-historical-rates-response-schema.json)
-- [Exchange Rates Live Rates Response](json-schema/exchange-rates-live-rates-response-schema.json)
-- [Iban Validation Iban Validation Response](json-schema/iban-validation-iban-validation-response-schema.json)
-- [Image Processing Image Processing Response](json-schema/image-processing-image-processing-response-schema.json)
-- [Ip Geolocation Currency Info](json-schema/ip-geolocation-currency-info-schema.json)
-- [Ip Geolocation Flag Info](json-schema/ip-geolocation-flag-info-schema.json)
-- [Ip Geolocation Ip Geolocation Response](json-schema/ip-geolocation-ip-geolocation-response-schema.json)
-- [Ip Geolocation Security Info](json-schema/ip-geolocation-security-info-schema.json)
-- [Ip Geolocation Timezone Info](json-schema/ip-geolocation-timezone-info-schema.json)
-- [Ip Intelligence Asn Info](json-schema/ip-intelligence-asn-info-schema.json)
-- [Ip Intelligence Company Basic](json-schema/ip-intelligence-company-basic-schema.json)
-- [Ip Intelligence Currency Info](json-schema/ip-intelligence-currency-info-schema.json)
-- [Ip Intelligence Flag Info](json-schema/ip-intelligence-flag-info-schema.json)
-- [Ip Intelligence Ip Intelligence Response](json-schema/ip-intelligence-ip-intelligence-response-schema.json)
-- [Ip Intelligence Ip Security Flags](json-schema/ip-intelligence-ip-security-flags-schema.json)
-- [Ip Intelligence Location Info](json-schema/ip-intelligence-location-info-schema.json)
-- [Ip Intelligence Timezone Info](json-schema/ip-intelligence-timezone-info-schema.json)
-- [Phone Intelligence Phone Country](json-schema/phone-intelligence-phone-country-schema.json)
-- [Phone Intelligence Phone Intelligence Response](json-schema/phone-intelligence-phone-intelligence-response-schema.json)
-- [Public Holidays Holiday](json-schema/public-holidays-holiday-schema.json)
-- [Timezones Convert Time Response](json-schema/timezones-convert-time-response-schema.json)
-- [Timezones Current Time Response](json-schema/timezones-current-time-response-schema.json)
-- [Vat Validation Vat Calculate Response](json-schema/vat-validation-vat-calculate-response-schema.json)
-- [Vat Validation Vat Rates Response](json-schema/vat-validation-vat-rates-response-schema.json)
-- [Vat Validation Vat Validation Response](json-schema/vat-validation-vat-validation-response-schema.json)
-- [Web Scraping Web Scraping Response](json-schema/web-scraping-web-scraping-response-schema.json)
-
-### JSON Structure
-
-- [Company Enrichment Company Enrichment Response](json-structure/company-enrichment-company-enrichment-response-structure.json)
-- [Email Reputation Breach Info](json-structure/email-reputation-breach-info-structure.json)
-- [Email Reputation Deliverability](json-structure/email-reputation-deliverability-structure.json)
-- [Email Reputation Domain Info](json-structure/email-reputation-domain-info-structure.json)
-- [Email Reputation Email Quality](json-structure/email-reputation-email-quality-structure.json)
-- [Email Reputation Email Reputation Response](json-structure/email-reputation-email-reputation-response-structure.json)
-- [Email Reputation Risk Info](json-structure/email-reputation-risk-info-structure.json)
-- [Email Reputation Sender Info](json-structure/email-reputation-sender-info-structure.json)
-- [Exchange Rates Convert Response](json-structure/exchange-rates-convert-response-structure.json)
-- [Exchange Rates Historical Rates Response](json-structure/exchange-rates-historical-rates-response-structure.json)
-- [Exchange Rates Live Rates Response](json-structure/exchange-rates-live-rates-response-structure.json)
-- [Iban Validation Iban Validation Response](json-structure/iban-validation-iban-validation-response-structure.json)
-- [Image Processing Image Processing Response](json-structure/image-processing-image-processing-response-structure.json)
-- [Ip Geolocation Currency Info](json-structure/ip-geolocation-currency-info-structure.json)
-- [Ip Geolocation Flag Info](json-structure/ip-geolocation-flag-info-structure.json)
-- [Ip Geolocation Ip Geolocation Response](json-structure/ip-geolocation-ip-geolocation-response-structure.json)
-- [Ip Geolocation Security Info](json-structure/ip-geolocation-security-info-structure.json)
-- [Ip Geolocation Timezone Info](json-structure/ip-geolocation-timezone-info-structure.json)
-- [Ip Intelligence Asn Info](json-structure/ip-intelligence-asn-info-structure.json)
-- [Ip Intelligence Company Basic](json-structure/ip-intelligence-company-basic-structure.json)
-- [Ip Intelligence Currency Info](json-structure/ip-intelligence-currency-info-structure.json)
-- [Ip Intelligence Flag Info](json-structure/ip-intelligence-flag-info-structure.json)
-- [Ip Intelligence Ip Intelligence Response](json-structure/ip-intelligence-ip-intelligence-response-structure.json)
-- [Ip Intelligence Ip Security Flags](json-structure/ip-intelligence-ip-security-flags-structure.json)
-- [Ip Intelligence Location Info](json-structure/ip-intelligence-location-info-structure.json)
-- [Ip Intelligence Timezone Info](json-structure/ip-intelligence-timezone-info-structure.json)
-- [Phone Intelligence Phone Country](json-structure/phone-intelligence-phone-country-structure.json)
-- [Phone Intelligence Phone Intelligence Response](json-structure/phone-intelligence-phone-intelligence-response-structure.json)
-- [Public Holidays Holiday](json-structure/public-holidays-holiday-structure.json)
-- [Timezones Convert Time Response](json-structure/timezones-convert-time-response-structure.json)
-- [Timezones Current Time Response](json-structure/timezones-current-time-response-structure.json)
-- [Vat Validation Vat Calculate Response](json-structure/vat-validation-vat-calculate-response-structure.json)
-- [Vat Validation Vat Rates Response](json-structure/vat-validation-vat-rates-response-structure.json)
-- [Vat Validation Vat Validation Response](json-structure/vat-validation-vat-validation-response-structure.json)
-- [Web Scraping Web Scraping Response](json-structure/web-scraping-web-scraping-response-structure.json)
-
-### JSON-LD
-
-- [Abstract Api Company Enrichment](json-ld/abstract-api-company-enrichment-context.jsonld)
-- [Abstract Api Email Reputation](json-ld/abstract-api-email-reputation-context.jsonld)
-- [Abstract Api Exchange Rates](json-ld/abstract-api-exchange-rates-context.jsonld)
-- [Abstract Api Iban Validation](json-ld/abstract-api-iban-validation-context.jsonld)
-- [Abstract Api Image Processing](json-ld/abstract-api-image-processing-context.jsonld)
-- [Abstract Api Ip Geolocation](json-ld/abstract-api-ip-geolocation-context.jsonld)
-- [Abstract Api Ip Intelligence](json-ld/abstract-api-ip-intelligence-context.jsonld)
-- [Abstract Api Phone Intelligence](json-ld/abstract-api-phone-intelligence-context.jsonld)
-- [Abstract Api Public Holidays](json-ld/abstract-api-public-holidays-context.jsonld)
-- [Abstract Api Timezones Convert](json-ld/abstract-api-timezones-convert-context.jsonld)
-- [Abstract Api Timezones Current](json-ld/abstract-api-timezones-current-context.jsonld)
-- [Abstract Api Vat Validation](json-ld/abstract-api-vat-validation-context.jsonld)
-- [Abstract Api Web Scraping](json-ld/abstract-api-web-scraping-context.jsonld)
-
-### Examples
-
-- [Company Enrichment Company Enrichment Response](examples/company-enrichment-company-enrichment-response-example.json)
-- [Email Reputation Breach Info](examples/email-reputation-breach-info-example.json)
-- [Email Reputation Deliverability](examples/email-reputation-deliverability-example.json)
-- [Email Reputation Domain Info](examples/email-reputation-domain-info-example.json)
-- [Email Reputation Email Quality](examples/email-reputation-email-quality-example.json)
-- [Email Reputation Email Reputation Response](examples/email-reputation-email-reputation-response-example.json)
-- [Email Reputation Risk Info](examples/email-reputation-risk-info-example.json)
-- [Email Reputation Sender Info](examples/email-reputation-sender-info-example.json)
-- [Exchange Rates Convert Response](examples/exchange-rates-convert-response-example.json)
-- [Exchange Rates Historical Rates Response](examples/exchange-rates-historical-rates-response-example.json)
-- [Exchange Rates Live Rates Response](examples/exchange-rates-live-rates-response-example.json)
-- [Iban Validation Iban Validation Response](examples/iban-validation-iban-validation-response-example.json)
-- [Image Processing Image Processing Response](examples/image-processing-image-processing-response-example.json)
-- [Ip Geolocation Currency Info](examples/ip-geolocation-currency-info-example.json)
-- [Ip Geolocation Flag Info](examples/ip-geolocation-flag-info-example.json)
-- [Ip Geolocation Ip Geolocation Response](examples/ip-geolocation-ip-geolocation-response-example.json)
-- [Ip Geolocation Security Info](examples/ip-geolocation-security-info-example.json)
-- [Ip Geolocation Timezone Info](examples/ip-geolocation-timezone-info-example.json)
-- [Ip Intelligence Asn Info](examples/ip-intelligence-asn-info-example.json)
-- [Ip Intelligence Company Basic](examples/ip-intelligence-company-basic-example.json)
-- [Ip Intelligence Currency Info](examples/ip-intelligence-currency-info-example.json)
-- [Ip Intelligence Flag Info](examples/ip-intelligence-flag-info-example.json)
-- [Ip Intelligence Ip Intelligence Response](examples/ip-intelligence-ip-intelligence-response-example.json)
-- [Ip Intelligence Ip Security Flags](examples/ip-intelligence-ip-security-flags-example.json)
-- [Ip Intelligence Location Info](examples/ip-intelligence-location-info-example.json)
-- [Ip Intelligence Timezone Info](examples/ip-intelligence-timezone-info-example.json)
-- [Phone Intelligence Phone Country](examples/phone-intelligence-phone-country-example.json)
-- [Phone Intelligence Phone Intelligence Response](examples/phone-intelligence-phone-intelligence-response-example.json)
-- [Public Holidays Holiday](examples/public-holidays-holiday-example.json)
-- [Timezones Convert Time Response](examples/timezones-convert-time-response-example.json)
-- [Timezones Current Time Response](examples/timezones-current-time-response-example.json)
-- [Vat Validation Vat Calculate Response](examples/vat-validation-vat-calculate-response-example.json)
-- [Vat Validation Vat Rates Response](examples/vat-validation-vat-rates-response-example.json)
-- [Vat Validation Vat Validation Response](examples/vat-validation-vat-validation-response-example.json)
-- [Web Scraping Web Scraping Response](examples/web-scraping-web-scraping-response-example.json)
-
-## Capabilities
-
-Naftiko capabilities organized as shared per-API definitions composed into customer-facing workflows.
-
-### Shared Per-API Definitions
-
-- [Avatars](capabilities/shared/avatars.yaml)
-- [Company Enrichment](capabilities/shared/company-enrichment.yaml)
-- [Email Reputation](capabilities/shared/email-reputation.yaml)
-- [Exchange Rates](capabilities/shared/exchange-rates.yaml)
-- [Iban Validation](capabilities/shared/iban-validation.yaml)
-- [Image Processing](capabilities/shared/image-processing.yaml)
-- [Ip Geolocation](capabilities/shared/ip-geolocation.yaml)
-- [Ip Intelligence](capabilities/shared/ip-intelligence.yaml)
-- [Phone Intelligence](capabilities/shared/phone-intelligence.yaml)
-- [Public Holidays](capabilities/shared/public-holidays.yaml)
-- [Timezones](capabilities/shared/timezones.yaml)
-- [Vat Validation](capabilities/shared/vat-validation.yaml)
-- [Web Scraping](capabilities/shared/web-scraping.yaml)
-- [Website Screenshot](capabilities/shared/website-screenshot.yaml)
-
-### Workflow Capabilities
-
-| Workflow | Description |
-|----------|-------------|
-| [Data Enrichment](capabilities/data-enrichment.yaml) | IP geolocation, company enrichment, and timezone data for user profile enrichment |
-| [Financial Compliance](capabilities/financial-compliance.yaml) | Exchange rates, VAT validation, and IBAN validation for financial compliance |
-| [Fraud Detection](capabilities/fraud-detection.yaml) | Email reputation, phone intelligence, and IP intelligence for fraud prevention |
-
-## Vocabulary
-
-- [Abstract Api Vocabulary](vocabulary/abstract-api-vocabulary.yaml) — Unified taxonomy mapping 13 resources, 9 actions, 3 workflows, and 6 personas across operational (OpenAPI) and capability (Naftiko) dimensions
-
-## Rules
-
-- [Abstract Api Spectral Rules](rules/abstract-api-spectral-rules.yml) — 33 rules across 13 categories enforcing Abstract API conventions
-
-## Maintainers
-
-**FN:** Kin Lane
-
-**Email:** kin@apievangelist.com
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/abstract-api/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
