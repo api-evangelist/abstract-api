@@ -1,0 +1,107 @@
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-10-28'
+method: searched
+source: https://www.abstractapi.com/api/email-verification-validation-api
+sources:
+- https://www.abstractapi.com/api/email-verification-validation-api
+provenance:
+  tool: engine/economics/harvest_pricing.py
+  run: 20261028T141238
+  grounding: every price_text was found verbatim in the fetched page text
+audience: developer-api
+pricing_basis: per-call
+delivery:
+  delivery: managed
+  method: page
+  read: '2026-10-28'
+published: true
+note: Monthly and annual (save 10%) toggles shown; annual tiers list same $17/$37/$39 per month prices
+  with yearly request bundles starting at 60,000 requests / year. Comparison table cites '$17 / month'
+  for 5,000 verifications.
+plan_count: 5
+currency: USD
+plans:
+- name: Free
+  price_text: $0 / month
+  price: 0
+  currency: USD
+  period: month
+  unit: requests
+  included_quota: 100 requests, 3 requests / second, full API response
+- name: Starter
+  price_text: $17 / month
+  price: 17
+  currency: USD
+  period: month
+  unit: requests
+  included_quota: 5,000 requests / month, 3 requests / second, Domain whitelisting, Bulk CSV upload, full
+    API response
+- name: Standard
+  price_text: $37 / month
+  price: 37
+  currency: USD
+  period: month
+  unit: requests
+  included_quota: 5,000 requests / month, 3 requests / second, Domain whitelisting, Bulk CSV upload
+- name: Professional
+  price_text: $39 / month
+  price: 39
+  currency: USD
+  period: month
+  unit: requests
+  included_quota: 5,000 requests / month, 3 requests / second, email risk and breaches
+- name: Enterprise
+  price_text: Custom
+  period: none
+  included_quota: Flexible requests / month, Commercial license, SOC 2 & GDPR, Enhanced SLA & support
+rate_limit_statements:
+- 3 requests / second
+- Flexible requests / second
+x-canonical:
+  generated: '2026-11-01'
+  vocabulary: engine/economics/plans-canonical.yml
+  models:
+  - hybrid
+  - metered
+  units:
+  - request
+  plans:
+  - name: Free
+    access: other
+    model: metered
+    model_how: derived
+    units:
+    - request
+    periods:
+    - month
+  - name: Starter
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - request
+    periods:
+    - month
+  - name: Standard
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - request
+    periods:
+    - month
+  - name: Professional
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - request
+    periods:
+    - month
+  - name: Enterprise
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none
